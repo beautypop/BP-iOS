@@ -1,0 +1,6 @@
+framework module QQPlaceholderTextView {
+  umbrella header "QQPlaceholderTextView-umbrella.h"
+
+  export *
+  module * { export * }
+}
