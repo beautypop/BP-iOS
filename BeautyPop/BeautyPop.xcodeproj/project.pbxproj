@@ -1097,7 +1097,7 @@
 				INFOPLIST_FILE = BeautyPop/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.BeautyPop.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.beautypop.app;
 				PRODUCT_NAME = BeautyPop;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/BeautyPop/BeautyPop-Bridging-Header.h";
@@ -1122,7 +1122,7 @@
 				INFOPLIST_FILE = BeautyPop/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.BeautyPop.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.beautypop.app;
 				PRODUCT_NAME = BeautyPop;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/BeautyPop/BeautyPop-Bridging-Header.h";
