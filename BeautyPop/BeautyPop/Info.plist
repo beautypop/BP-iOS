@@ -24,10 +24,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>com.BeautyPop.app.ios</string>
+			<string>com.beautypop.app.ios</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb1469031873403459</string>
+				<string>fb195306590831308</string>
 				<string>beautypop</string>
 			</array>
 		</dict>
@@ -35,7 +35,7 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
-	<string>1469031873403459</string>
+	<string>195306590831308</string>
 	<key>FacebookDisplayName</key>
 	<string>BeautyPop</string>
 	<key>LSApplicationQueriesSchemes</key>

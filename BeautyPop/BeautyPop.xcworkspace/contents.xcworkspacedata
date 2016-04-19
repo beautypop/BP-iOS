@@ -2,12 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/keithlei/_Sourcecode/BeautyPop/BB-iOS_master/BeautyPop/BeautyPop.xcodeproj">
+      location = "group:BeautyPop.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:BeautyPop.xcodeproj">
    </FileRef>
 </Workspace>
