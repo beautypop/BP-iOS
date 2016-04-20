@@ -2,8 +2,8 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "ic_like_tips.png",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "ic_like_tips.png"
     },
     {
       "idiom" : "universal",
