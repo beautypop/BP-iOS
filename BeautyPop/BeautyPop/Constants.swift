@@ -41,7 +41,7 @@ struct Constants {
     static let FEED_ITEM_SIDE_SPACING = CGFloat(10)
     static let FEED_ITEM_LINE_SPACING = CGFloat(10)
     static let FEED_ITEM_DETAILS_HEIGHT = CGFloat(50)
-    static let PRODUCT_INFO_HEIGHT = CGFloat(200)
+    static let PRODUCT_INFO_HEIGHT = CGFloat(258)
     static let PRODUCT_SELLER_HEIGHT = CGFloat(95)
     static let PRODUCT_COMMENTS_HEIGHT = CGFloat(50)
     static let SELLER_FEED_ITEM_DETAILS_HEIGHT = CGFloat(70)

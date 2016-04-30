@@ -18,6 +18,7 @@ class DetailsTableViewCell: UITableViewCell {
     @IBOutlet weak var prodTimerCount: UILabel!
     
     //MASK User Info Section
+    @IBOutlet weak var subCategoryBtn: UIButton!
     
     @IBOutlet weak var categoryBtn: UIButton!
     @IBOutlet weak var followersCount: UILabel!

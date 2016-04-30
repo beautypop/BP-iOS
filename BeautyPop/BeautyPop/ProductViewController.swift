@@ -227,6 +227,11 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
                     cell.categoryBtn.setTitle(self.productInfo!.categoryName, forState: .Normal)
                     cell.categoryBtn.setTitleColor(Color.PINK, forState: .Normal)
                     cell.categoryBtn.sizeToFit()
+                    
+                    cell.subCategoryBtn.setTitle(self.productInfo!.subCategoryName, forState: .Normal)
+                    cell.subCategoryBtn.setTitleColor(Color.PINK, forState: .Normal)
+                    cell.subCategoryBtn.sizeToFit()
+                    
                     cell.prodTimerCount.text = NSDate(timeIntervalSince1970:Double(self.productInfo!.createdDate) / 1000.0).timeAgo
                 } else {
                     cell.categoryBtn.hidden = true
@@ -411,7 +416,7 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
     //categoryScreen
     //MARK Segue handling methods.
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        if identifier == "categoryScreen" {
+        if identifier == "categoryScreen" || identifier == "subcategoryScreen" {
             return true
         } else if identifier == "userprofile" {
             return true
@@ -423,7 +428,12 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        if segue.identifier == "categoryScreen" {
+        if segue.identifier == "subcategoryScreen" {
+            let vController = segue.destinationViewController as! CategoryFeedViewController
+            let category = CategoryCache.getCategoryById(self.productInfo!.categoryId)
+            vController.selCategory = CategoryCache.getSubCategoryById(self.productInfo!.subCategoryId, subCategories: (category?.subCategories)!)
+            vController.hidesBottomBarWhenPushed = true
+        } else if segue.identifier == "categoryScreen" {
             let vController = segue.destinationViewController as! CategoryFeedViewController
             vController.selCategory = CategoryCache.getCategoryById(self.productInfo!.categoryId)
             vController.hidesBottomBarWhenPushed = true
