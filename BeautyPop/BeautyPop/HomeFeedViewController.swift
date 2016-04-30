@@ -211,7 +211,6 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
             self.bannerCollectionView?.dataSource = self
             self.bannerCollectionView?.delegate = self
             self.homeBannerHeight = headerView.bannerHeight
-            //self.homeBannerHeight?.constant = 0
             reusableView = headerView
         }
         
