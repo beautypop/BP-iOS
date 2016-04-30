@@ -10,7 +10,7 @@ import UIKit
 import SwiftEventBus
 import PhotoSlider
 
-class ProductViewController: ProductNavigationController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PhotoSliderDelegate, UITextFieldDelegate {
+class ProductViewController: ProductNavigationController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, PhotoSliderDelegate {
 
     @IBOutlet weak var buyerSoldButtonsLayout: UIView!
     @IBOutlet weak var buyerButtonsLayout: UIView!
@@ -64,7 +64,7 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
         //view.addGestureRecognizer(tap)
         
         self.detailTableView.separatorColor = Color.WHITE
-        self.detailTableView.estimatedRowHeight = 300.0
+        //self.detailTableView.estimatedRowHeight = Constants.PRODUCT_TABLE_ESTIMATED_HEIGHT
         self.detailTableView.rowHeight = UITableViewAutomaticDimension
         
         self.detailTableView.setNeedsLayout()
@@ -77,6 +77,7 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
         
         ApiFacade.getPost(feedItem.id, successCallback: onSuccessGetPost, failureCallback: onFailure)
         
+        /*
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: "keyboardWillShow:",
@@ -88,6 +89,7 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
             selector: "keyboardWillHide:",
             name: UIKeyboardWillHideNotification,
             object: nil)
+        */
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -160,9 +162,9 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
                 cell.btnPostComments.addTarget(self, action: "PostComments:", forControlEvents: UIControlEvents.TouchUpInside)
                 ViewUtil.displayRoundedCornerView(cell.btnPostComments)
                 cell.btnPostComments.layer.borderColor = Color.LIGHT_GRAY.CGColor
-                cell.commentTxt.delegate = self
                 cell.commentTxt.layer.cornerRadius = Constants.DEFAULT_CORNER_RADIUS
                 cell.commentTxt.layer.masksToBounds = true
+                //cell.commentTxt.delegate = self
             } else {
                 let comment:CommentVM = self.comments[indexPath.row]
                 cell.lblComments.text = comment.body
@@ -220,11 +222,12 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
                 }
                 
                 if self.productInfo != nil {
-                    cell.prodCategory.text = self.productInfo!.categoryName
                     //cell.prodTimerCount.text = String(self.productInfo.numComments)
                     cell.categoryBtn.hidden = false
+                    cell.categoryBtn.setTitle(self.productInfo!.categoryName, forState: .Normal)
+                    cell.categoryBtn.setTitleColor(Color.PINK, forState: .Normal)
+                    cell.categoryBtn.sizeToFit()
                     cell.prodTimerCount.text = NSDate(timeIntervalSince1970:Double(self.productInfo!.createdDate) / 1000.0).timeAgo
-                    
                 } else {
                     cell.categoryBtn.hidden = true
                 }
@@ -240,14 +243,13 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
                     
                     if self.productInfo!.ownerId != -1 {
                         ImageUtil.displayThumbnailProfileImage(self.productInfo!.ownerId, imageView: cell.postedUserImg)
-                        cell.postedUserImg.layer.cornerRadius = cell.postedUserImg.frame.height/2
+                        cell.postedUserImg.layer.cornerRadius = cell.postedUserImg.frame.height / 2
                         cell.postedUserImg.layer.masksToBounds = true
                     }
                 }
                 
                 ViewUtil.displayRoundedCornerView(cell.viewBtnIns, bgColor: Color.PINK)
             case 3:
-                
                 if let commentCount = productInfo?.numComments {
                     cell.commentsCount.text = String(commentCount)
                 }
@@ -262,9 +264,9 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0{
+        if section == 0 {
             return nil
-        }else{
+        } else {
             let returnedView = UIView(frame: CGRectMake(0, 0, self.detailTableView.bounds.width, 15.0))
             returnedView.backgroundColor = Color.DARK_GRAY
             return returnedView
@@ -281,17 +283,22 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch indexPath.section {
-        case 0: return ViewUtil.getScreenWidth(self.view)
+        case 0:
+            // image slider
+            return ViewUtil.getScreenWidth(self.view)
         case 1:
+            // Product info
             if self.productInfo != nil {
-                return CGFloat(200.0) + self.lcontentSize
+                return Constants.PRODUCT_INFO_HEIGHT + self.lcontentSize
             }
-            return CGFloat(200.0)
+            return Constants.PRODUCT_INFO_HEIGHT
         case 2:
-            return CGFloat(95.0)
+            // seller
+            return Constants.PRODUCT_SELLER_HEIGHT
         case 4:
-            return CGFloat(70.0)
-        default:    
+            // comments
+            return Constants.PRODUCT_COMMENTS_HEIGHT
+        default:
             return UITableViewAutomaticDimension
         }
     }
@@ -301,10 +308,9 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //on click of User section show the User profile screen.
+        // on click of User section show the User profile screen.
         if indexPath.section == 2  {
             self.performSegueWithIdentifier("userprofile", sender: nil)
-        //} else if indexPath.section == 4 && indexPath.row == self.comments.count {
         } else if (indexPath.section == 4 && indexPath.row == self.comments.count) || indexPath.section == 3 {
             pushMoreCommentsController()
         }
@@ -319,8 +325,8 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
             self.feedItem.isLiked = false
             
             self.likeImgBtn.setImage(UIImage(named: "ic_like.png"), forState: UIControlState.Normal)
-            ApiController.instance.unlikePost(self.productInfo!.id)
             self.likeCountTxt.setTitle(String(self.productInfo!.numLikes), forState: UIControlState.Normal)
+            ApiController.instance.unlikePost(self.productInfo!.id)
         } else {
             self.productInfo!.numLikes += 1
             self.productInfo!.isLiked = true
@@ -329,8 +335,8 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
             self.feedItem.isLiked = true
             
             self.likeImgBtn.setImage(UIImage(named: "ic_liked.png"), forState: UIControlState.Normal)
-            ApiController.instance.likePost(self.productInfo!.id)
             self.likeCountTxt.setTitle(String(self.productInfo!.numLikes), forState: UIControlState.Normal)
+            ApiController.instance.likePost(self.productInfo!.id)
         }
     }
     
@@ -462,7 +468,7 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
         let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.Default, handler: nil)
         let confirmAction = UIAlertAction(title: NSLocalizedString("confirm", comment: ""), style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction!) in
             ApiController.instance.soldPost(self.feedItem.id)
-            //self.view.makeToast(message: "Confirm Sold")
+            //ViewUtil.makeToast("Confirm Sold", view: self.view)
         })
     
         _messageDialog.addAction(cancelAction)
@@ -512,7 +518,6 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
         if (self.productInfo!.isOwner) {
             let editProductImg: UIButton = UIButton()
             editProductImg.setTitle(NSLocalizedString("edit", comment: ""), forState: UIControlState.Normal)
-            
             editProductImg.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
             editProductImg.titleLabel!.lineBreakMode = NSLineBreakMode.ByWordWrapping
             editProductImg.frame = CGRectMake(0, 0, 35, 35)
@@ -539,13 +544,14 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
     func onClickCopyLinkBtn(sender: AnyObject?) {
         //copy url to cliboard
         ViewUtil.copyToClipboard(UrlUtil.createProductUrl(self.productInfo!))
-        self.view.makeToast(message: NSLocalizedString("link_copy", comment: ""), duration: ViewUtil.SHOW_TOAST_DURATION_SHORT, position: ViewUtil.DEFAULT_TOAST_POSITION)
+        ViewUtil.makeToast(NSLocalizedString("link_copy", comment: ""), view: self.view)
     }
     
     func onClickFacebookLinkBtn(sender: AnyObject?) {
         SharingUtil.shareToFacebook(self.productInfo!, vController: self)
     }
  
+    /*
     func textFieldDidBeginEditing(textField: UITextField) {
         activeText = textField
     }
@@ -572,7 +578,6 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
             UIView.commitAnimations()
         }
         
-        /*
         if !isShownKeyboard {
             
             var info = notification.userInfo!
@@ -597,7 +602,6 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
             }
             isShownKeyboard = true
         }
-        */
     }
     
     func keyboardWillHide(notification: NSNotification) {
@@ -612,19 +616,10 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
             UIView.commitAnimations()
         }
     }
-    
-    
+    */
+
     @IBAction func onClickMoreComments(sender: AnyObject) {
         pushMoreCommentsController()
-    }
-    
-    func pushMoreCommentsController() {
-        let vController = self.storyboard!.instantiateViewControllerWithIdentifier("MoreCommentsViewController") as! MoreCommentsViewController
-        if let postId = self.productInfo?.id {
-            vController.postId = postId
-            ViewUtil.resetBackButton(self.navigationItem)
-            self.navigationController?.pushViewController(vController, animated: true)
-        }
     }
     
     @IBAction func onClickPostUser(sender: AnyObject) {
@@ -639,4 +634,12 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
         self.navigationController?.pushViewController(vController, animated: true)
     }
     
+    func pushMoreCommentsController() {
+        let vController = self.storyboard!.instantiateViewControllerWithIdentifier("MoreCommentsViewController") as! MoreCommentsViewController
+        if let postId = self.productInfo?.id {
+            vController.postId = postId
+            ViewUtil.resetBackButton(self.navigationItem)
+            self.navigationController?.pushViewController(vController, animated: true)
+        }
+    }
 }

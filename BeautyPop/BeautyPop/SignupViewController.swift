@@ -58,27 +58,46 @@ class SignupViewController: BaseLoginViewController {
     }
     
     func isValid() -> Bool {
-        var valid = true
-        if StringUtil.trim(self.firstNameText.text).isEmpty {
-            self.view.makeToast(message: NSLocalizedString("fill_first_name", comment: ""), duration: ViewUtil.SHOW_TOAST_DURATION_SHORT, position: ViewUtil.DEFAULT_TOAST_POSITION)
-            valid = false
-        } else if StringUtil.trim(self.lastNameText.text).isEmpty {
-            self.view.makeToast(message: NSLocalizedString("fill_last_name", comment: ""), duration: ViewUtil.SHOW_TOAST_DURATION_SHORT, position: ViewUtil.DEFAULT_TOAST_POSITION)
-            valid = false
-        } else if StringUtil.trim(self.emailText.text).isEmpty {
-            self.view.makeToast(message: NSLocalizedString("fill_email", comment: ""), duration: ViewUtil.SHOW_TOAST_DURATION_SHORT, position: ViewUtil.DEFAULT_TOAST_POSITION)
-            valid = false
-        }else if StringUtil.trim(self.passwordText.text).isEmpty {
-            self.view.makeToast(message: NSLocalizedString("fill_password", comment: ""), duration: ViewUtil.SHOW_TOAST_DURATION_SHORT, position: ViewUtil.DEFAULT_TOAST_POSITION)
-            valid = false
-        } else if StringUtil.trim(self.confirmPasswordText.text).isEmpty {
-            self.view.makeToast(message: NSLocalizedString("fill_confirm_password", comment: ""), duration: ViewUtil.SHOW_TOAST_DURATION_SHORT, position: ViewUtil.DEFAULT_TOAST_POSITION)
-            valid = false
-        } else if self.confirmPasswordText.text != self.passwordText.text {
-            self.view.makeToast(message: NSLocalizedString("fill_confirm_password", comment: ""), duration: ViewUtil.SHOW_TOAST_DURATION_SHORT, position: ViewUtil.DEFAULT_TOAST_POSITION)
-            valid = false
+        
+        let validEmail = ValidationUtil.isValidEmail(StringUtil.trim(self.emailText.text))
+        if !validEmail.0 {
+            ViewUtil.makeToast(validEmail.1!, view: self.view)
+            return false
         }
-        return valid
+        
+        let validFirstName = ValidationUtil.isValidUserName(StringUtil.trim(self.firstNameText.text))
+        if !validFirstName.0 {
+            ViewUtil.makeToast(validFirstName.1!, view: self.view)
+            return false
+        }
+        
+        let validLastName = ValidationUtil.isValidUserName(StringUtil.trim(self.lastNameText.text))
+        if !validLastName.0 {
+            ViewUtil.makeToast(validLastName.1!, view: self.view)
+            return false
+        }
+        
+        if StringUtil.trim(self.emailText.text).isEmpty {
+            ViewUtil.makeToast(NSLocalizedString("fill_email", comment: ""), view: self.view)
+            return false
+        }
+        
+        if StringUtil.trim(self.passwordText.text).isEmpty {
+            ViewUtil.makeToast(NSLocalizedString("fill_password", comment: ""), view: self.view)
+            return false
+        }
+        
+        if StringUtil.trim(self.confirmPasswordText.text).isEmpty {
+            ViewUtil.makeToast(NSLocalizedString("fill_confirm_password", comment: ""), view: self.view)
+            return false
+        }
+        
+        if self.confirmPasswordText.text != self.passwordText.text {
+            ViewUtil.makeToast(NSLocalizedString("fill_confirm_password", comment: ""), view: self.view)
+            return false
+        }
+        
+        return true
     }
     
     @IBAction func onClickBackButton(sender: UIButton) {

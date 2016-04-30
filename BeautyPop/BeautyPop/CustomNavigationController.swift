@@ -88,7 +88,7 @@ class CustomNavigationController: ScrollingNavigationViewController, ScrollingNa
         //gameBadgeBtn.addTarget(self, action: "onClickBadgebtn:", forControlEvents: UIControlEvents.TouchUpInside)
         //gameBadgeBtn.frame = CGRectMake(0, 0, 35, 35)
         
-        let logo: UIImageView = UIImageView(image: UIImage(named: "ic_launcher_48"))
+        let logo: UIImageView = UIImageView(image: UIImage(named: "ic_bb_logo"))
         logo.frame = CGRectMake(0, 0, 35, 35)
 
         let sellBarBtn = UIBarButtonItem(customView: sellBtn)

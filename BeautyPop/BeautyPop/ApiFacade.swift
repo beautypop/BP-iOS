@@ -298,17 +298,18 @@ class ApiFacade {
         ApiController.instance.newMessage(conversationId, message: message, image: image, system: system)
     }
     
-    static func newComment(postId: Int, commentText: String, successCallback: ((String) -> Void)?, failureCallback: ((String) -> Void)?) {
+    static func newComment(postId: Int, commentText: String, successCallback: ((ResponseVM) -> Void)?, failureCallback: ((String) -> Void)?) {
         
         SwiftEventBus.unregister(self)
         
         SwiftEventBus.onMainThread(self, name: "onSuccessNewComment") { result in
+            if ViewUtil.isEmptyResult(result) {
+                failureCallback!("New comment returned is empty")
+                return
+            }
+            
             if successCallback != nil {
-                if result.object is NSString {
-                    successCallback!(result.object as! String)
-                } else {
-                    successCallback!("")
-                }
+                successCallback!(result.object as! ResponseVM)
             }
         }
         
@@ -330,6 +331,11 @@ class ApiFacade {
         SwiftEventBus.unregister(self)
         
         SwiftEventBus.onMainThread(self, name: "onSuccessGetComments") { result in
+            if ViewUtil.isEmptyResult(result) {
+                failureCallback!("Comments returned is empty")
+                return
+            }
+
             if successCallback != nil {
                 successCallback!(result.object as! [CommentVM])
             }
@@ -575,7 +581,6 @@ class ApiFacade {
                 ApiController.instance.getUserFollowers(userId, offset: offset)
             default: break
         }
-        
     }
     
     static func getUserActivities(offset: Int64, successCallback: (([ActivityVM]) -> Void)?, failureCallback: ((String) -> Void)?) {
@@ -601,8 +606,116 @@ class ApiFacade {
                 failureCallback!(error)
             }
         }
+        
         ApiController.instance.getUserActivities(offset)
     }
     
+    static func newConversationOrder(conversationId: Int, offeredPrice: Double, successCallback: ((ConversationOrderVM) -> Void)?, failureCallback: ((String) -> Void)?) {
+        SwiftEventBus.unregister(self)
+        
+        SwiftEventBus.onMainThread(self, name: "onSuccessNewConversationOrder") { result in
+            if ViewUtil.isEmptyResult(result) {
+                failureCallback!("No activities items")
+                return
+            }
+            
+            if successCallback != nil {
+                successCallback!(result.object as! ConversationOrderVM)
+            }
+        }
+        
+        SwiftEventBus.onMainThread(self, name: "onFailureNewConversationOrder") { result in
+            if failureCallback != nil {
+                var error = "Failed to create conversation..."
+                if result.object is NSString {
+                    error += "\n"+(result.object as! String)
+                }
+                failureCallback!(error)
+            }
+        }
+        
+        ApiController.instance.newConversationOrder(conversationId, offeredPrice: offeredPrice)
+    }
+    
+    static func cancelConversationOrder(conversationId: Int, successCallback: ((ConversationOrderVM) -> Void)?, failureCallback: ((String) -> Void)?) {
+        SwiftEventBus.unregister(self)
+        
+        SwiftEventBus.onMainThread(self, name: "onSuccessCancelConversationOrder") { result in
+            if ViewUtil.isEmptyResult(result) {
+                failureCallback!("No activities items")
+                return
+            }
+            
+            if successCallback != nil {
+                successCallback!(result.object as! ConversationOrderVM)
+            }
+        }
+        
+        SwiftEventBus.onMainThread(self, name: "onFailureCancelConversationOrder") { result in
+            if failureCallback != nil {
+                var error = "Failed to create conversation..."
+                if result.object is NSString {
+                    error += "\n"+(result.object as! String)
+                }
+                failureCallback!(error)
+            }
+        }
+        
+        ApiController.instance.cancelConversationOrder(conversationId)
+    }
+    
+    
+    static func acceptConversationOrder(conversationId: Int, successCallback: ((ConversationOrderVM) -> Void)?, failureCallback: ((String) -> Void)?) {
+        SwiftEventBus.unregister(self)
+        
+        SwiftEventBus.onMainThread(self, name: "onSuccessAcceptConversationOrder") { result in
+            if ViewUtil.isEmptyResult(result) {
+                failureCallback!("No activities items")
+                return
+            }
+            
+            if successCallback != nil {
+                successCallback!(result.object as! ConversationOrderVM)
+            }
+        }
+        
+        SwiftEventBus.onMainThread(self, name: "onFailureAcceptConversationOrder") { result in
+            if failureCallback != nil {
+                var error = "Failed to create conversation..."
+                if result.object is NSString {
+                    error += "\n"+(result.object as! String)
+                }
+                failureCallback!(error)
+            }
+        }
+        ApiController.instance.acceptConversationOrder(conversationId)
+    }
+    
+    static func declineConversationOrder(conversationId: Int, successCallback: ((ConversationOrderVM) -> Void)?, failureCallback: ((String) -> Void)?) {
+        SwiftEventBus.unregister(self)
+        
+        SwiftEventBus.onMainThread(self, name: "onSuccessDeclineConversationOrder") { result in
+            if ViewUtil.isEmptyResult(result) {
+                failureCallback!("No activities items")
+                return
+            }
+            
+            if successCallback != nil {
+                successCallback!(result.object as! ConversationOrderVM)
+            }
+        }
+        
+        SwiftEventBus.onMainThread(self, name: "onFailureDeclineConversationOrder") { result in
+            if failureCallback != nil {
+                var error = "Failed to create conversation..."
+                if result.object is NSString {
+                    error += "\n"+(result.object as! String)
+                }
+                failureCallback!(error)
+            }
+        }
+        
+        ApiController.instance.declineConversationOrder(conversationId)
+    }
     
 }

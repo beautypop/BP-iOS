@@ -1,6 +1,6 @@
 //
 //  FollowingFeedViewController.swift
-//  Baby Box
+//  BeautyPop
 //
 //  Created by Mac on 12/11/15.
 //  Copyright © 2015 MIndNerves. All rights reserved.
@@ -13,7 +13,6 @@ import Kingfisher
 class FollowingFeedViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var uiCollectionView: UICollectionView!
-    @IBOutlet weak var topSpaceConstraint: NSLayoutConstraint!
     @IBOutlet weak var activityLoading: UIActivityIndicatorView!
     
     var feedLoader: FeedLoader? = nil

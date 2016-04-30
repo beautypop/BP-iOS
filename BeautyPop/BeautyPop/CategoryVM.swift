@@ -1,6 +1,6 @@
 //
 //  CategoryVM.swift
-//  Baby Box
+//  BeautyPop
 //
 //  Created by Mac on 12/11/15.
 //  Copyright © 2015 MIndNerves. All rights reserved.
@@ -16,7 +16,8 @@ class CategoryVM: BaseArgVM {
     var description: String = ""
     var categoryType: String = ""
     var seq: Int = 0
- 
+    var subCategories: [CategoryVM]?
+    
     override func mapping(map: ObjectMapper.Map) {
         id<-map["id"]
         icon<-map["icon"]
@@ -24,5 +25,6 @@ class CategoryVM: BaseArgVM {
         description<-map["description"]
         categoryType<-map["categoryType"]
         seq<-map["seq"]
+        subCategories<-map["subCategories"]
     }
 }

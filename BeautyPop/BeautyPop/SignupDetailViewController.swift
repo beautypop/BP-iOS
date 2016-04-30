@@ -88,15 +88,19 @@ class SignupDetailViewController: BaseLoginViewController, UITextFieldDelegate, 
     }
     
     func isValid() -> Bool {
-        var valid = true
-        if StringUtil.trim(self.displayName.text).isEmpty {
-            self.view.makeToast(message: NSLocalizedString("enter_displayname", comment: ""), duration: ViewUtil.SHOW_TOAST_DURATION_SHORT, position: ViewUtil.DEFAULT_TOAST_POSITION)
-            valid = false
-        } else if !ViewUtil.isDropDownSelected(self.locationDropDown) {
-            self.view.makeToast(message: NSLocalizedString("enter_location", comment: ""), duration: ViewUtil.SHOW_TOAST_DURATION_SHORT, position: ViewUtil.DEFAULT_TOAST_POSITION)
-            valid = false
+    
+        let validDisplayName = ValidationUtil.isValidDisplayName(StringUtil.trim(self.displayName.text))
+        if !validDisplayName.0 {
+            ViewUtil.makeToast(validDisplayName.1!, view: self.view)
+            return false
         }
-        return valid
+        
+        if !ViewUtil.isDropDownSelected(self.locationDropDown) {
+            ViewUtil.makeToast(NSLocalizedString("enter_location", comment: ""), view: self.view)
+            return false
+        }
+        
+        return true
     }
     
     func initLanguages() {

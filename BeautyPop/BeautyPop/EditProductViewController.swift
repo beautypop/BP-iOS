@@ -17,17 +17,20 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
     @IBOutlet weak var prodDescription: UITextView!
     @IBOutlet weak var pricetxt: UITextField!
     @IBOutlet weak var categoryDropDown: UIButton!
+    @IBOutlet weak var subCategoryDropDown: UIButton!
     @IBOutlet weak var conditionDropDown: UIButton!
     @IBOutlet weak var deletePostBtn: UIButton!
     
     var postId: Int = 0
     var postItem: PostVM? = nil
     let categoryOptions = DropDown()
+    let subCategoryOptions = DropDown()
     let conditionTypeDropDown = DropDown()
     
     var save: String = ""
     var selectedIndex :Int?
     var selCategory: Int = -1
+    var selSubCategory: Int = -1
     
     var keyboardType: UIKeyboardType {
         get{
@@ -84,7 +87,7 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
         }
         
         SwiftEventBus.onMainThread(self, name: "editProductFailed") { result in
-            self.view.makeToast(message: "Error when editing product", duration: ViewUtil.SHOW_TOAST_DURATION_SHORT, position: ViewUtil.DEFAULT_TOAST_POSITION)
+            ViewUtil.makeToast("Error when editing product", view: self.view)
         }
         
         SwiftEventBus.onMainThread(self, name: "deletePostSuccess") { result in
@@ -104,15 +107,21 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
         
         SwiftEventBus.onMainThread(self, name: "deletePostFailure") { result in
             ViewUtil.showNormalView(self, activityLoading: self.activityLoading)
-            self.view.makeToast(message: "Error when deleting product")
+            ViewUtil.makeToast("Error when deleting product", view: self.view)
         }
         
         self.conditionTypeDropDown.anchorView = conditionDropDown
         self.conditionTypeDropDown.bottomOffset = CGPoint(x: 0, y:conditionDropDown.bounds.height)
         self.conditionTypeDropDown.direction = .Top
+        
         self.categoryOptions.anchorView = categoryDropDown
-        self.categoryOptions.bottomOffset = CGPoint(x: 0, y:conditionDropDown.bounds.height)
+        self.categoryOptions.bottomOffset = CGPoint(x: 0, y:categoryDropDown.bounds.height)
         self.categoryOptions.direction = .Top
+        self.categoryDropDown.titleLabel?.addObserver(self, forKeyPath: "text", options: NSKeyValueObservingOptions.New, context: nil)
+        
+        self.subCategoryOptions.anchorView = subCategoryDropDown
+        self.subCategoryOptions.bottomOffset = CGPoint(x: 0, y:subCategoryDropDown.bounds.height)
+        self.subCategoryOptions.direction = .Top
         
         let saveProductImg: UIButton = UIButton()
         saveProductImg.setTitle("Save", forState: UIControlState.Normal)
@@ -132,9 +141,9 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
         self.prodDescription.text = self.postItem?.body
         self.pricetxt.text = String(Int((self.postItem?.price)!))
         self.selCategory = (self.postItem?.categoryId)!
-        
+        self.selSubCategory = (self.postItem?.subCategoryId)!
         initCategoryOptions()
-        
+        initSubCategoryOptions()
         initConditionTypes()
         
         ViewUtil.hideActivityLoading(self.activityLoading)
@@ -161,6 +170,16 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
         
         self.categoryOptions.selectionAction = { [unowned self] (index, item) in
             self.categoryDropDown.setTitle(item, forState: .Normal)
+        }
+    }
+    
+    func initSubCategoryOptions() {
+        
+        let selSubCategoryValue = NSLocalizedString("choose_sub_category", comment: "")
+        self.subCategoryDropDown.setTitle(selSubCategoryValue, forState: UIControlState.Normal)
+        self.subCategoryOptions.dataSource = []
+        self.subCategoryOptions.selectionAction = { [unowned self] (index, item) in
+            self.subCategoryDropDown.setTitle(item, forState: .Normal)
         }
     }
     
@@ -200,6 +219,14 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
         }
     }
     
+    @IBAction func subCategorySellDropDown(sender: AnyObject) {
+        if self.subCategoryOptions.hidden {
+            self.subCategoryOptions.show()
+        } else {
+            self.subCategoryOptions.hide()
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -222,27 +249,31 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
         if (isValid()) {
             ViewUtil.showGrayOutView(self, activityLoading: self.activityLoading)
             let category = CategoryCache.getCategoryByName(categoryDropDown.titleLabel!.text!)
+            let subCategory = CategoryCache.getSubCategoryByName(subCategoryDropDown.titleLabel!.text!, subCategories: category!.subCategories!)
             let conditionType = ViewUtil.parsePostConditionTypeFromValue(conditionDropDown.titleLabel!.text!)
-            ApiController.instance.editPost(self.postId, title: StringUtil.trim(postTitle.text), body: StringUtil.trim(prodDescription.text), catId: category!.id, conditionType: String(conditionType), pricetxt: StringUtil.trim(pricetxt.text))
+            ApiController.instance.editPost(self.postId, title: StringUtil.trim(postTitle.text), body: StringUtil.trim(prodDescription.text), catId: subCategory!.id, conditionType: String(conditionType), pricetxt: StringUtil.trim(pricetxt.text))
         }
     }
     
     func isValid() -> Bool {
         var valid = true
         if StringUtil.trim(self.postTitle.text).isEmpty {
-            self.view.makeToast(message: "Please fill title", duration: ViewUtil.SHOW_TOAST_DURATION_LONG, position: ViewUtil.DEFAULT_TOAST_POSITION)
+            ViewUtil.makeToast("Please fill title", view: self.view)
             valid = false
         } else if StringUtil.trim(self.prodDescription.text).isEmpty {
-            self.view.makeToast(message: "Please fill description", duration: ViewUtil.SHOW_TOAST_DURATION_LONG, position: ViewUtil.DEFAULT_TOAST_POSITION)
+            ViewUtil.makeToast("Please fill description", view: self.view)
             valid = false
         } else if StringUtil.trim(self.pricetxt.text).isEmpty {
-            self.view.makeToast(message: "Please enter a price", duration: ViewUtil.SHOW_TOAST_DURATION_LONG, position: ViewUtil.DEFAULT_TOAST_POSITION)
+            ViewUtil.makeToast("Please enter a price", view: self.view)
             valid = false
         } else if StringUtil.trim(self.conditionDropDown.titleLabel?.text).isEmpty {
-            self.view.makeToast(message: "Please select condition type", duration: ViewUtil.SHOW_TOAST_DURATION_LONG, position: ViewUtil.DEFAULT_TOAST_POSITION)
+            ViewUtil.makeToast("Please select condition type", view: self.view)
             valid = false
         } else if StringUtil.trim(self.categoryDropDown.titleLabel?.text).isEmpty {
-            self.view.makeToast(message: "Please select category", duration: ViewUtil.SHOW_TOAST_DURATION_LONG, position: ViewUtil.DEFAULT_TOAST_POSITION)
+            ViewUtil.makeToast("Please select category", view: self.view)
+            valid = false
+        } else if !ViewUtil.isDropDownSelected(self.subCategoryOptions) {
+            ViewUtil.makeToast("Please select subcategory", view: self.view)
             valid = false
         }
         return valid
@@ -277,7 +308,7 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
     }
     
     func onFailureGetPost(error: String) -> Void {
-        self.view.makeToast(message: "Error getting Product.")
+        ViewUtil.makeToast("Error getting Product.", view: self.view)
         ViewUtil.hideActivityLoading(self.activityLoading)
     }
     
@@ -295,4 +326,31 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
         _confirmDialog.addAction(confirmAction)
         self.presentViewController(_confirmDialog, animated: true, completion: nil)
     }
+    
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        if keyPath == "text" {
+            NSLog("populate subcategories drop down.")
+            let category = CategoryCache.getCategoryByName(categoryDropDown.titleLabel!.text!)
+            let subCategories = category?.subCategories
+            
+            var selCategoryValue = NSLocalizedString("choose_sub_category", comment: "")
+            var catDataSource : [String] = []
+            for i in 0 ..< subCategories!.count {
+                catDataSource.append(subCategories![i].description)
+                if (Int(subCategories![i].id) == self.selSubCategory) {
+                    selCategoryValue = subCategories![i].description
+                }
+            }
+            
+            self.subCategoryOptions.dataSource = catDataSource
+            dispatch_async(dispatch_get_main_queue(), {
+                self.subCategoryOptions.reloadAllComponents()
+            })
+            
+            self.subCategoryDropDown.setTitle(selCategoryValue, forState: UIControlState.Normal)
+            
+            
+        }
+    }
+    
 }

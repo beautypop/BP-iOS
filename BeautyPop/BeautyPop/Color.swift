@@ -22,17 +22,17 @@ class Color {
     static let DARK_GRAY: UIColor = Color.fromRGB(0x555555)
     static let DARK_GRAY_2: UIColor = Color.fromRGB(0x222222)
     static let DARK_GRAY_3: UIColor = Color.fromRGB(0x111111)
-    static let PINK: UIColor = Color.fromRGB(0xFF2742)
+    static let PINK: UIColor = Color.fromRGB(0xFF76A4)
     
-    static let LIGHT_PINK: UIColor = Color.fromRGB(0xfd4e64)
-    static let LIGHT_PINK_2: UIColor = Color.fromRGB(0xff7990)
-    static let LIGHT_PINK_3: UIColor = Color.fromRGB(0xffcdd5)
-    static let LIGHT_PINK_4: UIColor = Color.fromRGB(0xffe7eb)
+    static let LIGHT_PINK: UIColor = Color.fromRGB(0xFF99B8)
+    static let LIGHT_PINK_2: UIColor = Color.fromRGB(0xFFC7D2)
+    static let LIGHT_PINK_3: UIColor = Color.fromRGB(0xFFEAED)
+    static let LIGHT_PINK_4: UIColor = Color.fromRGB(0xFFF2EF)
     
     // Theme colors
     static let MENU_BAR_BG: UIColor = Color.fromRGB(0xFCFAF8)
     static let IMAGE_LOAD_BG: UIColor = Color.fromRGB(0xFFF2EF)
-    static let VIEW_BG: UIColor = Color.fromRGB(0xF6F6F6)
+    static let VIEW_BG: UIColor = Color.fromRGB(0xF5F8FA)
     static let FEED_BG: UIColor = Color.fromRGB(0xF5F8FA)
     //static let FEED_BG: UIColor = LIGHT_PINK_3
     static let FEED_ITEM_BORDER: UIColor = LIGHT_GRAY_2

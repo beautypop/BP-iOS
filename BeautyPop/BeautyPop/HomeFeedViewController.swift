@@ -13,8 +13,6 @@ import Kingfisher
 
 class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSource, UICollectionViewDelegate {
     
-    @IBOutlet weak var topSpaceConstraint: NSLayoutConstraint!
-    @IBOutlet weak var exploreTip: UIView!
     @IBOutlet weak var uiCollectionView: UICollectionView!
     @IBOutlet weak var activityLoading: UIActivityIndicatorView!
     
@@ -32,7 +30,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     var featuredItems: [FeaturedItemVM]?
     
     var bannerImages: [String] = []
-    var collectionView: UICollectionView?
+    var bannerCollectionView: UICollectionView?
     var pageControl: UIPageControl?
     var currentBannerPage: Int?
     var homeBannerHeight: NSLayoutConstraint?
@@ -93,14 +91,6 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
         
         feedViewAdapter = FeedViewAdapter(collectionView: uiCollectionView)
         
-        if (!SharedPreferencesUtil.getInstance().isScreenViewed(SharedPreferencesUtil.Screen.HOME_EXPLORE_TIPS)) {
-            self.exploreTip.hidden = false
-            SharedPreferencesUtil.getInstance().setScreenViewed(SharedPreferencesUtil.Screen.HOME_EXPLORE_TIPS)
-        } else {
-            self.exploreTip.hidden = true
-            self.topSpaceConstraint.constant = 5
-        }
-        
         setCollectionViewSizesInsets()
         setCollectionViewSizesInsetsForTopView()
         
@@ -112,16 +102,12 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
         self.uiCollectionView!.backgroundColor = Color.FEED_BG
         
         self.uiCollectionView.addPullToRefresh({ [weak self] in
-            CategoryCache.refresh(self?.onSuccessGetCategories, failureCallback: nil)
+            ApiFacade.getHomeSliderFeaturedItems(self!.onSuccessGetHomeFeaturedItems, failureCallback: self!.onFailureGetHomeFeaturedItems)
+            CategoryCache.refresh(self!.onSuccessGetCategories, failureCallback: nil)
             self!.feedLoader?.reloadFeedItems()
             })
         
         ApiFacade.getHomeSliderFeaturedItems(onSuccessGetHomeFeaturedItems, failureCallback: onFailureGetHomeFeaturedItems)
-    }
-    
-    @IBAction func onClicTipClose(sender: AnyObject) {
-        self.exploreTip.hidden = true
-        self.topSpaceConstraint.constant = 5
     }
     
     override func didReceiveMemoryWarning() {
@@ -135,7 +121,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if collectionView == self.collectionView {
+        if collectionView == self.bannerCollectionView {
             return self.bannerImages.count
         }
         var count = 0
@@ -149,8 +135,8 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        if collectionView == self.collectionView {
-            let cell = self.collectionView?.dequeueReusableCellWithReuseIdentifier("homeBannerCell", forIndexPath: indexPath) as! ImageCollectionViewCell
+        if collectionView == self.bannerCollectionView {
+            let cell = self.bannerCollectionView?.dequeueReusableCellWithReuseIdentifier("homeBannerCell", forIndexPath: indexPath) as! ImageCollectionViewCell
             let imageView = cell.imageView
             
             ImageUtil.displayFeaturedItemImage(self.bannerImages[indexPath.row], imageView: imageView)
@@ -205,7 +191,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if collectionView == self.collectionView {
+        if collectionView == self.bannerCollectionView {
             ViewUtil.handleFeaturedItemAction(self, featuredItem: self.featuredItems![indexPath.row])
         } else {
             if (collectionView.tag == 2){
@@ -213,7 +199,6 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
                 self.performSegueWithIdentifier("categoryscreen", sender: nil)
             }
         }
-        
     }
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
@@ -222,9 +207,9 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
             let headerView : HomeReusableView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "HeaderView", forIndexPath: indexPath) as! HomeReusableView
             headerView.headerViewCollection.reloadData()
             
-            self.collectionView = headerView.homeBannerView.subviews[0] as? UICollectionView
-            self.collectionView?.dataSource = self
-            self.collectionView?.delegate = self
+            self.bannerCollectionView = headerView.homeBannerView.subviews[0] as? UICollectionView
+            self.bannerCollectionView?.dataSource = self
+            self.bannerCollectionView?.delegate = self
             self.homeBannerHeight = headerView.bannerHeight
             //self.homeBannerHeight?.constant = 0
             reusableView = headerView
@@ -237,7 +222,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
-        if collectionView == self.collectionView {
+        if collectionView == self.bannerCollectionView {
             return CGSizeMake(self.view.bounds.width, self.view.bounds.width / Constants.HOME_BANNER_WIDTH_HEIGHT_RATIO)
         }
         
@@ -261,7 +246,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        if collectionView == self.collectionView {
+        if collectionView == self.bannerCollectionView {
             return CGSizeZero
         }
         
@@ -313,6 +298,10 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     
     // MARK: UIScrollview Delegate
     func scrollViewDidScroll(scrollView: UIScrollView) {
+        if scrollView == bannerCollectionView {
+            return
+        }
+        
         if (scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height - Constants.FEED_LOAD_SCROLL_THRESHOLD {
             feedLoader!.loadMoreFeedItems()
         }
@@ -367,9 +356,8 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
             }
             _ = NSTimer.scheduledTimerWithTimeInterval(Constants.BANNER_REFRESH_TIME_INTERVAL, target: self, selector: "scrollHomeBanner", userInfo: nil, repeats: true)
             //self.homeBannerHeight?.constant = Constants.HOME_BANNER_VIEW_HEIGHT
-            self.collectionView?.reloadData()
+            self.bannerCollectionView?.reloadData()
             //self.uiCollectionView.reloadData()
-            
         }
     }
     
@@ -378,17 +366,15 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     }
     
     func scrollHomeBanner() {
-        NSLog("Changing the page")
         if self.pageControl != nil {
             let indexPath = NSIndexPath(forRow: self.currentBannerPage!, inSection: 0)
             self.pageControl?.currentPage = self.currentBannerPage!
-            self.collectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: .None, animated: true)
+            self.bannerCollectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: .None, animated: true)
             self.currentBannerPage! = self.currentBannerPage! + 1
             if self.currentBannerPage == self.bannerImages.count {
                 self.currentBannerPage = 0
             }
         }
     }
-    
 }
 

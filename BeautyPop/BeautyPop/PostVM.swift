@@ -1,6 +1,6 @@
 //
 //  PostVM.swift
-//  Baby Box
+//  BeautyPop
 //
 //  Created by Mac on 17/11/15.
 //  Copyright © 2015 MIndNerves. All rights reserved.
@@ -27,6 +27,11 @@ class PostVM: PostVMLite {
     var deviceType: String = ""
     var ownerLastLogin: Double = 0
     
+    var subCategoryId: Int = 0
+    var subCategoryName: String = ""
+    var subCategoryIcon: String = ""
+    var subCategoryType: String = ""
+    
     override func mapping(map: ObjectMapper.Map) {
         super.mapping(map)
         ownerId<-map["ownerId"]
@@ -44,5 +49,10 @@ class PostVM: PostVMLite {
         isFollowingOwner<-map["isFollowingOwner"]
         deviceType<-map["deviceType"]
         ownerLastLogin<-map["ownerLastLogin"]
+        subCategoryId<-map["subCategoryId"]
+        subCategoryName<-map["subCategoryName"]
+        subCategoryIcon<-map["subCategoryIcon"]
+        subCategoryType<-map["subCategoryType"]
+        
     }
 }

@@ -21,9 +21,11 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
     @IBOutlet weak var categoryDropDown: UIButton!
     @IBOutlet weak var conditionDropDown: UIButton!
     @IBOutlet weak var activityLoading: UIActivityIndicatorView!
+    @IBOutlet weak var subCategoryDropDown: UIButton!
     
     let categoryOptions = DropDown()
     let conditionTypeDropDown = DropDown()
+    let subCategoryOptions = DropDown()
     
     var save: String = ""
     var collectionViewCellSize : CGSize?
@@ -101,19 +103,26 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
         
         SwiftEventBus.onMainThread(self, name: "newProductFailed") { result in
             ViewUtil.showNormalView(self, activityLoading: self.activityLoading)
-            self.view.makeToast(message: NSLocalizedString("error_listing_prod", comment: ""), duration: ViewUtil.SHOW_TOAST_DURATION_SHORT, position: ViewUtil.DEFAULT_TOAST_POSITION)
+            ViewUtil.makeToast(NSLocalizedString("error_listing_prod", comment: ""), view: self.view)
         }
         
         initCategoryOptions()
+        initSubCategoryOptions()
         
         initConditionTypes()
         
         self.conditionTypeDropDown.anchorView = conditionDropDown
         self.conditionTypeDropDown.bottomOffset = CGPoint(x: 0, y: conditionDropDown.bounds.height)
         self.conditionTypeDropDown.direction = .Top
+        
         self.categoryOptions.anchorView = categoryDropDown
-        self.categoryOptions.bottomOffset = CGPoint(x: 0, y: conditionDropDown.bounds.height)
+        self.categoryOptions.bottomOffset = CGPoint(x: 0, y: categoryDropDown.bounds.height)
         self.categoryOptions.direction = .Top
+        self.categoryDropDown.titleLabel?.addObserver(self, forKeyPath: "text", options: NSKeyValueObservingOptions.New, context: nil)
+        
+        self.subCategoryOptions.anchorView = subCategoryDropDown
+        self.subCategoryOptions.bottomOffset = CGPoint(x: 0, y: subCategoryDropDown.bounds.height)
+        self.subCategoryOptions.direction = .Top
         
         self.setCollectionViewSizesInsets()
         
@@ -129,6 +138,7 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
         
     func initCategoryOptions() {
         let categories = CategoryCache.categories
+        
         var selCategoryValue = NSLocalizedString("choose_category", comment: "")
         var catDataSource : [String] = []
         for i in 0 ..< categories.count {
@@ -144,9 +154,20 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
         })
         
         self.categoryDropDown.setTitle(selCategoryValue, forState: UIControlState.Normal)
-
+        
         self.categoryOptions.selectionAction = { [unowned self] (index, item) in
             self.categoryDropDown.setTitle(item, forState: .Normal)
+        }
+        
+    }
+    
+    func initSubCategoryOptions() {
+        
+        let selSubCategoryValue = NSLocalizedString("choose_sub_category", comment: "")
+        self.subCategoryDropDown.setTitle(selSubCategoryValue, forState: UIControlState.Normal)
+        self.subCategoryOptions.dataSource = []
+        self.subCategoryOptions.selectionAction = { [unowned self] (index, item) in
+            self.subCategoryDropDown.setTitle(item, forState: .Normal)
         }
     }
     
@@ -181,6 +202,14 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
             self.categoryOptions.show()
         } else {
             self.categoryOptions.hide()
+        }
+    }
+    
+    @IBAction func subCategorySellDropDown(sender: AnyObject) {
+        if self.subCategoryOptions.hidden {
+            self.subCategoryOptions.show()
+        } else {
+            self.subCategoryOptions.hide()
         }
     }
     
@@ -297,8 +326,10 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
         if (isValid()) {
             ViewUtil.showGrayOutView(self, activityLoading: self.activityLoading)
             let category = CategoryCache.getCategoryByName(categoryDropDown.titleLabel!.text!)
+            let subCategory = CategoryCache.getSubCategoryByName(subCategoryDropDown.titleLabel!.text!, subCategories: (category?.subCategories)!)
             let conditionType = ViewUtil.parsePostConditionTypeFromValue(conditionDropDown.titleLabel!.text!)
-            ApiController.instance.newPost(StringUtil.trim(sellingtext.text), body: StringUtil.trim(prodDescription.text), catId: category!.id, conditionType: String(conditionType), pricetxt: StringUtil.trim(pricetxt.text), imageCollection: self.imageCollection)
+            /*ApiController.instance.newPost(StringUtil.trim(sellingtext.text), body: StringUtil.trim(prodDescription.text), catId: category!.id, subCatId: subCategory!.id, conditionType: String(conditionType), pricetxt: StringUtil.trim(pricetxt.text), imageCollection: self.imageCollection)*/
+            ApiController.instance.newPost(StringUtil.trim(sellingtext.text), body: StringUtil.trim(prodDescription.text), catId: subCategory!.id, conditionType: String(conditionType), pricetxt: StringUtil.trim(pricetxt.text), imageCollection: self.imageCollection)
         }
     }
     
@@ -319,22 +350,25 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
         }
                 
         if !isImageUploaded {
-            self.view.makeToast(message: NSLocalizedString("upload_photo", comment: ""), duration: ViewUtil.SHOW_TOAST_DURATION_LONG, position: ViewUtil.DEFAULT_TOAST_POSITION)
+            ViewUtil.makeToast(NSLocalizedString("upload_photo", comment: ""), view: self.view)
             valid = false
         } else if StringUtil.trim(self.sellingtext.text).isEmpty {
-            self.view.makeToast(message: NSLocalizedString("fill_title", comment: ""), duration: ViewUtil.SHOW_TOAST_DURATION_LONG, position: ViewUtil.DEFAULT_TOAST_POSITION)
+            ViewUtil.makeToast(NSLocalizedString("fill_title", comment: ""), view: self.view)
             valid = false
         } else if StringUtil.trim(self.prodDescription.text).isEmpty {
-            self.view.makeToast(message: NSLocalizedString("fill_desc", comment: ""), duration: ViewUtil.SHOW_TOAST_DURATION_LONG, position: ViewUtil.DEFAULT_TOAST_POSITION)
+            ViewUtil.makeToast(NSLocalizedString("fill_desc", comment: ""), view: self.view)
             valid = false
         } else if StringUtil.trim(self.pricetxt.text).isEmpty {
-            self.view.makeToast(message: NSLocalizedString("fill_price", comment: ""), duration: ViewUtil.SHOW_TOAST_DURATION_LONG, position: ViewUtil.DEFAULT_TOAST_POSITION)
+            ViewUtil.makeToast(NSLocalizedString("fill_price", comment: ""), view: self.view)
             valid = false
         } else if !ViewUtil.isDropDownSelected(self.conditionTypeDropDown) {
-            self.view.makeToast(message: NSLocalizedString("fill_condition", comment: ""), duration: ViewUtil.SHOW_TOAST_DURATION_LONG, position: ViewUtil.DEFAULT_TOAST_POSITION)
+            ViewUtil.makeToast(NSLocalizedString("fill_condition", comment: ""), view: self.view)
             valid = false
         } else if !ViewUtil.isDropDownSelected(self.categoryOptions) {
-            self.view.makeToast(message: NSLocalizedString("fill_category", comment: ""), duration: ViewUtil.SHOW_TOAST_DURATION_LONG, position: ViewUtil.DEFAULT_TOAST_POSITION)
+            ViewUtil.makeToast(NSLocalizedString("fill_category", comment: ""), view: self.view)
+            valid = false
+        } else if !ViewUtil.isDropDownSelected(self.subCategoryOptions) {
+            ViewUtil.makeToast(NSLocalizedString("fill_sub_category", comment: ""), view: self.view)
             valid = false
         }
         return valid
@@ -393,5 +427,31 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
     func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
+    }
+    
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        if keyPath == "text" {
+            NSLog("populate subcategories drop down.")
+            let category = CategoryCache.getCategoryByName(categoryDropDown.titleLabel!.text!)
+            let subCategories = category?.subCategories
+            
+            var selCategoryValue = NSLocalizedString("choose_sub_category", comment: "")
+            var catDataSource : [String] = []
+            for i in 0 ..< subCategories!.count {
+                catDataSource.append(subCategories![i].description)
+                if (Int(subCategories![i].id) == self.selCategory) {
+                    selCategoryValue = subCategories![i].description
+                }
+            }
+            
+            self.subCategoryOptions.dataSource = catDataSource
+            dispatch_async(dispatch_get_main_queue(), {
+                self.subCategoryOptions.reloadAllComponents()
+            })
+            
+            self.subCategoryDropDown.setTitle(selCategoryValue, forState: UIControlState.Normal)
+        
+            
+        }
     }
 }

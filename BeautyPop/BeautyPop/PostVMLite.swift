@@ -1,6 +1,6 @@
 //
 //  PostVMLite.swift
-//  Baby Box
+//  BeautyPop
 //
 //  Created by Mac on 14/11/15.
 //  Copyright © 2015 MIndNerves. All rights reserved.

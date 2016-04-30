@@ -1,6 +1,6 @@
 //
 //  Constants.swift
-//  Baby Box
+//  BeautyPop
 //
 //  Created by Mac on 14/11/15.
 //  Copyright © 2015 MIndNerves. All rights reserved.
@@ -37,11 +37,15 @@ struct Constants {
     static let HOME_HEADER_ITEMS_MARGIN_TOTAL = CGFloat(12)     // 3 each x 4
     static let CATEGORY_HEADER_HEIGHT = CGFloat(150)
     static let PROFILE_HEADER_HEIGHT = CGFloat(190)
-    static let FEED_ITEM_CORNER_RADIUS = CGFloat(0)
-    static let FEED_ITEM_SIDE_SPACING = CGFloat(12)
-    static let FEED_ITEM_LINE_SPACING = CGFloat(12)
-    static let FEED_ITEM_DETAILS_HEIGHT = CGFloat(35)
+    static let FEED_ITEM_CORNER_RADIUS = CGFloat(5)
+    static let FEED_ITEM_SIDE_SPACING = CGFloat(10)
+    static let FEED_ITEM_LINE_SPACING = CGFloat(10)
+    static let FEED_ITEM_DETAILS_HEIGHT = CGFloat(50)
+    static let PRODUCT_INFO_HEIGHT = CGFloat(200)
+    static let PRODUCT_SELLER_HEIGHT = CGFloat(95)
+    static let PRODUCT_COMMENTS_HEIGHT = CGFloat(50)
     static let SELLER_FEED_ITEM_DETAILS_HEIGHT = CGFloat(70)
+    static let USER_ACTIVITY_DEFAULT_HEIGHT = CGFloat(60.0)
     static let MESSAGE_BUBBLE_CORNER_RADIUS = CGFloat(5)
     static let MESSAGE_IMAGE_WIDTH = CGFloat(0.65)
     static let MESSAGE_LOAD_MORE_BTN_HEIGHT = CGFloat(0)
@@ -49,14 +53,14 @@ struct Constants {
     static let NO_ITEM_TIP_TEXT_CELL_HEIGHT = CGFloat(70)
     
     // strings
-    static let ACTIVITY_FIRST_POST = NSLocalizedString("now_seller", comment: "") //"You are now a BeautyPop seller! Your first product has been listed:\n"
-    static let ACTIVITY_NEW_POST = NSLocalizedString("new_product", comment: "") // "New product listed:\n"
-    static let ACTIVITY_COMMENTED = NSLocalizedString("product_commented", comment: "") // "commented on product:\n"
-    static let ACTIVITY_LIKED = NSLocalizedString("product_liked", comment: "") //"liked your product."
-    static let ACTIVITY_FOLLOWED = NSLocalizedString("started_following", comment: "") //"started following you."
-    static let ACTIVITY_SOLD = NSLocalizedString("sold", comment: "") //"already sold."
-    static let ACTIVITY_GAME_BADGE = NSLocalizedString("new_badge_msg", comment: "") // "Congratulations! You got a new badge:\n"
-    static let SHARING_SELLER_MSG_PREFIX: String = NSLocalizedString("notif_checkout_msg", comment: "") //"Check out BeautyPop Seller"
+    static let ACTIVITY_FIRST_POST = NSLocalizedString("activity_now_seller", comment: "") //"You are now a BeautyPop seller! Your first product has been listed:\n"
+    static let ACTIVITY_NEW_POST = NSLocalizedString("activity_new_product", comment: "") // "New product listed:\n"
+    static let ACTIVITY_COMMENTED = NSLocalizedString("activity_product_commented", comment: "") // "commented on product:\n"
+    static let ACTIVITY_LIKED = NSLocalizedString("activity_product_liked", comment: "") //"liked your product."
+    static let ACTIVITY_FOLLOWED = NSLocalizedString("activity_started_following", comment: "") //"started following you."
+    static let ACTIVITY_SOLD = NSLocalizedString("activity_sold", comment: "") //"already sold."
+    static let ACTIVITY_GAME_BADGE = NSLocalizedString("activity_new_badge_msg", comment: "") // "Congratulations! You got a new badge:\n"
+    static let ACTIVITY_TIPS_NEW_USER = NSLocalizedString("activity_tips_new_user", comment: "") // "Congratulations! You got a new badge:\n"
     
     static let SETTING_EMAIL_NOTIF_NEW_PRODUCT = NSLocalizedString("product_listed", comment: "") //"Product listed"
     static let SETTING_EMAIL_NOTIF_NEW_CHAT = NSLocalizedString("new_chat", comment: "") //"New chat"
@@ -91,4 +95,6 @@ struct Constants {
     
     static let NO_PRODUCT_TEXT = NSLocalizedString("no_product_text", comment: "") //"~ No Products ~"
     static let NO_FOLLOWING_TEXT = NSLocalizedString("no_following_text", comment: "") //"~ No Followings ~"
+    
+    static let SHARING_SELLER_MSG_PREFIX = NSLocalizedString("notif_checkout_msg", comment: "") //"Check out BeautyPop Seller"
 }

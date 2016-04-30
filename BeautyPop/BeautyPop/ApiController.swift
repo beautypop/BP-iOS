@@ -1,6 +1,6 @@
 //
 //  ApiController.swift
-//  Baby Box
+//  BeautyPop
 //
 //  Created by Mac on 06/11/15.
 //  Copyright © 2015 MIndNerves. All rights reserved.
@@ -59,8 +59,8 @@ class ApiController {
         let callEvent = ApiCallEvent()
         callEvent.method = "/api/get-user-info"
         callEvent.resultClass = "UserVM"
-        callEvent.successEventbusName = "userInfoSuccess"
-        callEvent.failedEventbusName = "userInfoFailed"
+        callEvent.successEventbusName = "onSuccessGetUserInfo"
+        callEvent.failedEventbusName = "onFailureGetUserInfo"
         callEvent.apiUrl = Constants.BASE_URL + callEvent.method      //append logged in user id to get the logged in user details.
         
         self.makeApiCall(callEvent)
@@ -568,7 +568,7 @@ class ApiController {
         
         let callEvent = ApiCallEvent()
         callEvent.method = "/api/comment/new"
-        callEvent.resultClass = "String"
+        callEvent.resultClass = "ResponseVM"
         callEvent.body = parameter
         callEvent.successEventbusName = "onSuccessNewComment"
         callEvent.failedEventbusName = "onFailureNewComment"
@@ -576,6 +576,52 @@ class ApiController {
         self.makePostApiCall(callEvent)
     }
 
+    func newConversationOrder(conversationId: Int, offeredPrice: Double){
+        var strData = [String]()
+        strData.append("conversationId=\(conversationId)")
+        strData.append("offeredPrice=\(offeredPrice)")
+        let parameter = self.makeBodyString(strData)
+        
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/api/conversation-order/new"
+        callEvent.resultClass = "ConversationOrderVM"
+        callEvent.body = parameter
+        callEvent.successEventbusName = "onSuccessNewConversationOrder"
+        callEvent.failedEventbusName = "onFailureNewConversationOrder"
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        self.makePostApiCall(callEvent)
+    }
+    
+    func cancelConversationOrder(conversationOrderId: Int) {
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/api/conversation-order/cancel/\(conversationOrderId)"
+        callEvent.resultClass = "ConversationOrderVM"
+        callEvent.successEventbusName = "onSuccessCancelConversationOrder"
+        callEvent.failedEventbusName = "onFailureCancelConversationOrder"
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        self.makeApiCall(callEvent)
+    }
+    
+    func acceptConversationOrder(conversationOrderId: Int) {
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/api/conversation-order/accept/\(conversationOrderId)"
+        callEvent.resultClass = "ConversationOrderVM"
+        callEvent.successEventbusName = "onSuccessAcceptConversationOrder"
+        callEvent.failedEventbusName = "onFailureAcceptConversationOrder"
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        self.makeApiCall(callEvent)
+    }
+    
+    func declineConversationOrder(conversationOrderId: Int) {
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/api/conversation-order/decline/\(conversationOrderId)"
+        callEvent.resultClass = "ConversationOrderVM"
+        callEvent.successEventbusName = "onSuccessDeclineConversationOrder"
+        callEvent.failedEventbusName = "onFailureDeclineConversationOrder"
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        self.makeApiCall(callEvent)
+    }
+    
     func deleteComment(id: Int) {
         let callEvent = ApiCallEvent()
         callEvent.method = "/api/comment/delete/\(id)"
@@ -837,6 +883,8 @@ class ApiController {
         case "NotificationCounterVM": result = Mapper<NotificationCounterVM>().map(inputStr)!
         case "[SellerVM]": result = Mapper<SellerVM>().mapArray(inputStr)!
         case "[FeaturedItemVM]": result = Mapper<FeaturedItemVM>().mapArray(inputStr)!
+        case "ConversationOrderVM": result = Mapper<ConversationOrderVM>().map(inputStr)!
+        case "ResponseVM": result = Mapper<ResponseVM>().map(inputStr)!
         case "String": result = inputStr
         default: NSLog("calling default object resolver")
         }

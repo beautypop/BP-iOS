@@ -71,5 +71,23 @@ class CategoryCache {
     static func setCategories(cats: [CategoryVM]) {
         CategoryCache.categories = cats
     }
+    
+    static func getSubCategoryById(catId: Int, subCategories: [CategoryVM]) -> CategoryVM? {
+        for index in 0...subCategories.count {
+            if (Int(subCategories[index].id) == catId) {
+                return subCategories[index]
+            }
+        }
+        return nil
+    }
+    
+    static func getSubCategoryByName(name: String, subCategories: [CategoryVM]) -> CategoryVM? {
+        for index in 0...subCategories.count {
+            if (subCategories[index].name == name) {
+                return subCategories[index]
+            }
+        }
+        return nil
+    }
 
 }

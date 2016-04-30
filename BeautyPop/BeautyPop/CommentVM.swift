@@ -1,6 +1,6 @@
 //
 //  CommentVM.swift
-//  Baby Box
+//  BeautyPop
 //
 //  Created by Mac on 17/11/15.
 //  Copyright © 2015 MIndNerves. All rights reserved.
@@ -19,6 +19,7 @@ class CommentVM: BaseArgVM {
     var body: String = ""
     var isOwner: Bool = false
     var deviceType: String = ""
+    var isNew: Bool = false
     
     override func mapping(map: ObjectMapper.Map) {
         id<-map["id"]

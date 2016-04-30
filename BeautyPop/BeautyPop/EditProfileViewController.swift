@@ -53,7 +53,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UITextVi
         
         SwiftEventBus.onMainThread(self, name: "onEditInfoFailed") { result in
             ViewUtil.showNormalView(self, activityLoading: self.activityLoading)
-            self.view.makeToast(message: "Error updating user info", duration: ViewUtil.SHOW_TOAST_DURATION_SHORT, position: ViewUtil.DEFAULT_TOAST_POSITION)
+            ViewUtil.makeToast("Error updating user info", view: self.view)
         }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil)
@@ -153,12 +153,43 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UITextVi
     }
     
     func isValid() -> Bool {
-        var valid = true
-        if StringUtil.trim(self.location.titleLabel?.text).isEmpty {
-            self.view.makeToast(message: "Please select location", duration: ViewUtil.SHOW_TOAST_DURATION_SHORT, position: ViewUtil.DEFAULT_TOAST_POSITION)
-            valid = false
+        
+        /*
+        // Email not editable for now... 
+        let validEmail = ValidationUtil.isValidEmail(StringUtil.trim(self.email.text))
+        if !validEmail.0 {
+            ViewUtil.makeToast(validEmail.1!, view: self.view)
+            return false
         }
-        return valid
+        */
+        
+        let validFirstName = ValidationUtil.isValidUserName(StringUtil.trim(self.firstName.text))
+        if !validFirstName.0 {
+            ViewUtil.makeToast(validFirstName.1!, view: self.view)
+            return false
+        }
+        
+        let validLastName = ValidationUtil.isValidUserName(StringUtil.trim(self.lastName.text))
+        if !validLastName.0 {
+            ViewUtil.makeToast(validLastName.1!, view: self.view)
+            return false
+        }
+
+        let validDisplayName = ValidationUtil.isValidDisplayName(StringUtil.trim(self.displayName.text))
+        if !validDisplayName.0 {
+            ViewUtil.makeToast(validDisplayName.1!, view: self.view)
+            return false
+        }
+        
+        /*
+        // No need to validate location as it must be filled out during signup
+        if !ViewUtil.isDropDownSelected(self.locationDropDown) {
+            ViewUtil.makeToast(NSLocalizedString("enter_location", comment: ""), view: self.view)
+            return false
+        }
+        */
+
+        return true
     }
     
     func keyboardWillHide(notification: NSNotification) {

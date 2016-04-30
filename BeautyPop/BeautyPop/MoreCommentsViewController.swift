@@ -8,14 +8,17 @@
 
 import UIKit
 
-class MoreCommentsViewController: UIViewController, UITextFieldDelegate, UIScrollViewDelegate {
+class MoreCommentsViewController: UIViewController, UIScrollViewDelegate, UITextViewDelegate {
 
+    @IBOutlet weak var commentTextView: UITextView!
+    @IBOutlet weak var postCommentBtn: UIButton!
+    
+    @IBOutlet weak var bottomSpaceForText: NSLayoutConstraint!
     @IBOutlet weak var activityLoading: UIActivityIndicatorView!
     @IBOutlet weak var commentsTableView: UITableView!
     
     @IBOutlet weak var tipText: UILabel!
-    @IBOutlet weak var commentText: UITextField!
-    @IBOutlet weak var postCommentBtn: UIButton!
+    
     var viewCellIdentifier: String = "commentTableCell"
     var refreshControl = UIRefreshControl()
     var deleteCellIndex: NSIndexPath?
@@ -27,8 +30,10 @@ class MoreCommentsViewController: UIViewController, UITextFieldDelegate, UIScrol
     var postId: Int = 0
     var offset: Int64 = 0
     var lcontentSize = CGFloat(0.0)
+    
     let DEFAULT_SEPERATOR_SPACING = CGFloat(5.0)
     let DEFAULT_TABLEVIEW_CELL_HEIGHT = CGFloat(42.0)
+    
     override func viewWillAppear(animated: Bool) {
         //ViewUtil.hideActivityLoading(self.activityLoading)
     }
@@ -37,24 +42,35 @@ class MoreCommentsViewController: UIViewController, UITextFieldDelegate, UIScrol
         super.viewDidLoad()
         
         ViewUtil.showActivityLoading(self.activityLoading)
-        ViewUtil.displayRoundedCornerView(self.postCommentBtn, bgColor: Color.LIGHT_GRAY)
-        self.commentText.placeholder = NSLocalizedString("enter_comment", comment: "")
-        self.commentText.delegate = self
+        
+        //ViewUtil.displayRoundedCornerView(self.postCommentBtn, bgColor: Color.LIGHT_GRAY)
+        //ViewUtil.displayRoundedCornerView(self.commentTextView, bgColor: Color.WHITE, borderColor: Color.LIGHT_GRAY)
+        
+        self.postCommentBtn.enabled = false
+        self.commentTextView.delegate = self
+        self.commentTextView.placeholder = NSLocalizedString("enter_text", comment: "")
         
         ApiFacade.getComments(self.postId, offset: offset, successCallback: onSuccessGetComments, failureCallback: onFailureGetComments)
-        
         self.loading = true
         
         self.refreshControl.attributedTitle = NSAttributedString(string: "")
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
-        self.commentsTableView.addSubview(refreshControl)
         
+        self.commentsTableView.addSubview(refreshControl)
         self.commentsTableView.separatorColor = Color.LIGHT_GRAY
         self.commentsTableView.separatorStyle = .SingleLine
         self.commentsTableView.tableFooterView = UIView(frame: CGRectZero)
+        self.commentsTableView.estimatedRowHeight = 100.0
+        self.commentsTableView.rowHeight = UITableViewAutomaticDimension
         self.commentsTableView.setNeedsLayout()
         self.commentsTableView.layoutIfNeeded()
         
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: "dismissKeyboard")
+        self.commentsTableView.addGestureRecognizer(tap)
+        
+        self.addKeyboardNotifications()
     }
     
     override func viewWillDisappear(animated : Bool) {
@@ -100,20 +116,24 @@ class MoreCommentsViewController: UIViewController, UITextFieldDelegate, UIScrol
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(viewCellIdentifier)! as! CommentTableViewCell
         
+        self.lcontentSize = CGFloat(0.0)
         let comment = self.comments![indexPath.row]
         ImageUtil.displayThumbnailProfileImage(comment.ownerId, imageView: cell.userImg)
+        cell.contentMode = UIViewContentMode.Redraw
         cell.sizeToFit()
         cell.titleBtn.setTitle(comment.ownerName, forState: .Normal)
         cell.commentText.text = comment.body
         cell.commentText.numberOfLines = 0
-        self.lcontentSize = cell.commentText.frame.size.height
         cell.commentText.sizeToFit()
-        
-        if (comment.id != -1) {
+        self.lcontentSize = cell.commentText.frame.size.height
+        //cell.commentText.clipsToBounds = true
+        if (!comment.isNew) {
             cell.commentTime.text = NSDate(timeIntervalSince1970:Double(comment.createdDate) / 1000.0).timeAgo
         } else {
             cell.commentTime.text = NSDate(timeIntervalSinceNow: comment.createdDate / 1000.0).timeAgo
         }
+        cell.contentView.setNeedsLayout()
+        cell.contentView.layoutIfNeeded()
         return cell
     }
     
@@ -126,6 +146,10 @@ class MoreCommentsViewController: UIViewController, UITextFieldDelegate, UIScrol
         //content is getting rendered then there is no need to increase the ht of the cell.
             return DEFAULT_TABLEVIEW_CELL_HEIGHT + self.lcontentSize + DEFAULT_SEPERATOR_SPACING
         
+    }
+    
+    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
     
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -191,19 +215,19 @@ class MoreCommentsViewController: UIViewController, UITextFieldDelegate, UIScrol
                     self.offset += 1
                 }
                 ApiFacade.getComments(self.postId, offset: offset, successCallback: onSuccessGetComments, failureCallback: onFailureGetComments)
-                
             }
         }
     }
     
     @IBAction func onClickSaveBtn(sender: AnyObject) {
-        
-        if self.commentText.text!.isEmpty {
-            ViewUtil.makeToast(NSLocalizedString("enter_comment_msg", comment: ""), view: self.view)
+        let trimmedMessage = StringUtil.trim(self.commentTextView.text!)
+        if trimmedMessage.isEmpty {
+            ViewUtil.makeToast(NSLocalizedString("enter_text_msg", comment: ""), view: self.view)
             return
         }
+        
         ViewUtil.showGrayOutView(self)
-        ApiFacade.newComment(self.postId, commentText: StringUtil.trim(self.commentText.text), successCallback: onSuccessNewComment, failureCallback: onFailureNewComment)
+        ApiFacade.newComment(self.postId, commentText: trimmedMessage, successCallback: onSuccessNewComment, failureCallback: onFailureNewComment)
     }
     
     func onSuccessGetComments(comments: [CommentVM]) {
@@ -223,18 +247,22 @@ class MoreCommentsViewController: UIViewController, UITextFieldDelegate, UIScrol
         self.refreshControl.endRefreshing()
     }
     
-    func onSuccessNewComment(response: String) {
+    func onSuccessNewComment(response: ResponseVM) {
         let comment = CommentVM()
         comment.ownerId = UserInfoCache.getUser()!.id
-        comment.body = self.commentText.text!
+        comment.body = self.commentTextView.text!
         comment.ownerName = UserInfoCache.getUser()!.displayName
         comment.deviceType = "iOS"
         comment.createdDate = NSDate().timeIntervalSinceNow
-        comment.id = -1
+        comment.id = response.objId!
+        comment.isNew = true
         self.comments!.append(comment)
-        self.commentText.text = ""
+        self.commentTextView.text = ""
         self.commentsTableView.reloadData()
         ViewUtil.showNormalView(self, activityLoading: self.activityLoading)
+        self.commentTextView.resignFirstResponder()
+        //let nsIndexPath = NSIndexPath(forRow: self.comments!.count - 1, inSection: 0)
+        //self.commentsTableView.scrollToRowAtIndexPath(nsIndexPath, atScrollPosition: .Bottom, animated: false)
         //self.performSegueWithIdentifier("unwindToProductScreen", sender: self)
     }
     
@@ -244,7 +272,7 @@ class MoreCommentsViewController: UIViewController, UITextFieldDelegate, UIScrol
             self.commentsTableView.contentInset =  UIEdgeInsetsZero
             ViewUtil.showNormalView(self, activityLoading: self.activityLoading)
             self.commentsTableView.reloadData()
-            self.view.makeToast(message: NSLocalizedString("delete_confirm_msg", comment: ""), duration: ViewUtil.SHOW_TOAST_DURATION_SHORT, position: ViewUtil.DEFAULT_TOAST_POSITION)
+            ViewUtil.makeToast(NSLocalizedString("delete_confirm_msg", comment: ""), view: self.view)
         } else {
             ViewUtil.showNormalView(self, activityLoading: self.activityLoading)
         }
@@ -267,13 +295,7 @@ class MoreCommentsViewController: UIViewController, UITextFieldDelegate, UIScrol
         ViewUtil.showDialog(NSLocalizedString("error", comment: ""), message: message, view: self)
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool { // called when 'return' key pressed. return NO to ignore.
-        textField.resignFirstResponder()
-        return true
-    }
-    
     @IBAction func onClickUser(sender: AnyObject) {
-        
         let button = sender as! UIButton
         let view = button.superview!
         let cell = view.superview! as! CommentTableViewCell
@@ -285,5 +307,43 @@ class MoreCommentsViewController: UIViewController, UITextFieldDelegate, UIScrol
         self.navigationController?.pushViewController(vController, animated: true)
     }
     
+    func addKeyboardNotifications() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name:UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name:UIKeyboardWillHideNotification, object: nil)
+    }
     
+    // MARK:- Notification
+    
+    func keyboardWillShow(notification: NSNotification) {
+        var info = notification.userInfo!
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        
+        UIView.animateWithDuration(1.0, animations: { () -> Void in
+            self.bottomSpaceForText.constant = keyboardFrame.size.height
+            }) { (completed: Bool) -> Void in
+                NSLog("keyboard shown")
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        UIView.animateWithDuration(1.0, animations: { () -> Void in
+            self.bottomSpaceForText.constant = 0.0
+            }) { (completed: Bool) -> Void in
+                NSLog("keyboard hide")
+        }
+    }
+    
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    func textViewDidChange(textView: UITextView) {
+        self.postCommentBtn.enabled = !textView.text.isEmpty
+        //self.tableViewHtConstraint.constant = self.tableViewHtConstraint.constant - 20
+    }
+    
+    func textViewDidEndEditing(textView: UITextView) {
+        //self.tableViewHtConstraint.constant = CGFloat(0.0)
+    }
 }

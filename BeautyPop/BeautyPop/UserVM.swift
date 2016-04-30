@@ -1,6 +1,6 @@
 //
 //  UserVM.swift
-//  Baby Box
+//  BeautyPop
 //
 //  Created by Mac on 12/11/15.
 //  Copyright © 2015 MIndNerves. All rights reserved.
