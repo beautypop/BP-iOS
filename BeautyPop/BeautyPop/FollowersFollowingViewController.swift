@@ -34,7 +34,7 @@ class FollowersFollowingViewController: UICollectionViewController {
             ApiController.instance.unfollowUser(item.id)
             item.isFollowing = false
             cell.followingsBtn.setTitle("Follow", forState: UIControlState.Normal)
-            ViewUtil.displayRoundedCornerView(cell.followingsBtn, bgColor: Color.PINK)
+            ViewUtil.displayRoundedCornerView(cell.followingsBtn, bgColor: Color.LIGHT_PINK)
         } else {
             ApiController.instance.followUser(item.id)
             item.isFollowing = true
@@ -106,7 +106,7 @@ class FollowersFollowingViewController: UICollectionViewController {
             ViewUtil.displayRoundedCornerView(cell.followingsBtn, bgColor: Color.LIGHT_GRAY)
             cell.followingsBtn.setTitle("Following", forState: UIControlState.Normal)
         } else {
-            ViewUtil.displayRoundedCornerView(cell.followingsBtn, bgColor: Color.PINK)
+            ViewUtil.displayRoundedCornerView(cell.followingsBtn, bgColor: Color.LIGHT_PINK)
             cell.followingsBtn.setTitle("Follow", forState: UIControlState.Normal)
         }
         

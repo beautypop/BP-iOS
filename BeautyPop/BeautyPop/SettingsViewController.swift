@@ -29,7 +29,7 @@ class SettingsViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "actionbar_bg_pink"), forBarMetrics: UIBarMetrics.Default)
         
-        ViewUtil.displayRoundedCornerView(logOutBtn, bgColor: Color.PINK)
+        ViewUtil.displayRoundedCornerView(logOutBtn, bgColor: Color.LIGHT_PINK)
         
         initLanguages()
         self.languageTypeDropDown.anchorView = languageDropDown

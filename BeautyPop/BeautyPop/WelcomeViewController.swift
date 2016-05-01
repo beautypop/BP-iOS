@@ -37,8 +37,8 @@ class WelcomeViewController: UIViewController, UITableViewDelegate, UITableViewD
         let color = Color.PINK.CGColor
         self.signUpBtn.backgroundColor = Color.CLEAR
 
-        ViewUtil.displayRoundedCornerView(self.loginBtn, bgColor: Color.PINK)
-        ViewUtil.displayRoundedCornerView(self.signUpBtn)
+        ViewUtil.displayRoundedCornerView(self.loginBtn, bgColor: Color.LIGHT_PINK)
+        ViewUtil.displayRoundedCornerView(self.signUpBtn, bgColor: Color.WHITE, borderColor: Color.LIGHT_PINK)
         self.signUpBtn.layer.borderColor = color
         self.signUpBtn.setTitleColor(Color.PINK, forState: UIControlState.Normal)
     }

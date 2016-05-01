@@ -253,7 +253,7 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
                     }
                 }
                 
-                ViewUtil.displayRoundedCornerView(cell.viewBtnIns, bgColor: Color.PINK)
+                ViewUtil.displayRoundedCornerView(cell.viewBtnIns, bgColor: Color.LIGHT_PINK)
             case 3:
                 if let commentCount = productInfo?.numComments {
                     cell.commentsCount.text = String(commentCount)

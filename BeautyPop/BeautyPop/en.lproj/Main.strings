@@ -303,7 +303,7 @@
 "Xud-3o-yZv.text" = "About:";
 
 /* Class = "UILabel"; text = "Facebook"; ObjectID = "YFW-1f-Url"; */
-"YFW-1f-Url.text" = "Facebook";
+"YFW-1f-Url.text" = "Sign up with Facebook";
 
 /* Class = "UILabel"; text = "$0"; ObjectID = "YFe-ZO-BcS"; */
 "YFe-ZO-BcS.text" = "$0";
@@ -489,7 +489,7 @@
 "qUS-Bb-vLX.text" = "Category:";
 
 /* Class = "UILabel"; text = "Sign Up"; ObjectID = "rLW-ZP-6C2"; */
-"rLW-ZP-6C2.text" = "Sign Up";
+"rLW-ZP-6C2.text" = "Sign up with Email";
 
 /* Class = "UIButton"; normalTitle = "Following"; ObjectID = "s4b-Lm-Kpb"; */
 "s4b-Lm-Kpb.normalTitle" = "Following";

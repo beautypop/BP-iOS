@@ -113,8 +113,6 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
         let userProfileBarBtn = UIBarButtonItem(customView: userProfileBtn)
         self.navigationItem.rightBarButtonItems = [userProfileBarBtn]
         
-        //ViewUtil.displayRoundedCornerView(self.sendButton, bgColor: Color.LIGHT_GRAY.CGColor)
-        
         self.initButtonsLayout()
         self.initLayout(self.conversation!)
     }
@@ -447,7 +445,6 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
     
     func initButtonsLayout() {
         
-        //ViewUtil.displayRoundedCornerView(self.buyerMessageButton)
         ViewUtil.displayRoundedCornerBtnView(self.buyerCancelButton)
         ViewUtil.displayRoundedCornerBtnView(self.buyerOrderAgainButton)
         ViewUtil.displayRoundedCornerBtnView(self.buyerOrderButton)

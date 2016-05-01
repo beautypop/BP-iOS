@@ -26,7 +26,7 @@ class SignupDetailViewController: BaseLoginViewController, UITextFieldDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-        ViewUtil.displayRoundedCornerView(self.submitBtn, bgColor: Color.PINK)
+        ViewUtil.displayRoundedCornerView(self.submitBtn, bgColor: Color.LIGHT_PINK)
         
         var locs: [String] = []
         for (_, element) in DistrictCache.districts.enumerate() {

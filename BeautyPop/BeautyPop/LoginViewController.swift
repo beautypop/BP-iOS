@@ -28,7 +28,7 @@ class LoginViewController: BaseLoginViewController, UITextFieldDelegate {
         self.userNameTxt.delegate = self
         self.passwordTxt.delegate = self
         
-        ViewUtil.displayRoundedCornerView(self.loginButton, bgColor: Color.PINK)
+        ViewUtil.displayRoundedCornerView(self.loginButton, bgColor: Color.LIGHT_PINK)
     }
     
     @IBAction func onEmailLogin(sender: UIButton) {

@@ -75,7 +75,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UITextVi
     func initializeEditComponents() {
         
         let userInfo = UserInfoCache.getUser()
-        ViewUtil.displayRoundedCornerView(self.submitBtn, bgColor: Color.PINK)
+        ViewUtil.displayRoundedCornerView(self.submitBtn, bgColor: Color.LIGHT_PINK)
         if (userInfo!.isFBLogin) {
             self.fbLoginIcon.hidden = false
         } else {

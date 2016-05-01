@@ -152,7 +152,7 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
                     ViewUtil.displayRoundedCornerView(cell.editProfile, bgColor: Color.LIGHT_GRAY)
                 } else {
                     cell.editProfile.setTitle(NSLocalizedString("follow_txt", comment: ""), forState: UIControlState.Normal)
-                    ViewUtil.displayRoundedCornerView(cell.editProfile, bgColor: Color.PINK)
+                    ViewUtil.displayRoundedCornerView(cell.editProfile, bgColor: Color.LIGHT_PINK)
                 }
                 
                 cell.profileDescription.numberOfLines = 3
@@ -355,7 +355,7 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
             ApiController.instance.unfollowUser((self.userInfo!.id))
             self.userInfo!.isFollowing = false
             cell.editProfile.setTitle(NSLocalizedString("follow_txt", comment: ""), forState: UIControlState.Normal)
-            ViewUtil.displayRoundedCornerView(cell.editProfile, bgColor: Color.PINK)
+            ViewUtil.displayRoundedCornerView(cell.editProfile, bgColor: Color.LIGHT_PINK)
         } else {
             ApiController.instance.followUser(self.userInfo!.id)
             self.userInfo!.isFollowing = true
