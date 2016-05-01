@@ -207,7 +207,7 @@ class ViewUtil {
     static func setCustomBackButton(viewController: UIViewController, action: Selector) {
         viewController.navigationItem.setHidesBackButton(true, animated: false)
         
-        let backImage = UIImage(named: "back")
+        let backImage = UIImage(named: "ic_back")
         let backButton: UIButton = UIButton()
         backButton.setImage(backImage, forState: UIControlState.Normal)
         backButton.addTarget(viewController, action: action, forControlEvents: UIControlEvents.TouchUpInside)

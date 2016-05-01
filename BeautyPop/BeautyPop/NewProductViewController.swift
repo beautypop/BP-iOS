@@ -246,6 +246,8 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
         }
         
         cell.imageHolder.tag = indexPath.row
+        cell.imageHolder.layer.borderWidth = 1.0
+        cell.imageHolder.layer.borderColor = Color.LIGHT_GRAY_2.CGColor
         cell.imageHolder.addTarget(self, action:"choosePhotoOption:" , forControlEvents: UIControlEvents.TouchUpInside)
         return cell
     }
@@ -450,8 +452,6 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
             })
             
             self.subCategoryDropDown.setTitle(selCategoryValue, forState: UIControlState.Normal)
-        
-            
         }
     }
 }
