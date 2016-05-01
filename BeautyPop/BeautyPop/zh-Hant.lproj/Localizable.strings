@@ -75,7 +75,7 @@
 "view_chat" = "View Chats";
 "delete_conversation_msg" = "Delete Conversation";
 "confirm_delete_conversation" = "Conversation Deleted Successfully!";
-"product_desc" = "Product Description";
+"product_desc" = "Product Description (Optional)";
 "product_listed_msg" = "Congratulations! Product has been listed.";
 "error_listing_prod" = "Error when listing product";
 "save" = "Save";

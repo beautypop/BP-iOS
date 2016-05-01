@@ -53,7 +53,7 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
     }
     
     override func viewDidAppear(animated: Bool) {
-        self.tabBarController?.tabBar.alpha = CGFloat(Constants.MAIN_BOTTOM_BAR_ALPHA)
+        //self.tabBarController?.tabBar.alpha = CGFloat(Constants.MAIN_BOTTOM_BAR_ALPHA)
         
         setSegmentedControlTitles()
         
@@ -66,6 +66,11 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
         
         //check for flag and if found refresh the data..
         if (self.isRefresh) {
+            if self.activeHeaderViewCell != nil {
+                self.activeHeaderViewCell?.segmentControl.selectedSegmentIndex = 0
+                segAction(self.activeHeaderViewCell!.segmentControl)
+            }
+            
             reloadFeedItems()
             self.isRefresh = false
         }
@@ -137,7 +142,7 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
             self.activeHeaderViewCell = cell
             
             //Divide the width equally among buttons..
-            if (!isWidthSet) {
+            if !isWidthSet {
                 setSizesForFilterButtons(cell)
             }
             
@@ -149,13 +154,13 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
                 ImageUtil.displayMyThumbnailProfileImage(self.userInfo!.id, imageView: cell.userImg)
             }
             
-            if (self.userInfo!.numFollowers > 0) {
+            if self.userInfo!.numFollowers > 0 {
                 cell.followersBtn.setTitle("Followers " + String(self.userInfo!.numFollowers), forState:UIControlState.Normal)
             } else {
                 cell.followersBtn.setTitle("Followers", forState: UIControlState.Normal)
             }
                 
-            if (self.userInfo!.numFollowings > 0) {
+            if self.userInfo!.numFollowings > 0 {
                 cell.followingBtn.setTitle("Following " + String(self.userInfo!.numFollowings), forState: UIControlState.Normal)
             } else {
                 cell.followingBtn.setTitle("Following", forState: UIControlState.Normal)
@@ -203,7 +208,7 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
     
     // MARK: UICollectionViewDelegateFlowLayout
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        if (collectionView.tag == 2) {
+        if collectionView.tag == 2 {
             if let _ = collectionViewTopCellSize {
                 setCollectionViewSizesInsetsForTopView()
                 return collectionViewTopCellSize!
@@ -223,7 +228,7 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        if (collectionView.tag == 2){
+        if collectionView.tag == 2 {
             return CGSizeZero
         } else {
             return CGSizeMake(self.view.frame.width, Constants.PROFILE_HEADER_HEIGHT)
@@ -313,9 +318,9 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
     
     @IBAction func segAction(sender: AnyObject) {
         let segControl = sender as? UISegmentedControl
-        if (segControl!.selectedSegmentIndex == 0) {
+        if segControl!.selectedSegmentIndex == 0 {
             feedLoader?.setFeedType(FeedFilter.FeedType.USER_POSTED)
-        } else if (segControl!.selectedSegmentIndex == 1) {
+        } else if segControl!.selectedSegmentIndex == 1 {
             feedLoader?.setFeedType(FeedFilter.FeedType.USER_LIKED)
         }
 

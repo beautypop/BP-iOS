@@ -330,7 +330,6 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
             let category = CategoryCache.getCategoryByName(categoryDropDown.titleLabel!.text!)
             let subCategory = CategoryCache.getSubCategoryByName(subCategoryDropDown.titleLabel!.text!, subCategories: (category?.subCategories)!)
             let conditionType = ViewUtil.parsePostConditionTypeFromValue(conditionDropDown.titleLabel!.text!)
-            /*ApiController.instance.newPost(StringUtil.trim(sellingtext.text), body: StringUtil.trim(prodDescription.text), catId: category!.id, subCatId: subCategory!.id, conditionType: String(conditionType), pricetxt: StringUtil.trim(pricetxt.text), imageCollection: self.imageCollection)*/
             ApiController.instance.newPost(StringUtil.trim(sellingtext.text), body: StringUtil.trim(prodDescription.text), catId: subCategory!.id, conditionType: String(conditionType), pricetxt: StringUtil.trim(pricetxt.text), imageCollection: self.imageCollection)
         }
     }
@@ -357,9 +356,11 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
         } else if StringUtil.trim(self.sellingtext.text).isEmpty {
             ViewUtil.makeToast(NSLocalizedString("fill_title", comment: ""), view: self.view)
             valid = false
+        /*
         } else if StringUtil.trim(self.prodDescription.text).isEmpty {
             ViewUtil.makeToast(NSLocalizedString("fill_desc", comment: ""), view: self.view)
             valid = false
+        */
         } else if StringUtil.trim(self.pricetxt.text).isEmpty {
             ViewUtil.makeToast(NSLocalizedString("fill_price", comment: ""), view: self.view)
             valid = false

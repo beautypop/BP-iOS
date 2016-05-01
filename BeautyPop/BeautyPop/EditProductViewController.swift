@@ -66,7 +66,7 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
         
         self.postTitle.delegate = self
         
-        self.prodDescription.placeholder = "Product Description"
+        self.prodDescription.placeholder = NSLocalizedString("product_desc", comment: "")
         self.prodDescription.isApplyTextFieldStyle = true
         self.prodDescription.layer.borderWidth = 0
         
@@ -260,9 +260,11 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
         if StringUtil.trim(self.postTitle.text).isEmpty {
             ViewUtil.makeToast("Please fill title", view: self.view)
             valid = false
+        /*
         } else if StringUtil.trim(self.prodDescription.text).isEmpty {
             ViewUtil.makeToast("Please fill description", view: self.view)
             valid = false
+        */
         } else if StringUtil.trim(self.pricetxt.text).isEmpty {
             ViewUtil.makeToast("Please enter a price", view: self.view)
             valid = false
