@@ -19,7 +19,7 @@ class FollowingFeedViewController: UIViewController, UIScrollViewDelegate {
     var feedViewAdapter: FeedViewAdapter? = nil
     
     var parentNavigationController : UINavigationController?
-    var vController: ProductViewController?
+    var productViewController: ProductViewController?
     var collectionViewCellSize : CGSize?
     var collectionViewTopCellSize : CGSize?
     var reuseIdentifier = "CellType1"
@@ -34,10 +34,11 @@ class FollowingFeedViewController: UIViewController, UIScrollViewDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
-        if (currentIndex != nil) {
-            let item = vController?.feedItem
+        if currentIndex != nil && productViewController?.feedItem != nil {
+            let item = productViewController?.feedItem
             feedLoader?.setItem(currentIndex!.row, item: item!)
             self.uiCollectionView.reloadItemsAtIndexPaths([currentIndex!])
+            currentIndex = nil
         }
     }
     
@@ -120,7 +121,8 @@ class FollowingFeedViewController: UIViewController, UIScrollViewDelegate {
         return 1.0
     }
     
-    /*func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    /*
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         var reusableView : UICollectionReusableView? = nil
         
         if kind == UICollectionElementKindSectionFooter {
@@ -128,25 +130,26 @@ class FollowingFeedViewController: UIViewController, UIScrollViewDelegate {
         }
         
         return reusableView!
-    }*/
+    }
+    */
     
     //MARK Segue handling methods.
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        if (identifier == "fProductSegue") {
+        if identifier == "fProductSegue" {
             return true
         }
         return false
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "fProductSegue") {
+        if segue.identifier == "fProductSegue" {
             let cell = sender as! FeedProductCollectionViewCell
             let indexPath = self.uiCollectionView!.indexPathForCell(cell)
             let feedItem = feedLoader!.getItem(indexPath!.row)
             self.currentIndex = indexPath
-            vController = segue.destinationViewController as? ProductViewController
-            vController!.feedItem = feedItem
-            vController!.hidesBottomBarWhenPushed = true
+            productViewController = segue.destinationViewController as? ProductViewController
+            productViewController!.feedItem = feedItem
+            productViewController!.hidesBottomBarWhenPushed = true
         }
     }
     

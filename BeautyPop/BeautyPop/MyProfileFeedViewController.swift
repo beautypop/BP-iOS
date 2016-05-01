@@ -23,7 +23,7 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
     var activeHeaderViewCell: UserFeedHeaderViewCell? = nil
     let imagePicker = UIImagePickerController()
     
-    var vController: ProductViewController?
+    var productViewController: ProductViewController?
     var currentIndex: NSIndexPath?
     
     var isRefresh: Bool = false
@@ -57,8 +57,8 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
         
         setSegmentedControlTitles()
         
-        if (currentIndex != nil) {
-            let item = vController?.feedItem
+        if currentIndex != nil && productViewController?.feedItem != nil {
+            let item = productViewController?.feedItem
             feedLoader?.setItem(currentIndex!.row, item: item!)
             self.uiCollectionView.reloadItemsAtIndexPaths([currentIndex!])
             currentIndex = nil
@@ -109,7 +109,7 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
     }
     
     func setSegmentedControlTitles() {
-        if (self.activeHeaderViewCell != nil) {
+        if self.activeHeaderViewCell != nil {
             self.activeHeaderViewCell?.segmentControl.setTitle("Products " + String(self.userInfo!.numProducts), forSegmentAtIndex: 0)
             self.activeHeaderViewCell?.segmentControl.setTitle("Likes " + String(self.userInfo!.numLikes), forSegmentAtIndex: 1)
         }
@@ -122,7 +122,7 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var count = 0
-        if (collectionView.tag == 2) {
+        if collectionView.tag == 2 {
             count = 1
         } else {
             count = self.getFeedItems().count
@@ -236,39 +236,39 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
     
     //MARK Segue handling methods.
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        if (identifier == "followingCalls") {
+        if identifier == "followingCalls" {
             return true
-        } else if (identifier == "followersCall") {
+        } else if identifier == "followersCall" {
             return true
-        } else if (identifier == "editProfile"){
+        } else if identifier == "editProfile" {
             return true
-        } else if (identifier == "mpProductScreen"){
+        } else if identifier == "mpProductScreen" {
             return true
-        } else if (identifier == "settings") {
+        } else if identifier == "settings" {
             return true
         }
         return false
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "followingCalls" || segue.identifier == "followersCall") {
+        if segue.identifier == "followingCalls" || segue.identifier == "followersCall" {
             let vController = segue.destinationViewController as! FollowersFollowingViewController
             vController.userId = self.userInfo!.id
             vController.optionType = segue.identifier!
             vController.hidesBottomBarWhenPushed = true
-        } else if (segue.identifier == "editProfile"){
+        } else if segue.identifier == "editProfile" {
             let vController = segue.destinationViewController as! EditProfileViewController
             vController.userId = self.userInfo!.id
             vController.hidesBottomBarWhenPushed = true
-        } else if (segue.identifier == "mpProductScreen"){
+        } else if segue.identifier == "mpProductScreen" {
             let cell = sender as! FeedProductCollectionViewCell
             let indexPath = self.uiCollectionView!.indexPathForCell(cell)
             let feedItem = feedLoader!.getItem(indexPath!.row)
             self.currentIndex = indexPath
-            vController = segue.destinationViewController as? ProductViewController
-            vController!.feedItem = feedItem
-            vController!.hidesBottomBarWhenPushed = true
-        } else if (segue.identifier == "settings") {
+            productViewController = segue.destinationViewController as? ProductViewController
+            productViewController!.feedItem = feedItem
+            productViewController!.hidesBottomBarWhenPushed = true
+        } else if segue.identifier == "settings" {
             //self.uiCollectionView.delegate = nil
             let vController = segue.destinationViewController as! SettingsViewController
             vController.hidesBottomBarWhenPushed = true

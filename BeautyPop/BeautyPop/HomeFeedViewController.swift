@@ -26,14 +26,15 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     var currentIndex: NSIndexPath?
     var categories : [CategoryVM] = []
     
-    var vController: ProductViewController?
-    var featuredItems: [FeaturedItemVM]?
+    var productViewController: ProductViewController?
     
+    var featuredItems: [FeaturedItemVM]?
     var bannerImages: [String] = []
     var bannerCollectionView: UICollectionView?
     var pageControl: UIPageControl?
     var currentBannerPage: Int?
     var homeBannerHeight: NSLayoutConstraint?
+    var bannerTimer: NSTimer?
     
     func reloadDataToView() {
         self.categories = CategoryCache.categories
@@ -58,10 +59,11 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
             navigationController.scrollingNavbarDelegate = self
         }
         
-        if (currentIndex != nil && vController?.feedItem != nil) {
-            let item = vController?.feedItem
+        if currentIndex != nil && productViewController?.feedItem != nil {
+            let item = productViewController?.feedItem
             feedLoader?.setItem(currentIndex!.row, item: item!)
             self.uiCollectionView.reloadItemsAtIndexPaths([currentIndex!])
+            currentIndex = nil
         }
     }
     
@@ -280,18 +282,18 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "categoryscreen") {
+        if segue.identifier == "categoryscreen" {
             let vController = segue.destinationViewController as! CategoryFeedViewController
             vController.selCategory = self.categories[self.currentIndex!.row]
             vController.hidesBottomBarWhenPushed = true
-        } else if (segue.identifier == "productScreen") {
+        } else if segue.identifier == "productScreen" {
             let cell = sender as! FeedProductCollectionViewCell
             let indexPath = self.uiCollectionView!.indexPathForCell(cell)
             let feedItem = feedLoader!.getItem(indexPath!.row)
             self.currentIndex = indexPath
-            vController = segue.destinationViewController as? ProductViewController
-            vController!.feedItem = feedItem
-            vController!.hidesBottomBarWhenPushed = true
+            productViewController = segue.destinationViewController as? ProductViewController
+            productViewController!.feedItem = feedItem
+            productViewController!.hidesBottomBarWhenPushed = true
         }
     }
     
@@ -337,7 +339,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     
     func onSuccessGetUserByDisplayName(userVM: UserVM) -> Void {
         //get the userid and redirect to profile page....
-        let vController =  self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileFeedViewController") as! UserProfileFeedViewController
+        let vController = self.storyboard!.instantiateViewControllerWithIdentifier("UserProfileFeedViewController") as! UserProfileFeedViewController
         vController.userId = userVM.id
         self.navigationController?.pushViewController(vController, animated: true)
     }
@@ -347,16 +349,21 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     }
     
     func onSuccessGetHomeFeaturedItems(featuredItems: [FeaturedItemVM]) {
+        self.bannerImages.removeAll()
         self.featuredItems?.removeAll()
         self.featuredItems = featuredItems
         if featuredItems.count > 0 {
             for i in 0...(self.featuredItems?.count)! - 1 {
                 self.bannerImages.append(String(self.featuredItems![i].image))
             }
-            _ = NSTimer.scheduledTimerWithTimeInterval(Constants.BANNER_REFRESH_TIME_INTERVAL, target: self, selector: "scrollHomeBanner", userInfo: nil, repeats: true)
+            
             //self.homeBannerHeight?.constant = Constants.HOME_BANNER_VIEW_HEIGHT
             self.bannerCollectionView?.reloadData()
-            //self.uiCollectionView.reloadData()
+            
+            if self.bannerTimer != nil {
+                self.bannerTimer?.invalidate()
+            }
+            self.bannerTimer = NSTimer.scheduledTimerWithTimeInterval(Constants.BANNER_REFRESH_TIME_INTERVAL, target: self, selector: "scrollHomeBanner", userInfo: nil, repeats: true)
         }
     }
     

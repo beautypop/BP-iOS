@@ -23,7 +23,7 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
     
     var activeHeaderViewCell: UserFeedHeaderViewCell? = nil
     
-    var vController: ProductViewController?
+    var productViewController: ProductViewController?
     var currentIndex: NSIndexPath?
     
     override func reloadDataToView() {
@@ -58,10 +58,11 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
         //self.tabBarController!.tabBar.hidden = true
         //self.navigationItem.setHidesBackButton(false, animated: true)
         
-        if (currentIndex != nil) {
-            let item = vController?.feedItem
+        if currentIndex != nil && productViewController?.feedItem != nil {
+            let item = productViewController?.feedItem
             feedLoader?.setItem(currentIndex!.row, item: item!)
             self.uiCollectionView.reloadItemsAtIndexPaths([currentIndex!])
+            currentIndex = nil
         }
     }
     
@@ -109,7 +110,7 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var count = 0
-        if (collectionView.tag == 2) {
+        if collectionView.tag == 2 {
             count = 1
         } else {
             count = self.getFeedItems().count
@@ -119,35 +120,35 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        if (collectionView.tag == 2) {
+        if collectionView.tag == 2 {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("headerCell", forIndexPath: indexPath) as! UserFeedHeaderViewCell
             self.activeHeaderViewCell = cell
             
             //Divide the width equally among buttons..
-            if (!isWidthSet) {
+            if !isWidthSet {
                 setSizesForFilterButtons(cell)
             }
             
-            if (self.userInfo != nil) {
+            if self.userInfo != nil {
                 cell.displayName.text = self.userInfo?.displayName
                 
                 if cell.userImg.image == nil {
                     ImageUtil.displayThumbnailProfileImage(self.userInfo!.id, imageView: cell.userImg)
                 }
                 
-                if (self.userInfo!.numFollowers > 0) {
+                if self.userInfo!.numFollowers > 0 {
                     cell.followersBtn.setTitle(NSLocalizedString("followers_txt", comment: "") + String(self.userInfo!.numFollowers), forState: UIControlState.Normal)
                 } else {
                     cell.followersBtn.setTitle(NSLocalizedString("followers_txt", comment: ""), forState: UIControlState.Normal)
                 }
                 
-                if (self.userInfo!.numFollowings > 0) {
+                if self.userInfo!.numFollowings > 0 {
                     cell.followingBtn.setTitle(NSLocalizedString("following_txt", comment: "") + String(self.userInfo!.numFollowings), forState: UIControlState.Normal)
                 } else {
                     cell.followingBtn.setTitle(NSLocalizedString("following_txt", comment: ""), forState: UIControlState.Normal)
                 }
                 
-                if (self.userInfo!.isFollowing) {
+                if self.userInfo!.isFollowing {
                     cell.editProfile.setTitle(NSLocalizedString("following_txt", comment: ""), forState: UIControlState.Normal)
                     ViewUtil.displayRoundedCornerView(cell.editProfile, bgColor: Color.LIGHT_GRAY)
                 } else {
@@ -177,16 +178,18 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        /*
         if (collectionView.tag == 2) {
             
         } else {
-            /*vController =  self.storyboard!.instantiateViewControllerWithIdentifier("ProductViewController") as! ProductViewController
+            productViewController = self.storyboard!.instantiateViewControllerWithIdentifier("ProductViewController") as! ProductViewController
             let feedItem = self.getFeedItems()[indexPath.row]
-            vController!.feedItem = feedItem
+            productViewController!.feedItem = feedItem
             self.currentIndex = indexPath
             //self.tabBarController!.tabBar.hidden = true
-            self.navigationController?.pushViewController(vController!, animated: true)*/
+            self.navigationController?.pushViewController(productViewController!, animated: true)
         }
+        */
     }
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
@@ -273,9 +276,9 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
             let indexPath = self.uiCollectionView!.indexPathForCell(cell)
             let feedItem = feedLoader!.getItem(indexPath!.row)
             self.currentIndex = indexPath
-            vController = segue.destinationViewController as? ProductViewController
-            vController!.feedItem = feedItem
-            vController!.hidesBottomBarWhenPushed = true
+            productViewController = segue.destinationViewController as? ProductViewController
+            productViewController!.feedItem = feedItem
+            productViewController!.hidesBottomBarWhenPushed = true
         }
     }
     

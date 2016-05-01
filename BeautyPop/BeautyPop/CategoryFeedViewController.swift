@@ -26,7 +26,7 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
     var loadingProducts: Bool = false
     var selCategory: CategoryVM? = nil
     
-    var vController: ProductViewController?
+    var productViewController: ProductViewController?
     var currentIndex: NSIndexPath?
     
     func reloadDataToView() {
@@ -38,10 +38,11 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
-        if (currentIndex != nil) {
-            let item = vController?.feedItem
+        if currentIndex != nil && productViewController?.feedItem != nil {
+            let item = productViewController?.feedItem
             feedLoader?.setItem(currentIndex!.row, item: item!)
             self.uiCollectionView.reloadItemsAtIndexPaths([currentIndex!])
+            currentIndex = nil
         }
     }
     
@@ -95,7 +96,7 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var count = 0
-        if (collectionView.tag == 2) {
+        if collectionView.tag == 2 {
             count = 1
         } else {
             count = feedLoader!.size()
@@ -105,7 +106,7 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        if (collectionView.tag == 2) {
+        if collectionView.tag == 2 {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("categoryCell", forIndexPath: indexPath) as! CategoryCollectionViewCell
             
             cell.categoryName.text = self.selCategory?.name
@@ -119,7 +120,7 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
             })
             
             //Divide the width equally among buttons.. 
-            if (!isWidthSet) {
+            if !isWidthSet {
                 setSizesForFilterButtons(cell)
             }
             
@@ -157,24 +158,24 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
     }
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if (collectionView.tag == 2){
+        if collectionView.tag == 2 {
             
         } else {
             //self.performSegueWithIdentifier("gotoproductdetail", sender: nil)
-            vController =  self.storyboard!.instantiateViewControllerWithIdentifier("ProductViewController") as? ProductViewController
+            productViewController =  self.storyboard!.instantiateViewControllerWithIdentifier("ProductViewController") as? ProductViewController
             let feedItem = feedLoader!.getItem(indexPath.row)
-            vController!.feedItem = feedItem
-            vController!.category = self.selCategory
+            productViewController!.feedItem = feedItem
+            productViewController!.category = self.selCategory
             self.currentIndex = indexPath
             ViewUtil.resetBackButton(self.navigationItem)
-            self.navigationController?.pushViewController(vController!, animated: true)
+            self.navigationController?.pushViewController(productViewController!, animated: true)
         }
     }
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         
         var reusableView : UICollectionReusableView? = nil
-        if (kind == UICollectionElementKindSectionHeader) {
+        if kind == UICollectionElementKindSectionHeader {
             let headerView : HomeReusableView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "HeaderView", forIndexPath: indexPath) as! HomeReusableView
             headerView.headerViewCollection.reloadData()
             reusableView = headerView
@@ -186,7 +187,7 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
     // MARK: UICollectionViewDelegateFlowLayout
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        if (collectionView.tag == 2) {
+        if collectionView.tag == 2 {
             if let _ = collectionViewTopCellSize {
                 return collectionViewTopCellSize!
             }
@@ -206,7 +207,7 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
     
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        if (collectionView.tag == 2){
+        if collectionView.tag == 2 {
             return CGSizeZero
         } else {
             return CGSizeMake(self.view.frame.width, Constants.CATEGORY_HEADER_HEIGHT)
