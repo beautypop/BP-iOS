@@ -57,10 +57,12 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
     override func viewWillAppear(animated: Bool) {
         ViewUtil.hideActivityLoading(self.activityLoading)
         self.navigationController?.interactivePopGestureRecognizer!.enabled = false
+        self.tabBarController?.tabBar.hidden = true
     }
     
     override func viewWillDisappear(animated: Bool) {
         self.navigationController?.interactivePopGestureRecognizer!.enabled = true
+        self.tabBarController?.tabBar.hidden = false
     }
     
     override func viewDidLoad() {

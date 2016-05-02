@@ -274,7 +274,7 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
         } else if StringUtil.trim(self.categoryDropDown.titleLabel?.text).isEmpty {
             ViewUtil.makeToast("Please select category", view: self.view)
             valid = false
-        } else if !ViewUtil.isDropDownSelected(self.subCategoryOptions) {
+        } else if StringUtil.trim(self.subCategoryDropDown.titleLabel?.text).isEmpty || StringUtil.trim(self.subCategoryDropDown.titleLabel?.text) == "Choose Subcategory:" {
             ViewUtil.makeToast("Please select subcategory", view: self.view)
             valid = false
         }
