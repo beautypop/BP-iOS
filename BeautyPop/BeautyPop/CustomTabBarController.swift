@@ -26,7 +26,7 @@ class CustomTabBarController: UITabBarController {
         let navController = app.window?.rootViewController as! UINavigationController
         var controllers = navController.viewControllers
         
-        for i in 0...controllers.count-1 {
+        for i in 0 ..< controllers.count {
             if controllers[i].isKindOfClass(CustomTabBarController) {
                 let tabBarController = controllers[i] as! CustomTabBarController
                 return tabBarController

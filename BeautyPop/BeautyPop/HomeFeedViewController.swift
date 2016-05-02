@@ -353,7 +353,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
         self.featuredItems?.removeAll()
         self.featuredItems = featuredItems
         if featuredItems.count > 0 {
-            for i in 0...(self.featuredItems?.count)! - 1 {
+            for i in 0 ..< (self.featuredItems?.count)! {
                 self.bannerImages.append(String(self.featuredItems![i].image))
             }
             

@@ -51,8 +51,8 @@ class CategoryCache {
     }
     
     static func getCategoryById(catId: Int) -> CategoryVM? {
-        for index in 0...CategoryCache.categories.count {
-            if (Int(CategoryCache.categories[index].id) == catId) {
+        for index in 0 ..< CategoryCache.categories.count {
+            if Int(CategoryCache.categories[index].id) == catId {
                 return CategoryCache.categories[index]
             }
         }
@@ -60,8 +60,8 @@ class CategoryCache {
     }
     
     static func getCategoryByName(name: String) -> CategoryVM? {
-        for index in 0...CategoryCache.categories.count {
-            if (CategoryCache.categories[index].name == name) {
+        for index in 0 ..< CategoryCache.categories.count {
+            if CategoryCache.categories[index].name == name {
                 return CategoryCache.categories[index]
             }
         }
@@ -73,8 +73,8 @@ class CategoryCache {
     }
     
     static func getSubCategoryById(catId: Int, subCategories: [CategoryVM]) -> CategoryVM? {
-        for index in 0...subCategories.count {
-            if (Int(subCategories[index].id) == catId) {
+        for index in 0 ..< subCategories.count {
+            if Int(subCategories[index].id) == catId {
                 return subCategories[index]
             }
         }
@@ -82,8 +82,8 @@ class CategoryCache {
     }
     
     static func getSubCategoryByName(name: String, subCategories: [CategoryVM]) -> CategoryVM? {
-        for index in 0...subCategories.count {
-            if (subCategories[index].name == name) {
+        for index in 0 ..< subCategories.count {
+            if subCategories[index].name == name {
                 return subCategories[index]
             }
         }

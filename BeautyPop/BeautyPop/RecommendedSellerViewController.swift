@@ -100,7 +100,7 @@ class RecommendedSellerViewController: UIViewController {
         imageHolders.append(cell.postImg4)
         
         let posts = item.posts
-        for i in 0...posts.count - 1 {
+        for i in 0 ..< posts.count {
             ImageUtil.displayOriginalPostImage(posts[i].images[0], imageView: imageHolders[i])
             if (item.numMoreProducts > 0 && i == posts.count - 1) {
                 cell.moreText.setTitle("+" + String(item.numMoreProducts) + NSLocalizedString("product_txt", comment: ""), forState: UIControlState.Normal)

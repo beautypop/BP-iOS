@@ -189,7 +189,7 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
             switch indexPath.section {
             case 0:
                 if self.productInfo != nil && self.productInfo!.images.count > 0 {
-                    for i in 0...self.productInfo!.images.count - 1 {
+                    for i in 0 ..< self.productInfo!.images.count {
                         self.images.append(String(self.productInfo!.images[i]))
                     }
                     self.collectionView = cell.viewWithTag(1) as! UICollectionView

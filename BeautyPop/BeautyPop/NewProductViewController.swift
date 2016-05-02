@@ -33,7 +33,9 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
     var reuseIdentifier = "CustomCell"
     var imageCollection = [AnyObject]()
     var selectedIndex :Int? = 0
-    var selCategory: Int = -1
+    var selCategoryId: Int = -1
+    var selSubCategoryId: Int = -1
+    
     let croppingEnabled: Bool = true
     let libraryEnabled: Bool = true
     
@@ -143,45 +145,55 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
     func initCategoryOptions() {
         let categories = CategoryCache.categories
         
-        var selCategoryValue = NSLocalizedString("choose_category", comment: "")
-        var catDataSource : [String] = []
+        var selectedValue = NSLocalizedString("choose_category", comment: "")
+        var dataSource: [String] = []
         for i in 0 ..< categories.count {
-            catDataSource.append(categories[i].description)
-            if (Int(categories[i].id) == self.selCategory) {
-                selCategoryValue = categories[i].description
+            dataSource.append(categories[i].name)
+            if Int(categories[i].id) == self.selCategoryId {
+                selectedValue = categories[i].name
             }
         }
         
-        self.categoryOptions.dataSource = catDataSource
+        self.categoryOptions.dataSource = dataSource
         dispatch_async(dispatch_get_main_queue(), {
             self.categoryOptions.reloadAllComponents()
         })
         
-        self.categoryDropDown.setTitle(selCategoryValue, forState: UIControlState.Normal)
+        self.categoryDropDown.setTitle(selectedValue, forState: UIControlState.Normal)
         
         self.categoryOptions.selectionAction = { [unowned self] (index, item) in
+            self.selCategoryId = -1
+            self.selSubCategoryId = -1
+            if let category = CategoryCache.getCategoryByName(item) {
+                self.selCategoryId = category.id
+            }
             self.categoryDropDown.setTitle(item, forState: .Normal)
         }
-        
     }
     
     func initSubCategoryOptions() {
-        
         let selSubCategoryValue = NSLocalizedString("choose_sub_category", comment: "")
         self.subCategoryDropDown.setTitle(selSubCategoryValue, forState: UIControlState.Normal)
         self.subCategoryOptions.dataSource = []
         self.subCategoryOptions.selectionAction = { [unowned self] (index, item) in
+            self.selSubCategoryId = -1
+            if let category = CategoryCache.getCategoryById(self.selCategoryId) {
+                if let subCategory = CategoryCache.getSubCategoryByName(item, subCategories: category.subCategories!) {
+                    self.selSubCategoryId = subCategory.id
+                }
+            }
             self.subCategoryDropDown.setTitle(item, forState: .Normal)
         }
     }
     
     func initConditionTypes() {
-        self.conditionTypeDropDown.dataSource = [
+        let dataSource: [String] = [
             ViewUtil.PostConditionType.NEW_WITH_TAG.rawValue,
             ViewUtil.PostConditionType.NEW_WITHOUT_TAG.rawValue,
             ViewUtil.PostConditionType.USED.rawValue
         ]
         
+        self.conditionTypeDropDown.dataSource = dataSource
         dispatch_async(dispatch_get_main_queue(), {
             self.conditionTypeDropDown.reloadAllComponents()
         })
@@ -329,12 +341,10 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
     }
     
     func saveProduct(sender: AnyObject) {
-        if (isValid()) {
+        if isValid() {
             ViewUtil.showGrayOutView(self, activityLoading: self.activityLoading)
-            let category = CategoryCache.getCategoryByName(categoryDropDown.titleLabel!.text!)
-            let subCategory = CategoryCache.getSubCategoryByName(subCategoryDropDown.titleLabel!.text!, subCategories: (category?.subCategories)!)
             let conditionType = ViewUtil.parsePostConditionTypeFromValue(conditionDropDown.titleLabel!.text!)
-            ApiController.instance.newPost(StringUtil.trim(sellingtext.text), body: StringUtil.trim(prodDescription.text), catId: subCategory!.id, conditionType: String(conditionType), pricetxt: StringUtil.trim(pricetxt.text), imageCollection: self.imageCollection)
+            ApiController.instance.newPost(StringUtil.trim(sellingtext.text), body: StringUtil.trim(prodDescription.text), catId: self.selSubCategoryId, conditionType: String(conditionType), pricetxt: StringUtil.trim(pricetxt.text), imageCollection: self.imageCollection)
         }
     }
     
@@ -371,10 +381,10 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
         } else if !ViewUtil.isDropDownSelected(self.conditionTypeDropDown) {
             ViewUtil.makeToast(NSLocalizedString("fill_condition", comment: ""), view: self.view)
             valid = false
-        } else if !ViewUtil.isDropDownSelected(self.categoryOptions) {
+        } else if self.selCategoryId == -1 {
             ViewUtil.makeToast(NSLocalizedString("fill_category", comment: ""), view: self.view)
             valid = false
-        } else if !ViewUtil.isDropDownSelected(self.subCategoryOptions) {
+        } else if self.selSubCategoryId == -1 {
             ViewUtil.makeToast(NSLocalizedString("fill_sub_category", comment: ""), view: self.view)
             valid = false
         }
@@ -443,15 +453,15 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
             let subCategories = category?.subCategories
             
             var selCategoryValue = NSLocalizedString("choose_sub_category", comment: "")
-            var catDataSource : [String] = []
+            var dataSource: [String] = []
             for i in 0 ..< subCategories!.count {
-                catDataSource.append(subCategories![i].description)
-                if (Int(subCategories![i].id) == self.selCategory) {
-                    selCategoryValue = subCategories![i].description
+                dataSource.append(subCategories![i].name)
+                if Int(subCategories![i].id) == self.selSubCategoryId {
+                    selCategoryValue = subCategories![i].name
                 }
             }
             
-            self.subCategoryOptions.dataSource = catDataSource
+            self.subCategoryOptions.dataSource = dataSource
             dispatch_async(dispatch_get_main_queue(), {
                 self.subCategoryOptions.reloadAllComponents()
             })

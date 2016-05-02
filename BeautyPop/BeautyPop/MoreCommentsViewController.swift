@@ -89,13 +89,13 @@ class MoreCommentsViewController: UIViewController, UIScrollViewDelegate, UIText
                 productController?.comments = []
                 if self.comments?.count > 0 {
                     if self.comments!.count <= 3 {
-                        for i in 0...self.comments!.count - 1 {
+                        for i in 0 ..< self.comments!.count {
                             productController?.comments.append(self.comments![i])
                         }
                         
                     } else {
                         let counter = (self.comments?.count)! - 3
-                        for i in counter...self.comments!.count - 1 {
+                        for i in counter ..< self.comments!.count {
                             productController?.comments.append(self.comments![i])
                         }
                     }

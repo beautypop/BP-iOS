@@ -11,7 +11,7 @@ import SwiftEventBus
 import QQPlaceholderTextView
 
 class EditProductViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
-
+    
     @IBOutlet weak var activityLoading: UIActivityIndicatorView!
     @IBOutlet weak var postTitle: UITextField!
     @IBOutlet weak var prodDescription: UITextView!
@@ -29,27 +29,27 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
     
     var save: String = ""
     var selectedIndex :Int?
-    var selCategory: Int = -1
-    var selSubCategory: Int = -1
+    var selCategoryId: Int = -1
+    var selSubCategoryId: Int = -1
     
     /*
-    var keyboardType: UIKeyboardType {
-        get{
-            return textFieldKeyboardType.keyboardType
-        }
-        set{
-            if newValue != UIKeyboardType.NumberPad {
-                self.keyboardType = UIKeyboardType.NumberPad
-            }
-        }
-    }
-    
-    @IBOutlet weak var textFieldKeyboardType: UITextField!{
-        didSet {
-            textFieldKeyboardType.keyboardType = UIKeyboardType.NumberPad
-        }
-    }
-    */
+     var keyboardType: UIKeyboardType {
+     get{
+     return textFieldKeyboardType.keyboardType
+     }
+     set{
+     if newValue != UIKeyboardType.NumberPad {
+     self.keyboardType = UIKeyboardType.NumberPad
+     }
+     }
+     }
+     
+     @IBOutlet weak var textFieldKeyboardType: UITextField!{
+     didSet {
+     textFieldKeyboardType.keyboardType = UIKeyboardType.NumberPad
+     }
+     }
+     */
     
     override func viewWillAppear(animated: Bool) {
         ViewUtil.hideActivityLoading(self.activityLoading)
@@ -144,8 +144,9 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
         self.postTitle.text = self.postItem?.title
         self.prodDescription.text = self.postItem?.body
         self.pricetxt.text = String(Int((self.postItem?.price)!))
-        self.selCategory = (self.postItem?.categoryId)!
-        self.selSubCategory = (self.postItem?.subCategoryId)!
+        self.selCategoryId = (self.postItem?.categoryId)!
+        self.selSubCategoryId = (self.postItem?.subCategoryId)!
+        
         initCategoryOptions()
         initSubCategoryOptions()
         initConditionTypes()
@@ -156,12 +157,12 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
     func initCategoryOptions() {
         let categories = CategoryCache.categories
         
-        var selectedValue = "Choose a Category:"
+        var selectedValue = NSLocalizedString("choose_category", comment: "")
         var dataSource: [String] = []
         for i in 0 ..< categories.count {
-            dataSource.append(categories[i].description)
-            if (Int(categories[i].id) == self.selCategory) {
-                selectedValue = categories[i].description
+            dataSource.append(categories[i].name)
+            if Int(categories[i].id) == self.selCategoryId {
+                selectedValue = categories[i].name
             }
         }
         
@@ -173,16 +174,26 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
         self.categoryDropDown.setTitle(selectedValue, forState: UIControlState.Normal)
         
         self.categoryOptions.selectionAction = { [unowned self] (index, item) in
+            self.selCategoryId = -1
+            self.selSubCategoryId = -1
+            if let category = CategoryCache.getCategoryByName(item) {
+                self.selCategoryId = category.id
+            }
             self.categoryDropDown.setTitle(item, forState: .Normal)
         }
     }
     
     func initSubCategoryOptions() {
-        
         let selSubCategoryValue = NSLocalizedString("choose_sub_category", comment: "")
         self.subCategoryDropDown.setTitle(selSubCategoryValue, forState: UIControlState.Normal)
         self.subCategoryOptions.dataSource = []
         self.subCategoryOptions.selectionAction = { [unowned self] (index, item) in
+            self.selSubCategoryId = -1
+            if let category = CategoryCache.getCategoryById(self.selCategoryId) {
+                if let subCategory = CategoryCache.getSubCategoryByName(item, subCategories: category.subCategories!) {
+                    self.selSubCategoryId = subCategory.id
+                }
+            }
             self.subCategoryDropDown.setTitle(item, forState: .Normal)
         }
     }
@@ -250,12 +261,10 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
             return
         }
         
-        if (isValid()) {
+        if isValid() {
             ViewUtil.showGrayOutView(self, activityLoading: self.activityLoading)
-            let category = CategoryCache.getCategoryByName(categoryDropDown.titleLabel!.text!)
-            let subCategory = CategoryCache.getSubCategoryByName(subCategoryDropDown.titleLabel!.text!, subCategories: category!.subCategories!)
             let conditionType = ViewUtil.parsePostConditionTypeFromValue(conditionDropDown.titleLabel!.text!)
-            ApiController.instance.editPost(self.postId, title: StringUtil.trim(postTitle.text), body: StringUtil.trim(prodDescription.text), catId: subCategory!.id, conditionType: String(conditionType), pricetxt: StringUtil.trim(pricetxt.text))
+            ApiController.instance.editPost(self.postId, title: StringUtil.trim(postTitle.text), body: StringUtil.trim(prodDescription.text), catId: self.selSubCategoryId, conditionType: String(conditionType), pricetxt: StringUtil.trim(pricetxt.text))
         }
     }
     
@@ -264,22 +273,22 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
         if StringUtil.trim(self.postTitle.text).isEmpty {
             ViewUtil.makeToast("Please fill title", view: self.view)
             valid = false
-        /*
-        } else if StringUtil.trim(self.prodDescription.text).isEmpty {
-            ViewUtil.makeToast("Please fill description", view: self.view)
-            valid = false
-        */
+            /*
+             } else if StringUtil.trim(self.prodDescription.text).isEmpty {
+             ViewUtil.makeToast("Please fill description", view: self.view)
+             valid = false
+             */
         } else if StringUtil.trim(self.pricetxt.text).isEmpty {
-            ViewUtil.makeToast("Please enter a price", view: self.view)
+            ViewUtil.makeToast(NSLocalizedString("fill_price", comment: ""), view: self.view)
             valid = false
         } else if StringUtil.trim(self.conditionDropDown.titleLabel?.text).isEmpty {
-            ViewUtil.makeToast("Please select condition type", view: self.view)
+            ViewUtil.makeToast(NSLocalizedString("fill_condition", comment: ""), view: self.view)
             valid = false
-        } else if StringUtil.trim(self.categoryDropDown.titleLabel?.text).isEmpty {
-            ViewUtil.makeToast("Please select category", view: self.view)
+        } else if self.selCategoryId == -1 {
+            ViewUtil.makeToast(NSLocalizedString("fill_category", comment: ""), view: self.view)
             valid = false
-        } else if StringUtil.trim(self.subCategoryDropDown.titleLabel?.text).isEmpty || StringUtil.trim(self.subCategoryDropDown.titleLabel?.text) == "Choose Subcategory:" {
-            ViewUtil.makeToast("Please select subcategory", view: self.view)
+        } else if self.selSubCategoryId == -1 {
+            ViewUtil.makeToast(NSLocalizedString("fill_sub_category", comment: ""), view: self.view)
             valid = false
         }
         return valid
@@ -340,23 +349,20 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
             let subCategories = category?.subCategories
             
             var selCategoryValue = NSLocalizedString("choose_sub_category", comment: "")
-            var catDataSource : [String] = []
+            var dataSource: [String] = []
             for i in 0 ..< subCategories!.count {
-                catDataSource.append(subCategories![i].description)
-                if (Int(subCategories![i].id) == self.selSubCategory) {
-                    selCategoryValue = subCategories![i].description
+                dataSource.append(subCategories![i].name)
+                if Int(subCategories![i].id) == self.selSubCategoryId {
+                    selCategoryValue = subCategories![i].name
                 }
             }
             
-            self.subCategoryOptions.dataSource = catDataSource
+            self.subCategoryOptions.dataSource = dataSource
             dispatch_async(dispatch_get_main_queue(), {
                 self.subCategoryOptions.reloadAllComponents()
             })
             
             self.subCategoryDropDown.setTitle(selCategoryValue, forState: UIControlState.Normal)
-            
-            
         }
     }
-    
 }

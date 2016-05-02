@@ -104,7 +104,7 @@ class NotificationSettingsViewController: UIViewController {
         let emailNotifications = self.notificationDataSource[0] as! [NotificationVM]
         let pushNotifications = self.notificationDataSource[1] as! [NotificationVM]
         
-        for i in 0...emailNotifications.count - 1 {
+        for i in 0 ..< emailNotifications.count {
             let notifItem = emailNotifications[i]
             switch notifItem.title {
                 case Constants.SETTING_EMAIL_NOTIF_NEW_PRODUCT:
@@ -119,7 +119,7 @@ class NotificationSettingsViewController: UIViewController {
             }
         }
         
-        for i in 0...pushNotifications.count - 1 {
+        for i in 0 ..< pushNotifications.count {
             let notifItem = pushNotifications[i]
             switch notifItem.title {
                 case Constants.SETTING_PUSH_NOTIF_NEW_CHAT:
