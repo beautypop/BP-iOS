@@ -45,11 +45,11 @@ class UrlUtil {
     }
     
     static func createSellerUrl(user: UserVMLite) -> String {
-        return String(format: Constants.DEEP_LINK_URL_SCHEME, SELLER_URL, user.id)
+        return String(format: SELLER_URL, user.id)
     }
     
     static func createProductUrl(post: PostVMLite) -> String {
-        return String(format: Constants.DEEP_LINK_URL_SCHEME, PRODUCT_URL, post.id)
+        return String(format: PRODUCT_URL, post.id)
     }
     
     static func createCategoryUrl(category: CategoryVM) -> String {
