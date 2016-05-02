@@ -32,6 +32,7 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
     var selCategory: Int = -1
     var selSubCategory: Int = -1
     
+    /*
     var keyboardType: UIKeyboardType {
         get{
             return textFieldKeyboardType.keyboardType
@@ -45,17 +46,20 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
     
     @IBOutlet weak var textFieldKeyboardType: UITextField!{
         didSet {
-            //textFieldKeyboardType.keyboardType = UIKeyboardType.NumberPad
+            textFieldKeyboardType.keyboardType = UIKeyboardType.NumberPad
         }
     }
+    */
     
     override func viewWillAppear(animated: Bool) {
         ViewUtil.hideActivityLoading(self.activityLoading)
         self.navigationController?.interactivePopGestureRecognizer!.enabled = false
+        self.tabBarController?.tabBar.hidden = true
     }
     
     override func viewWillDisappear(animated: Bool) {
         self.navigationController?.interactivePopGestureRecognizer!.enabled = true
+        self.tabBarController?.tabBar.hidden = false
     }
     
     override func viewDidLoad() {
@@ -274,7 +278,7 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
         } else if StringUtil.trim(self.categoryDropDown.titleLabel?.text).isEmpty {
             ViewUtil.makeToast("Please select category", view: self.view)
             valid = false
-        } else if StringUtil.trim(self.subCategoryDropDown.titleLabel?.text).isEmpty || StringUtil.trim(self.subCategoryDropDown.titleLabel?.text) == "Choose Subcategory:" {
+        } else if StringUtil.trim(self.subCategoryDropDown.titleLabel?.text).isEmpty {
             ViewUtil.makeToast("Please select subcategory", view: self.view)
             valid = false
         }

@@ -37,6 +37,7 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
     let croppingEnabled: Bool = true
     let libraryEnabled: Bool = true
     
+    /*
     var keyboardType: UIKeyboardType {
         get{
             return textFieldKeyboardType.keyboardType
@@ -53,6 +54,7 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
             textFieldKeyboardType.keyboardType = UIKeyboardType.NumberPad
         }
     }
+    */
     
     override func viewWillAppear(animated: Bool) {
         ViewUtil.hideActivityLoading(self.activityLoading)

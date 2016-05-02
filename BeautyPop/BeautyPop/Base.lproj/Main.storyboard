@@ -2303,10 +2303,10 @@
                                         </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" placeholder="Set Price:" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9aE-Yp-Cim">
-                                        <rect key="frame" x="274" y="10" width="122" height="27"/>
+                                        <rect key="frame" x="279" y="10" width="120" height="27"/>
                                         <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="122" id="j6x-Xb-SLp"/>
+                                            <constraint firstAttribute="width" constant="120" id="j6x-Xb-SLp"/>
                                             <constraint firstAttribute="height" constant="27" id="yT9-9S-8N2"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -2360,7 +2360,7 @@
                                     <constraint firstItem="uR9-g6-h0i" firstAttribute="bottom" secondItem="dAG-gU-MVp" secondAttribute="top" constant="-8" id="0xS-oV-5Cr"/>
                                     <constraint firstAttribute="trailing" secondItem="mG2-ZN-k9U" secondAttribute="trailing" constant="15" id="4uV-aA-AiN"/>
                                     <constraint firstItem="9bx-ty-9gO" firstAttribute="leading" secondItem="uR9-g6-h0i" secondAttribute="leading" id="6py-cd-QLO"/>
-                                    <constraint firstAttribute="trailing" secondItem="9aE-Yp-Cim" secondAttribute="trailing" constant="18" id="9ND-PJ-XES"/>
+                                    <constraint firstAttribute="trailing" secondItem="9aE-Yp-Cim" secondAttribute="trailing" constant="15" id="9ND-PJ-XES"/>
                                     <constraint firstItem="VSi-HF-R07" firstAttribute="top" secondItem="WIS-vR-yfH" secondAttribute="top" constant="4" id="Co9-Ko-p3x"/>
                                     <constraint firstItem="5fQ-TB-uDC" firstAttribute="leading" secondItem="VSi-HF-R07" secondAttribute="leading" id="Ejh-Ra-dLz"/>
                                     <constraint firstItem="9aE-Yp-Cim" firstAttribute="top" secondItem="VSi-HF-R07" secondAttribute="top" constant="6" id="F8x-HU-clo"/>
@@ -2379,7 +2379,7 @@
                                     <constraint firstAttribute="trailing" secondItem="uR9-g6-h0i" secondAttribute="trailing" constant="15" id="apN-ne-99p"/>
                                     <constraint firstItem="9bx-ty-9gO" firstAttribute="centerY" secondItem="eMX-io-Zj7" secondAttribute="centerY" id="b9Y-Jo-PTR"/>
                                     <constraint firstItem="5fQ-TB-uDC" firstAttribute="top" secondItem="VSi-HF-R07" secondAttribute="bottom" constant="17" id="cOi-66-JbI"/>
-                                    <constraint firstItem="mG2-ZN-k9U" firstAttribute="leading" secondItem="9aE-Yp-Cim" secondAttribute="leading" constant="-99" id="dkY-Xg-bD9"/>
+                                    <constraint firstItem="mG2-ZN-k9U" firstAttribute="leading" secondItem="9aE-Yp-Cim" secondAttribute="leading" constant="-100" id="dkY-Xg-bD9"/>
                                     <constraint firstItem="Lif-dz-waa" firstAttribute="top" secondItem="mG2-ZN-k9U" secondAttribute="bottom" constant="8" id="eIc-qT-kg0"/>
                                     <constraint firstItem="5fQ-TB-uDC" firstAttribute="leading" secondItem="tm9-7E-njC" secondAttribute="leading" id="fA1-oL-PXS"/>
                                     <constraint firstItem="tm9-7E-njC" firstAttribute="top" secondItem="5fQ-TB-uDC" secondAttribute="bottom" constant="30" id="fSv-EE-uau"/>
@@ -2388,6 +2388,11 @@
                                     <constraint firstItem="eMX-io-Zj7" firstAttribute="top" secondItem="tm9-7E-njC" secondAttribute="bottom" constant="30" id="rJ8-Rs-NZM"/>
                                     <constraint firstItem="uR9-g6-h0i" firstAttribute="leading" secondItem="mG2-ZN-k9U" secondAttribute="leading" constant="27" id="yb1-lK-kFQ"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="dkY-Xg-bD9"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="knU-as-N0t">
                                 <rect key="frame" x="189" y="350" width="37" height="37"/>
@@ -2423,7 +2428,6 @@
                         <outlet property="prodDescription" destination="SUQ-hS-hbY" id="fip-bf-2Nr"/>
                         <outlet property="sellingtext" destination="bjF-St-W7d" id="KGa-ul-dKe"/>
                         <outlet property="subCategoryDropDown" destination="9bx-ty-9gO" id="Mzj-8J-O5g"/>
-                        <outlet property="textFieldKeyboardType" destination="9aE-Yp-Cim" id="dh7-HC-w8C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K6L-r1-x0y" sceneMemberID="firstResponder"/>
@@ -7399,10 +7403,10 @@
                                         </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" placeholder="Set Price:" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4PR-st-EBc">
-                                        <rect key="frame" x="274" y="10" width="122" height="27"/>
+                                        <rect key="frame" x="279" y="10" width="120" height="27"/>
                                         <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="122" id="AOy-30-4rH"/>
+                                            <constraint firstAttribute="width" constant="120" id="AOy-30-4rH"/>
                                             <constraint firstAttribute="height" constant="27" id="stB-D6-mrK"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -7472,7 +7476,7 @@
                                     <constraint firstItem="YdX-WE-SMq" firstAttribute="leading" secondItem="ngh-M2-nYZ" secondAttribute="leading" constant="27" id="T8V-2h-ZGg"/>
                                     <constraint firstItem="ngh-M2-nYZ" firstAttribute="leading" secondItem="4PR-st-EBc" secondAttribute="leading" constant="-99" id="TBB-pb-3xK"/>
                                     <constraint firstItem="Xcq-So-JYK" firstAttribute="centerY" secondItem="Ve2-bF-F5O" secondAttribute="centerY" id="TxY-Rf-hjC"/>
-                                    <constraint firstAttribute="trailing" secondItem="4PR-st-EBc" secondAttribute="trailing" constant="18" id="VQw-re-0sm"/>
+                                    <constraint firstAttribute="trailing" secondItem="4PR-st-EBc" secondAttribute="trailing" constant="15" id="VQw-re-0sm"/>
                                     <constraint firstItem="Xcq-So-JYK" firstAttribute="leading" secondItem="YdX-WE-SMq" secondAttribute="leading" id="WMB-QI-o3r"/>
                                     <constraint firstItem="Ifb-LW-wlG" firstAttribute="top" secondItem="4NE-Gr-mfs" secondAttribute="bottom" constant="4" id="ZgS-c1-dPZ"/>
                                     <constraint firstItem="Ve2-bF-F5O" firstAttribute="leading" secondItem="qUS-Bb-vLX" secondAttribute="leading" id="bYN-gi-gV2"/>
@@ -7484,6 +7488,11 @@
                                     <constraint firstItem="4PR-st-EBc" firstAttribute="baseline" secondItem="4NE-Gr-mfs" secondAttribute="baseline" constant="-10" id="spZ-Se-vRi"/>
                                     <constraint firstItem="Ifb-LW-wlG" firstAttribute="leading" secondItem="ML7-bM-I4y" secondAttribute="leading" constant="5" id="zwc-68-xIc"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="TBB-pb-3xK"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="jxT-Br-3ed">
                                 <rect key="frame" x="189" y="349" width="37" height="37"/>
@@ -7529,7 +7538,6 @@
                         <outlet property="pricetxt" destination="4PR-st-EBc" id="jDb-XL-KZq"/>
                         <outlet property="prodDescription" destination="yhP-re-W0I" id="bfb-lJ-h9S"/>
                         <outlet property="subCategoryDropDown" destination="Xcq-So-JYK" id="yGv-DB-hrm"/>
-                        <outlet property="textFieldKeyboardType" destination="4PR-st-EBc" id="FU2-5J-jtg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z6O-Ij-NRd" sceneMemberID="firstResponder"/>

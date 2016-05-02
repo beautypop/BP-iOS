@@ -54,6 +54,8 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
     
     override func viewDidAppear(animated: Bool) {
         //self.tabBarController?.tabBar.alpha = CGFloat(Constants.MAIN_BOTTOM_BAR_ALPHA)
+        self.tabBarController?.tabBar.hidden = false
+        self.navigationController?.tabBarController?.tabBar.hidden = false
         
         setSegmentedControlTitles()
         
@@ -65,7 +67,7 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
         }
         
         //check for flag and if found refresh the data..
-        if (self.isRefresh) {
+        if self.isRefresh {
             if self.activeHeaderViewCell != nil {
                 self.activeHeaderViewCell?.segmentControl.selectedSegmentIndex = 0
                 segAction(self.activeHeaderViewCell!.segmentControl)

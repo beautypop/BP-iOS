@@ -564,10 +564,11 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
             message: "Make an offer to Seller",
             preferredStyle: UIAlertControllerStyle.Alert)
         
-        var inputTextField: UITextField?;
+        var inputTextField: UITextField?
         _messageDialog.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
             textField.placeholder = String(self.conversation!.postPrice)
             textField.text = String(self.conversation!.postPrice)
+            textField.keyboardType = UIKeyboardType.NumberPad
             inputTextField = textField
         })
         
