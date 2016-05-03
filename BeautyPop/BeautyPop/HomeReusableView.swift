@@ -17,7 +17,13 @@ class HomeReusableView: UICollectionReusableView {
     @IBOutlet weak var trailingconstraints: NSLayoutConstraint!
     @IBOutlet weak var leadingConstrains: NSLayoutConstraint!
     
+    @IBOutlet weak var filterBtnWidth: NSLayoutConstraint!
     @IBOutlet weak var headerViewCollection: UICollectionView!
+    
+    @IBOutlet weak var highToLow: UIButton!
+    @IBOutlet weak var popularBtn: UIButton!
+    @IBOutlet weak var newestBtn: UIButton!
+    @IBOutlet weak var lowToHighBtn: UIButton!
     
     override func updateConstraints() {
         super.updateConstraints()

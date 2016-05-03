@@ -28,6 +28,7 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
     
     var productViewController: ProductViewController?
     var currentIndex: NSIndexPath?
+    var selSubCategoryIndex: NSIndexPath?
     
     func reloadDataToView() {
         self.uiCollectionView.reloadData()
@@ -97,7 +98,11 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         var count = 0
         if collectionView.tag == 2 {
-            count = 1
+            if self.selCategory?.subCategories != nil && self.selCategory?.subCategories!.count > 0 {
+                count = (self.selCategory?.subCategories?.count)!
+            } else {
+                count = 1
+            }
         } else {
             count = feedLoader!.size()
         }
@@ -107,30 +112,24 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         if collectionView.tag == 2 {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("categoryCell", forIndexPath: indexPath) as! CategoryCollectionViewCell
             
-            cell.categoryName.text = self.selCategory?.name
+            var cell = collectionView.dequeueReusableCellWithReuseIdentifier("categoryCell", forIndexPath: indexPath) as! CategoryCollectionViewCell
             cell.layer.backgroundColor = Color.FEED_BG.CGColor
             
-            let imagePath = (self.selCategory?.icon)!
-            let imageUrl  = NSURL(string: imagePath)
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                cell.categoryIcon.kf_setImageWithURL(imageUrl!)
-            })
-            
-            //Divide the width equally among buttons.. 
-            if !isWidthSet {
-                setSizesForFilterButtons(cell)
-            }
-            
-            //Set button width and text color...
-            self.setUnClickedBtnBackgroundAndText(cell.popularBtn)
-            self.setUnClickedBtnBackgroundAndText(cell.newestBtn)
-            self.setUnClickedBtnBackgroundAndText(cell.lowToHighBtn)
-            self.setUnClickedBtnBackgroundAndText(cell.highToLow)
-            
-            switch feedLoader!.feedType {
+            if selCategory?.subCategories != nil && selCategory?.subCategories?.count > 0 && (selCategory?.subCategories?.count)! - 1 == indexPath.row {
+                cell = collectionView.dequeueReusableCellWithReuseIdentifier("filterBtnViewCell", forIndexPath: indexPath) as! CategoryCollectionViewCell
+                
+                //Divide the width equally among buttons..
+                /*if !isWidthSet {
+                    setSizesForFilterButtons(cell)
+                }
+                //Set button width and text color...
+                self.setUnClickedBtnBackgroundAndText(cell.popularBtn)
+                self.setUnClickedBtnBackgroundAndText(cell.newestBtn)
+                self.setUnClickedBtnBackgroundAndText(cell.lowToHighBtn)
+                self.setUnClickedBtnBackgroundAndText(cell.highToLow)
+                */
+                /*switch feedLoader!.feedType {
                 case FeedFilter.FeedType.CATEGORY_POPULAR:
                     self.setClickedBtnBackgroundAndText(cell.popularBtn)
                 case FeedFilter.FeedType.CATEGORY_NEWEST:
@@ -140,8 +139,31 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
                 case FeedFilter.FeedType.CATEGORY_PRICE_HIGH_LOW:
                     self.setClickedBtnBackgroundAndText(cell.highToLow)
                 default: break
+                }*/
+            } else  if selCategory?.subCategories != nil && selCategory?.subCategories?.count > 0 {
+                cell.categoryName.text = self.selCategory?.subCategories![indexPath.row].name
+                cell.categoryName.numberOfLines = 0
+                cell.categoryName.sizeToFit()
+                let imagePath = self.selCategory?.subCategories![indexPath.row].icon //(self.selCategory?.icon)!
+                let imageUrl  = NSURL(string: imagePath!)
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    cell.categoryIcon.kf_setImageWithURL(imageUrl!)
+                })
+                
+                let gradientLayer = CAGradientLayer()
+                gradientLayer.frame = cell.bounds
+                gradientLayer.locations = [0.0, 1.0]
+                
+                gradientLayer.colors = [
+                    UIColor(white: 0, alpha: 0.0).CGColor,
+                    UIColor(white: 0, alpha: 0.4).CGColor,
+                    Color.LIGHT_GRAY.CGColor
+                ]
+                //cell.categoryIcon.layer.sublayers = nil
+                cell.categoryIcon.layer.insertSublayer(gradientLayer, atIndex: 0)
             }
-
+            
             return cell
         } else {
             let feedItem = feedLoader!.getItem(indexPath.row)
@@ -159,7 +181,8 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
 
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if collectionView.tag == 2 {
-            
+            self.selSubCategoryIndex = indexPath
+            self.performSegueWithIdentifier("subCategoryScreen", sender: nil)
         } else {
             //self.performSegueWithIdentifier("gotoproductdetail", sender: nil)
             productViewController =  self.storyboard!.instantiateViewControllerWithIdentifier("ProductViewController") as? ProductViewController
@@ -178,6 +201,28 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
         if kind == UICollectionElementKindSectionHeader {
             let headerView : HomeReusableView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "HeaderView", forIndexPath: indexPath) as! HomeReusableView
             headerView.headerViewCollection.reloadData()
+            
+            if !isWidthSet {
+                setSizesForFilterButtons(headerView)
+            }
+            //Set button width and text color...
+            self.setUnClickedBtnBackgroundAndText(headerView.popularBtn)
+            self.setUnClickedBtnBackgroundAndText(headerView.newestBtn)
+            self.setUnClickedBtnBackgroundAndText(headerView.lowToHighBtn)
+            self.setUnClickedBtnBackgroundAndText(headerView.highToLow)
+            
+            switch feedLoader!.feedType {
+            case FeedFilter.FeedType.CATEGORY_POPULAR:
+                self.setClickedBtnBackgroundAndText(headerView.popularBtn)
+            case FeedFilter.FeedType.CATEGORY_NEWEST:
+                self.setClickedBtnBackgroundAndText(headerView.newestBtn)
+            case FeedFilter.FeedType.CATEGORY_PRICE_LOW_HIGH:
+                self.setClickedBtnBackgroundAndText(headerView.lowToHighBtn)
+            case FeedFilter.FeedType.CATEGORY_PRICE_HIGH_LOW:
+                self.setClickedBtnBackgroundAndText(headerView.highToLow)
+            default: break
+            }
+            
             reusableView = headerView
         }
         
@@ -205,12 +250,19 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
         return CGSizeZero
     }
     
-    
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         if collectionView.tag == 2 {
             return CGSizeZero
         } else {
-            return CGSizeMake(self.view.frame.width, Constants.CATEGORY_HEADER_HEIGHT)
+            let extraMargin = CGFloat(60)
+            if selCategory?.subCategories != nil && selCategory?.subCategories?.count > 0 {
+                let availableWidthForCells: CGFloat = self.view.bounds.width - Constants.HOME_HEADER_ITEMS_MARGIN_TOTAL
+                
+                let imageHt = Int(availableWidthForCells / 4) * ((selCategory?.subCategories?.count)! / 4)
+                return CGSizeMake(self.view.frame.width, CGFloat(imageHt) + extraMargin)
+            } else {
+                return CGSizeMake(self.view.frame.width, extraMargin)
+            }
         }
     }
     
@@ -220,10 +272,18 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
 
     //MARK Segue handling methods.
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        return true
+        if identifier == "subCategoryScreen" {
+            return true
+        }
+        return false
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "subCategoryScreen" {
+            let vController = segue.destinationViewController as! CategoryFeedViewController
+            vController.selCategory = self.selCategory?.subCategories![self.selSubCategoryIndex!.row]
+            vController.hidesBottomBarWhenPushed = true
+        }
     }
     
     // MARK: UIScrollview Delegate
@@ -237,7 +297,11 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func setCollectionViewSizesInsetsForTopView() {
-        collectionViewTopCellSize = CGSizeMake(self.view.bounds.width, Constants.CATEGORY_HEADER_HEIGHT)
+        //collectionViewTopCellSize = CGSizeMake(self.view.bounds.width, Constants.CATEGORY_HEADER_HEIGHT)
+            let availableWidthForCells: CGFloat = self.view.bounds.width - Constants.HOME_HEADER_ITEMS_MARGIN_TOTAL
+            let cellWidth: CGFloat = availableWidthForCells / 4
+            collectionViewTopCellSize = CGSizeMake(cellWidth, cellWidth)
+        
     }
     
     func setCollectionViewSizesInsets() {
@@ -296,11 +360,11 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
         self.navigationController?.pushViewController(vController, animated: true)
     }
     
-    func setSizesForFilterButtons(cell: CategoryCollectionViewCell) {
+    func setSizesForFilterButtons(cell: HomeReusableView) {
         isWidthSet = true
         let availableWidthForButtons:CGFloat = self.view.bounds.width - 30
         let buttonWidth :CGFloat = availableWidthForButtons / 4
-        cell.btnWidthConstraint.constant = buttonWidth
+        cell.filterBtnWidth.constant = buttonWidth
         cell.popularBtn.layer.borderColor = Color.LIGHT_GRAY.CGColor
         cell.popularBtn.layer.borderWidth = 0.5
         
