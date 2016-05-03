@@ -36,6 +36,7 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
+        self.tabBarController?.tabBar.hidden = true
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -240,7 +241,11 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
             if selCategory?.subCategories != nil && selCategory?.subCategories?.count > 0 {
                 let availableWidthForCells: CGFloat = self.view.bounds.width - Constants.HOME_HEADER_ITEMS_MARGIN_TOTAL
                 
-                let imageHt = Int(availableWidthForCells / 4) * ((selCategory?.subCategories?.count)! / 4)
+                var noOfRows = ((selCategory?.subCategories?.count)! / 4)
+                if (selCategory?.subCategories?.count)! % 4 > 0 {
+                    noOfRows = noOfRows + 1
+                }
+                let imageHt = Int(availableWidthForCells / 4) * noOfRows
                 return CGSizeMake(self.view.frame.width, CGFloat(imageHt) + extraMargin)
             } else {
                 return CGSizeMake(self.view.frame.width, extraMargin)
