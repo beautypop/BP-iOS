@@ -354,7 +354,7 @@ class ApiFacade {
         ApiController.instance.getComments(postId, offset: offset)
     }
     
-    static func deleteComment(commentId: Int, successCallback: ((String) -> Void)?, failureCallback: ((String) -> Void)?) {
+    static func deleteComment(id: Int, successCallback: ((String) -> Void)?, failureCallback: ((String) -> Void)?) {
         
         SwiftEventBus.unregister(self)
         
@@ -374,7 +374,7 @@ class ApiFacade {
             }
         }
         
-        ApiController.instance.deleteComment(commentId)
+        ApiController.instance.deleteComment(id)
     }
 
     static func getHomeSliderFeaturedItems(successCallback: (([FeaturedItemVM]) -> Void)?, failureCallback: ((String) -> Void)?) {
@@ -403,6 +403,34 @@ class ApiFacade {
         
         ApiController.instance.getFeaturedItems(HOME_SLIDER_ITEM_TYPE)
     }
+    
+    static func getSuggestedProducts(id: Int, successCallback: (([PostVMLite]) -> Void)?, failureCallback: ((String) -> Void)?) {
+        SwiftEventBus.unregister(self)
+        
+        SwiftEventBus.onMainThread(self, name: "onSuccessGetSuggestedProducts") { result in
+            if ViewUtil.isEmptyResult(result) {
+                failureCallback!("No suggested products")
+                return
+            }
+            
+            if successCallback != nil {
+                successCallback!(result.object as! [PostVMLite])
+            }
+        }
+        
+        SwiftEventBus.onMainThread(self, name: "onFailureGetSuggestedProducts") { result in
+            if failureCallback != nil {
+                var error = "Failed to get suggested products..."
+                if result.object is NSString {
+                    error += "\n"+(result.object as! String)
+                }
+                failureCallback!(error)
+            }
+        }
+        
+        ApiController.instance.getSuggestedProducts(id)
+    }
+
     
     //static func registerAppForNotification(successCallback: ((String) -> Void)?, failureCallback: ((String) -> Void)?) {
     static func registerAppForNotification() {

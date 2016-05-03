@@ -26,15 +26,15 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     var reuseIdentifier = "CellType1"
     var currentIndex: NSIndexPath?
     var categories : [CategoryVM] = []
-    
-    var productViewController: ProductViewController?
-    
     var featuredItems: [FeaturedItemVM]?
     var bannerImages: [String] = []
     var bannerCollectionView: UICollectionView?
     var pageControl: UIPageControl?
     var currentBannerPage: Int?
     var bannerTimer: NSTimer?
+    
+    var productViewController: ProductViewController?
+    var isRefresh = false
     
     func reloadDataToView() {
         self.categories = CategoryCache.categories
@@ -64,6 +64,12 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
             feedLoader?.setItem(currentIndex!.row, item: item!)
             self.uiCollectionView.reloadItemsAtIndexPaths([currentIndex!])
             currentIndex = nil
+        }
+        
+        //check for flag and if found refresh the data..
+        if self.isRefresh {
+            self.feedLoader?.reloadFeedItems()
+            self.isRefresh = false
         }
     }
     
@@ -107,7 +113,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
             ApiFacade.getHomeSliderFeaturedItems(self!.onSuccessGetHomeFeaturedItems, failureCallback: self!.onFailureGetHomeFeaturedItems)
             CategoryCache.refresh(self!.onSuccessGetCategories, failureCallback: nil)
             self!.feedLoader?.reloadFeedItems()
-            })
+        })
         
         ApiFacade.getHomeSliderFeaturedItems(onSuccessGetHomeFeaturedItems, failureCallback: onFailureGetHomeFeaturedItems)
     }

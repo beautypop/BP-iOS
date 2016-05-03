@@ -24,143 +24,6 @@ class ApiController {
     init() {
     }
     
-    func getCategories() {
-        let callEvent = ApiCallEvent()
-        callEvent.method = "/api/get-categories"
-        callEvent.resultClass = "[CategoryVM]"
-        callEvent.successEventbusName = "categoriesReceivedSuccess"
-        callEvent.failedEventbusName = "categoriesReceivedFailed"
-        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
-        self.makeApiCall(callEvent)
-    }
-    
-    //Get the post of type HOME_FOLLOWING
-    func getHomeExploreFeed(offset: Int64) {
-        let callEvent = ApiCallEvent()
-        callEvent.method = "/api/get-home-explore-feed/\(offset)"
-        callEvent.resultClass = "[PostVMLite]"
-        callEvent.successEventbusName = "homeExploreFeedLoadSuccess"
-        callEvent.failedEventbusName = "homeExploreFeedLoadFailed"
-        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
-        self.makeApiCall(callEvent)
-    }
-    
-    func getHomeFollowingFeed(offset: Int64) {
-        let callEvent = ApiCallEvent()
-        callEvent.method = "/api/get-home-following-feed/\(offset)"
-        callEvent.resultClass = "[PostVMLite]"
-        callEvent.successEventbusName = "homeFollowingFeedLoadSuccess"
-        callEvent.failedEventbusName = "homeFollowingFeedLoadFailed"
-        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
-        self.makeApiCall(callEvent)
-    }
-    
-    func getUserInfo() {
-        let callEvent = ApiCallEvent()
-        callEvent.method = "/api/get-user-info"
-        callEvent.resultClass = "UserVM"
-        callEvent.successEventbusName = "onSuccessGetUserInfo"
-        callEvent.failedEventbusName = "onFailureGetUserInfo"
-        callEvent.apiUrl = Constants.BASE_URL + callEvent.method      //append logged in user id to get the logged in user details.
-        
-        self.makeApiCall(callEvent)
-    }
-    
-    func getUser(id: Int) {
-        let callEvent = ApiCallEvent()
-        callEvent.method = "/api/get-user/\(id)"
-        callEvent.resultClass = "UserVM"
-        callEvent.successEventbusName = "onSuccessGetUser"
-        callEvent.failedEventbusName = "onFailureGetUser"
-        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
-        self.makeApiCall(callEvent)
-    }
-    
-    func getUserByDisplayName(displayName: String) {
-        let callEvent = ApiCallEvent()
-        //callEvent.method = "/api/get-user-by-displayname/\(displayName)"
-        callEvent.method = "/api/get-user/9"
-        callEvent.resultClass = "UserVM"
-        callEvent.successEventbusName = "onSuccessGetUserByDisplayName"
-        callEvent.failedEventbusName = "onFailureGetUserByDisplayName"
-        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
-        self.makeApiCall(callEvent)
-    }
-    
-    func getUserActivities(offset: Int64) {
-        let callEvent = ApiCallEvent()
-        callEvent.method = "/api/get-activities/\(offset)"
-        callEvent.resultClass = "[ActivityVM]"
-        callEvent.successEventbusName = "onSuccessGetActivities"
-        callEvent.failedEventbusName = "onFailureGetActivities"
-        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
-        self.makeApiCall(callEvent)
-    }
-    
-    func likePost(id: Int) {
-        let callEvent = ApiCallEvent()
-        callEvent.method = "/api/like-post/\(id)"
-        callEvent.resultClass = "String"
-        //callEvent.successEventbusName = ""
-        //callEvent.failedEventbusName = ""
-        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
-        self.makeApiCall(callEvent)
-    }
-    
-    func unlikePost(id: Int) {
-        let callEvent = ApiCallEvent()
-        callEvent.method = "/api/unlike-post/\(id)"
-        callEvent.resultClass = "String"
-        //callEvent.successEventbusName = ""
-        //callEvent.failedEventbusName = ""
-        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
-        
-        self.makeApiCall(callEvent)
-    }
-    
-    func getPost(id: Int) {
-        let callEvent = ApiCallEvent()
-        callEvent.method = "/api/get-post/\(id)"
-        callEvent.resultClass = "PostVM"
-        callEvent.successEventbusName = "onSuccessGetPost"
-        callEvent.failedEventbusName = "onFailureGetPost"
-        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
-        self.makeApiCall(callEvent)
-    }
-
-    func soldPost(id: Int) {
-        let callEvent = ApiCallEvent()
-        callEvent.method = "/api/sold-post/\(id)"
-        callEvent.resultClass = "String"
-        callEvent.successEventbusName = "soldPostSuccess"
-        callEvent.failedEventbusName = "soldPostFailed"
-        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
-        
-        self.makeApiCall(callEvent)
-    }
-
-    func followUser(id: Int) {
-        let callEvent = ApiCallEvent()
-        callEvent.method = "/api/follow-user/\(id)"
-        callEvent.resultClass = "String"
-        callEvent.successEventbusName = "followUserSuccess"
-        callEvent.failedEventbusName = "followUserFailed"
-        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
-        
-        self.makeApiCall(callEvent)
-    }
-    
-    func unfollowUser(id: Int) {
-        let callEvent = ApiCallEvent()
-        callEvent.method = "/api/unfollow-user/\(id)"
-        callEvent.resultClass = "String"
-        callEvent.successEventbusName = "unfollowUserSuccess"
-        callEvent.failedEventbusName = "unfollowUserFailed"
-        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
-        
-        self.makeApiCall(callEvent)
-    }
-    
     func loginByFacebook(authToken: String) {
         let url = Constants.BASE_URL + "/authenticate/mobile/facebook?access_token=\(authToken)"
         let callEvent = ApiCallEvent()
@@ -249,6 +112,56 @@ class ApiController {
         callEvent.apiUrl = Constants.BASE_URL + callEvent.method
         self.makeApiCall(callEvent)
     }
+
+    func getCategories() {
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/api/get-categories"
+        callEvent.resultClass = "[CategoryVM]"
+        callEvent.successEventbusName = "categoriesReceivedSuccess"
+        callEvent.failedEventbusName = "categoriesReceivedFailed"
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        self.makeApiCall(callEvent)
+    }
+    
+    func getDistricts() {
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/api/get-districts"
+        callEvent.resultClass = "[LocationVM]"
+        callEvent.successEventbusName = "getDistrictsSuccess"
+        callEvent.failedEventbusName = "getDistrictsFailed"
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        self.makeApiCall(callEvent)
+    }
+    
+    func getCountries() {
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/api/get-countries"
+        callEvent.resultClass = "[CountryVM]"
+        callEvent.successEventbusName = "getCountriesSuccess"
+        callEvent.failedEventbusName = "getCountriesFailed"
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        self.makeApiCall(callEvent)
+    }
+    
+    func getHomeExploreFeed(offset: Int64) {
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/api/get-home-explore-feed/\(offset)"
+        callEvent.resultClass = "[PostVMLite]"
+        callEvent.successEventbusName = "homeExploreFeedLoadSuccess"
+        callEvent.failedEventbusName = "homeExploreFeedLoadFailed"
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        self.makeApiCall(callEvent)
+    }
+    
+    func getHomeFollowingFeed(offset: Int64) {
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/api/get-home-following-feed/\(offset)"
+        callEvent.resultClass = "[PostVMLite]"
+        callEvent.successEventbusName = "homeFollowingFeedLoadSuccess"
+        callEvent.failedEventbusName = "homeFollowingFeedLoadFailed"
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        self.makeApiCall(callEvent)
+    }
     
     func getCategoryPopularFeed(id: Int, offset: Int64) {
         let callEvent = ApiCallEvent()
@@ -310,6 +223,117 @@ class ApiController {
         self.makeApiCall(callEvent)
     }
     
+    func getUserInfo() {
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/api/get-user-info"
+        callEvent.resultClass = "UserVM"
+        callEvent.successEventbusName = "onSuccessGetUserInfo"
+        callEvent.failedEventbusName = "onFailureGetUserInfo"
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method      //append logged in user id to get the logged in user details.
+        self.makeApiCall(callEvent)
+    }
+    
+    func getUser(id: Int) {
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/api/get-user/\(id)"
+        callEvent.resultClass = "UserVM"
+        callEvent.successEventbusName = "onSuccessGetUser"
+        callEvent.failedEventbusName = "onFailureGetUser"
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        self.makeApiCall(callEvent)
+    }
+    
+    func getUserByDisplayName(displayName: String) {
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/api/get-user-by-displayname/\(displayName)"
+        callEvent.resultClass = "UserVM"
+        callEvent.successEventbusName = "onSuccessGetUserByDisplayName"
+        callEvent.failedEventbusName = "onFailureGetUserByDisplayName"
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        self.makeApiCall(callEvent)
+    }
+    
+    func getUserActivities(offset: Int64) {
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/api/get-activities/\(offset)"
+        callEvent.resultClass = "[ActivityVM]"
+        callEvent.successEventbusName = "onSuccessGetActivities"
+        callEvent.failedEventbusName = "onFailureGetActivities"
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        self.makeApiCall(callEvent)
+    }
+    
+    func likePost(id: Int) {
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/api/like-post/\(id)"
+        callEvent.resultClass = "String"
+        //callEvent.successEventbusName = ""
+        //callEvent.failedEventbusName = ""
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        self.makeApiCall(callEvent)
+    }
+    
+    func unlikePost(id: Int) {
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/api/unlike-post/\(id)"
+        callEvent.resultClass = "String"
+        //callEvent.successEventbusName = ""
+        //callEvent.failedEventbusName = ""
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        
+        self.makeApiCall(callEvent)
+    }
+    
+    func getPost(id: Int) {
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/api/get-post/\(id)"
+        callEvent.resultClass = "PostVM"
+        callEvent.successEventbusName = "onSuccessGetPost"
+        callEvent.failedEventbusName = "onFailureGetPost"
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        self.makeApiCall(callEvent)
+    }
+
+    func soldPost(id: Int) {
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/api/sold-post/\(id)"
+        callEvent.resultClass = "String"
+        callEvent.successEventbusName = "soldPostSuccess"
+        callEvent.failedEventbusName = "soldPostFailed"
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        self.makeApiCall(callEvent)
+    }
+
+    func getSuggestedProducts(id: Int) {
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/api/get-suggested-products/\(id)"
+        callEvent.resultClass = "[PostVMLite]"
+        callEvent.successEventbusName = "onSuccessGetSuggestedProducts"
+        callEvent.failedEventbusName = "onFailureGetSuggestedProducts"
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        self.makeApiCall(callEvent)
+    }
+    
+    func followUser(id: Int) {
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/api/follow-user/\(id)"
+        callEvent.resultClass = "String"
+        callEvent.successEventbusName = "followUserSuccess"
+        callEvent.failedEventbusName = "followUserFailed"
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        self.makeApiCall(callEvent)
+    }
+    
+    func unfollowUser(id: Int) {
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/api/unfollow-user/\(id)"
+        callEvent.resultClass = "String"
+        callEvent.successEventbusName = "unfollowUserSuccess"
+        callEvent.failedEventbusName = "unfollowUserFailed"
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        self.makeApiCall(callEvent)
+    }
+    
     func getUserFollowings(id: Int, offset: Int64) {
         let callEvent = ApiCallEvent()
         callEvent.method = "/api/get-followings/\(id)/\(offset)"
@@ -326,26 +350,6 @@ class ApiController {
         callEvent.resultClass = "[UserVMLite]"
         callEvent.successEventbusName = "onSuccessGetFollowingFollowers"
         callEvent.failedEventbusName = "onFailureGetFollowingFollowers"
-        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
-        self.makeApiCall(callEvent)
-    }
-    
-    func getDistricts() {
-        let callEvent = ApiCallEvent()
-        callEvent.method = "/api/get-districts"
-        callEvent.resultClass = "[LocationVM]"
-        callEvent.successEventbusName = "getDistrictsSuccess"
-        callEvent.failedEventbusName = "getDistrictsFailed"
-        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
-        self.makeApiCall(callEvent)
-    }
-
-    func getCountries() {
-        let callEvent = ApiCallEvent()
-        callEvent.method = "/api/get-countries"
-        callEvent.resultClass = "[CountryVM]"
-        callEvent.successEventbusName = "getCountriesSuccess"
-        callEvent.failedEventbusName = "getCountriesFailed"
         callEvent.apiUrl = Constants.BASE_URL + callEvent.method
         self.makeApiCall(callEvent)
     }
@@ -395,7 +399,6 @@ class ApiController {
         callEvent.successEventbusName = "onSuccessGetConversations"
         callEvent.failedEventbusName = "onFailureGetConversations"
         callEvent.apiUrl = Constants.BASE_URL + callEvent.method
-        
         self.makeApiCall(callEvent)
     }
     
@@ -406,7 +409,6 @@ class ApiController {
         callEvent.successEventbusName = "onSuccessGetConversation"
         callEvent.failedEventbusName = "onFailureGetConversation"
         callEvent.apiUrl = Constants.BASE_URL + callEvent.method
-        
         self.makeApiCall(callEvent)
     }
     
@@ -417,7 +419,6 @@ class ApiController {
         callEvent.successEventbusName = "onSuccessOpenConversation"
         callEvent.failedEventbusName = "onFailureOpenConversation"
         callEvent.apiUrl = Constants.BASE_URL + callEvent.method
-        
         self.makeApiCall(callEvent)
     }
     
@@ -428,7 +429,6 @@ class ApiController {
         callEvent.successEventbusName = "onSuccessDeleteConversation"
         callEvent.failedEventbusName = "onFailureDeleteConversation"
         callEvent.apiUrl = Constants.BASE_URL + callEvent.method
-        
         self.makeApiCall(callEvent)
     }
     
@@ -439,7 +439,6 @@ class ApiController {
         callEvent.successEventbusName = "onSuccessGetMessages"
         callEvent.failedEventbusName = "onFailureGetMessages"
         callEvent.apiUrl = Constants.BASE_URL + callEvent.method
-        
         self.makeApiCall(callEvent)
     }
     

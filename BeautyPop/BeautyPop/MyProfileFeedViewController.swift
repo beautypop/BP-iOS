@@ -26,7 +26,7 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
     var productViewController: ProductViewController?
     var currentIndex: NSIndexPath?
     
-    var isRefresh: Bool = false
+    var isRefresh = false
     var uploadedImage: UIImage?
     
     override func reloadDataToView() {

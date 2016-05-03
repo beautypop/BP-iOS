@@ -77,6 +77,8 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
         
         ApiFacade.getPost(feedItem.id, successCallback: onSuccessGetPost, failureCallback: onFailure)
         
+        ApiFacade.getSuggestedProducts(feedItem.id, successCallback: onSuccessGetSuggestedProducts, failureCallback: onFailure)
+        
         /*
         NSNotificationCenter.defaultCenter().addObserver(
             self,
@@ -358,6 +360,22 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
         ViewUtil.hideActivityLoading(self.activityLoading)
     }
     
+    func onSuccessOpenConversation(conversation: ConversationVM) {
+        let vController = self.storyboard!.instantiateViewControllerWithIdentifier("MessagesViewController") as! MessagesViewController
+        vController.conversation = conversation
+        ViewUtil.resetBackButton(self.navigationItem)
+        self.navigationController?.pushViewController(vController, animated: true)
+    }
+    
+    func onSuccessGetSuggestedProducts(_posts: [PostVMLite]) {
+        // populate to bottom horizontal scroller
+        
+    }
+    
+    func onFailure(message: String) {
+        ViewUtil.showDialog("Error", message: message, view: self)
+    }
+    
     // MARK: - UICollectionViewDataSource
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -511,17 +529,6 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
     func textFieldShouldReturn(textField: UITextField) -> Bool { // called when 'return' key pressed. return NO to ignore.
         textField.resignFirstResponder()
         return true
-    }
-    
-    func onSuccessOpenConversation(conversation: ConversationVM) {
-        let vController = self.storyboard!.instantiateViewControllerWithIdentifier("MessagesViewController") as! MessagesViewController
-        vController.conversation = conversation
-        ViewUtil.resetBackButton(self.navigationItem)
-        self.navigationController?.pushViewController(vController, animated: true)
-    }
-    
-    func onFailure(message: String) {
-        ViewUtil.showDialog("Error", message: message, view: self)
     }
     
     func enableEditPost() {
