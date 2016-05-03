@@ -82,20 +82,21 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UITextVi
             self.mbLoginIcon.hidden = false
         }
         self.email.text = userInfo?.email
-        ViewUtil.displayRoundedCornerView(self.email)
+        //ViewUtil.displayRoundedCornerView(self.email)
         self.displayName.delegate = self
         self.displayName.text = userInfo?.displayName
-        ViewUtil.displayRoundedCornerView(self.displayName)
+        //ViewUtil.displayRoundedCornerView(self.displayName)
         self.firstName.delegate = self
         self.firstName.text = userInfo?.firstName
-        ViewUtil.displayRoundedCornerView(self.firstName)
+        //ViewUtil.displayRoundedCornerView(self.firstName)
         self.lastName.delegate = self
         self.lastName.text = userInfo?.lastName
-        ViewUtil.displayRoundedCornerView(self.lastName)
+        //ViewUtil.displayRoundedCornerView(self.lastName)
         self.aboutMe.delegate = self
         self.aboutMe.text = userInfo?.aboutMe
-        ViewUtil.displayRoundedCornerView(self.aboutMe)
-        ViewUtil.displayRoundedCornerView(self.location)
+        ViewUtil.displayRoundedCornerView(self.aboutMe, bgColor: Color.WHITE, borderColor: Color.LIGHT_GRAY_2)
+        ViewUtil.displayRoundedCornerView(self.location, bgColor: Color.WHITE, borderColor: Color.LIGHT_GRAY_2)
+        
         initializeLocationDropDown((userInfo?.location.id)!)
         ViewUtil.hideActivityLoading(self.activityLoading)
         
@@ -106,7 +107,6 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UITextVi
     func keyboardWillShow(notification: NSNotification) {
         let userInfo = notification.userInfo!
         let keyboardSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
-        
         self.editScrollView.contentSize.height += keyboardSize.height
     }
     

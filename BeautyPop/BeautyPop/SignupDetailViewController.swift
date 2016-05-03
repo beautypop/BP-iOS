@@ -13,10 +13,9 @@ class SignupDetailViewController: BaseLoginViewController, UITextFieldDelegate, 
 
     @IBOutlet weak var submitBtn: UIButton!
     @IBOutlet weak var displayName: UITextField!
-    @IBOutlet weak var location: UIButton!
     @IBOutlet weak var languageDropDown: UIButton!
+    
     let languageTypeDropDown = DropDown()
-    let locationDropDown = DropDown()
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = true
@@ -32,15 +31,6 @@ class SignupDetailViewController: BaseLoginViewController, UITextFieldDelegate, 
         for (_, element) in DistrictCache.districts.enumerate() {
             locs.append(element.displayName)
         }
-        self.locationDropDown.dataSource = locs
- 
-        self.locationDropDown.selectionAction = { [unowned self] (index, item) in
-            self.location.setTitle(item, forState: .Normal)
-        }
-        
-        self.locationDropDown.anchorView = self.location
-        self.locationDropDown.bottomOffset = CGPoint(x: 0, y: self.location.bounds.height)
-        self.locationDropDown.direction = .Top
         
         initLanguages()
         self.languageTypeDropDown.anchorView = languageDropDown
@@ -73,17 +63,7 @@ class SignupDetailViewController: BaseLoginViewController, UITextFieldDelegate, 
     
     @IBAction func onClickSubmitBtn(sender: UIButton) {
         if isValid() {
-            let location = DistrictCache.getDistrictByName(self.location.titleLabel!.text!)
-            ApiFacade.saveSignUpInfo(self.displayName.text!, locationId: location!.id,
-                                     successCallback: onSuccessSaveSignUpInfo, failureCallback: onFailure)
-        }
-    }
-    
-    @IBAction func ShoworDismiss(sender: AnyObject) {
-        if self.locationDropDown.hidden {
-            self.locationDropDown.show()
-        } else {
-            self.locationDropDown.hide()
+            ApiFacade.saveSignUpInfo(self.displayName.text!, locationId: -1, successCallback: onSuccessSaveSignUpInfo, failureCallback: onFailure)
         }
     }
     
@@ -92,11 +72,6 @@ class SignupDetailViewController: BaseLoginViewController, UITextFieldDelegate, 
         let validDisplayName = ValidationUtil.isValidDisplayName(StringUtil.trim(self.displayName.text))
         if !validDisplayName.0 {
             ViewUtil.makeToast(validDisplayName.1!, view: self.view)
-            return false
-        }
-        
-        if !ViewUtil.isDropDownSelected(self.locationDropDown) {
-            ViewUtil.makeToast(NSLocalizedString("enter_location", comment: ""), view: self.view)
             return false
         }
         
