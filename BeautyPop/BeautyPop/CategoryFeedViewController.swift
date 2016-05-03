@@ -85,9 +85,7 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
             self!.feedLoader?.reloadFeedItems(Int((self?.selCategory?.id)!))
         })
         
-        if selCategory?.subCategories == nil || selCategory?.subCategories?.count == 0 {
-            self.navigationItem.title = self.selCategory?.name
-        }
+        self.navigationItem.title = self.selCategory?.name
     }
     
     override func didReceiveMemoryWarning() {
