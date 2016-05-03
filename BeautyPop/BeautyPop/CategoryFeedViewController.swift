@@ -344,7 +344,7 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func setClickedBtnBackgroundAndText(sender: UIButton) {
-        sender.backgroundColor = Color.PINK
+        sender.backgroundColor = Color.LIGHT_PINK
         sender.setTitleColor(Color.WHITE, forState: UIControlState.Normal)
     }
     
