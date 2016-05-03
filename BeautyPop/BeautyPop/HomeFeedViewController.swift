@@ -15,12 +15,13 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     
     @IBOutlet weak var uiCollectionView: UICollectionView!
     @IBOutlet weak var activityLoading: UIActivityIndicatorView!
-    
+
     var feedLoader: FeedLoader? = nil
     var feedViewAdapter: FeedViewAdapter? = nil
     
-    var collectionViewCellSize : CGSize?
-    var collectionViewTopCellSize : CGSize?
+    var headerView: HomeReusableView?
+    var collectionViewCellSize: CGSize?
+    var collectionViewTopCellSize: CGSize?
     var lastContentOffset: CGFloat = 0
     var reuseIdentifier = "CellType1"
     var currentIndex: NSIndexPath?
@@ -33,7 +34,6 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     var bannerCollectionView: UICollectionView?
     var pageControl: UIPageControl?
     var currentBannerPage: Int?
-    var homeBannerHeight: NSLayoutConstraint?
     var bannerTimer: NSTimer?
     
     func reloadDataToView() {
@@ -204,7 +204,6 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     }
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-        var reusableView : UICollectionReusableView? = nil
         if kind == UICollectionElementKindSectionHeader && self.uiCollectionView == collectionView {
             let headerView : HomeReusableView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "HeaderView", forIndexPath: indexPath) as! HomeReusableView
             headerView.headerViewCollection.reloadData()
@@ -212,11 +211,10 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
             self.bannerCollectionView = headerView.homeBannerView.subviews[0] as? UICollectionView
             self.bannerCollectionView?.dataSource = self
             self.bannerCollectionView?.delegate = self
-            self.homeBannerHeight = headerView.bannerHeight
-            reusableView = headerView
+            self.headerView = headerView
         }
         
-        return reusableView!
+        return self.headerView!
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
@@ -348,21 +346,27 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     }
     
     func onSuccessGetHomeFeaturedItems(featuredItems: [FeaturedItemVM]) {
+        if self.headerView != nil {
+            self.headerView?.homeBannerHeight.constant = 0
+        }
+        
         self.bannerImages.removeAll()
         self.featuredItems?.removeAll()
         self.featuredItems = featuredItems
+        
         if self.featuredItems != nil && self.featuredItems!.count > 0 {
             for i in 0 ..< self.featuredItems!.count {
                 self.bannerImages.append(String(self.featuredItems![i].image))
             }
             
-            //self.homeBannerHeight?.constant = Constants.HOME_BANNER_VIEW_HEIGHT
             self.bannerCollectionView?.reloadData()
             
             if self.bannerTimer != nil {
                 self.bannerTimer?.invalidate()
             }
             self.bannerTimer = NSTimer.scheduledTimerWithTimeInterval(Constants.BANNER_REFRESH_TIME_INTERVAL, target: self, selector: "scrollHomeBanner", userInfo: nil, repeats: true)
+            
+            self.headerView?.homeBannerHeight.constant = self.view.bounds.width / Constants.HOME_BANNER_WIDTH_HEIGHT_RATIO
         }
     }
     
