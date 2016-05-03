@@ -164,8 +164,16 @@ class UserActivityViewController: CustomNavigationController {
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
-        if ("FIRST_POST" == self.userActivitesItems[indexPath.row].activityType) {
+        if "FIRST_POST" == self.userActivitesItems[indexPath.row].activityType {
             return CGSizeMake(self.view.bounds.width, 90)
+        } else if "TIPS_NEW_USER" == self.userActivitesItems[indexPath.row].activityType {
+            // this code is used to dynamically specify the height to CellView without this code contents get overlapped
+            let dummyLbl = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 0))
+            dummyLbl.numberOfLines = 0
+            dummyLbl.text = Constants.ACTIVITY_TIPS_NEW_USER
+            dummyLbl.sizeToFit()
+            
+            return CGSizeMake(self.view.bounds.width, Constants.USER_ACTIVITY_DEFAULT_HEIGHT + dummyLbl.bounds.height)
         }
         //return collectionViewCellSize!
         
