@@ -23,7 +23,7 @@ struct Constants {
     static let HTTP_STATUS_BAD_REQUEST = 400;
     
     static let SPLASH_SHOW_DURATION = 0.5
-    static let FEED_LOAD_SCROLL_THRESHOLD = CGFloat(50.0)
+    static let FEED_LOAD_SCROLL_THRESHOLD = CGFloat(500.0)
     static let SHOW_HIDE_BAR_SCROLL_DISTANCE = CGFloat(5.0)
     static let MAIN_BOTTOM_BAR_ALPHA = 0.9
     static let BANNER_REFRESH_TIME_INTERVAL = 4.0
@@ -39,9 +39,9 @@ struct Constants {
     static let CATEGORY_HEADER_HEIGHT = CGFloat(150)
     static let PROFILE_HEADER_HEIGHT = CGFloat(190)
     static let FEED_COLUMNS = CGFloat(2)
-    static let FEED_ITEM_CORNER_RADIUS = CGFloat(3)
-    static let FEED_ITEM_SIDE_SPACING = CGFloat(5)
-    static let FEED_ITEM_LINE_SPACING = CGFloat(5)
+    static let FEED_ITEM_CORNER_RADIUS = CGFloat(5)
+    static let FEED_ITEM_SIDE_SPACING = CGFloat(10)
+    static let FEED_ITEM_LINE_SPACING = CGFloat(10)
     static let FEED_ITEM_DETAILS_HEIGHT = CGFloat(50)
     static let PRODUCT_INFO_HEIGHT = CGFloat(258)
     static let PRODUCT_SELLER_HEIGHT = CGFloat(95)
