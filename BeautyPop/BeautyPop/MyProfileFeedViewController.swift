@@ -56,7 +56,7 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
         //self.tabBarController?.tabBar.alpha = CGFloat(Constants.MAIN_BOTTOM_BAR_ALPHA)
         self.tabBarController?.tabBar.hidden = false
         self.navigationController?.tabBarController?.tabBar.hidden = false
-        
+        self.navigationItem.title = self.userInfo?.displayName
         setSegmentedControlTitles()
         
         if currentIndex != nil && productViewController?.feedItem != nil {

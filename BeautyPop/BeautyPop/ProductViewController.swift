@@ -60,43 +60,23 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
             ViewUtil.makeToast("Failed to mark item as sold. Please try again later.", view: self.view)
         }
         
-        //let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
-        //view.addGestureRecognizer(tap)
-        
         self.detailTableView.separatorColor = Color.WHITE
-        //self.detailTableView.estimatedRowHeight = Constants.PRODUCT_TABLE_ESTIMATED_HEIGHT
         self.detailTableView.rowHeight = UITableViewAutomaticDimension
         
         self.detailTableView.setNeedsLayout()
         self.detailTableView.layoutIfNeeded()
         self.detailTableView.reloadData()
         self.detailTableView.translatesAutoresizingMaskIntoConstraints = true
-        //self.detailTableView.backgroundColor = Color.FEED_BG
         
         ViewUtil.showActivityLoading(self.activityLoading)
         
         ApiFacade.getPost(feedItem.id, successCallback: onSuccessGetPost, failureCallback: onFailure)
         
-        /*
-        NSNotificationCenter.defaultCenter().addObserver(
-            self,
-            selector: "keyboardWillShow:",
-            name: UIKeyboardWillShowNotification,
-            object: nil)
-        
-        NSNotificationCenter.defaultCenter().addObserver(
-            self,
-            selector: "keyboardWillHide:",
-            name: UIKeyboardWillHideNotification,
-            object: nil)
-        */
     }
     
     override func viewDidAppear(animated: Bool) {
         self.myDate = NSDate()
         if moreCommentUpdated {
-            //let indexPaths = [NSIndexPath(forRow: 1, inSection: 3)]
-            //self.detailTableView.reloadRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.None)
             moreCommentUpdated = false
             self.detailTableView.reloadData()
         }
@@ -136,11 +116,11 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
         
         switch indexPath.section {
         case 0:
-            reuseidentifier = "cell1"
-        case 1:
-            reuseidentifier = "cell2"
-        case 2:
             reuseidentifier = "cell3"
+        case 1:
+            reuseidentifier = "cell1"
+        case 2:
+            reuseidentifier = "cell2"
         case 3:
             reuseidentifier = "cell4"
         case 4:
@@ -188,6 +168,22 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
             
             switch indexPath.section {
             case 0:
+                if self.productInfo != nil {
+                    cell.followersCount.text = String(self.productInfo!.ownerNumFollowers)
+                    cell.noOfProducts.text = String(self.productInfo!.ownerNumProducts)
+                    
+                    cell.postTitle.text = self.productInfo!.ownerName
+                    cell.postedUserImg.image = UIImage(named: "")
+                    cell.ownerLastLogin.text = NSDate(timeIntervalSince1970: self.productInfo!.ownerLastLogin / 1000.0).timeAgo
+                    
+                    if self.productInfo!.ownerId != -1 {
+                        ImageUtil.displayThumbnailProfileImage(self.productInfo!.ownerId, imageView: cell.postedUserImg)
+                        cell.postedUserImg.layer.cornerRadius = cell.postedUserImg.frame.height / 2
+                        cell.postedUserImg.layer.masksToBounds = true
+                    }
+                }
+                
+            case 1:
                 if self.productInfo != nil && self.productInfo!.images.count > 0 {
                     for i in 0 ..< self.productInfo!.images.count {
                         self.images.append(String(self.productInfo!.images[i]))
@@ -198,7 +194,7 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
                     cell.soldImage.hidden = !self.productInfo!.sold
                 }
                 
-            case 1:
+            case 2:
                 cell.contentMode = UIViewContentMode.Redraw
                 cell.sizeToFit()
                 if self.productInfo != nil {
@@ -237,23 +233,6 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
                     cell.categoryBtn.hidden = true
                 }
                 
-            case 2:
-                if self.productInfo != nil {
-                    cell.followersCount.text = String(self.productInfo!.ownerNumFollowers)
-                    cell.noOfProducts.text = String(self.productInfo!.ownerNumProducts)
-                    
-                    cell.postTitle.text = self.productInfo!.ownerName
-                    cell.postedUserImg.image = UIImage(named: "")
-                    cell.ownerLastLogin.text = NSDate(timeIntervalSince1970: self.productInfo!.ownerLastLogin / 1000.0).timeAgo
-                    
-                    if self.productInfo!.ownerId != -1 {
-                        ImageUtil.displayThumbnailProfileImage(self.productInfo!.ownerId, imageView: cell.postedUserImg)
-                        cell.postedUserImg.layer.cornerRadius = cell.postedUserImg.frame.height / 2
-                        cell.postedUserImg.layer.masksToBounds = true
-                    }
-                }
-                
-                ViewUtil.displayRoundedCornerView(cell.viewBtnIns, bgColor: Color.LIGHT_PINK)
             case 3:
                 if let commentCount = productInfo?.numComments {
                     cell.commentsCount.text = String(commentCount)
@@ -289,17 +268,17 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
+            // seller
+            return Constants.PRODUCT_SELLER_HEIGHT
+        case 1:
             // image slider
             return ViewUtil.getScreenWidth(self.view)
-        case 1:
+        case 2:
             // Product info
             if self.productInfo != nil {
                 return Constants.PRODUCT_INFO_HEIGHT + self.lcontentSize
             }
             return Constants.PRODUCT_INFO_HEIGHT
-        case 2:
-            // seller
-            return Constants.PRODUCT_SELLER_HEIGHT
         case 4:
             // comments
             return Constants.PRODUCT_COMMENTS_HEIGHT
@@ -314,7 +293,7 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // on click of User section show the User profile screen.
-        if indexPath.section == 2  {
+        if indexPath.section == 0  {
             self.performSegueWithIdentifier("userprofile", sender: nil)
         } else if (indexPath.section == 4 && indexPath.row == self.comments.count) || indexPath.section == 3 {
             pushMoreCommentsController()
@@ -516,9 +495,6 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
         ConversationCache.open(self.productInfo!.id, successCallback: onSuccessOpenConversation, failureCallback: onFailure)
     }
     
-    @IBAction func onClickViewChat(sender: AnyObject) {
-    }
-    
     @IBAction func onClickSold(sender: AnyObject) {
         let _messageDialog = UIAlertController(title: "", message: Constants.PRODUCT_SOLD_TEXT, preferredStyle: UIAlertControllerStyle.Alert)
         let okAction = UIAlertAction(title: NSLocalizedString("ok", comment: ""), style: UIAlertActionStyle.Default, handler: nil)
@@ -569,73 +545,6 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
         SharingUtil.shareToFacebook(self.productInfo!, vController: self)
     }
  
-    /*
-    func textFieldDidBeginEditing(textField: UITextField) {
-        activeText = textField
-    }
-    
-    func textFieldDidEndEditing(textField: UITextField) {
-        activeText = nil
-    }
-    
-    //Keyboard Overlapping UITextField solution approach
-    //http://stackoverflow.com/questions/594181/making-a-uitableview-scroll-when-text-field-is-selected
-    func keyboardWillShow(notification: NSNotification) {
-        
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            var frame = self.detailTableView.frame
-            UIView.beginAnimations(nil, context: nil)
-            UIView.setAnimationBeginsFromCurrentState(true)
-            UIView.setAnimationDuration(0.3)
-            frame.size.height -= keyboardSize.height
-            self.detailTableView.frame = frame
-            if activeText != nil {
-                let rect = self.detailTableView.convertRect(activeText.bounds, fromView: activeText)
-                self.detailTableView.scrollRectToVisible(rect, animated: false)
-            }
-            UIView.commitAnimations()
-        }
-        
-        if !isShownKeyboard {
-            
-            var info = notification.userInfo!
-            let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
-            
-            UIView.animateWithDuration(1.0, animations: { () -> Void in
-                //self.buttomLayoutConstraint = keyboardFrame.size.height
-                
-                var frame = self.detailTableView.frame
-                UIView.beginAnimations(nil, context: nil)
-                UIView.setAnimationBeginsFromCurrentState(true)
-                UIView.setAnimationDuration(0.3)
-                frame.size.height -= keyboardFrame.size.height
-                self.detailTableView.frame = frame
-                if self.activeText != nil {
-                    let rect = self.detailTableView.convertRect(self.activeText.bounds, fromView: self.activeText)
-                    self.detailTableView.scrollRectToVisible(rect, animated: false)
-                }
-                
-                }) { (completed: Bool) -> Void in
-                    
-            }
-            isShownKeyboard = true
-        }
-    }
-    
-    func keyboardWillHide(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            var frame = self.detailTableView.frame
-            UIView.beginAnimations(nil, context: nil)
-            UIView.setAnimationBeginsFromCurrentState(true)
-            UIView.setAnimationDuration(0.3)
-            frame.size.height += keyboardSize.height
-            self.detailTableView.frame = frame
-            isShownKeyboard = false
-            UIView.commitAnimations()
-        }
-    }
-    */
-
     @IBAction func onClickMoreComments(sender: AnyObject) {
         pushMoreCommentsController()
     }
