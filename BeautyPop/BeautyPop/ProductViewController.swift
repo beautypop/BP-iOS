@@ -77,8 +77,6 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
         
         ApiFacade.getPost(feedItem.id, successCallback: onSuccessGetPost, failureCallback: onFailure)
         
-        ApiFacade.getSuggestedProducts(feedItem.id, successCallback: onSuccessGetSuggestedProducts, failureCallback: onFailure)
-        
         /*
         NSNotificationCenter.defaultCenter().addObserver(
             self,
@@ -358,6 +356,9 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
         self.processButtonsVisibility()
         self.enableEditPost()
         ViewUtil.hideActivityLoading(self.activityLoading)
+        
+        // load more products
+        ApiFacade.getSuggestedProducts(feedItem.id, successCallback: onSuccessGetSuggestedProducts, failureCallback: onFailure)
     }
     
     func onSuccessOpenConversation(conversation: ConversationVM) {
