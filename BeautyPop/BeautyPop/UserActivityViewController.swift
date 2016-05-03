@@ -80,7 +80,7 @@ class UserActivityViewController: CustomNavigationController {
         
         let viewStatus = self.userActivitesItems[indexPath.row].viewed
         let activityType = self.userActivitesItems[indexPath.row].activityType
-        switch (activityType) {
+        switch activityType {
         case "FIRST_POST", "NEW_POST", "NEW_COMMENT", "LIKED", "SOLD", "FOLLOWED":
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("UserActivity", forIndexPath: indexPath) as! UserActivityViewCell
             cell.contentMode = UIViewContentMode.Redraw
@@ -116,8 +116,8 @@ class UserActivityViewController: CustomNavigationController {
                 ImageUtil.displayPostImage(Int(self.userActivitesItems[indexPath.row].targetImage), imageView: cell.postImage)
             }
             
-            if (!viewStatus) {
-                cell.layer.backgroundColor = Color.IMAGE_LOAD_BG.CGColor
+            if !viewStatus {
+                cell.layer.backgroundColor = Color.LIGHT_PINK_4.CGColor
             }
             
             cell.sizeToFit()
@@ -132,8 +132,8 @@ class UserActivityViewController: CustomNavigationController {
             cell.textMessage.sizeToFit()
             ImageUtil.displayThumbnailProfileImage(Int(self.userActivitesItems[indexPath.row].actorImage), imageView: cell.profileImg)
 
-            if (!viewStatus) {
-                cell.layer.backgroundColor = Color.IMAGE_LOAD_BG.CGColor
+            if !viewStatus {
+                cell.layer.backgroundColor = Color.LIGHT_PINK_4.CGColor
             }
             
             cell.sizeToFit()
@@ -144,7 +144,7 @@ class UserActivityViewController: CustomNavigationController {
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         self.currentIndex = indexPath.row
         let item = self.userActivitesItems[indexPath.row]
-        switch (item.activityType) {
+        switch item.activityType {
         case "FIRST_POST", "NEW_POST", "NEW_COMMENT", "LIKED", "SOLD":
             ApiFacade.getPost(self.userActivitesItems[indexPath.row].target, successCallback: onSuccessGetPost, failureCallback: onFailure)
         case "TIPS_NEW_USER":

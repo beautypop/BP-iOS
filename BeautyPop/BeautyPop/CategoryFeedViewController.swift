@@ -291,7 +291,7 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
     
     func onClickSellBtn(sender: AnyObject?) {
         let vController = self.storyboard?.instantiateViewControllerWithIdentifier("NewProductViewController") as! NewProductViewController
-        vController.selCategory = Int((selCategory?.id)!)
+        vController.selCategoryId = Int((selCategory?.id)!)
         ViewUtil.resetBackButton(self.navigationItem)
         self.navigationController?.pushViewController(vController, animated: true)
     }

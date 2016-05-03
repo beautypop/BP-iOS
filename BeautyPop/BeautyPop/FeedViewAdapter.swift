@@ -93,8 +93,8 @@ class FeedViewAdapter {
     }
     
     static func getFeedItemCellSize(width: CGFloat) -> CGSize {
-        let availableWidthForCells: CGFloat = width - (Constants.FEED_ITEM_SIDE_SPACING * 3)  // left middle right spacing
-        let cellWidth: CGFloat = availableWidthForCells / 2
+        let availableWidthForCells: CGFloat = width - (Constants.FEED_ITEM_SIDE_SPACING * (Constants.FEED_COLUMNS + 1))  // left middle right spacing
+        let cellWidth: CGFloat = availableWidthForCells / Constants.FEED_COLUMNS
         let cellHeight = cellWidth + Constants.FEED_ITEM_DETAILS_HEIGHT
         return CGSizeMake(cellWidth, cellHeight)
     }

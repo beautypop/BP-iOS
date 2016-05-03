@@ -127,7 +127,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
             return self.bannerImages.count
         }
         var count = 0
-        if (collectionView.tag == 2) {
+        if collectionView.tag == 2 {
             count = self.categories.count
         } else {
             count = feedLoader!.size()
@@ -154,7 +154,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
             return cell
         }
         
-        if (collectionView.tag == 2){
+        if collectionView.tag == 2 {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("staticCell", forIndexPath: indexPath) as! CategoryCollectionViewCell
             let categoryVM = self.categories[indexPath.row]
             let imagePath = categoryVM.icon
@@ -196,7 +196,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
         if collectionView == self.bannerCollectionView {
             ViewUtil.handleFeaturedItemAction(self, featuredItem: self.featuredItems![indexPath.row])
         } else {
-            if (collectionView.tag == 2){
+            if collectionView.tag == 2 {
                 self.currentIndex = indexPath
                 self.performSegueWithIdentifier("categoryscreen", sender: nil)
             }
@@ -205,7 +205,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         var reusableView : UICollectionReusableView? = nil
-        if (kind == UICollectionElementKindSectionHeader && self.uiCollectionView == collectionView) {
+        if kind == UICollectionElementKindSectionHeader && self.uiCollectionView == collectionView {
             let headerView : HomeReusableView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "HeaderView", forIndexPath: indexPath) as! HomeReusableView
             headerView.headerViewCollection.reloadData()
             
@@ -227,12 +227,11 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
             return CGSizeMake(self.view.bounds.width, self.view.bounds.width / Constants.HOME_BANNER_WIDTH_HEIGHT_RATIO)
         }
         
-        if (collectionView.tag == 2) {
+        if collectionView.tag == 2 {
             if let _ = collectionViewTopCellSize {
                 return collectionViewTopCellSize!
             }
         } else {
-            
             if self.feedLoader?.feedItems.count == 1 {
                 if self.feedLoader?.feedItems[0].id == -1 {
                     return FeedViewAdapter.getNoFeedItemCellSize(self.view.bounds.width)
@@ -255,8 +254,8 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
             return CGSizeZero
         } else {
             let availableWidthForCells: CGFloat = self.view.bounds.width - Constants.HOME_HEADER_ITEMS_MARGIN_TOTAL
-            let cellWidth: CGFloat = availableWidthForCells / 3
-            let ht = cellWidth * CGFloat(Int(self.categories.count / 3))
+            let cellWidth: CGFloat = availableWidthForCells / Constants.HOME_CATEGORY_SELECTOR_COLUMNS
+            let ht = cellWidth * CGFloat(self.categories.count / Int(Constants.HOME_CATEGORY_SELECTOR_COLUMNS))
             let extraMargin = CGFloat(60)
             if self.bannerImages.isEmpty {
                 return CGSizeMake(self.view.frame.width, ht + extraMargin)
@@ -352,8 +351,8 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
         self.bannerImages.removeAll()
         self.featuredItems?.removeAll()
         self.featuredItems = featuredItems
-        if featuredItems.count > 0 {
-            for i in 0 ..< (self.featuredItems?.count)! {
+        if self.featuredItems != nil && self.featuredItems!.count > 0 {
+            for i in 0 ..< self.featuredItems!.count {
                 self.bannerImages.append(String(self.featuredItems![i].image))
             }
             

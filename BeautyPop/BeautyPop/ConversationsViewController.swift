@@ -115,8 +115,7 @@ class ConversationsViewController: UIViewController {
             if item.unread > 0 {
                 ViewUtil.displayCircularView(cell.unreadComments)
                 cell.unreadComments.backgroundColor = Color.RED
-                cell.layer.borderColor = Color.PINK.CGColor
-                cell.layer.backgroundColor = Color.LIGHT_PINK_3.CGColor
+                cell.layer.backgroundColor = Color.LIGHT_PINK_4.CGColor
                 cell.unreadComments.hidden = false
             }
         }

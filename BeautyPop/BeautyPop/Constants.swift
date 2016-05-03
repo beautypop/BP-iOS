@@ -14,7 +14,7 @@ struct Constants {
     static let BASE_URL = "http://119.81.228.91"
     static let BASE_IMAGE_URL = "http://119.81.228.91"
     
-    static let DEEP_LINK_URL_SCHEME = "BeautyPop://"
+    static let DEEP_LINK_URL_SCHEME = "beautypop://"
     
     static let DEVICE_TYPE = "IOS";
     static let CURRENCY_SYMBOL = "$"
@@ -26,7 +26,7 @@ struct Constants {
     static let FEED_LOAD_SCROLL_THRESHOLD = CGFloat(50.0)
     static let SHOW_HIDE_BAR_SCROLL_DISTANCE = CGFloat(5.0)
     static let MAIN_BOTTOM_BAR_ALPHA = 0.9
-    static let BANNER_REFRESH_TIME_INTERVAL = 5.0
+    static let BANNER_REFRESH_TIME_INTERVAL = 4.0
     
     // sizes
     static let DEFAULT_BUTTON_CORNER_RADIUS = CGFloat(7)
@@ -34,12 +34,14 @@ struct Constants {
     static let DEFAULT_CORNER_RADIUS = CGFloat(5)
     static let DEFAULT_SPACING = CGFloat(10)
     static let HOME_BANNER_WIDTH_HEIGHT_RATIO = CGFloat(3)
+    static let HOME_CATEGORY_SELECTOR_COLUMNS = CGFloat(3)
     static let HOME_HEADER_ITEMS_MARGIN_TOTAL = CGFloat(12)     // 3 each x 4
     static let CATEGORY_HEADER_HEIGHT = CGFloat(150)
     static let PROFILE_HEADER_HEIGHT = CGFloat(190)
-    static let FEED_ITEM_CORNER_RADIUS = CGFloat(5)
-    static let FEED_ITEM_SIDE_SPACING = CGFloat(10)
-    static let FEED_ITEM_LINE_SPACING = CGFloat(10)
+    static let FEED_COLUMNS = CGFloat(2)
+    static let FEED_ITEM_CORNER_RADIUS = CGFloat(3)
+    static let FEED_ITEM_SIDE_SPACING = CGFloat(5)
+    static let FEED_ITEM_LINE_SPACING = CGFloat(5)
     static let FEED_ITEM_DETAILS_HEIGHT = CGFloat(50)
     static let PRODUCT_INFO_HEIGHT = CGFloat(258)
     static let PRODUCT_SELLER_HEIGHT = CGFloat(95)
