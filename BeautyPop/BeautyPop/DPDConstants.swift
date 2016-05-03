@@ -18,7 +18,7 @@ internal struct DPDConstant {
 		static let SeparatorStyle = UITableViewCellSeparatorStyle.None
 		static let SeparatorInsets = UIEdgeInsetsZero
 		static let CornerRadius: CGFloat = 2
-		static let RowHeight: CGFloat = 44
+		static let RowHeight: CGFloat = 35
 		static let HeightPadding: CGFloat = 20
 		
 		struct Shadow {

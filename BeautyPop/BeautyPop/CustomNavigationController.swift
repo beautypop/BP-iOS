@@ -33,14 +33,14 @@ class CustomNavigationController: ScrollingNavigationViewController, ScrollingNa
     func onClickSellBtn(sender: AnyObject?) {
         //self.tabBarController!.tabBar.hidden = true
         let vController = self.storyboard?.instantiateViewControllerWithIdentifier("NewProductViewController")
-        vController?.hidesBottomBarWhenPushed = true
+        //vController?.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vController!, animated: true)
     }
     
     func onClickChatBtn(sender: AnyObject?) {
         //self.tabBarController!.tabBar.hidden = true
         let vController = self.storyboard?.instantiateViewControllerWithIdentifier("ConversationsController")
-        vController?.hidesBottomBarWhenPushed = true
+        //vController?.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vController!, animated: true)
     }
     
