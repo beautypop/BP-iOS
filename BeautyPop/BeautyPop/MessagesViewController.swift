@@ -569,6 +569,7 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
             textField.placeholder = String(self.conversation!.postPrice)
             textField.text = String(self.conversation!.postPrice)
             textField.keyboardType = UIKeyboardType.NumberPad
+            textField.font = UIFont.systemFontOfSize(18)
             inputTextField = textField
         })
         
@@ -597,8 +598,8 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
         NSLog("onClickBuyerCancelButton")
         
         let _messageDialog = UIAlertController(
-            title: "Buy Now",
-            message: NSLocalizedString("pm_order_cancel_confirm", comment: ""),
+            title: NSLocalizedString("pm_order_cancel_confirm", comment: ""),
+            message: nil,
             preferredStyle: UIAlertControllerStyle.Alert)
         let cancelAction = UIAlertAction(
             title: NSLocalizedString("cancel", comment: ""),
@@ -620,8 +621,8 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
         NSLog("onClickSellerAcceptButton")
         
         let _messageDialog = UIAlertController(
-            title: "Accept",
-            message: NSLocalizedString("pm_order_accept_confirm", comment: ""),
+            title: NSLocalizedString("pm_order_accept_confirm", comment: ""),
+            message: nil,
             preferredStyle: UIAlertControllerStyle.Alert)
         let cancelAction = UIAlertAction(
             title: NSLocalizedString("cancel", comment: ""),
@@ -643,8 +644,8 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
         NSLog("onClickSellerDeclineButton")
         
         let _messageDialog = UIAlertController(
-            title: "Accept",
-            message: NSLocalizedString("pm_order_decline_confirm", comment: ""),
+            title: NSLocalizedString("pm_order_decline_confirm", comment: ""),
+            message: nil,
             preferredStyle: UIAlertControllerStyle.Alert)
         let cancelAction = UIAlertAction(
             title: NSLocalizedString("cancel", comment: ""),
