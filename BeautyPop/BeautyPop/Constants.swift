@@ -13,7 +13,7 @@ struct Constants {
     
     static let BASE_URL = "http://119.81.228.91"
     static let BASE_IMAGE_URL = "http://119.81.228.91"
-    
+
     static let DEEP_LINK_URL_SCHEME = "beautypop://"
     
     static let DEVICE_TYPE = "IOS";
@@ -34,11 +34,14 @@ struct Constants {
     static let DEFAULT_CORNER_RADIUS = CGFloat(5)
     static let DEFAULT_SPACING = CGFloat(10)
     static let HOME_BANNER_WIDTH_HEIGHT_RATIO = CGFloat(3)
-    static let HOME_CATEGORY_SELECTOR_COLUMNS = CGFloat(3)
-    static let HOME_HEADER_ITEMS_MARGIN_TOTAL = CGFloat(12)     // 3 each x 4
+    static let HOME_CATEGORY_SELECTOR_COLUMNS = 3
+    static let HOME_HEADER_ITEMS_MARGIN_TOTAL = CGFloat(12)         // 3 each x 4
+    static let CATEGORY_HEADER_ITEMS_MARGIN_TOTAL = CGFloat(15)     // 3 each x 5
+    static let CATEGORY_HEADER_SUBCATEGORY_SELECTOR_COLUMNS = 4
+    static let CATEGORY_HEADER_SUBCATEGORY_SELECTOR_EXTRA_MARGIN = CGFloat(50)
     static let CATEGORY_HEADER_HEIGHT = CGFloat(150)
     static let PROFILE_HEADER_HEIGHT = CGFloat(190)
-    static let FEED_COLUMNS = CGFloat(2)
+    static let FEED_COLUMNS = 2
     static let FEED_ITEM_CORNER_RADIUS = CGFloat(5)
     static let FEED_ITEM_SIDE_SPACING = CGFloat(10)
     static let FEED_ITEM_LINE_SPACING = CGFloat(10)

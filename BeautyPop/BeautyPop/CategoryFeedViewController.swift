@@ -186,6 +186,7 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
             if !isWidthSet {
                 setSizesForFilterButtons(headerView)
             }
+            
             //Set button width and text color...
             self.setUnClickedBtnBackgroundAndText(headerView.popularBtn)
             self.setUnClickedBtnBackgroundAndText(headerView.newestBtn)
@@ -235,18 +236,17 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
         if collectionView.tag == 2 {
             return CGSizeZero
         } else {
-            let extraMargin = CGFloat(60)
             if selCategory?.subCategories != nil && selCategory?.subCategories?.count > 0 {
-                let availableWidthForCells: CGFloat = self.view.bounds.width - Constants.HOME_HEADER_ITEMS_MARGIN_TOTAL
+                let availableWidthForCells: CGFloat = self.view.bounds.width - Constants.CATEGORY_HEADER_ITEMS_MARGIN_TOTAL
                 
-                var noOfRows = ((selCategory?.subCategories?.count)! / 4)
-                if (selCategory?.subCategories?.count)! % 4 > 0 {
+                var noOfRows = ((selCategory?.subCategories?.count)! / Constants.CATEGORY_HEADER_SUBCATEGORY_SELECTOR_COLUMNS)
+                if (selCategory?.subCategories?.count)! % Constants.CATEGORY_HEADER_SUBCATEGORY_SELECTOR_COLUMNS > 0 {
                     noOfRows = noOfRows + 1
                 }
-                let imageHt = Int(availableWidthForCells / 4) * noOfRows
-                return CGSizeMake(self.view.frame.width, CGFloat(imageHt) + extraMargin)
+                let imageHt = Int(availableWidthForCells / Constants.CATEGORY_HEADER_SUBCATEGORY_SELECTOR_COLUMNS) * noOfRows
+                return CGSizeMake(self.view.frame.width, CGFloat(imageHt) + Constants.CATEGORY_HEADER_SUBCATEGORY_SELECTOR_EXTRA_MARGIN)
             } else {
-                return CGSizeMake(self.view.frame.width, extraMargin)
+                return CGSizeMake(self.view.frame.width, Constants.CATEGORY_HEADER_SUBCATEGORY_SELECTOR_EXTRA_MARGIN)
             }
         }
     }
@@ -282,10 +282,9 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func setCollectionViewSizesInsetsForTopView() {
-        let availableWidthForCells: CGFloat = self.view.bounds.width - Constants.HOME_HEADER_ITEMS_MARGIN_TOTAL
-        let cellWidth: CGFloat = availableWidthForCells / 4
+        let availableWidthForCells: CGFloat = self.view.bounds.width - Constants.CATEGORY_HEADER_ITEMS_MARGIN_TOTAL
+        let cellWidth: CGFloat = availableWidthForCells / Constants.CATEGORY_HEADER_SUBCATEGORY_SELECTOR_COLUMNS
         collectionViewTopCellSize = CGSizeMake(cellWidth, cellWidth)
-        
     }
     
     func setCollectionViewSizesInsets() {
@@ -346,8 +345,8 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
     
     func setSizesForFilterButtons(cell: HomeReusableView) {
         isWidthSet = true
-        let availableWidthForButtons:CGFloat = self.view.bounds.width - 30
-        let buttonWidth :CGFloat = availableWidthForButtons / 4
+        let availableWidthForButtons: CGFloat = self.view.bounds.width - (Constants.DEFAULT_SPACING * 2)
+        let buttonWidth: CGFloat = availableWidthForButtons / 4
         cell.filterBtnWidth.constant = buttonWidth
         cell.popularBtn.layer.borderColor = Color.LIGHT_GRAY.CGColor
         cell.popularBtn.layer.borderWidth = 0.5
