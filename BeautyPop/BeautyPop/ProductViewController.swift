@@ -42,7 +42,8 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
     var customDate: NSDate = NSDate()
     
     var collectionView: UICollectionView!
-    
+    var moreProductsCollectionView: UICollectionView!
+    var moreProducts: [PostVMLite] = []
     var images: [String] = []
     
     override func viewDidLoad() {
@@ -69,7 +70,7 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
         ViewUtil.showActivityLoading(self.activityLoading)
         
         ApiFacade.getPost(feedItem.id, successCallback: onSuccessGetPost, failureCallback: onFailure)
-        
+        self.moreProductsCollectionView.hidden = true
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -87,7 +88,7 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
     //MARK: UITableViewDelegate
 
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 5
+        return 6
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -128,6 +129,8 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
             } else {
                 reuseidentifier = "mCell2"
             }
+        case 5:
+            reuseidentifier = "cell5"
         default:
             reuseidentifier = ""
         }
@@ -146,12 +149,8 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
             } else {
                 let comment:CommentVM = self.comments[indexPath.row]
                 cell.lblComments.text = comment.body
-                //cell.lblComments.numberOfLines = 0
-                //self.lblCommentsSize = cell.lblComments.frame.size.height
-                
-                //cell.lblComments.sizeToFit()
                 cell.postUserName.setTitle(comment.ownerName, forState: .Normal)
-                if (comment.id != -1) {
+                if (comment.isNew) {
                     cell.postedTime.text = NSDate(timeIntervalSince1970:Double(comment.createdDate) / 1000.0).timeAgo
                 } else {
                     cell.postedTime.text = NSDate(timeIntervalSinceNow: comment.createdDate / 1000.0).timeAgo
@@ -235,6 +234,10 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
                 if let commentCount = productInfo?.numComments {
                     cell.commentsCount.text = String(commentCount)
                 }
+            case 5:
+                self.moreProductsCollectionView = cell.viewWithTag(1) as! UICollectionView
+                self.moreProductsCollectionView.delegate = self
+                self.moreProductsCollectionView.dataSource = self
                 
             default:
                 reuseidentifier = ""
@@ -280,6 +283,8 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
         case 4:
             // comments
             return Constants.PRODUCT_COMMENTS_HEIGHT
+        case 5:
+            return Constants.MORE_PRODUCT_CELL_HEIGHT
         default:
             return UITableViewAutomaticDimension
         }
@@ -347,7 +352,11 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
     
     func onSuccessGetSuggestedProducts(_posts: [PostVMLite]) {
         // populate to bottom horizontal scroller
-        
+        if (!_posts.isEmpty) {
+            self.moreProducts = _posts
+            self.moreProductsCollectionView.reloadData()
+            self.moreProductsCollectionView.hidden = false
+        }
     }
     
     func onFailure(message: String) {
@@ -361,30 +370,53 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if self.moreProductsCollectionView != nil && self.moreProductsCollectionView == collectionView {
+            return self.moreProducts.count
+        }
         return self.images.count
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("hcell", forIndexPath: indexPath) as! ImageCollectionViewCell
-        let imageView = cell.imageView
-        cell.pageControl.numberOfPages = self.productInfo!.images.count
-        cell.pageControl.currentPage = indexPath.row
-        cell.pageControl.hidesForSinglePage = true
-        ImageUtil.displayOriginalPostImage(Int(self.images[indexPath.row])!, imageView: imageView)
-        return cell
+        
+        if self.moreProductsCollectionView != nil && moreProductsCollectionView == collectionView {
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("moreProductCell", forIndexPath: indexPath) as! ImageCollectionViewCell
+            ImageUtil.displayPostImage(self.moreProducts[indexPath.row].id, imageView: cell.imageView)
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("hcell", forIndexPath: indexPath) as! ImageCollectionViewCell
+            let imageView = cell.imageView
+            cell.pageControl.numberOfPages = self.productInfo!.images.count
+            cell.pageControl.currentPage = indexPath.row
+            cell.pageControl.hidesForSinglePage = true
+            ImageUtil.displayOriginalPostImage(Int(self.images[indexPath.row])!, imageView: imageView)
+            return cell
+        }
+        
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        if self.moreProductsCollectionView != nil && moreProductsCollectionView == collectionView {
+            return CGSizeMake(Constants.MORE_PRODUCT_WIDTH, Constants.MORE_PRODUCT_HEIGHT)
+        }
         return CGSize(width: self.view.frame.size.width, height: self.view.frame.size.width)
     }
     
     // MARK: - UICollectionViewDelegate
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let tCell = collectionView.cellForItemAtIndexPath(indexPath) as? ImageCollectionViewCell
-        let imageUrl = ImageUtil.getProductImageUrl(self.images[indexPath.row])
-        ViewUtil.viewFullScreenImageByUrl(imageUrl, viewController: self)
-        tCell?.pageControl.currentPage = indexPath.row
+        if self.moreProductsCollectionView != nil && moreProductsCollectionView == collectionView {
+            let vController =  self.storyboard!.instantiateViewControllerWithIdentifier("ProductViewController") as! ProductViewController
+            vController.feedItem = self.moreProducts[indexPath.row]
+            vController.hidesBottomBarWhenPushed = true
+            ViewUtil.resetBackButton(self.navigationItem)
+            self.navigationController?.pushViewController(vController, animated: true)
+            
+        } else {
+            let tCell = collectionView.cellForItemAtIndexPath(indexPath) as? ImageCollectionViewCell
+            let imageUrl = ImageUtil.getProductImageUrl(self.images[indexPath.row])
+            ViewUtil.viewFullScreenImageByUrl(imageUrl, viewController: self)
+            tCell?.pageControl.currentPage = indexPath.row
+        }
     }
     
     // MARK: - PhotoSliderDelegate

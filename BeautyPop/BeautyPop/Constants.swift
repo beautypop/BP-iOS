@@ -49,6 +49,7 @@ struct Constants {
     static let PRODUCT_INFO_HEIGHT = CGFloat(258)
     static let PRODUCT_SELLER_HEIGHT = CGFloat(80)
     static let PRODUCT_COMMENTS_HEIGHT = CGFloat(50)
+    static let MORE_PRODUCT_CELL_HEIGHT = CGFloat(100)
     static let SELLER_FEED_ITEM_DETAILS_HEIGHT = CGFloat(70)
     static let USER_ACTIVITY_DEFAULT_HEIGHT = CGFloat(70.0)
     static let USER_ACTIVITY_SIDE_MARGIN = CGFloat(100.0)
@@ -57,6 +58,8 @@ struct Constants {
     static let MESSAGE_LOAD_MORE_BTN_HEIGHT = CGFloat(0)
     static let IMAGE_RESIZE_DIMENSION = CGFloat(640)
     static let NO_ITEM_TIP_TEXT_CELL_HEIGHT = CGFloat(70)
+    static let MORE_PRODUCT_WIDTH = CGFloat(80)
+    static let MORE_PRODUCT_HEIGHT = CGFloat(80)
     
     // strings
     static let ACTIVITY_FIRST_POST = NSLocalizedString("activity_now_seller", comment: "") //"You are now a BeautyPop seller! Your first product has been listed:\n"

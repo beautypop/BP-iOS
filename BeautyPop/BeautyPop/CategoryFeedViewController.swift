@@ -137,7 +137,7 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
                 })
                 
                 let gradientLayer = CAGradientLayer()
-                gradientLayer.frame = cell.bounds
+                gradientLayer.frame = cell.categoryIcon.bounds
                 gradientLayer.locations = [0.0, 1.0]
                 
                 gradientLayer.colors = [
