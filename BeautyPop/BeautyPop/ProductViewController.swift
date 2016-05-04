@@ -39,7 +39,6 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
     
     var productInfo: PostVM?
     var comments: [CommentVM] = []
-    var category: CategoryVM?
     var customDate: NSDate = NSDate()
     
     var collectionView: UICollectionView!

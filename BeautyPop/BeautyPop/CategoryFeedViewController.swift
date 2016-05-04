@@ -70,6 +70,7 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
         
         uiCollectionView.collectionViewLayout = FeedViewAdapter.getFeedViewFlowLayout(self)
         
+        /*
         let sellBtn: UIButton = UIButton()
         sellBtn.setImage(UIImage(named: "btn_sell"), forState: UIControlState.Normal)
         sellBtn.addTarget(self, action: "onClickSellBtn:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -77,6 +78,7 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
         let sellBarBtn = UIBarButtonItem(customView: sellBtn)
         
         self.navigationItem.rightBarButtonItems = [sellBarBtn]
+        */
         
         self.uiCollectionView!.alwaysBounceVertical = true
         self.uiCollectionView!.backgroundColor = Color.FEED_BG
@@ -169,9 +171,7 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
             productViewController =  self.storyboard!.instantiateViewControllerWithIdentifier("ProductViewController") as? ProductViewController
             let feedItem = feedLoader!.getItem(indexPath.row)
             productViewController!.feedItem = feedItem
-            productViewController!.category = self.selCategory
             self.currentIndex = indexPath
-            ViewUtil.resetBackButton(self.navigationItem)
             self.navigationController?.pushViewController(productViewController!, animated: true)
         }
     }
@@ -338,8 +338,7 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
     
     func onClickSellBtn(sender: AnyObject?) {
         let vController = self.storyboard?.instantiateViewControllerWithIdentifier("NewProductViewController") as! NewProductViewController
-        vController.selCategoryId = Int((selCategory?.id)!)
-        ViewUtil.resetBackButton(self.navigationItem)
+        //vController.selCategoryId = Int((selCategory?.id)!)
         self.navigationController?.pushViewController(vController, animated: true)
     }
     
