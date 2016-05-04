@@ -28,8 +28,6 @@ class DetailsTableViewCell: UITableViewCell {
     @IBOutlet weak var postedUserImg: UIImageView!
     @IBOutlet weak var ownerLastLogin: UILabel!
     
-    @IBOutlet weak var deletePostBtn: UIButton!
-    @IBOutlet weak var viewBtnIns: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

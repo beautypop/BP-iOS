@@ -28,7 +28,6 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
     @IBOutlet weak var likeImgBtn: UIButton!
     @IBOutlet weak var likeCountTxt: UIButton!
     @IBOutlet weak var detailTableView: UITableView!
-    @IBOutlet weak var activeText: UITextField!
     
     var moreCommentUpdated: Bool = false
     
