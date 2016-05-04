@@ -1121,8 +1121,8 @@
                                                                     <constraint firstAttribute="width" constant="80" id="QDP-1S-W8a"/>
                                                                 </constraints>
                                                             </imageView>
-                                                            <label clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aum-oF-k8m" userLabel="CategoryName">
-                                                                <rect key="frame" x="0.0" y="47" width="80" height="30"/>
+                                                            <label clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aum-oF-k8m" userLabel="CategoryName">
+                                                                <rect key="frame" x="0.0" y="55" width="80" height="30"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <accessibility key="accessibilityConfiguration">
                                                                     <accessibilityTraits key="traits" staticText="YES" notEnabled="YES"/>
@@ -5135,7 +5135,7 @@
                                                         <constraint firstAttribute="trailing" secondItem="893-T2-3eY" secondAttribute="trailing" constant="15" id="E1w-jy-Zkg"/>
                                                         <constraint firstItem="FVP-dT-c97" firstAttribute="top" secondItem="ewg-51-Bc5" secondAttribute="top" constant="12" id="EMB-wa-HXa"/>
                                                         <constraint firstItem="FVP-dT-c97" firstAttribute="leading" secondItem="ewg-51-Bc5" secondAttribute="leading" constant="10" id="T2O-wb-afY"/>
-                                                        <constraint firstItem="v8T-U2-LOB" firstAttribute="leading" secondItem="FVP-dT-c97" secondAttribute="trailing" constant="5" id="WDQ-1m-NcN"/>
+                                                        <constraint firstItem="v8T-U2-LOB" firstAttribute="leading" secondItem="FVP-dT-c97" secondAttribute="trailing" constant="4" id="WDQ-1m-NcN"/>
                                                         <constraint firstItem="893-T2-3eY" firstAttribute="centerY" secondItem="v8T-U2-LOB" secondAttribute="centerY" id="c6f-fq-Vav"/>
                                                         <constraint firstAttribute="bottom" secondItem="z9r-Cx-ob2" secondAttribute="bottom" constant="3" id="k0B-X3-XDd"/>
                                                         <constraint firstItem="z9r-Cx-ob2" firstAttribute="leading" secondItem="ewg-51-Bc5" secondAttribute="leading" id="m0k-Fu-zjr"/>
@@ -5147,10 +5147,10 @@
                                             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                         </tableViewCellContentView>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="ewg-51-Bc5" secondAttribute="bottom" id="MNQ-kV-M9s"/>
+                                            <constraint firstAttribute="bottom" secondItem="ewg-51-Bc5" secondAttribute="bottom" constant="-7" id="MNQ-kV-M9s"/>
                                             <constraint firstItem="ewg-51-Bc5" firstAttribute="leading" secondItem="ykO-7V-s7d" secondAttribute="leading" constant="10" id="ZXJ-dw-UZ3"/>
                                             <constraint firstAttribute="trailing" secondItem="ewg-51-Bc5" secondAttribute="trailing" constant="10" id="gt2-vp-gpH"/>
-                                            <constraint firstItem="ewg-51-Bc5" firstAttribute="top" secondItem="ykO-7V-s7d" secondAttribute="top" id="nPk-QJ-Pva"/>
+                                            <constraint firstItem="ewg-51-Bc5" firstAttribute="top" secondItem="ykO-7V-s7d" secondAttribute="top" constant="7" id="nPk-QJ-Pva"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="commentsCount" destination="FVP-dT-c97" id="cM8-5y-mdf"/>
