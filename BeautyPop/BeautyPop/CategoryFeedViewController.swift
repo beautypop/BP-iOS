@@ -129,7 +129,7 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
                 cell.categoryName.numberOfLines = 0
                 cell.categoryName.sizeToFit()
                 cell.categoryName.textAlignment = .Center
-                let imagePath = self.selCategory?.subCategories![indexPath.row].icon //(self.selCategory?.icon)!
+                let imagePath = self.selCategory?.subCategories![indexPath.row].icon
                 let imageUrl  = NSURL(string: imagePath!)
                 
                 dispatch_async(dispatch_get_main_queue(), {
@@ -137,12 +137,12 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
                 })
                 
                 let gradientLayer = CAGradientLayer()
-                gradientLayer.frame = cell.categoryIcon.bounds
+                gradientLayer.frame = cell.bounds
                 gradientLayer.locations = [0.0, 1.0]
                 
                 gradientLayer.colors = [
                     UIColor(white: 0, alpha: 0.0).CGColor,
-                    UIColor(white: 0, alpha: 0.4).CGColor,
+                    UIColor(white: 0, alpha: 0.6).CGColor,
                     Color.LIGHT_GRAY.CGColor
                 ]
                 cell.categoryIcon.layer.sublayers = nil
@@ -239,7 +239,7 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
             if selCategory?.subCategories != nil && selCategory?.subCategories?.count > 0 {
                 let availableWidthForCells: CGFloat = self.view.bounds.width - Constants.CATEGORY_HEADER_ITEMS_MARGIN_TOTAL
                 
-                var noOfRows = ((selCategory?.subCategories?.count)! / Constants.CATEGORY_HEADER_SUBCATEGORY_SELECTOR_COLUMNS)
+                var noOfRows = (selCategory?.subCategories?.count)! / Constants.CATEGORY_HEADER_SUBCATEGORY_SELECTOR_COLUMNS
                 if (selCategory?.subCategories?.count)! % Constants.CATEGORY_HEADER_SUBCATEGORY_SELECTOR_COLUMNS > 0 {
                     noOfRows = noOfRows + 1
                 }
