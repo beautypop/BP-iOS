@@ -355,7 +355,7 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
         let cell = view.superview?.superview as! UserFeedHeaderViewCell
         
         if (self.userInfo!.isFollowing) {
-            ApiController.instance.unfollowUser((self.userInfo!.id))
+            ApiController.instance.unfollowUser(self.userInfo!.id)
             self.userInfo!.isFollowing = false
             cell.editProfile.setTitle(NSLocalizedString("follow_txt", comment: ""), forState: UIControlState.Normal)
             ViewUtil.displayRoundedCornerView(cell.editProfile, bgColor: Color.LIGHT_PINK)

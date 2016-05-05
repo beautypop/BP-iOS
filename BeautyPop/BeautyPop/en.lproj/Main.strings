@@ -431,8 +431,8 @@
 /* Class = "UIButton"; normalTitle = "Accept"; ObjectID = "l2b-7u-Aio"; */
 "l2b-7u-Aio.normalTitle" = "Accept";
 
-/* Class = "UIButton"; normalTitle = "Post"; ObjectID = "l9q-W5-jbB"; */
-"l9q-W5-jbB.normalTitle" = "Post";
+/* Class = "UIButton"; normalTitle = "Send"; ObjectID = "l9q-W5-jbB"; */
+"l9q-W5-jbB.normalTitle" = "Send";
 
 /* Class = "UIButton"; normalTitle = "-Select-"; ObjectID = "mG2-ZN-k9U"; */
 "mG2-ZN-k9U.normalTitle" = "-Select-";

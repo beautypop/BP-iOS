@@ -177,8 +177,16 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
             switch indexPath.section {
             case 0:
                 if self.productInfo != nil {
+                    if self.productInfo!.isFollowingOwner {
+                        cell.followBtn.setTitle(NSLocalizedString("following_txt", comment: ""), forState: UIControlState.Normal)
+                        ViewUtil.displayRoundedCornerView(cell.followBtn, bgColor: Color.LIGHT_GRAY)
+                    } else {
+                        cell.followBtn.setTitle(NSLocalizedString("follow_txt", comment: ""), forState: UIControlState.Normal)
+                        ViewUtil.displayRoundedCornerView(cell.followBtn, bgColor: Color.LIGHT_PINK)
+                    }
+                    
                     cell.followersCount.text = String(self.productInfo!.ownerNumFollowers)
-                    cell.noOfProducts.text = String(self.productInfo!.ownerNumProducts)
+                    cell.productsCount.text = String(self.productInfo!.ownerNumProducts)
                     
                     cell.postTitle.text = self.productInfo!.ownerName
                     cell.postedUserImg.image = UIImage(named: "")
@@ -344,6 +352,7 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
         for comment in self.productInfo!.latestComments {
             self.comments.append(comment)
         }
+        
         self.initLikeUnlike()
         self.detailTableView.reloadData()
         self.processButtonsVisibility()
@@ -583,6 +592,24 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
     
     func onClickFacebookLinkBtn(sender: AnyObject?) {
         SharingUtil.shareToFacebook(self.productInfo!, vController: self)
+    }
+    
+    @IBAction func onClickFollowUnfollow(sender: AnyObject) {
+        let button = sender as! UIButton
+        let view = button.superview!
+        let cell = view.superview as! DetailsTableViewCell
+        
+        if (self.productInfo!.isFollowingOwner) {
+            ApiController.instance.unfollowUser(self.productInfo!.ownerId)
+            self.productInfo!.isFollowingOwner = false
+            cell.followBtn.setTitle(NSLocalizedString("follow_txt", comment: ""), forState: UIControlState.Normal)
+            ViewUtil.displayRoundedCornerView(cell.followBtn, bgColor: Color.LIGHT_PINK)
+        } else {
+            ApiController.instance.followUser(self.productInfo!.ownerId)
+            self.productInfo!.isFollowingOwner = true
+            cell.followBtn.setTitle(NSLocalizedString("following_txt", comment: ""), forState: UIControlState.Normal)
+            ViewUtil.displayRoundedCornerView(cell.followBtn, bgColor: Color.LIGHT_GRAY)
+        }
     }
  
     @IBAction func onClickMoreComments(sender: AnyObject) {
