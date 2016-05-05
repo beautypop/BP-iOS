@@ -13,7 +13,7 @@ struct Constants {
     
     static let BASE_URL = "http://119.81.228.91"
     static let BASE_IMAGE_URL = "http://119.81.228.91"
-
+    
     static let DEEP_LINK_URL_SCHEME = "beautypop://"
     
     static let DEVICE_TYPE = "IOS";
@@ -38,7 +38,7 @@ struct Constants {
     static let HOME_HEADER_ITEMS_MARGIN_TOTAL = CGFloat(12)         // 3 each x 4
     static let CATEGORY_HEADER_ITEMS_MARGIN_TOTAL = CGFloat(15)     // 3 each x 5
     static let CATEGORY_HEADER_SUBCATEGORY_SELECTOR_COLUMNS = 4
-    static let CATEGORY_HEADER_SUBCATEGORY_SELECTOR_EXTRA_MARGIN = CGFloat(50)
+    static let CATEGORY_HEADER_SUBCATEGORY_SELECTOR_EXTRA_HEIGHT = CGFloat(50)
     static let CATEGORY_HEADER_HEIGHT = CGFloat(150)
     static let PROFILE_HEADER_HEIGHT = CGFloat(190)
     static let FEED_COLUMNS = 2
@@ -47,9 +47,9 @@ struct Constants {
     static let FEED_ITEM_LINE_SPACING = CGFloat(10)
     static let FEED_ITEM_DETAILS_HEIGHT = CGFloat(50)
     static let PRODUCT_INFO_HEIGHT = CGFloat(258)
-    static let PRODUCT_SELLER_HEIGHT = CGFloat(80)
+    static let PRODUCT_SELLER_HEIGHT = CGFloat(75)
     static let PRODUCT_COMMENTS_HEIGHT = CGFloat(50)
-    static let MORE_PRODUCT_CELL_HEIGHT = CGFloat(100)
+    static let PRODUCT_MORE_PRODUCTS_HEIGHT = CGFloat(150)
     static let SELLER_FEED_ITEM_DETAILS_HEIGHT = CGFloat(70)
     static let USER_ACTIVITY_DEFAULT_HEIGHT = CGFloat(70.0)
     static let USER_ACTIVITY_SIDE_MARGIN = CGFloat(100.0)
@@ -58,8 +58,8 @@ struct Constants {
     static let MESSAGE_LOAD_MORE_BTN_HEIGHT = CGFloat(0)
     static let IMAGE_RESIZE_DIMENSION = CGFloat(640)
     static let NO_ITEM_TIP_TEXT_CELL_HEIGHT = CGFloat(70)
-    static let MORE_PRODUCT_WIDTH = CGFloat(80)
-    static let MORE_PRODUCT_HEIGHT = CGFloat(80)
+    static let MORE_PRODUCTS_DIMENSION = CGFloat(100)
+    static let MORE_PRODUCTS_EXTRA_HEIGHT = CGFloat(35)
     
     // strings
     static let ACTIVITY_FIRST_POST = NSLocalizedString("activity_now_seller", comment: "") //"You are now a BeautyPop seller! Your first product has been listed:\n"

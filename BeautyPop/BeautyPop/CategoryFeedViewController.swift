@@ -244,9 +244,9 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
                     noOfRows = noOfRows + 1
                 }
                 let imageHt = Int(availableWidthForCells / Constants.CATEGORY_HEADER_SUBCATEGORY_SELECTOR_COLUMNS) * noOfRows
-                return CGSizeMake(self.view.frame.width, CGFloat(imageHt) + Constants.CATEGORY_HEADER_SUBCATEGORY_SELECTOR_EXTRA_MARGIN)
+                return CGSizeMake(self.view.frame.width, CGFloat(imageHt) + Constants.CATEGORY_HEADER_SUBCATEGORY_SELECTOR_EXTRA_HEIGHT)
             } else {
-                return CGSizeMake(self.view.frame.width, Constants.CATEGORY_HEADER_SUBCATEGORY_SELECTOR_EXTRA_MARGIN)
+                return CGSizeMake(self.view.frame.width, Constants.CATEGORY_HEADER_SUBCATEGORY_SELECTOR_EXTRA_HEIGHT)
             }
         }
     }

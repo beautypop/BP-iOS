@@ -81,6 +81,17 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
         }
     }
 
+    override func viewWillAppear(animated: Bool) {
+        //self.navigationController?.interactivePopGestureRecognizer?.enabled = false
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        //self.navigationController?.interactivePopGestureRecognizer?.enabled = true
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -284,7 +295,7 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
             // comments
             return Constants.PRODUCT_COMMENTS_HEIGHT
         case 5:
-            return Constants.MORE_PRODUCT_CELL_HEIGHT
+            return Constants.PRODUCT_MORE_PRODUCTS_HEIGHT
         default:
             return UITableViewAutomaticDimension
         }
@@ -380,7 +391,7 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
         
         if self.moreProductsCollectionView != nil && moreProductsCollectionView == collectionView {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("moreProductCell", forIndexPath: indexPath) as! ImageCollectionViewCell
-            ImageUtil.displayPostImage(self.moreProducts[indexPath.row].id, imageView: cell.imageView)
+            ImageUtil.displayPostImage(self.moreProducts[indexPath.row].images[0], imageView: cell.imageView)
             return cell
         } else {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("hcell", forIndexPath: indexPath) as! ImageCollectionViewCell
@@ -396,7 +407,7 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         if self.moreProductsCollectionView != nil && moreProductsCollectionView == collectionView {
-            return CGSizeMake(Constants.MORE_PRODUCT_WIDTH, Constants.MORE_PRODUCT_HEIGHT)
+            return CGSizeMake(Constants.MORE_PRODUCTS_DIMENSION, Constants.MORE_PRODUCTS_DIMENSION)
         }
         return CGSize(width: self.view.frame.size.width, height: self.view.frame.size.width)
     }
@@ -410,7 +421,6 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
             vController.hidesBottomBarWhenPushed = true
             ViewUtil.resetBackButton(self.navigationItem)
             self.navigationController?.pushViewController(vController, animated: true)
-            
         } else {
             let tCell = collectionView.cellForItemAtIndexPath(indexPath) as? ImageCollectionViewCell
             let imageUrl = ImageUtil.getProductImageUrl(self.images[indexPath.row])
