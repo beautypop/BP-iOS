@@ -132,12 +132,18 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
             if self.userInfo != nil {
                 initUserDetails(cell)
                 
-                if self.userInfo!.isFollowing {
-                    cell.editProfile.setTitle(NSLocalizedString("following_txt", comment: ""), forState: UIControlState.Normal)
-                    ViewUtil.displayRoundedCornerView(cell.editProfile, bgColor: Color.LIGHT_GRAY)
+                if self.userInfo!.id == UserInfoCache.getUser()!.id {
+                    cell.editProfile.hidden = true
                 } else {
-                    cell.editProfile.setTitle(NSLocalizedString("follow_txt", comment: ""), forState: UIControlState.Normal)
-                    ViewUtil.displayRoundedCornerView(cell.editProfile, bgColor: Color.LIGHT_PINK)
+                    cell.editProfile.hidden = false
+                    
+                    if self.userInfo!.isFollowing {
+                        cell.editProfile.setTitle(NSLocalizedString("following_txt", comment: ""), forState: UIControlState.Normal)
+                        ViewUtil.displayRoundedCornerView(cell.editProfile, bgColor: Color.LIGHT_GRAY)
+                    } else {
+                        cell.editProfile.setTitle(NSLocalizedString("follow_txt", comment: ""), forState: UIControlState.Normal)
+                        ViewUtil.displayRoundedCornerView(cell.editProfile, bgColor: Color.LIGHT_PINK)
+                    }
                 }
             }
             

@@ -85,10 +85,16 @@ class RecommendedSellerViewController: UIViewController {
         ImageUtil.displayThumbnailProfileImage(self.recommendedSellers[indexPath.row].id, imageView: cell.sellerImg)
         
         // follow
-        if item.isFollowing {
-            ViewUtil.selectFollowButtonStyleLite(cell.followBtn)
+        if item.id == UserInfoCache.getUser()!.id {
+            cell.followBtn.hidden = true
         } else {
-            ViewUtil.unselectFollowButtonStyleLite(cell.followBtn)
+            cell.followBtn.hidden = false
+            
+            if item.isFollowing {
+                ViewUtil.selectFollowButtonStyleLite(cell.followBtn)
+            } else {
+                ViewUtil.unselectFollowButtonStyleLite(cell.followBtn)
+            }
         }
         
         self.setSizesFoProdImgs(cell)
@@ -114,13 +120,7 @@ class RecommendedSellerViewController: UIViewController {
                 cell.moreText.hidden = true
             }
         }
-        
-        if UserInfoCache.getUser()!.id == item.id {
-            cell.followBtn.hidden = true
-        } else {
-            cell.followBtn.hidden = false
-        }
-        
+
         cell.layer.cornerRadius = Constants.DEFAULT_CORNER_RADIUS
         cell.layer.masksToBounds = true
         cell.layer.borderColor = Color.LIGHT_GRAY.CGColor
