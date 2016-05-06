@@ -148,26 +148,10 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
                 setSizesForFilterButtons(cell)
             }
             
-            cell.displayName.text = self.userInfo?.displayName
-            cell.profileDescription.numberOfLines = 3
-            cell.profileDescription.text = self.userInfo?.aboutMe
-            cell.profileDescription.sizeToFit()
-            if cell.userImg.image == nil {
-                ImageUtil.displayMyThumbnailProfileImage(self.userInfo!.id, imageView: cell.userImg)
+            if self.userInfo != nil {
+                initUserDetails(cell)
             }
             
-            if self.userInfo!.numFollowers > 0 {
-                cell.followersBtn.setTitle("Followers " + String(self.userInfo!.numFollowers), forState:UIControlState.Normal)
-            } else {
-                cell.followersBtn.setTitle("Followers", forState: UIControlState.Normal)
-            }
-                
-            if self.userInfo!.numFollowings > 0 {
-                cell.followingBtn.setTitle("Following " + String(self.userInfo!.numFollowings), forState: UIControlState.Normal)
-            } else {
-                cell.followingBtn.setTitle("Following", forState: UIControlState.Normal)
-            }
-
             return cell
         } else {
             let feedItem = self.getFeedItems()[indexPath.row]

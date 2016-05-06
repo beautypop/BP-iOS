@@ -89,4 +89,28 @@ class BaseProfileFeedViewController: CustomNavigationController {
         }
         return []
     }
+    
+    func initUserDetails(cell: UserFeedHeaderViewCell) {
+        cell.displayName.text = self.userInfo?.name
+        
+        cell.profileDescription.numberOfLines = 3
+        cell.profileDescription.text = self.userInfo?.aboutMe
+        cell.profileDescription.sizeToFit()
+        
+        if cell.userImg.image == nil {
+            ImageUtil.displayThumbnailProfileImage(self.userInfo!.id, imageView: cell.userImg)
+        }
+        
+        if self.userInfo!.numFollowers > 0 {
+            cell.followersBtn.setTitle(NSLocalizedString("followers_txt", comment: "") + String(self.userInfo!.numFollowers), forState: UIControlState.Normal)
+        } else {
+            cell.followersBtn.setTitle(NSLocalizedString("followers_txt", comment: "") + "0", forState: UIControlState.Normal)
+        }
+        
+        if self.userInfo!.numFollowings > 0 {
+            cell.followingBtn.setTitle(NSLocalizedString("following_txt", comment: "") + String(self.userInfo!.numFollowings), forState: UIControlState.Normal)
+        } else {
+            cell.followingBtn.setTitle(NSLocalizedString("following_txt", comment: "") + "0", forState: UIControlState.Normal)
+        }
+    }
 }

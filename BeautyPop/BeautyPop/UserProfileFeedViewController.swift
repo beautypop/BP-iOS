@@ -130,23 +130,7 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
             }
             
             if self.userInfo != nil {
-                cell.displayName.text = self.userInfo?.displayName
-                
-                if cell.userImg.image == nil {
-                    ImageUtil.displayThumbnailProfileImage(self.userInfo!.id, imageView: cell.userImg)
-                }
-                
-                if self.userInfo!.numFollowers > 0 {
-                    cell.followersBtn.setTitle(NSLocalizedString("followers_txt", comment: "") + String(self.userInfo!.numFollowers), forState: UIControlState.Normal)
-                } else {
-                    cell.followersBtn.setTitle(NSLocalizedString("followers_txt", comment: ""), forState: UIControlState.Normal)
-                }
-                
-                if self.userInfo!.numFollowings > 0 {
-                    cell.followingBtn.setTitle(NSLocalizedString("following_txt", comment: "") + String(self.userInfo!.numFollowings), forState: UIControlState.Normal)
-                } else {
-                    cell.followingBtn.setTitle(NSLocalizedString("following_txt", comment: ""), forState: UIControlState.Normal)
-                }
+                initUserDetails(cell)
                 
                 if self.userInfo!.isFollowing {
                     cell.editProfile.setTitle(NSLocalizedString("following_txt", comment: ""), forState: UIControlState.Normal)
@@ -155,10 +139,6 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
                     cell.editProfile.setTitle(NSLocalizedString("follow_txt", comment: ""), forState: UIControlState.Normal)
                     ViewUtil.displayRoundedCornerView(cell.editProfile, bgColor: Color.LIGHT_PINK)
                 }
-                
-                cell.profileDescription.numberOfLines = 3
-                cell.profileDescription.text = self.userInfo?.aboutMe
-                cell.profileDescription.sizeToFit()
             }
             
             return cell
