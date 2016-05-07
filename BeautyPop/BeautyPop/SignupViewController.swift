@@ -34,14 +34,7 @@ class SignupViewController: BaseLoginViewController {
     }
    
     override func viewDidLoad() {
-
         ViewUtil.displayRoundedCornerView(self.signUpBtn, bgColor: Color.LIGHT_PINK)
-        
-        self.privacyBtn.layer.borderWidth = 1.0
-        self.privacyBtn.layer.borderColor = Color.DARK_GRAY.CGColor
-        
-        self.termsBtn.layer.borderWidth = 1.0
-        self.termsBtn.layer.borderColor = Color.DARK_GRAY.CGColor
     }
     
     @IBAction func onSignUp(sender: UIButton) {

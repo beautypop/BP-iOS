@@ -6465,40 +6465,30 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IkR-lz-Cb5" userLabel="Privacy Btn">
                                 <rect key="frame" x="55" y="444" width="25" height="25"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="25" id="D3a-i8-v7h"/>
                                     <constraint firstAttribute="height" constant="25" id="Lxu-kr-U4w"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal" image="ic_accept">
-                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </state>
+                                <state key="normal" image="ic_accept"/>
                                 <connections>
                                     <action selector="onClickPrivacyCheckbox:" destination="aC0-aF-LDK" eventType="touchUpInside" id="1xd-UL-clf"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VhO-Sn-9vk" userLabel="Terms Btn">
-                                <rect key="frame" x="281" y="444" width="25" height="25"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VhO-Sn-9vk" userLabel="Terms Btn">
+                                <rect key="frame" x="282" y="444" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="2Ph-ws-50r"/>
                                     <constraint firstAttribute="width" constant="25" id="7s4-S9-fay"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Button" image="ic_accept">
-                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                                <state key="normal" image="ic_accept"/>
                                 <connections>
                                     <action selector="onClickTermsCheckbox:" destination="aC0-aF-LDK" eventType="touchUpInside" id="7X6-G1-eaD"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Hn-HX-tza">
-                                <rect key="frame" x="314" y="444" width="80" height="25"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Hn-HX-tza">
+                                <rect key="frame" x="315" y="444" width="44" height="25"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="Agk-LM-Ypy"/>
@@ -6508,12 +6498,17 @@
                                 <state key="normal" title="Terms">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Tcb-Qx-wN5"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <segue destination="oSP-LP-0fx" kind="show" identifier="terms" id="h7o-0V-p0S"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uog-9j-I29">
-                                <rect key="frame" x="88" y="444" width="80" height="25"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uog-9j-I29">
+                                <rect key="frame" x="88" y="444" width="51" height="25"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="7HV-Sf-lre"/>
@@ -6523,6 +6518,11 @@
                                 <state key="normal" title="Privacy">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="7HV-Sf-lre"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <segue destination="oSP-LP-0fx" kind="show" identifier="privacy" id="1Pa-89-nNo"/>
                                 </connections>
@@ -6554,6 +6554,7 @@
                             <constraint firstItem="LM5-to-7RV" firstAttribute="trailing" secondItem="C0p-5S-sY8" secondAttribute="trailing" id="BXY-Xr-SdH"/>
                             <constraint firstItem="Yn9-y8-CRQ" firstAttribute="baseline" secondItem="doq-we-jTp" secondAttribute="baseline" id="Dfp-Bg-Id1"/>
                             <constraint firstItem="fkv-Kn-f8H" firstAttribute="width" secondItem="Qtx-K0-rVK" secondAttribute="width" id="Dp2-sp-lpY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9Hn-HX-tza" secondAttribute="trailing" constant="35" id="E03-2J-fyl"/>
                             <constraint firstItem="zH0-jh-xNt" firstAttribute="top" secondItem="Chp-t4-2vn" secondAttribute="bottom" constant="15" id="F2z-c8-8HD"/>
                             <constraint firstItem="Chp-t4-2vn" firstAttribute="top" secondItem="uSZ-kp-O68" secondAttribute="bottom" constant="53" id="FSl-xS-Ipf"/>
                             <constraint firstItem="Yn9-y8-CRQ" firstAttribute="centerY" secondItem="doq-we-jTp" secondAttribute="centerY" id="Gvo-gK-cAo"/>
@@ -6663,6 +6664,7 @@
                                 <exclude reference="UFZ-3b-KA8"/>
                                 <exclude reference="VEA-xc-vMr"/>
                                 <exclude reference="nhV-No-CgD"/>
+                                <exclude reference="VJK-fb-Wte"/>
                                 <exclude reference="xxk-zr-Opf"/>
                                 <exclude reference="PSG-Ta-ged"/>
                             </mask>
