@@ -92,6 +92,7 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
         super.viewDidLoad()
         
         feedViewAdapter = FeedViewAdapter(collectionView: uiCollectionView)
+        feedViewAdapter?.feedViewItemsLayout = FeedViewAdapter.FeedViewItemsLayout.TWO_COLUMNS
         
         setUserInfo(UserInfoCache.getUser())
         
@@ -104,7 +105,7 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
         setCollectionViewSizesInsets()
         setCollectionViewSizesInsetsForTopView()
         
-        self.uiCollectionView.collectionViewLayout = FeedViewAdapter.getFeedViewFlowLayout(self)
+        self.uiCollectionView.collectionViewLayout = feedViewAdapter!.getFeedViewFlowLayout(self)
         
         self.uiCollectionView!.alwaysBounceVertical = true
         self.uiCollectionView!.backgroundColor = Color.FEED_BG
@@ -281,7 +282,7 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
     }
     
     func setCollectionViewSizesInsets() {
-        collectionViewCellSize = FeedViewAdapter.getFeedItemCellSize(self.view.bounds.width)
+        collectionViewCellSize = self.feedViewAdapter!.getFeedItemCellSize(self.view.bounds.width)
     }
     
     @IBAction func onLikeBtnClick(sender: AnyObject) {

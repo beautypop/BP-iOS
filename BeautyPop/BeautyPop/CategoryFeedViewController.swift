@@ -68,7 +68,7 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
         setCollectionViewSizesInsets()
         setCollectionViewSizesInsetsForTopView()
         
-        uiCollectionView.collectionViewLayout = FeedViewAdapter.getFeedViewFlowLayout(self)
+        uiCollectionView.collectionViewLayout = feedViewAdapter!.getFeedViewFlowLayout(self)
         
         /*
         let sellBtn: UIButton = UIButton()
@@ -288,7 +288,7 @@ class CategoryFeedViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func setCollectionViewSizesInsets() {
-        collectionViewCellSize = FeedViewAdapter.getFeedItemCellSize(self.view.bounds.width)
+        collectionViewCellSize = self.feedViewAdapter!.getFeedItemCellSize(self.view.bounds.width)
     }
     
     @IBAction func onLikeBtnClick(sender: AnyObject) {

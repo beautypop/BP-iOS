@@ -10,6 +10,17 @@ import UIKit
 
 class FeedViewAdapter {
 
+    enum FeedViewItemsLayout {
+        case TWO_COLUMNS
+        case THREE_COLUMNS
+        
+        init() {
+            self = .THREE_COLUMNS
+        }
+    }
+    
+    var feedViewItemsLayout = FeedViewItemsLayout.THREE_COLUMNS
+    
     var collectionView: UICollectionView
     
     init(collectionView: UICollectionView) {
@@ -22,7 +33,7 @@ class FeedViewAdapter {
     
     func bindViewCell(cell: FeedProductCollectionViewCell, feedItem: PostVMLite, index: Int, showOwner: Bool) -> FeedProductCollectionViewCell {
         
-        cell.title.font = UIFont.systemFontOfSize(14)
+        cell.title.font = UIFont.systemFontOfSize(12)
         cell.title.textColor = Color.DARK_GRAY
         cell.title.text = feedItem.title
         
@@ -38,7 +49,7 @@ class FeedViewAdapter {
         cell.likeCount.minimumScaleFactor = 0.01
         cell.likeCount.adjustsFontSizeToFitWidth = true
         cell.likeCount.lineBreakMode = NSLineBreakMode.ByClipping
-        cell.likeCount.font = UIFont.systemFontOfSize(14, weight: UIFontWeightLight)
+        cell.likeCount.font = UIFont.systemFontOfSize(12, weight: UIFontWeightLight)
         cell.likeCount.text = String(feedItem.numLikes)
         cell.likeCount.sizeToFit()
 
@@ -52,7 +63,7 @@ class FeedViewAdapter {
         }
 
         // price
-        cell.productPrice.font = UIFont.systemFontOfSize(14)
+        cell.productPrice.font = UIFont.systemFontOfSize(12)
         cell.productPrice.text = "\(Constants.CURRENCY_SYMBOL)\(String(stringInterpolationSegment: Int(feedItem.price)))"
         if feedItem.originalPrice != 0 && feedItem.originalPrice != -1 && feedItem.originalPrice != Int(feedItem.price) {
             let attrString = NSAttributedString(string: "\(Constants.CURRENCY_SYMBOL)\(String(stringInterpolationSegment:Int(feedItem.originalPrice)))", attributes: [NSStrikethroughStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue])
@@ -92,29 +103,31 @@ class FeedViewAdapter {
         }
     }
     
-    static func getFeedItemCellSize(width: CGFloat) -> CGSize {
-        let availableWidthForCells: CGFloat = width - (Constants.FEED_ITEM_SIDE_SPACING * CGFloat(Constants.FEED_COLUMNS + 1))  // left middle right spacing
-        let cellWidth: CGFloat = availableWidthForCells / Constants.FEED_COLUMNS
-        let cellHeight = cellWidth + Constants.FEED_ITEM_DETAILS_HEIGHT
+    func getFeedItemCellSize(width: CGFloat) -> CGSize {
+        var sideSpacing = Constants.FEED_ITEM_3COL_SIDE_SPACING
+        var detailsHeight = Constants.FEED_ITEM_3COL_DETAILS_HEIGHT
+        if self.feedViewItemsLayout == FeedViewItemsLayout.TWO_COLUMNS {
+            sideSpacing = Constants.FEED_ITEM_2COL_SIDE_SPACING
+            detailsHeight = Constants.FEED_ITEM_2COL_DETAILS_HEIGHT
+        }
+        
+        let availableWidthForCells: CGFloat = width - (sideSpacing * CGFloat(getFeedColumns() + 1))  // left middle right spacing
+        let cellWidth: CGFloat = availableWidthForCells / getFeedColumns()
+        let cellHeight = cellWidth + detailsHeight
         return CGSizeMake(cellWidth, cellHeight)
     }
     
-    static func getFeedViewFlowLayout(viewController: UIViewController) -> UICollectionViewFlowLayout {
-        return getFeedViewFlowLayout(viewController, spacing: nil)
+    func getFeedViewFlowLayout(viewController: UIViewController) -> UICollectionViewFlowLayout {
+        return FeedViewAdapter.getFeedViewFlowLayout(viewController, spacing: getSideSpacing())
     }
     
-    static func getFeedViewFlowLayout(viewController: UIViewController, spacing: CGFloat?) -> UICollectionViewFlowLayout {
-        var _spacing = Constants.FEED_ITEM_SIDE_SPACING
-        if spacing != nil {
-            _spacing = spacing!
-        }
-        
+    static func getFeedViewFlowLayout(viewController: UIViewController, spacing: CGFloat) -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.itemSize = CGSizeMake(viewController.view.bounds.width, viewController.view.bounds.height)
         flowLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
-        flowLayout.minimumInteritemSpacing = _spacing
-        flowLayout.minimumLineSpacing = _spacing
-        flowLayout.sectionInset = UIEdgeInsetsMake(_spacing, _spacing, _spacing, _spacing)
+        flowLayout.minimumInteritemSpacing = spacing
+        flowLayout.minimumLineSpacing = spacing
+        flowLayout.sectionInset = UIEdgeInsetsMake(spacing, spacing, spacing, spacing)
         return flowLayout
     }
     
@@ -146,4 +159,43 @@ class FeedViewAdapter {
         return cell
     }
     
+    func getFeedColumns() -> Int {
+        switch self.feedViewItemsLayout {
+        case FeedViewItemsLayout.TWO_COLUMNS:
+            return 2
+        case FeedViewItemsLayout.THREE_COLUMNS: fallthrough
+        default:
+            return 3
+        }
+    }
+    
+    func getSideSpacing() -> CGFloat {
+        switch self.feedViewItemsLayout {
+        case FeedViewItemsLayout.TWO_COLUMNS:
+            return Constants.FEED_ITEM_2COL_SIDE_SPACING
+        case FeedViewItemsLayout.THREE_COLUMNS: fallthrough
+        default:
+            return Constants.FEED_ITEM_3COL_SIDE_SPACING
+        }
+    }
+    
+    func getLineSpacing() -> CGFloat {
+        switch self.feedViewItemsLayout {
+        case FeedViewItemsLayout.TWO_COLUMNS:
+            return Constants.FEED_ITEM_2COL_LINE_SPACING
+        case FeedViewItemsLayout.THREE_COLUMNS: fallthrough
+        default:
+            return Constants.FEED_ITEM_3COL_LINE_SPACING
+        }
+    }
+    
+    func getDetailsHeight() -> CGFloat {
+        switch self.feedViewItemsLayout {
+        case FeedViewItemsLayout.TWO_COLUMNS:
+            return Constants.FEED_ITEM_2COL_DETAILS_HEIGHT
+        case FeedViewItemsLayout.THREE_COLUMNS: fallthrough
+        default:
+            return Constants.FEED_ITEM_3COL_DETAILS_HEIGHT
+        }
+    }
 }

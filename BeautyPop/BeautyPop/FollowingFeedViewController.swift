@@ -60,7 +60,7 @@ class FollowingFeedViewController: UIViewController, UIScrollViewDelegate {
         
         setCollectionViewSizesInsets()
         
-        self.uiCollectionView.collectionViewLayout = FeedViewAdapter.getFeedViewFlowLayout(self)
+        self.uiCollectionView.collectionViewLayout = feedViewAdapter!.getFeedViewFlowLayout(self)
         
         self.uiCollectionView!.alwaysBounceVertical = true
         self.uiCollectionView!.backgroundColor = Color.FEED_BG
@@ -165,7 +165,7 @@ class FollowingFeedViewController: UIViewController, UIScrollViewDelegate {
     }*/
     
     func setCollectionViewSizesInsets() {
-        collectionViewCellSize = FeedViewAdapter.getFeedItemCellSize(self.view.bounds.width)
+        collectionViewCellSize = self.feedViewAdapter!.getFeedItemCellSize(self.view.bounds.width)
     }
     
     @IBAction func onLikeBtnClick(sender: AnyObject) {

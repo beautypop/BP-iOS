@@ -104,7 +104,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
         
         self.uiCollectionView.registerClass(HomeReusableView.self, forSupplementaryViewOfKind: "CategoryHeaderView", withReuseIdentifier: "HeaderView")
         
-        self.uiCollectionView.collectionViewLayout = FeedViewAdapter.getFeedViewFlowLayout(self)
+        self.uiCollectionView.collectionViewLayout = feedViewAdapter!.getFeedViewFlowLayout(self)
         
         self.uiCollectionView!.alwaysBounceVertical = true
         self.uiCollectionView!.backgroundColor = Color.FEED_BG
@@ -318,7 +318,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     }
     
     func setCollectionViewSizesInsets() {
-        collectionViewCellSize = FeedViewAdapter.getFeedItemCellSize(self.view.bounds.width)
+        collectionViewCellSize = self.feedViewAdapter!.getFeedItemCellSize(self.view.bounds.width)
     }
     
     @IBAction func onLikeBtnClick(sender: AnyObject) {
