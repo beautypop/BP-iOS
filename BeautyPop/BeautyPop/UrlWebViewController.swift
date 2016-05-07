@@ -9,11 +9,11 @@
 import UIKit
 import SwiftEventBus
 
-class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
-
-    static var FORGET_PASSWORD_URL: String = Constants.BASE_URL + "/login/password/forgot";
+class UrlWebViewController: UIViewController {
     
-    @IBOutlet weak var forgotPasswordWebView: UIWebView!
+    var url: String? = nil
+    
+    @IBOutlet weak var webView: UIWebView!
     
     override func viewWillAppear(animated: Bool) {
         self.navigationController?.navigationBarHidden = false
@@ -22,7 +22,11 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        forgotPasswordWebView.loadRequest(NSURLRequest(URL: NSURL(string: ForgotPasswordViewController.FORGET_PASSWORD_URL)!))
+        if url != nil {
+            webView.loadRequest(NSURLRequest(URL: NSURL(string: url!)!))
+        } else {
+            ViewUtil.makeToast("No Url to load", view: self.view)
+        }
     }
 
     override func didReceiveMemoryWarning() {

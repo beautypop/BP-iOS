@@ -48,15 +48,21 @@ class LoginViewController: BaseLoginViewController, UITextFieldDelegate {
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
-        if (identifier == "gotoforgotpassword") {
+        if (identifier == "forgotPassword") {
             return true
         } else if (identifier == "showSignupView") {
             return true
-        }
-        
+        }        
         return self.isUserLoggedIn        
     }
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "forgotPassword" {
+            let vController = segue.destinationViewController as! UrlWebViewController
+            vController.url = Constants.FORGET_PASSWORD_URL
+        }
+    }
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool { // called when 'return' key pressed. return NO to ignore.
         textField.resignFirstResponder()
         return true

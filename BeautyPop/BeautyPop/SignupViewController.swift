@@ -13,11 +13,11 @@ import FBSDKLoginKit
 
 class SignupViewController: BaseLoginViewController {
     
-    @IBOutlet weak var policyBtn: UIButton!
-    @IBOutlet weak var licenseBtn: UIButton!
+    @IBOutlet weak var privacyBtn: UIButton!
+    @IBOutlet weak var termsBtn: UIButton!
     
-    var isLicenseDisplay = true
-    var isPolicyDisplay = true
+    var isPrivacyDisplay = true
+    var isTermsDisplay = true
     var categories : [CategoryVM] = []
     var isValidForm: Bool = false
     
@@ -37,11 +37,11 @@ class SignupViewController: BaseLoginViewController {
 
         ViewUtil.displayRoundedCornerView(self.signUpBtn, bgColor: Color.LIGHT_PINK)
         
-        self.licenseBtn.layer.borderWidth = 1.0
-        self.licenseBtn.layer.borderColor = Color.DARK_GRAY.CGColor
+        self.privacyBtn.layer.borderWidth = 1.0
+        self.privacyBtn.layer.borderColor = Color.DARK_GRAY.CGColor
         
-        self.policyBtn.layer.borderWidth = 1.0
-        self.policyBtn.layer.borderColor = Color.DARK_GRAY.CGColor
+        self.termsBtn.layer.borderWidth = 1.0
+        self.termsBtn.layer.borderColor = Color.DARK_GRAY.CGColor
     }
     
     @IBAction func onSignUp(sender: UIButton) {
@@ -105,35 +105,41 @@ class SignupViewController: BaseLoginViewController {
     }
     
     @IBAction func onClickPrivacyCheckbox(sender: AnyObject) {
-        isLicenseDisplay = !isLicenseDisplay
-        if (isLicenseDisplay) {
-            //show another controller
-            self.licenseBtn.setImage(UIImage(named: "ic_accept"), forState: UIControlState.Normal)
-            let vController =  self.storyboard!.instantiateViewControllerWithIdentifier("LicenseViewController") as! LicenseViewController
-            self.navigationController?.pushViewController(vController, animated: true)
-            
+        if (isPrivacyDisplay) {
+            self.privacyBtn.setImage(UIImage(named: ""), forState: UIControlState.Normal)
         } else {
-            //change the image to show unselected.
-            self.licenseBtn.setImage(UIImage(named: ""), forState: UIControlState.Normal)
+            self.privacyBtn.setImage(UIImage(named: "ic_accept"), forState: UIControlState.Normal)
         }
+        isPrivacyDisplay = !isPrivacyDisplay
     }
     
     @IBAction func onClickTermsCheckbox(sender: UIButton) {
-        isPolicyDisplay = !isPolicyDisplay
-        if (isPolicyDisplay) {
-            //show another controller
-            self.policyBtn.setImage(UIImage(named: "ic_accept"), forState: UIControlState.Normal)
-            let vController =  self.storyboard!.instantiateViewControllerWithIdentifier("LicenseViewController") as! LicenseViewController
-            self.navigationController?.pushViewController(vController, animated: true)
+        if (isTermsDisplay) {
+            self.termsBtn.setImage(UIImage(named: ""), forState: UIControlState.Normal)
         } else {
-            //change the image to show unselected.
-            self.policyBtn.setImage(UIImage(named: ""), forState: UIControlState.Normal)
+            self.termsBtn.setImage(UIImage(named: "ic_accept"), forState: UIControlState.Normal)
         }
+        isTermsDisplay = !isTermsDisplay
     }
     
     //MARK Segue handling methods.
     
+    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+        if (identifier == "privacy") {
+            return true
+        } else if (identifier == "terms") {
+            return true
+        }
+        return false
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-      
+        if segue.identifier == "privacy" {
+            let vController = segue.destinationViewController as! UrlWebViewController
+            vController.url = Constants.PRIVACY_URL
+        } else if segue.identifier == "terms" {
+            let vController = segue.destinationViewController as! UrlWebViewController
+            vController.url = Constants.TERMS_URL
+        }
     }
 }
