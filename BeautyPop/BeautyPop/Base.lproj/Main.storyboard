@@ -6464,25 +6464,25 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IkR-lz-Cb5" userLabel="Privacy Btn">
-                                <rect key="frame" x="55" y="444" width="25" height="25"/>
+                                <rect key="frame" x="55" y="444" width="24" height="24"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="25" id="D3a-i8-v7h"/>
-                                    <constraint firstAttribute="height" constant="25" id="Lxu-kr-U4w"/>
+                                    <constraint firstAttribute="width" constant="24" id="D3a-i8-v7h"/>
+                                    <constraint firstAttribute="height" constant="24" id="Lxu-kr-U4w"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" image="ic_accept"/>
+                                <state key="normal" image="ic_check"/>
                                 <connections>
                                     <action selector="onClickPrivacyCheckbox:" destination="aC0-aF-LDK" eventType="touchUpInside" id="1xd-UL-clf"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VhO-Sn-9vk" userLabel="Terms Btn">
-                                <rect key="frame" x="282" y="444" width="25" height="25"/>
+                                <rect key="frame" x="283" y="444" width="24" height="24"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="2Ph-ws-50r"/>
-                                    <constraint firstAttribute="width" constant="25" id="7s4-S9-fay"/>
+                                    <constraint firstAttribute="height" constant="24" id="2Ph-ws-50r"/>
+                                    <constraint firstAttribute="width" constant="24" id="7s4-S9-fay"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" image="ic_accept"/>
+                                <state key="normal" image="ic_check"/>
                                 <connections>
                                     <action selector="onClickTermsCheckbox:" destination="aC0-aF-LDK" eventType="touchUpInside" id="7X6-G1-eaD"/>
                                 </connections>
@@ -6508,7 +6508,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uog-9j-I29">
-                                <rect key="frame" x="88" y="444" width="51" height="25"/>
+                                <rect key="frame" x="87" y="443.5" width="51" height="25"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="7HV-Sf-lre"/>
@@ -8046,10 +8046,10 @@
         <image name="arrow_next" width="60" height="60"/>
         <image name="dash_line" width="432" height="12"/>
         <image name="dollar" width="64" height="64"/>
-        <image name="ic_accept" width="24" height="24"/>
         <image name="ic_back_round" width="64" height="64"/>
         <image name="ic_bb_logo" width="64" height="64"/>
         <image name="ic_camera" width="64" height="64"/>
+        <image name="ic_check" width="64" height="64"/>
         <image name="ic_fb_logo" width="64" height="64"/>
         <image name="ic_like" width="85" height="85"/>
         <image name="ic_like_tips" width="85" height="85"/>

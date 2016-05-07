@@ -34,7 +34,14 @@ class SignupViewController: BaseLoginViewController {
     }
    
     override func viewDidLoad() {
+
         ViewUtil.displayRoundedCornerView(self.signUpBtn, bgColor: Color.LIGHT_PINK)
+        
+        self.privacyBtn.layer.borderWidth = 1.0
+        self.privacyBtn.layer.borderColor = Color.GRAY.CGColor
+        
+        self.termsBtn.layer.borderWidth = 1.0
+        self.termsBtn.layer.borderColor = Color.GRAY.CGColor
     }
     
     @IBAction func onSignUp(sender: UIButton) {
@@ -101,7 +108,7 @@ class SignupViewController: BaseLoginViewController {
         if (isPrivacyDisplay) {
             self.privacyBtn.setImage(UIImage(named: ""), forState: UIControlState.Normal)
         } else {
-            self.privacyBtn.setImage(UIImage(named: "ic_accept"), forState: UIControlState.Normal)
+            self.privacyBtn.setImage(UIImage(named: "ic_check"), forState: UIControlState.Normal)
         }
         isPrivacyDisplay = !isPrivacyDisplay
     }
@@ -110,7 +117,7 @@ class SignupViewController: BaseLoginViewController {
         if (isTermsDisplay) {
             self.termsBtn.setImage(UIImage(named: ""), forState: UIControlState.Normal)
         } else {
-            self.termsBtn.setImage(UIImage(named: "ic_accept"), forState: UIControlState.Normal)
+            self.termsBtn.setImage(UIImage(named: "ic_check"), forState: UIControlState.Normal)
         }
         isTermsDisplay = !isTermsDisplay
     }
