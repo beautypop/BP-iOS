@@ -1,5 +1,5 @@
 //
-//  ForgotPasswordViewController.swift
+//  UrlWebViewController
 //  BeautyPop
 //
 //  Created by Mac on 07/12/15.

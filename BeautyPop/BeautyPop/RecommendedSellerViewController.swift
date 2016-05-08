@@ -38,7 +38,7 @@ class RecommendedSellerViewController: UIViewController {
         
         ApiController.instance.getRecommendedSellersFeed(offSet)
         
-        self.uiCollectionView.collectionViewLayout = FeedViewAdapter.getFeedViewFlowLayout(self, spacing: Constants.DEFAULT_SPACING)
+        self.uiCollectionView.collectionViewLayout = FeedViewAdapter.getFeedViewFlowLayout(self, sideSpacing: Constants.DEFAULT_SPACING, lineSpacing: Constants.DEFAULT_SPACING)
         
         self.uiCollectionView!.alwaysBounceVertical = true
         self.uiCollectionView!.backgroundColor = Color.FEED_BG

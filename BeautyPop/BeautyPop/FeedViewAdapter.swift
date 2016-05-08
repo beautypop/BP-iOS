@@ -13,10 +13,6 @@ class FeedViewAdapter {
     enum FeedViewItemsLayout {
         case TWO_COLUMNS
         case THREE_COLUMNS
-        
-        init() {
-            self = .THREE_COLUMNS
-        }
     }
     
     var feedViewItemsLayout = FeedViewItemsLayout.THREE_COLUMNS
@@ -118,16 +114,16 @@ class FeedViewAdapter {
     }
     
     func getFeedViewFlowLayout(viewController: UIViewController) -> UICollectionViewFlowLayout {
-        return FeedViewAdapter.getFeedViewFlowLayout(viewController, spacing: getSideSpacing())
+        return FeedViewAdapter.getFeedViewFlowLayout(viewController, sideSpacing: getSideSpacing(), lineSpacing: getLineSpacing())
     }
     
-    static func getFeedViewFlowLayout(viewController: UIViewController, spacing: CGFloat) -> UICollectionViewFlowLayout {
+    static func getFeedViewFlowLayout(viewController: UIViewController, sideSpacing: CGFloat, lineSpacing: CGFloat) -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.itemSize = CGSizeMake(viewController.view.bounds.width, viewController.view.bounds.height)
         flowLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
-        flowLayout.minimumInteritemSpacing = spacing
-        flowLayout.minimumLineSpacing = spacing
-        flowLayout.sectionInset = UIEdgeInsetsMake(spacing, spacing, spacing, spacing)
+        flowLayout.minimumInteritemSpacing = sideSpacing
+        flowLayout.minimumLineSpacing = lineSpacing
+        flowLayout.sectionInset = UIEdgeInsetsMake(sideSpacing, sideSpacing, sideSpacing, sideSpacing)
         return flowLayout
     }
     
