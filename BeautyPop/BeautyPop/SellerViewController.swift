@@ -48,6 +48,7 @@ class SellerViewController: CustomNavigationController {
             self.sellerRecommendationController!.view.frame = self.uiContainerView.bounds
             self.uiContainerView.addSubview((self.sellerRecommendationController?.view)!)
             self.sellerRecommendationController?.didMoveToParentViewController(self)
+            self.activeSegment = 0
         } else if(self.segController.selectedSegmentIndex == 1) {
             if self.followingController == nil {
                 self.followingController = self.storyboard!.instantiateViewControllerWithIdentifier("FollowingFeedViewController") as! FollowingFeedViewController
@@ -61,6 +62,7 @@ class SellerViewController: CustomNavigationController {
             self.followingController!.view.frame = self.uiContainerView.bounds
             self.uiContainerView.addSubview((self.followingController?.view)!)
             self.followingController?.didMoveToParentViewController(self)
+            self.activeSegment = 1
         }
         
         ViewUtil.selectSegmentControl(self.segController, view: self.view)
