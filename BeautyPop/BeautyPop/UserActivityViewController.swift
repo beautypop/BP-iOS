@@ -115,7 +115,7 @@ class UserActivityViewController: CustomNavigationController {
                 cell.postImage.hidden = false
                 ImageUtil.displayPostImage(Int(self.userActivitesItems[indexPath.row].targetImage), imageView: cell.postImage)
             }
-            
+            cell.layer.backgroundColor = Color.WHITE.CGColor
             if !viewStatus {
                 cell.layer.backgroundColor = Color.LIGHT_PINK_4.CGColor
             }
@@ -131,7 +131,7 @@ class UserActivityViewController: CustomNavigationController {
             cell.textMessage.numberOfLines = 0
             cell.textMessage.sizeToFit()
             ImageUtil.displayThumbnailProfileImage(Int(self.userActivitesItems[indexPath.row].actorImage), imageView: cell.profileImg)
-
+            cell.layer.backgroundColor = Color.WHITE.CGColor
             if !viewStatus {
                 cell.layer.backgroundColor = Color.LIGHT_PINK_4.CGColor
             }
