@@ -1226,7 +1226,7 @@
                                             </connections>
                                         </collectionView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zvc-EV-XQm">
-                                            <rect key="frame" x="10" y="129" width="394" height="35"/>
+                                            <rect key="frame" x="10" y="125" width="394" height="35"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wLf-nT-LOO">
                                                     <rect key="frame" x="0.0" y="0.0" width="98.5" height="35"/>
@@ -1342,7 +1342,7 @@
                                         <constraint firstItem="Zvc-EV-XQm" firstAttribute="centerX" secondItem="Kkt-tn-mtR" secondAttribute="centerX" id="f5q-9X-a5p"/>
                                         <constraint firstItem="Zvc-EV-XQm" firstAttribute="centerX" secondItem="Kkt-tn-mtR" secondAttribute="centerX" id="i1J-k3-5kJ"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="u2s-z7-0Lw" secondAttribute="bottom" id="k8x-Il-8hs"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="Zvc-EV-XQm" secondAttribute="bottom" constant="-7" id="tnQ-Zr-Yg3"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Zvc-EV-XQm" secondAttribute="bottom" constant="-3" id="tnQ-Zr-Yg3"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="Zvc-EV-XQm" secondAttribute="trailing" constant="10" id="ug9-Bc-a8g"/>
                                         <constraint firstItem="u2s-z7-0Lw" firstAttribute="leading" secondItem="Kkt-tn-mtR" secondAttribute="leading" id="yUy-2t-FRn"/>
                                     </constraints>

@@ -38,12 +38,12 @@ struct Constants {
     static let DEFAULT_CORNER_RADIUS = CGFloat(5)
     static let DEFAULT_SPACING = CGFloat(10)
     static let HOME_BANNER_WIDTH_HEIGHT_RATIO = CGFloat(3)
-    static let HOME_CATEGORY_SELECTOR_COLUMNS = 3
+    static let HOME_HEADER_CATEGORY_SELECTOR_COLUMNS = 3
+    static let HOME_HEADER_CATEGORY_SELECTOR_EXTRA_HEIGHT = CGFloat(80)
     static let HOME_HEADER_ITEMS_MARGIN_TOTAL = CGFloat(12)         // 3 each x 4
-    static let CATEGORY_HEADER_ITEMS_MARGIN_TOTAL = CGFloat(15)     // 3 each x 5
     static let CATEGORY_HEADER_SUBCATEGORY_SELECTOR_COLUMNS = 4
-    static let CATEGORY_HEADER_SUBCATEGORY_SELECTOR_EXTRA_HEIGHT = CGFloat(50)
-    static let CATEGORY_HEADER_HEIGHT = CGFloat(150)
+    static let CATEGORY_HEADER_SUBCATEGORY_SELECTOR_EXTRA_HEIGHT = CGFloat(55)
+    static let CATEGORY_HEADER_ITEMS_MARGIN_TOTAL = CGFloat(15)     // 3 each x 5
     static let PROFILE_HEADER_HEIGHT = CGFloat(190)
     static let FEED_ITEM_CORNER_RADIUS = CGFloat(3)
     static let FEED_ITEM_2COL_SIDE_SPACING = CGFloat(7)
