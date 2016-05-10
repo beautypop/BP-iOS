@@ -674,8 +674,8 @@ class ApiController {
         let callEvent = ApiCallEvent()
         callEvent.method = "/api/user-info/edit"
         callEvent.resultClass = "UserVM"
-        callEvent.successEventbusName = "onEditInfoSuccess"
-        callEvent.failedEventbusName = "onEditInfoFailed"
+        callEvent.successEventbusName = "onSuccessEditUserInfo"
+        callEvent.failedEventbusName = "onFailureEditUserInfo"
         callEvent.apiUrl = Constants.BASE_URL + callEvent.method
         let url = callEvent.apiUrl + "?key=\(StringUtil.encode(AppDelegate.getInstance().sessionId!))"
         

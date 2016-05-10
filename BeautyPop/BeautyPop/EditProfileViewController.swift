@@ -37,7 +37,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UITextVi
         
         SwiftEventBus.unregister(self)
         
-        SwiftEventBus.onMainThread(self, name: "onEditInfoSuccess") { result in
+        SwiftEventBus.onMainThread(self, name: "onSuccessEditUserInfo") { result in
             NSLog("User info updated successfully")
             UserInfoCache.refresh(AppDelegate.getInstance().sessionId!)
             ViewUtil.showNormalView(self, activityLoading: self.activityLoading)
@@ -51,7 +51,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UITextVi
             }
         }
         
-        SwiftEventBus.onMainThread(self, name: "onEditInfoFailed") { result in
+        SwiftEventBus.onMainThread(self, name: "onFailureEditUserInfo") { result in
             ViewUtil.showNormalView(self, activityLoading: self.activityLoading)
             ViewUtil.makeToast("Error updating user info", view: self.view)
         }
@@ -97,7 +97,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UITextVi
         ViewUtil.displayRoundedCornerView(self.aboutMe, bgColor: Color.WHITE, borderColor: Color.LIGHT_GRAY_2)
         ViewUtil.displayRoundedCornerView(self.location, bgColor: Color.WHITE, borderColor: Color.LIGHT_GRAY_2)
         
-        initializeLocationDropDown((userInfo?.location.id)!)
+        //initializeLocationDropDown((userInfo?.location.id)!)
         ViewUtil.hideActivityLoading(self.activityLoading)
         
         self.helpText.numberOfLines = 0
@@ -121,9 +121,10 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UITextVi
     @IBAction func onClickSubmitBtn(sender: UIButton) {
         if isValid() {
             ViewUtil.showGrayOutView(self, activityLoading: self.activityLoading)
-            let location = DistrictCache.getDistrictByName(self.location.titleLabel!.text!)
+            //let location = DistrictCache.getDistrictByName(self.location.titleLabel!.text!)
+            //let locationId = location != nil ? location!.id : -1
             let editUserInfoVM = EditUserInfoVM(email: self.email.text!, aboutMe: self.aboutMe.text, displayName: self.displayName.text!,
-                firstName: self.firstName.text!, lastName: self.lastName.text!, location: (location?.id)!)
+                firstName: self.firstName.text!, lastName: self.lastName.text!, location: -1)
             
             ApiController.instance.editUserInfo(editUserInfoVM)
         }
@@ -131,7 +132,7 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UITextVi
     
     func initializeLocationDropDown(locationId: Int) {
         var locs: [String] = []
-        var selLocationValue = "Select a Location:"
+        var selLocationValue = NSLocalizedString("select", comment: "")
         for (_, element) in DistrictCache.districts.enumerate() {
             if element.id == locationId {
                 selLocationValue = element.displayName

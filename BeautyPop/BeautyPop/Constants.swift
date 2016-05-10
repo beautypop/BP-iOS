@@ -19,6 +19,10 @@ struct Constants {
     static let DEVICE_TYPE = "IOS";
     static let CURRENCY_SYMBOL = "$"
     
+    static let FORGET_PASSWORD_URL: String = Constants.BASE_URL + "/login/password/forgot";
+    static let PRIVACY_URL: String = Constants.BASE_URL + "/privacy";
+    static let TERMS_URL: String = Constants.BASE_URL + "/terms";
+    
     static let HTTP_STATUS_OK = 200;
     static let HTTP_STATUS_BAD_REQUEST = 400;
     
@@ -45,8 +49,8 @@ struct Constants {
     static let FEED_ITEM_2COL_SIDE_SPACING = CGFloat(7)
     static let FEED_ITEM_2COL_LINE_SPACING = CGFloat(7)
     static let FEED_ITEM_2COL_DETAILS_HEIGHT = CGFloat(50)
-    static let FEED_ITEM_3COL_SIDE_SPACING = CGFloat(3)
-    static let FEED_ITEM_3COL_LINE_SPACING = CGFloat(3)
+    static let FEED_ITEM_3COL_SIDE_SPACING = CGFloat(5)
+    static let FEED_ITEM_3COL_LINE_SPACING = CGFloat(7)
     static let FEED_ITEM_3COL_DETAILS_HEIGHT = CGFloat(50)
     static let PRODUCT_INFO_HEIGHT = CGFloat(258)
     static let PRODUCT_SELLER_HEIGHT = CGFloat(75)
