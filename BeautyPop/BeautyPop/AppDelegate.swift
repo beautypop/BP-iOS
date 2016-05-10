@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private var _apnsDeviceToken: String? = nil
     private var _appVersionCode: String? = nil
+    private var _appShortVersion: String? = nil
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         //App launch code
@@ -109,6 +110,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         apnsDeviceToken = tokenString
         //http://stackoverflow.com/questions/24501288/getting-version-and-build-info-with-swift
         appVersionCode = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? String
+        appShortVersion = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String
         
         SwiftEventBus.post("onSuccessRegisterAppNotification")
     }
@@ -157,13 +159,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var appVersionCode: String? {
         set {
             _appVersionCode = newValue
-            SharedPreferencesUtil.getInstance().setSystemVersionCode(_appVersionCode!)
+            SharedPreferencesUtil.getInstance().setAppVersionCode(_appVersionCode!)
         }
         get {
             if _appVersionCode == nil {
-                _appVersionCode = SharedPreferencesUtil.getInstance().getSystemVersionCode()
+                _appVersionCode = SharedPreferencesUtil.getInstance().getAppVersionCode()
             }
             return _appVersionCode
+        }
+    }
+    
+    var appShortVersion: String? {
+        set {
+            _appShortVersion = newValue
+            SharedPreferencesUtil.getInstance().setAppShortVersion(_appShortVersion!)
+        }
+        get {
+            if _appShortVersion == nil {
+                _appShortVersion = SharedPreferencesUtil.getInstance().getAppShortVersion()
+            }
+            return _appShortVersion
         }
     }
     

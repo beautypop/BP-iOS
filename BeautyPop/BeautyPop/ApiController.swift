@@ -770,8 +770,10 @@ class ApiController {
         
         let request: NSMutableURLRequest = NSMutableURLRequest()
         let url = arg.apiUrl + "?key=\(StringUtil.encode(AppDelegate.getInstance().sessionId!))"
+        let userAgent = "ios app \(StringUtil.encode(AppDelegate.getInstance().appShortVersion!))(\(StringUtil.encode(AppDelegate.getInstance().appVersionCode!)))"
         
         request.URL = NSURL(string: url)
+        request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
         request.HTTPMethod = "GET"
         NSLog("sending string %@", url)
         

@@ -26,6 +26,7 @@ class SharedPreferencesUtil {
         case USER_INFO = "userInfo"
         case DEVICE_TOKEN = "deviceToken"
         case VERSION_CODE = "versionCode"
+        case SHORT_VERSION = "shortVersion"
     }
     
     private static let sharedPreferencesUtil = SharedPreferencesUtil()
@@ -56,10 +57,13 @@ class SharedPreferencesUtil {
         self.prefs.setValue(deviceToken, forKey: User.DEVICE_TOKEN.rawValue)
     }
     
-    func setSystemVersionCode(deviceToken: String) {
-        self.prefs.setValue(deviceToken, forKey: User.VERSION_CODE.rawValue)
+    func setAppVersionCode(versionCode: String) {
+        self.prefs.setValue(versionCode, forKey: User.VERSION_CODE.rawValue)
     }
-    
+   
+    func setAppShortVersion(shortVersion: String) {
+        self.prefs.setValue(shortVersion, forKey: User.SHORT_VERSION.rawValue)
+    }
     
     //
     // Get
@@ -90,16 +94,23 @@ class SharedPreferencesUtil {
         return userInfo
     }
     
-    func getSystemVersionCode() -> String {
+    func getDeviceToken() -> String {
         if self.prefs.valueForKey(User.DEVICE_TOKEN.rawValue) != nil {
             return self.prefs.valueForKey(User.DEVICE_TOKEN.rawValue) as! String
         }
         return ""
     }
     
-    func getDeviceToken() -> String {
+    func getAppVersionCode() -> String {
         if self.prefs.valueForKey(User.VERSION_CODE.rawValue) != nil {
             return self.prefs.valueForKey(User.VERSION_CODE.rawValue) as! String
+        }
+        return ""
+    }
+    
+    func getAppShortVersion() -> String {
+        if self.prefs.valueForKey(User.SHORT_VERSION.rawValue) != nil {
+            return self.prefs.valueForKey(User.SHORT_VERSION.rawValue) as! String
         }
         return ""
     }
