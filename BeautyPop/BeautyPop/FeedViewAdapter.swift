@@ -79,7 +79,7 @@ class FeedViewAdapter {
             ImageUtil.displayThumbnailProfileImage(feedItem.ownerId, imageView: cell.userCircleImg)
         }
         
-        cell.layer.cornerRadius = Constants.FEED_ITEM_CORNER_RADIUS
+        cell.layer.cornerRadius = getCornerRadius()
         return cell
     }
 
@@ -162,6 +162,16 @@ class FeedViewAdapter {
         case FeedViewItemsLayout.THREE_COLUMNS: fallthrough
         default:
             return 3
+        }
+    }
+    
+    func getCornerRadius() -> CGFloat {
+        switch self.feedViewItemsLayout {
+        case FeedViewItemsLayout.TWO_COLUMNS:
+            return Constants.FEED_ITEM_2COL_CORNER_RADIUS
+        case FeedViewItemsLayout.THREE_COLUMNS: fallthrough
+        default:
+            return Constants.FEED_ITEM_3COL_CORNER_RADIUS
         }
     }
     
