@@ -161,7 +161,7 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
                 let comment:CommentVM = self.comments[indexPath.row]
                 cell.lblComments.text = comment.body
                 cell.postUserName.setTitle(comment.ownerName, forState: .Normal)
-                if (comment.isNew) {
+                if (!comment.isNew) {
                     cell.postedTime.text = NSDate(timeIntervalSince1970:Double(comment.createdDate) / 1000.0).timeAgo
                 } else {
                     cell.postedTime.text = NSDate(timeIntervalSinceNow: comment.createdDate / 1000.0).timeAgo
