@@ -106,8 +106,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             tokenString += String(format: "%02.2hhx", arguments: [tokenChars[i]])
         }
         
-        print("Device Token:", tokenString)
+        
+        NSLog("Device Token:", tokenString)
         apnsDeviceToken = tokenString
+        
         //http://stackoverflow.com/questions/24501288/getting-version-and-build-info-with-swift
         appVersionCode = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? String
         appShortVersion = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String
@@ -149,7 +151,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             SharedPreferencesUtil.getInstance().setDeviceToken(_apnsDeviceToken!)
         }
         get {
-            if _apnsDeviceToken == nil {
+            if _apnsDeviceToken == nil || _apnsDeviceToken == "" {
                 _apnsDeviceToken = SharedPreferencesUtil.getInstance().getDeviceToken()
             }
             return _apnsDeviceToken
@@ -162,7 +164,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             SharedPreferencesUtil.getInstance().setAppVersionCode(_appVersionCode!)
         }
         get {
-            if _appVersionCode == nil {
+            if _appVersionCode == nil || _appVersionCode == "" {
                 _appVersionCode = SharedPreferencesUtil.getInstance().getAppVersionCode()
             }
             return _appVersionCode
@@ -175,7 +177,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             SharedPreferencesUtil.getInstance().setAppShortVersion(_appShortVersion!)
         }
         get {
-            if _appShortVersion == nil {
+            if _appShortVersion == nil || _appShortVersion == "" {
                 _appShortVersion = SharedPreferencesUtil.getInstance().getAppShortVersion()
             }
             return _appShortVersion

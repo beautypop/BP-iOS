@@ -68,7 +68,9 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
         
         //check for flag and if found refresh the data..
         if self.isRefresh {
+            ViewUtil.scrollToTop(uiCollectionView)
             self.feedLoader?.reloadFeedItems()
+            self.resetAndStartRefreshTimer()
             self.isRefresh = false
         }
     }
@@ -115,6 +117,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
             self!.feedLoader?.reloadFeedItems()
             self!.resetAndStartRefreshTimer()
         })
+        
         self.resetAndStartRefreshTimer()
         ApiFacade.getHomeSliderFeaturedItems(onSuccessGetHomeFeaturedItems, failureCallback: onFailureGetHomeFeaturedItems)
     }
@@ -178,7 +181,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
             
             gradientLayer.colors = [
                 UIColor(white: 0, alpha: 0.0).CGColor,
-                UIColor(white: 0, alpha: 0.4).CGColor,
+                UIColor(white: 0, alpha: 0.6).CGColor,
                 Color.LIGHT_GRAY.CGColor
             ]
             cell.categoryIcon.layer.sublayers = nil
@@ -309,6 +312,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
         
         if (scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height - Constants.FEED_LOAD_SCROLL_THRESHOLD {
             feedLoader!.loadMoreFeedItems()
+            resetAndStartRefreshTimer()
         }
     }
     
@@ -393,15 +397,19 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
         }
     }
     
-    
-    func resetAndStartRefreshTimer() {
+    func stopRefreshTimer() {
         if self.feedRefreshTimer != nil {
             self.feedRefreshTimer?.invalidate()
         }
-        self.feedRefreshTimer = NSTimer.scheduledTimerWithTimeInterval(Constants.FEED_REFRESH_TIME_INTERVAL, target: self, selector: "feedRefreshTimeHandler", userInfo: nil, repeats: true)
+    }
+    
+    func resetAndStartRefreshTimer() {
+        stopRefreshTimer()
+        self.feedRefreshTimer = NSTimer.scheduledTimerWithTimeInterval(Constants.FEED_REFRESH_TIME_INTERVAL, target: self, selector: "feedRefreshTimeHandler", userInfo: nil, repeats: false)
     }
     
     func feedRefreshTimeHandler() {
+        stopRefreshTimer()
         self.isRefresh = true
     }
 }

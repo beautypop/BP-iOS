@@ -89,6 +89,10 @@ class ViewUtil {
 		forBarMetrics:UIBarMetrics.Default)
     }
     
+    static func scrollToTop(vController: UICollectionView) {
+        vController.contentOffset = CGPointMake(0, 0 - vController.contentInset.top);
+    }
+    
     static func selectSegmentControl(segmentController: UISegmentedControl, view: UIView) {
         if segmentController.selectedSegmentIndex != 0 && segmentController.selectedSegmentIndex != 1 {
             return

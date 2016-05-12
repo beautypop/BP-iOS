@@ -31,7 +31,7 @@ struct Constants {
     static let SHOW_HIDE_BAR_SCROLL_DISTANCE = CGFloat(5.0)
     static let MAIN_BOTTOM_BAR_ALPHA = 0.9
     static let BANNER_REFRESH_TIME_INTERVAL = 4.0
-    static let FEED_REFRESH_TIME_INTERVAL = 5.0
+    static let FEED_REFRESH_TIME_INTERVAL = 5.0 * 60
     
     // sizes
     static let DEFAULT_BUTTON_CORNER_RADIUS = CGFloat(7)
