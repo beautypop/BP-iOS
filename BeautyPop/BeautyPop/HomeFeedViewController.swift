@@ -32,7 +32,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     var pageControl: UIPageControl?
     var currentBannerPage: Int?
     var bannerTimer: NSTimer?
-    
+    var feedRefreshTimer: NSTimer?
     var productViewController: ProductViewController?
     var isRefresh = false
     
@@ -113,8 +113,9 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
             ApiFacade.getHomeSliderFeaturedItems(self!.onSuccessGetHomeFeaturedItems, failureCallback: self!.onFailureGetHomeFeaturedItems)
             CategoryCache.refresh(self!.onSuccessGetCategories, failureCallback: nil)
             self!.feedLoader?.reloadFeedItems()
+            self!.resetAndStartRefreshTimer()
         })
-        
+        self.resetAndStartRefreshTimer()
         ApiFacade.getHomeSliderFeaturedItems(onSuccessGetHomeFeaturedItems, failureCallback: onFailureGetHomeFeaturedItems)
     }
     
@@ -390,6 +391,18 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
                 self.currentBannerPage = 0
             }
         }
+    }
+    
+    
+    func resetAndStartRefreshTimer() {
+        if self.feedRefreshTimer != nil {
+            self.feedRefreshTimer?.invalidate()
+        }
+        self.feedRefreshTimer = NSTimer.scheduledTimerWithTimeInterval(Constants.FEED_REFRESH_TIME_INTERVAL, target: self, selector: "feedRefreshTimeHandler", userInfo: nil, repeats: true)
+    }
+    
+    func feedRefreshTimeHandler() {
+        self.isRefresh = true
     }
 }
 
