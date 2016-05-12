@@ -46,6 +46,14 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
         reloadDataToView()
     }
     
+    func appWillEnterForeground() {
+        if AppDelegate.getInstance().enteredBackgroundSeconds > Constants.FEED_IDLE_REFRESH_TIME_INTERVAL {
+            ViewUtil.scrollToTop(uiCollectionView)
+            self.feedLoader?.reloadFeedItems()
+            self.isRefresh = false
+        }
+    }
+    
     override func viewWillAppear(animated: Bool) {
         ViewUtil.hideActivityLoading(self.activityLoading)
         NotificationCounter.refresh(onSuccessRefreshNotifications, failureCallback: onFailureRefreshNotifications)
@@ -107,23 +115,12 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
             ApiFacade.getHomeSliderFeaturedItems(self!.onSuccessGetHomeFeaturedItems, failureCallback: self!.onFailureGetHomeFeaturedItems)
             CategoryCache.refresh(self!.onSuccessGetCategories, failureCallback: nil)
             self!.feedLoader?.reloadFeedItems()
-            self!.resetAndStartRefreshTimer()
         })
         
-        self.resetAndStartRefreshTimer()
         ApiFacade.getHomeSliderFeaturedItems(onSuccessGetHomeFeaturedItems, failureCallback: onFailureGetHomeFeaturedItems)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector:"appWillEnterForeground", name:
             UIApplicationWillEnterForegroundNotification, object: nil)
-    }
-    
-    func appWillEnterForeground() {
-        if self.isRefresh {
-            ViewUtil.scrollToTop(uiCollectionView)
-            self.feedLoader?.reloadFeedItems()
-            self.resetAndStartRefreshTimer()
-            self.isRefresh = false
-        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -316,7 +313,6 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
         
         if (scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height - Constants.FEED_LOAD_SCROLL_THRESHOLD {
             feedLoader!.loadMoreFeedItems()
-            resetAndStartRefreshTimer()
         }
     }
     
@@ -401,6 +397,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
         }
     }
     
+    /*
     func stopRefreshTimer() {
         if self.feedRefreshTimer != nil {
             self.feedRefreshTimer?.invalidate()
@@ -409,12 +406,13 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     
     func resetAndStartRefreshTimer() {
         stopRefreshTimer()
-        self.feedRefreshTimer = NSTimer.scheduledTimerWithTimeInterval(Constants.FEED_REFRESH_TIME_INTERVAL, target: self, selector: "feedRefreshTimeHandler", userInfo: nil, repeats: false)
+        self.feedRefreshTimer = NSTimer.scheduledTimerWithTimeInterval(Constants.FEED_IDLE_REFRESH_TIME_INTERVAL, target: self, selector: "feedRefreshTimeHandler", userInfo: nil, repeats: false)
     }
     
     func feedRefreshTimeHandler() {
         stopRefreshTimer()
         self.isRefresh = true
     }
+    */
 }
 
