@@ -65,14 +65,6 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
             self.uiCollectionView.reloadItemsAtIndexPaths([currentIndex!])
             currentIndex = nil
         }
-        
-        //check for flag and if found refresh the data..
-        if self.isRefresh {
-            ViewUtil.scrollToTop(uiCollectionView)
-            self.feedLoader?.reloadFeedItems()
-            self.resetAndStartRefreshTimer()
-            self.isRefresh = false
-        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -120,6 +112,18 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
         
         self.resetAndStartRefreshTimer()
         ApiFacade.getHomeSliderFeaturedItems(onSuccessGetHomeFeaturedItems, failureCallback: onFailureGetHomeFeaturedItems)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"appWillEnterForeground", name:
+            UIApplicationWillEnterForegroundNotification, object: nil)
+    }
+    
+    func appWillEnterForeground() {
+        if self.isRefresh {
+            ViewUtil.scrollToTop(uiCollectionView)
+            self.feedLoader?.reloadFeedItems()
+            self.resetAndStartRefreshTimer()
+            self.isRefresh = false
+        }
     }
     
     override func didReceiveMemoryWarning() {
