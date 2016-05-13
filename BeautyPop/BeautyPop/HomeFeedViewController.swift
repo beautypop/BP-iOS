@@ -38,6 +38,12 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     var isRefresh = false
     //var feedRefreshTimer: NSTimer?
     
+    func refreshFeed() {
+        ViewUtil.scrollToTop(uiCollectionView)
+        self.feedLoader?.reloadFeedItems()
+        self.isRefresh = false
+    }
+    
     func reloadDataToView() {
         self.categories = CategoryCache.categories
         self.uiCollectionView.reloadData()
@@ -50,7 +56,14 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     
     func appWillEnterForeground() {
         if AppDelegate.getInstance().enteredBackgroundSeconds > Constants.FEED_IDLE_REFRESH_TIME_INTERVAL {
-            self.isRefresh = true
+            // currently visible
+            if self.navigationController?.visibleViewController == self {
+                refreshFeed()
+            }
+            // refresh later when visible
+            else {
+                self.isRefresh = true
+            }
         }
     }
     
@@ -75,9 +88,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
         }
         
         if isRefresh {
-            ViewUtil.scrollToTop(uiCollectionView)
-            self.feedLoader?.reloadFeedItems()
-            self.isRefresh = false
+            refreshFeed()
         }
     }
     
