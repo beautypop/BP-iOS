@@ -32,9 +32,11 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     var pageControl: UIPageControl?
     var currentBannerPage: Int?
     var bannerTimer: NSTimer?
-    var feedRefreshTimer: NSTimer?
+    
     var productViewController: ProductViewController?
+    
     var isRefresh = false
+    //var feedRefreshTimer: NSTimer?
     
     func reloadDataToView() {
         self.categories = CategoryCache.categories
@@ -48,9 +50,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     
     func appWillEnterForeground() {
         if AppDelegate.getInstance().enteredBackgroundSeconds > Constants.FEED_IDLE_REFRESH_TIME_INTERVAL {
-            ViewUtil.scrollToTop(uiCollectionView)
-            self.feedLoader?.reloadFeedItems()
-            self.isRefresh = false
+            self.isRefresh = true
         }
     }
     
@@ -72,6 +72,12 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
             feedLoader?.setItem(currentIndex!.row, item: item!)
             self.uiCollectionView.reloadItemsAtIndexPaths([currentIndex!])
             currentIndex = nil
+        }
+        
+        if isRefresh {
+            ViewUtil.scrollToTop(uiCollectionView)
+            self.feedLoader?.reloadFeedItems()
+            self.isRefresh = false
         }
     }
     
