@@ -249,6 +249,10 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
                     cell.categoryBtn.hidden = true
                 }
                 
+                //cell.contentView.layoutMargins = UIEdgeInsetsMake(-10, 10, 10, 10)
+                //cell.contentView.layoutIfNeeded()
+                
+                
             case 3:
                 if let commentCount = productInfo?.numComments {
                     cell.commentsCount.text = String(commentCount)

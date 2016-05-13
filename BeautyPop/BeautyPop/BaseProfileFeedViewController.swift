@@ -93,10 +93,10 @@ class BaseProfileFeedViewController: CustomNavigationController {
     func initUserDetails(cell: UserFeedHeaderViewCell) {
         cell.displayName.text = self.userInfo?.name
         
-        cell.profileDescription.numberOfLines = 3
+        cell.profileDescription.numberOfLines = 0
         cell.profileDescription.text = self.userInfo?.aboutMe
         cell.profileDescription.sizeToFit()
-        
+        //cell.sellerUrl.text = UrlUtil.createSellerUrl(self.userInfo!)
         if cell.userImg.image == nil {
             ImageUtil.displayThumbnailProfileImage(self.userInfo!.id, imageView: cell.userImg)
         }

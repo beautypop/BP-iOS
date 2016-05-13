@@ -219,6 +219,12 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
             return CGSizeZero
         } else {
             return CGSizeMake(self.view.frame.width, Constants.PROFILE_HEADER_HEIGHT)
+            
+            /*let dummyLbl = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width - Constants.USER_ACTIVITY_SIDE_MARGIN, height: 0))
+            dummyLbl.numberOfLines = 0
+            dummyLbl.text = self.userInfo?.aboutMe
+            dummyLbl.sizeToFit()
+            return CGSizeMake(self.view.bounds.width, Constants.PROFILE_HEADER_HEIGHT + dummyLbl.bounds.height)*/
         }
     }
     
