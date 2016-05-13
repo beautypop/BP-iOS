@@ -10,7 +10,7 @@ import UIKit
 import SwiftEventBus
 import QQPlaceholderTextView
 
-class NewProductViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
+class NewProductViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var hrBarHtConstraint: UIView!
     @IBOutlet weak var sellingtext: UITextField!
@@ -38,6 +38,8 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
     
     let croppingEnabled: Bool = true
     let libraryEnabled: Bool = true
+    
+    let imagePicker = UIImagePickerController()
     
     /*
     var keyboardType: UIKeyboardType {
@@ -79,7 +81,7 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
         self.prodDescription.placeholder = NSLocalizedString("product_desc", comment: "")
         self.prodDescription.isApplyTextFieldStyle = true
         self.prodDescription.layer.borderWidth = 0
-        
+        self.imagePicker.delegate = self
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         self.view.addGestureRecognizer(tap)
         
@@ -294,7 +296,7 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
         let optionMenu = UIAlertController(title: NSLocalizedString("select_photo", comment: ""), message: "", preferredStyle: .ActionSheet)
         let cameraAction = UIAlertAction(title: NSLocalizedString("camera", comment: ""), style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
-            let cameraViewController = ALCameraViewController(croppingEnabled: self.croppingEnabled, allowsLibraryAccess: self.libraryEnabled) { (image) -> Void in
+            /*let cameraViewController = ALCameraViewController(croppingEnabled: self.croppingEnabled, allowsLibraryAccess: self.libraryEnabled) { (image) -> Void in
                 if (image != nil) {
                     self.imageCollection.removeAtIndex(self.selectedIndex!)
                     self.imageCollection.insert(image!.retainOrientation(), atIndex: self.selectedIndex!)
@@ -304,11 +306,14 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
             
-            self.presentViewController(cameraViewController, animated: true, completion: nil)
+            self.presentViewController(cameraViewController, animated: true, completion: nil)*/
+            self.imagePicker.allowsEditing = true
+            self.imagePicker.sourceType = .Camera
+            self.navigationController!.presentViewController(self.imagePicker, animated: true, completion: nil)
         })
         let photoGalleryAction = UIAlertAction(title: "Photo Album", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
-            let libraryViewController = ALCameraViewController.imagePickerViewController(self.croppingEnabled) { (image) -> Void in
+            /*let libraryViewController = ALCameraViewController.imagePickerViewController(self.croppingEnabled) { (image) -> Void in
                 if (image != nil) {
                     self.imageCollection.removeAtIndex(self.selectedIndex!)
                     self.imageCollection.insert(image!.retainOrientation(), atIndex: self.selectedIndex!)
@@ -317,9 +322,10 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
                 }
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
-            self.presentViewController(libraryViewController, animated: true, completion: nil)
-            
-            //self.presentViewController(self.imagePicker, animated: true, completion: nil)
+            self.presentViewController(libraryViewController, animated: true, completion: nil)*/
+            self.imagePicker.allowsEditing = true
+            self.imagePicker.sourceType = .PhotoLibrary
+            self.navigationController!.presentViewController(self.imagePicker, animated: true, completion: nil)
         })
         let cancelAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: .Cancel, handler: {
             (alert: UIAlertAction!) -> Void in
@@ -469,4 +475,16 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
             self.subCategoryDropDown.setTitle(selCategoryValue, forState: UIControlState.Normal)
         }
     }
+    
+    // MARK: UIImagePickerControllerDelegate Methods
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
+        if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            self.imageCollection.removeAtIndex(self.selectedIndex!)
+            self.imageCollection.insert(pickedImage.retainOrientation(), atIndex: self.selectedIndex!)
+            self.collectionView.reloadData()
+        }
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
 }
