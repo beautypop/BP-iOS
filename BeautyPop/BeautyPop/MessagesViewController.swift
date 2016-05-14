@@ -9,7 +9,7 @@
 import UIKit
 import PhotoSlider
 
-class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollViewDelegate, UITextViewDelegate {
+class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollViewDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
         
     @IBOutlet weak var commentTextView: UITextView!
     @IBOutlet weak var bottomSpaceForText: NSLayoutConstraint!
@@ -44,7 +44,7 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
     var lastItemPosition = 0
     var bubbleData: ChatBubbleData?
     var pendingOrder = false
-    
+    let imagePicker = UIImagePickerController()
     @IBOutlet weak var buyerMessageLbl: UILabel!
     @IBOutlet weak var buyerButtonsLayout: UIView! //Parent Layout
     @IBOutlet weak var buyerOrderLayout: UIView!
@@ -78,7 +78,7 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
         MessagesViewController.instance = self
         messageCointainerScroll.delegate = self
         self.commentTextView.delegate = self
-        
+        self.imagePicker.delegate = self
         //ViewUtil.displayRoundedCornerView(self.commentTextView, bgColor: Color.WHITE, borderColor: Color.LIGHT_GRAY)
         self.commentTextView.placeholder = NSLocalizedString("enter_text", comment: "")
         self.sendButton.enabled = false
@@ -197,19 +197,25 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
         
         let cameraAction = UIAlertAction(title: "Camera", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
-            let cameraViewController = ALCameraViewController(croppingEnabled: self.croppingEnabled, allowsLibraryAccess: self.libraryEnabled) { (image) -> Void in
+            /*let cameraViewController = ALCameraViewController(croppingEnabled: self.croppingEnabled, allowsLibraryAccess: self.libraryEnabled) { (image) -> Void in
                 self.onImageSelected(image)
             }
             
-            self.presentViewController(cameraViewController, animated: true, completion: nil)
+            self.presentViewController(cameraViewController, animated: true, completion: nil)*/
+            self.imagePicker.allowsEditing = true
+            self.imagePicker.sourceType = .Camera
+            self.navigationController!.presentViewController(self.imagePicker, animated: true, completion: nil)
         })
         
         let photoGalleryAction = UIAlertAction(title: "Photo Album", style: .Default, handler: {
             (alert: UIAlertAction!) -> Void in
-            let libraryViewController = ALCameraViewController.imagePickerViewController(self.croppingEnabled) { (image) -> Void in
+            /*let libraryViewController = ALCameraViewController.imagePickerViewController(self.croppingEnabled) { (image) -> Void in
                 self.onImageSelected(image)
             }
-            self.presentViewController(libraryViewController, animated: true, completion: nil)
+            self.presentViewController(libraryViewController, animated: true, completion: nil)*/
+            self.imagePicker.allowsEditing = true
+            self.imagePicker.sourceType = .PhotoLibrary
+            self.navigationController!.presentViewController(self.imagePicker, animated: true, completion: nil)
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: {
@@ -290,8 +296,13 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
     }
     
     //MARK: Delegates
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!) {
+    // MARK: UIImagePickerControllerDelegate Methods
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
+        if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            self.onImageSelected(pickedImage)
+        }
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
