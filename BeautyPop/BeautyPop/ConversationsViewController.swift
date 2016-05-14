@@ -124,6 +124,34 @@ class ConversationsViewController: UIViewController {
         ImageUtil.displayPostImage(ConversationCache.conversations[indexPath.row].postImage, imageView: cell.productImage)
         ImageUtil.displayThumbnailProfileImage(ConversationCache.conversations[indexPath.row].userId, imageView: cell.postImage)
         
+        cell.orderStatusView.backgroundColor = UIColor.clearColor()
+        cell.orderStatusView.layer.borderWidth = 0
+        
+        ViewUtil.displayRoundedCornerView(cell.orderStatusView, bgColor: nil, borderColor: Color.WHITE)
+        if (item.order != nil) {
+            cell.acceptedText.hidden = !item.order!.accepted
+            cell.declinedText.hidden = !item.order!.declined
+            cell.cancelledText.hidden = !item.order!.cancelled
+            cell.offeredText.hidden = true
+            
+            if item.order!.accepted {
+                ViewUtil.displayRoundedCornerView(cell.orderStatusView, bgColor: nil, borderColor: Color.GREEEN)
+                cell.orderStatusView.layer.borderWidth = 1
+            } else if item.order!.declined {
+                ViewUtil.displayRoundedCornerView(cell.orderStatusView, bgColor: nil, borderColor: Color.RED)
+                cell.orderStatusView.layer.borderWidth = 1
+            } else if item.order!.cancelled {
+                ViewUtil.displayRoundedCornerView(cell.orderStatusView, bgColor: nil, borderColor: Color.GRAY)
+                cell.orderStatusView.layer.borderWidth = 1
+            }
+            
+            if item.order?.offeredPrice > 0 {
+                cell.offeredPrice.text = String(Double((item.order?.offeredPrice)!))
+                cell.offeredPrice.hidden = false
+                cell.offeredText.hidden = false
+            }
+        }
+        
         return cell
     }
     
