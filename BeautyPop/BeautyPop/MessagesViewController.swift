@@ -516,6 +516,7 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
         // closed orders
         else {
             buyerMessageLayout.hidden = false
+            buyerOrderAgainButton.hidden = false
             if _conversation.postSold {
                 buyerOrderAgainButton.hidden = true
             }
@@ -577,8 +578,8 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
         
         var inputTextField: UITextField?
         _messageDialog.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
-            textField.placeholder = String(self.conversation!.postPrice)
-            textField.text = String(self.conversation!.postPrice)
+            textField.placeholder = String(Int(self.conversation!.postPrice))
+            textField.text = String(Int(self.conversation!.postPrice))
             textField.keyboardType = UIKeyboardType.NumberPad
             textField.font = UIFont.systemFontOfSize(18)
             inputTextField = textField

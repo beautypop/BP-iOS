@@ -135,8 +135,8 @@ class ConversationsViewController: UIViewController {
         cell.offeredPrice.hidden = true
         
         if item.order != nil && item.order!.active {
-            cell.acceptedTextWidthConstraint.constant = 60.0
-            cell.offeredLeadingContraint.constant = 15.0
+            cell.acceptedTextWidthConstraint.constant = Constants.CONVERSATION_ORDER_STATUS_TAG_WIDTH
+            cell.offeredLeadingContraint.constant = Constants.CONVERSATION_ORDER_STATUS_TAG_MARGIN
             
             if item.order!.accepted {
                 cell.acceptedText.hidden = false

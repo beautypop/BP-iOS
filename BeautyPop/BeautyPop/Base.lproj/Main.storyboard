@@ -1719,7 +1719,7 @@
                                                     <rect key="frame" x="70" y="84" width="68" height="18"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
-                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Accepted" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10y-wO-1Po">
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Accepted" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10y-wO-1Po">
                                                     <rect key="frame" x="75" y="86" width="60" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="7Bk-1F-yU5"/>
@@ -1729,13 +1729,13 @@
                                                     <color key="textColor" red="0.17254901960784313" green="0.72941176470588232" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Declined" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O6a-X8-KHC" userLabel="Declined">
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Declined" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O6a-X8-KHC" userLabel="Declined">
                                                     <rect key="frame" x="75" y="86" width="60" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                     <color key="textColor" red="1" green="0.18067175760000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cancelled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ah8-Ke-xqH" userLabel="Cancelled">
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cancelled" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ah8-Ke-xqH" userLabel="Cancelled">
                                                     <rect key="frame" x="75" y="86" width="60" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
                                                     <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
@@ -1778,11 +1778,11 @@
                                                 <constraint firstItem="O6a-X8-KHC" firstAttribute="leading" secondItem="10y-wO-1Po" secondAttribute="leading" id="M4w-ix-OTe"/>
                                                 <constraint firstItem="p87-Dm-Ba9" firstAttribute="top" secondItem="10y-wO-1Po" secondAttribute="top" constant="-2" id="MfP-d5-75u"/>
                                                 <constraint firstItem="1Go-pl-dHe" firstAttribute="leading" secondItem="10y-wO-1Po" secondAttribute="trailing" constant="15" id="MgF-aq-y6B"/>
-                                                <constraint firstItem="p87-Dm-Ba9" firstAttribute="trailing" secondItem="10y-wO-1Po" secondAttribute="trailing" id="NkN-Q5-cxU"/>
+                                                <constraint firstItem="p87-Dm-Ba9" firstAttribute="trailing" secondItem="10y-wO-1Po" secondAttribute="trailing" constant="2" id="NkN-Q5-cxU"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="3eL-zl-GUv" secondAttribute="trailing" id="O92-7X-OKM"/>
                                                 <constraint firstItem="10y-wO-1Po" firstAttribute="top" secondItem="ekA-86-u0c" secondAttribute="bottom" constant="10" id="RJL-SK-Kmo"/>
                                                 <constraint firstItem="th5-ei-zEB" firstAttribute="leading" secondItem="3eL-zl-GUv" secondAttribute="leading" id="Rig-Hy-J40"/>
-                                                <constraint firstItem="p87-Dm-Ba9" firstAttribute="leading" secondItem="10y-wO-1Po" secondAttribute="leading" constant="-3" id="Rye-SK-aoQ"/>
+                                                <constraint firstItem="p87-Dm-Ba9" firstAttribute="leading" secondItem="10y-wO-1Po" secondAttribute="leading" constant="-2" id="Rye-SK-aoQ"/>
                                                 <constraint firstItem="fCa-T3-2YO" firstAttribute="bottom" secondItem="3eL-zl-GUv" secondAttribute="bottom" id="S6g-f6-L4s"/>
                                                 <constraint firstItem="Ixa-aR-b6e" firstAttribute="leading" secondItem="PHB-ZS-Ryw" secondAttribute="leading" id="SU6-UR-7a0"/>
                                                 <constraint firstItem="O6a-X8-KHC" firstAttribute="width" secondItem="10y-wO-1Po" secondAttribute="width" id="UbI-ZM-cBf"/>
@@ -8295,8 +8295,8 @@
         <image name="user_thumbnail" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qeX-vh-ZpW"/>
         <segue reference="NRf-cI-JqS"/>
+        <segue reference="h7o-0V-p0S"/>
         <segue reference="pK4-qg-eaZ"/>
         <segue reference="f1D-EY-plH"/>
         <segue reference="SC0-fE-foi"/>
