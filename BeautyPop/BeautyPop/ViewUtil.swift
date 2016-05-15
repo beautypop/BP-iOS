@@ -89,6 +89,10 @@ class ViewUtil {
 		forBarMetrics:UIBarMetrics.Default)
     }
     
+    static func formatPrice(price: Double) -> String {
+        return "\(Constants.CURRENCY_SYMBOL)\(String(Int(price)))"
+    }
+    
     static func scrollToTop(vController: UICollectionView) {
         vController.contentOffset = CGPointMake(0, 0 - vController.contentInset.top);
     }
@@ -335,15 +339,15 @@ class ViewUtil {
     
     static func refreshNotifications(uiTabbar: UITabBar, navigationItem: UINavigationItem) {
         let tabBarItem = (uiTabbar.items![2]) as UITabBarItem
-        if (NotificationCounter.counter!.activitiesCount > 0) {
+        if NotificationCounter.counter!.activitiesCount > 0 {
             let aCount = (NotificationCounter.counter!.activitiesCount) as Int
             tabBarItem.badgeValue = String(aCount)
         } else {
             tabBarItem.badgeValue = nil
         }
-        let chatNavItem = navigationItem.rightBarButtonItems?[1] as? ENMBadgedBarButtonItem
         
-        if (NotificationCounter.counter!.conversationsCount > 0) {
+        let chatNavItem = navigationItem.rightBarButtonItems?[1] as? ENMBadgedBarButtonItem
+        if NotificationCounter.counter!.conversationsCount > 0 {
             let cCount = (NotificationCounter.counter!.conversationsCount) as Int
             chatNavItem?.badgeValue = String(cCount)
         } else {

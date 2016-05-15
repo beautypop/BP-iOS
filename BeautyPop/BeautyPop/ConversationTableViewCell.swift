@@ -28,6 +28,10 @@ class ConversationTableViewCell: UITableViewCell {
     @IBOutlet weak var cancelledText: UILabel!
     @IBOutlet weak var declinedText: UILabel!
     @IBOutlet weak var acceptedText: UILabel!
+    
+    @IBOutlet weak var acceptedTextWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var offeredLeadingContraint: NSLayoutConstraint!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -38,5 +42,4 @@ class ConversationTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }

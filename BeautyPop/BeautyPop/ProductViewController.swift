@@ -222,15 +222,16 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
                     cell.productTitle.text = self.productInfo!.title
                     cell.prodCondition.text = ViewUtil.parsePostConditionTypeFromType(self.productInfo!.conditionType)
                     
-                    if (self.productInfo!.originalPrice != 0 && self.productInfo!.originalPrice != -1 && self.productInfo!.originalPrice != Int(self.productInfo!.price)) {
-                        let attrString = NSAttributedString(string: "\(Constants.CURRENCY_SYMBOL)\(String(stringInterpolationSegment:Int(self.productInfo!.originalPrice)))", attributes: [NSStrikethroughStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue])
+                    if self.productInfo!.originalPrice != 0
+                        && self.productInfo!.originalPrice != -1
+                        && self.productInfo!.originalPrice != self.productInfo!.price {
+                        let attrString = NSAttributedString(string: ViewUtil.formatPrice(self.productInfo!.originalPrice), attributes: [NSStrikethroughStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue])
                         cell.prodOriginalPrice.attributedText = attrString
                     } else {
                         cell.prodOriginalPrice.attributedText = NSAttributedString(string: "")
                     }
                     
-                    cell.prodPrice.text = "\(Constants.CURRENCY_SYMBOL)\(String(stringInterpolationSegment: Int(self.productInfo!.price)))"
-                
+                    cell.prodPrice.text = ViewUtil.formatPrice(self.productInfo!.price)
                 }
                 
                 if self.productInfo != nil {

@@ -38,7 +38,7 @@ class Color {
     static let FEED_ITEM_BORDER: UIColor = LIGHT_GRAY_2
     static let CHAT_ME: UIColor = Color.fromRGB(0xDCF8C6)
     static let CHAT_YOU: UIColor = Color.fromRGB(0xFFFFFF)
-    static let GREEEN: UIColor = Color.fromRGB(0x2CBA28)
+    static let GREEN: UIColor = Color.fromRGB(0x2CBA28)
     
     // Utils
     static func fromRGB(rgbValue: UInt) -> UIColor {

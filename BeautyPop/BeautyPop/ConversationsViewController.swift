@@ -128,27 +128,37 @@ class ConversationsViewController: UIViewController {
         cell.orderStatusView.layer.borderWidth = 0
         
         ViewUtil.displayRoundedCornerView(cell.orderStatusView, bgColor: nil, borderColor: Color.WHITE)
-        if (item.order != nil) {
-            cell.acceptedText.hidden = !item.order!.accepted
-            cell.declinedText.hidden = !item.order!.declined
-            cell.cancelledText.hidden = !item.order!.cancelled
-            cell.offeredText.hidden = true
+        cell.acceptedText.hidden = true
+        cell.declinedText.hidden = true
+        cell.cancelledText.hidden = true
+        cell.offeredText.hidden = true
+        cell.offeredPrice.hidden = true
+        
+        if item.order != nil && item.order!.active {
+            cell.acceptedTextWidthConstraint.constant = 60.0
+            cell.offeredLeadingContraint.constant = 15.0
             
             if item.order!.accepted {
-                ViewUtil.displayRoundedCornerView(cell.orderStatusView, bgColor: nil, borderColor: Color.GREEEN)
+                cell.acceptedText.hidden = false
+                ViewUtil.displayRoundedCornerView(cell.orderStatusView, bgColor: nil, borderColor: Color.GREEN)
                 cell.orderStatusView.layer.borderWidth = 1
             } else if item.order!.declined {
+                cell.declinedText.hidden = false
                 ViewUtil.displayRoundedCornerView(cell.orderStatusView, bgColor: nil, borderColor: Color.RED)
                 cell.orderStatusView.layer.borderWidth = 1
             } else if item.order!.cancelled {
-                ViewUtil.displayRoundedCornerView(cell.orderStatusView, bgColor: nil, borderColor: Color.GRAY)
+                cell.cancelledText.hidden = false
+                ViewUtil.displayRoundedCornerView(cell.orderStatusView, bgColor: nil, borderColor: Color.LIGHT_GRAY)
                 cell.orderStatusView.layer.borderWidth = 1
+            } else {
+                cell.acceptedTextWidthConstraint.constant = 0.0
+                cell.offeredLeadingContraint.constant = 0.0
             }
-            
-            if item.order?.offeredPrice > 0 {
-                cell.offeredPrice.text = String(Double((item.order?.offeredPrice)!))
-                cell.offeredPrice.hidden = false
+
+            if let offeredPrice = item.order!.offeredPrice {
                 cell.offeredText.hidden = false
+                cell.offeredPrice.hidden = false
+                cell.offeredPrice.text = ViewUtil.formatPrice(offeredPrice)
             }
         }
         

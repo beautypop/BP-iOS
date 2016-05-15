@@ -101,7 +101,7 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
         
         ImageUtil.displayPostImage(self.conversation!.postImage, imageView: prodImg)
         self.prodName.text = self.conversation?.postTitle
-        self.prodPrice.text = Constants.CURRENCY_SYMBOL + String(self.conversation!.postPrice.toIntMax())
+        self.prodPrice.text = ViewUtil.formatPrice(self.conversation!.postPrice)
         self.soldTextLbl.hidden = !self.conversation!.postSold
         self.buyTextLbl.hidden = self.conversation!.postOwner
         self.sellTextLbl.hidden = !self.conversation!.postOwner

@@ -17,7 +17,7 @@ class PostVMLite: BaseArgVM {
     var ownerName: String = ""
     var title: String = ""
     var price: Double = 0
-    var originalPrice: Int = 0
+    var originalPrice: Double = 0
     var sold: Bool = false
     var postType: String = ""
     var conditionType: String = ""
