@@ -45,7 +45,7 @@ struct Constants {
     static let CATEGORY_HEADER_SUBCATEGORY_SELECTOR_COLUMNS = 4
     static let CATEGORY_HEADER_SUBCATEGORY_SELECTOR_EXTRA_HEIGHT = CGFloat(55)
     static let CATEGORY_HEADER_ITEMS_MARGIN_TOTAL = CGFloat(15)     // 3 each x 5
-    static let PROFILE_HEADER_HEIGHT = CGFloat(190)
+    static let PROFILE_HEADER_HEIGHT = CGFloat(225)
     static let FEED_ITEM_2COL_CORNER_RADIUS = CGFloat(3)
     static let FEED_ITEM_2COL_SIDE_SPACING = CGFloat(7)
     static let FEED_ITEM_2COL_LINE_SPACING = CGFloat(7)

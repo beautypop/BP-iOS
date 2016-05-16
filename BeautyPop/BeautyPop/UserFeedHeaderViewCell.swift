@@ -10,6 +10,7 @@ import UIKit
 
 class UserFeedHeaderViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var sellerUrl: UILabel!
     @IBOutlet weak var btnWidthConsttraint: NSLayoutConstraint!
     @IBOutlet weak var profileDescription: UILabel!
     @IBOutlet weak var buttonsView: UIView!
