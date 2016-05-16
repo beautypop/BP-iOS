@@ -224,6 +224,9 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
         } else {
             let dummyLbl = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 0))
             dummyLbl.numberOfLines = 0
+            dummyLbl.adjustsFontSizeToFitWidth = true
+            dummyLbl.lineBreakMode = NSLineBreakMode.ByClipping
+            dummyLbl.font = UIFont.systemFontOfSize(14, weight: UIFontWeightLight)
             dummyLbl.text = self.userInfo?.aboutMe
             dummyLbl.sizeToFit()
             return CGSizeMake(self.view.bounds.width, Constants.PROFILE_HEADER_HEIGHT + dummyLbl.bounds.height)
@@ -290,6 +293,9 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
         //collectionViewTopCellSize = CGSizeMake(self.view.bounds.width, Constants.PROFILE_HEADER_HEIGHT)
         let dummyLbl = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 0))
         dummyLbl.numberOfLines = 0
+        dummyLbl.adjustsFontSizeToFitWidth = true
+        dummyLbl.lineBreakMode = NSLineBreakMode.ByClipping
+        dummyLbl.font = UIFont.systemFontOfSize(14, weight: UIFontWeightLight)
         dummyLbl.text = self.userInfo?.aboutMe
         dummyLbl.sizeToFit()
         collectionViewTopCellSize = CGSizeMake(self.view.bounds.width, Constants.PROFILE_HEADER_HEIGHT + dummyLbl.bounds.height)
