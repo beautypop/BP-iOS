@@ -4776,8 +4776,8 @@
                                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DTg-hS-frU" userLabel="hrBar2">
-                                                                <rect key="frame" x="0.0" y="159" width="406" height="1"/>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DTg-hS-frU" userLabel="hrBar2">
+                                                                <rect key="frame" x="0.0" y="179" width="406" height="1"/>
                                                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="1" id="P9m-oE-6Wc"/>
@@ -7474,8 +7474,8 @@
                                                                     <segue destination="GgU-Ie-MVr" kind="show" identifier="settings" id="kGb-m8-jMo"/>
                                                                 </connections>
                                                             </button>
-                                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QmZ-MO-djm" userLabel="hrBar2">
-                                                                <rect key="frame" x="0.0" y="164" width="396" height="1"/>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QmZ-MO-djm" userLabel="hrBar2">
+                                                                <rect key="frame" x="0.0" y="179" width="396" height="1"/>
                                                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="1" id="6zQ-cc-MRM"/>
