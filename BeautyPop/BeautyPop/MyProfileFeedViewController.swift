@@ -57,7 +57,11 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
         self.tabBarController?.tabBar.hidden = false
         self.navigationController?.tabBarController?.tabBar.hidden = false
         self.navigationItem.title = self.userInfo?.displayName
+        
         setSegmentedControlTitles()
+        if let segmentControl = self.activeHeaderViewCell?.segmentControl {
+            ViewUtil.selectSegmentControl(segmentControl, view: self.uiCollectionView)
+        }
         
         if currentIndex != nil && productViewController?.feedItem != nil {
             let item = productViewController?.feedItem
@@ -66,11 +70,11 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
             currentIndex = nil
         }
         
-        //check for flag and if found refresh the data..
+        // check for flag and if found refresh the data..
         if self.isRefresh {
-            if self.activeHeaderViewCell != nil {
-                self.activeHeaderViewCell?.segmentControl.selectedSegmentIndex = 0
-                segAction(self.activeHeaderViewCell!.segmentControl)
+            if let segmentControl = self.activeHeaderViewCell?.segmentControl {
+                segmentControl.selectedSegmentIndex = 0
+                segAction(segmentControl)
             }
             
             reloadFeedItems()
@@ -117,9 +121,9 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
     }
     
     func setSegmentedControlTitles() {
-        if self.activeHeaderViewCell != nil {
-            self.activeHeaderViewCell?.segmentControl.setTitle("Products " + String(self.userInfo!.numProducts), forSegmentAtIndex: 0)
-            self.activeHeaderViewCell?.segmentControl.setTitle("Likes " + String(self.userInfo!.numLikes), forSegmentAtIndex: 1)
+        if let segmentControl = self.activeHeaderViewCell?.segmentControl {
+            segmentControl.setTitle(NSLocalizedString("products_txt", comment: "") + String(self.userInfo!.numProducts), forSegmentAtIndex: 0)
+            segmentControl.setTitle(NSLocalizedString("likes", comment: "") + String(self.userInfo!.numLikes), forSegmentAtIndex: 1)
         }
     }
     
@@ -339,19 +343,17 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
     }
     
     func setSizesForFilterButtons(cell: UserFeedHeaderViewCell) {
-        isWidthSet = true
         let availableWidthForButtons:CGFloat = self.view.bounds.width
         let buttonWidth :CGFloat = availableWidthForButtons / 3
         
         cell.segmentControl.backgroundColor = Color.WHITE
-        
-        ViewUtil.selectSegmentControl(cell.segmentControl, view: self.uiCollectionView)
-        
         cell.btnWidthConsttraint.constant = buttonWidth
         cell.editProfile.layer.borderColor = Color.LIGHT_GRAY.CGColor
         cell.editProfile.layer.borderWidth = 1.0
         
         ViewUtil.displayRoundedCornerView(cell.editProfile)
+        
+        isWidthSet = true
     }
     
     func onSuccessGetUserInfo(userInfo: UserVM) {

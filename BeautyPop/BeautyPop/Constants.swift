@@ -68,6 +68,8 @@ struct Constants {
     static let NO_ITEM_TIP_TEXT_CELL_HEIGHT = CGFloat(70)
     static let MORE_PRODUCTS_DIMENSION = CGFloat(100)
     static let MORE_PRODUCTS_EXTRA_HEIGHT = CGFloat(35)
+    static let CONVERSATION_ORDER_STATUS_TAG_WIDTH = CGFloat(60)
+    static let CONVERSATION_ORDER_STATUS_TAG_MARGIN = CGFloat(15)
     
     // strings
     static let ACTIVITY_FIRST_POST = NSLocalizedString("activity_now_seller", comment: "") //"You are now a BeautyPop seller! Your first product has been listed:\n"

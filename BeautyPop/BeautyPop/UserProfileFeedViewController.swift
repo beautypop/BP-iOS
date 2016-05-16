@@ -38,9 +38,9 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
         self.setUserInfo(user)
         self.navigationItem.title = self.userInfo?.displayName
         
-        if (self.activeHeaderViewCell != nil) {
-            self.activeHeaderViewCell?.segmentControl.setTitle(NSLocalizedString("products_txt", comment: "") + String(self.userInfo!.numProducts), forSegmentAtIndex: 0)
-            self.activeHeaderViewCell?.segmentControl.setTitle(NSLocalizedString("likes", comment: "") + String(self.userInfo!.numLikes), forSegmentAtIndex: 1)
+        if let segmentControl = self.activeHeaderViewCell?.segmentControl {
+            segmentControl.setTitle(NSLocalizedString("products_txt", comment: "") + String(self.userInfo!.numProducts), forSegmentAtIndex: 0)
+            segmentControl.setTitle(NSLocalizedString("likes", comment: "") + String(self.userInfo!.numLikes), forSegmentAtIndex: 1)
         }
         self.reloadFeedItems()
     }
@@ -57,6 +57,10 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
     override func viewDidAppear(animated: Bool) {
         //self.tabBarController!.tabBar.hidden = true
         //self.navigationItem.setHidesBackButton(false, animated: true)
+        
+        if let segmentControl = self.activeHeaderViewCell?.segmentControl {
+            ViewUtil.selectSegmentControl(segmentControl, view: self.uiCollectionView)
+        }
         
         if currentIndex != nil && productViewController?.feedItem != nil {
             let item = productViewController?.feedItem
@@ -324,20 +328,17 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
     }
     
     func setSizesForFilterButtons(cell: UserFeedHeaderViewCell) {
-        isWidthSet = true
         let availableWidthForButtons:CGFloat = self.view.bounds.width
         let buttonWidth :CGFloat = availableWidthForButtons / 3
         
         cell.segmentControl.backgroundColor = Color.WHITE
-        
-        ViewUtil.selectSegmentControl(cell.segmentControl, view: self.uiCollectionView)
-        
         cell.btnWidthConsttraint.constant = buttonWidth
-        /*cell.followersBtn.layer.borderColor = Color.LIGHT_GRAY.CGColor
+        /*
+        cell.followersBtn.layer.borderColor = Color.LIGHT_GRAY.CGColor
         cell.followersBtn.layer.borderWidth = 1.0
-        
         cell.followingBtn.layer.borderColor = Color.LIGHT_GRAY.CGColor
-        cell.followingBtn.layer.borderWidth = 1.0        */
+        cell.followingBtn.layer.borderWidth = 1.0
+        */
         
         ViewUtil.displayRoundedCornerView(cell.editProfile, bgColor: Color.LIGHT_GRAY)
         
@@ -346,6 +347,8 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
         } else {
             cell.editProfile.hidden = true
         }
+        
+        isWidthSet = true
     }
    
     @IBAction func onClickFollowUnfollow(sender: AnyObject) {
