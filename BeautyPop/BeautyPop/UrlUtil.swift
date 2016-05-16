@@ -13,7 +13,7 @@ class UrlUtil {
     static let ENCODE_CHARSET_UTF8 = "UTF-8"
     
     // NOTE: let str = String(format:"%d , %f, %ld, %@", INT_VALUE, FLOAT_VALUE, DOUBLE_VALUE, STRING_VALUE)
-    static let SELLER_URL = Constants.BASE_URL + "/seller/%d"
+    static let SELLER_URL = Constants.BASE_URL + "/%@"
     static let PRODUCT_URL = Constants.BASE_URL + "/product/%d"
     static let CATEGORY_URL = Constants.BASE_URL + "/category/%d"
     
@@ -45,7 +45,7 @@ class UrlUtil {
     }
     
     static func createSellerUrl(user: UserVMLite) -> String {
-        return String(format: SELLER_URL, user.id)
+        return String(format: SELLER_URL, user.displayName)
     }
     
     static func createProductUrl(post: PostVMLite) -> String {
