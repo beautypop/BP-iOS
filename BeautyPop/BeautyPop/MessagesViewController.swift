@@ -26,8 +26,8 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
     @IBOutlet weak var uploadImgSrc: UIImageView!
     @IBOutlet weak var cameraBtn: UIButton!
     @IBOutlet weak var footerbtnsHeight: NSLayoutConstraint!
-    
     @IBOutlet weak var sellerMessageLbl: UILabel!
+    
     var conversation: ConversationVM? = nil
     var offered = false
     var offeredPrice: Double? = -1.0
@@ -45,6 +45,7 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
     var bubbleData: ChatBubbleData?
     var pendingOrder = false
     let imagePicker = UIImagePickerController()
+    
     @IBOutlet weak var buyerMessageLbl: UILabel!
     @IBOutlet weak var buyerButtonsLayout: UIView! //Parent Layout
     @IBOutlet weak var buyerOrderLayout: UIView!
@@ -428,7 +429,7 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
         self.handleChatMessageResponse(response)
 
         if self.offered {
-            self.newMessage("New offer: \(Int(self.offeredPrice!))", image: nil, system: true)
+            self.doBuyerOrder(self.conversation!, offeredPrice: self.offeredPrice!)
         }
     }
     
@@ -726,7 +727,6 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
         
         pendingOrder = true
         ApiFacade.cancelConversationOrder(conversation.order!.id, successCallback: onSuccessCancelConversationOrder, failureCallback: onFailureCancelConversationOrder)
-        
     }
     
     func onSuccessCancelConversationOrder(order: ConversationOrderVM) {
