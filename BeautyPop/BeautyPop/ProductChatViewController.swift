@@ -126,6 +126,44 @@ class ProductChatViewController: UIViewController {
         cell.comment.text = NSDate(timeIntervalSince1970:Double(item.lastMessageDate) / 1000.0).timeAgo
         ImageUtil.displayThumbnailProfileImage(self.conversations[indexPath.row].userId, imageView: cell.postImage)
         
+        cell.orderStatusView.backgroundColor = UIColor.clearColor()
+        cell.orderStatusView.layer.borderWidth = 0
+        
+        ViewUtil.displayRoundedCornerView(cell.orderStatusView, bgColor: nil, borderColor: Color.WHITE)
+        cell.acceptedText.hidden = true
+        cell.declinedText.hidden = true
+        cell.cancelledText.hidden = true
+        cell.offeredText.hidden = true
+        cell.offeredPrice.hidden = true
+        
+        if item.order != nil && item.order!.active {
+            cell.acceptedTextWidthConstraint.constant = Constants.CONVERSATION_ORDER_STATUS_TAG_WIDTH
+            cell.offeredLeadingContraint.constant = Constants.CONVERSATION_ORDER_STATUS_TAG_MARGIN
+            
+            if item.order!.accepted {
+                cell.acceptedText.hidden = false
+                ViewUtil.displayRoundedCornerView(cell.orderStatusView, bgColor: nil, borderColor: Color.GREEN)
+                cell.orderStatusView.layer.borderWidth = 1
+            } else if item.order!.declined {
+                cell.declinedText.hidden = false
+                ViewUtil.displayRoundedCornerView(cell.orderStatusView, bgColor: nil, borderColor: Color.RED)
+                cell.orderStatusView.layer.borderWidth = 1
+            } else if item.order!.cancelled {
+                cell.cancelledText.hidden = false
+                ViewUtil.displayRoundedCornerView(cell.orderStatusView, bgColor: nil, borderColor: Color.LIGHT_GRAY)
+                cell.orderStatusView.layer.borderWidth = 1
+            } else {
+                cell.acceptedTextWidthConstraint.constant = 0.0
+                cell.offeredLeadingContraint.constant = 0.0
+            }
+            
+            if let offeredPrice = item.order!.offeredPrice {
+                cell.offeredText.hidden = false
+                cell.offeredPrice.hidden = false
+                cell.offeredPrice.text = ViewUtil.formatPrice(offeredPrice)
+            }
+        }
+        
         return cell
     }
     

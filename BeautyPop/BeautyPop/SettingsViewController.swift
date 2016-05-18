@@ -28,7 +28,7 @@ class SettingsViewController: UIViewController {
             self.handleLogout(resultDto)
         }
         
-        versionText.text = AppDelegate.getInstance().appShortVersion
+        //versionText.text = AppDelegate.getInstance().appShortVersion
         
         ViewUtil.displayRoundedCornerView(logOutBtn, bgColor: Color.LIGHT_PINK)
         
