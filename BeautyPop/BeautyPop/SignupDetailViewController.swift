@@ -27,6 +27,8 @@ class SignupDetailViewController: BaseLoginViewController, UITextFieldDelegate, 
                 
         ViewUtil.displayRoundedCornerView(self.submitBtn, bgColor: Color.LIGHT_PINK)
         
+        displayName.delegate = self
+        
         var locs: [String] = []
         for (_, element) in DistrictCache.districts.enumerate() {
             locs.append(element.displayName)
@@ -36,8 +38,6 @@ class SignupDetailViewController: BaseLoginViewController, UITextFieldDelegate, 
         self.languageTypeDropDown.anchorView = languageDropDown
         self.languageTypeDropDown.bottomOffset = CGPoint(x: 0, y: languageDropDown.bounds.height)
         self.languageTypeDropDown.direction = .Top
-        
-        
     }
 
     func onSuccessSaveSignUpInfo(response: String) {
@@ -103,4 +103,8 @@ class SignupDetailViewController: BaseLoginViewController, UITextFieldDelegate, 
         }
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool { // called when 'return' key pressed. return NO to ignore.
+        textField.resignFirstResponder()
+        return true
+    }
 }

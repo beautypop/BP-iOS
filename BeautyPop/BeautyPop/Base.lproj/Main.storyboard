@@ -6591,7 +6591,7 @@
                                     <constraint firstAttribute="width" constant="155" id="BQq-aX-3od"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="BQq-aX-3od"/>
@@ -6675,7 +6675,7 @@
                                     <constraint firstAttribute="height" constant="45" id="fl5-r1-LyI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="NL1-ls-a5w"/>

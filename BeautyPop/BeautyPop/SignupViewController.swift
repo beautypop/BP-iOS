@@ -11,7 +11,7 @@ import SwiftEventBus
 import FBSDKCoreKit
 import FBSDKLoginKit
 
-class SignupViewController: BaseLoginViewController {
+class SignupViewController: BaseLoginViewController, UITextFieldDelegate {
     
     @IBOutlet weak var privacyBtn: UIButton!
     @IBOutlet weak var termsBtn: UIButton!
@@ -36,6 +36,12 @@ class SignupViewController: BaseLoginViewController {
     override func viewDidLoad() {
 
         ViewUtil.displayRoundedCornerView(self.signUpBtn, bgColor: Color.LIGHT_PINK)
+        
+        firstNameText.delegate = self
+        lastNameText.delegate = self
+        emailText.delegate = self
+        passwordText.delegate = self
+        confirmPasswordText.delegate = self
         
         self.privacyBtn.layer.borderWidth = 1.0
         self.privacyBtn.layer.borderColor = Color.GRAY.CGColor
@@ -141,5 +147,10 @@ class SignupViewController: BaseLoginViewController {
             let vController = segue.destinationViewController as! UrlWebViewController
             vController.url = Constants.TERMS_URL
         }
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
