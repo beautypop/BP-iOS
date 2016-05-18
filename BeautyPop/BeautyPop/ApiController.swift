@@ -553,8 +553,8 @@ class ApiController {
         let callEvent = ApiCallEvent()
         callEvent.method = "/api/post/delete/\(id)"
         callEvent.resultClass = "String"
-        callEvent.successEventbusName = "deletePostSuccess"
-        callEvent.failedEventbusName = "deletePostFailed"
+        callEvent.successEventbusName = "onSuccessDeletePost"
+        callEvent.failedEventbusName = "onFailureDeletePost"
         callEvent.apiUrl = Constants.BASE_URL + callEvent.method
         self.makeApiCall(callEvent)
     }

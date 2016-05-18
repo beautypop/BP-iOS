@@ -335,7 +335,7 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
 
         ViewUtil.selectSegmentControl(segControl!, view: self.uiCollectionView)
         
-        //setSegmentedControlTitles()
+        setSegmentedControlTitles()
     }
     
     // MARK: UIImagePickerControllerDelegate Methods

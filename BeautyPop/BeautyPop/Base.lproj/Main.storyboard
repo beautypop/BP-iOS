@@ -418,7 +418,7 @@
                                                         <constraint firstAttribute="height" constant="15" id="AJJ-zD-CfE"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <state key="normal" title="mo">
+                                                    <state key="normal" title="Bo">
                                                         <color key="titleColor" red="0.98823529409999999" green="0.30588235289999999" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
@@ -493,7 +493,7 @@
                                             <constraint firstItem="A5m-Nq-PAj" firstAttribute="top" secondItem="JEb-KH-Dm3" secondAttribute="top" id="QLC-Nc-IDI"/>
                                             <constraint firstItem="evP-hF-mKI" firstAttribute="leading" secondItem="2G3-HM-cle" secondAttribute="leading" id="QZ1-xY-Cu0"/>
                                             <constraint firstItem="evP-hF-mKI" firstAttribute="bottom" secondItem="2G3-HM-cle" secondAttribute="bottom" id="RyC-cu-dKj"/>
-                                            <constraint firstItem="2G3-HM-cle" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="A5m-Nq-PAj" secondAttribute="trailing" constant="5" id="YLD-Mb-s8D"/>
+                                            <constraint firstItem="2G3-HM-cle" firstAttribute="leading" secondItem="A5m-Nq-PAj" secondAttribute="trailing" constant="5" id="YLD-Mb-s8D"/>
                                             <constraint firstItem="Ycg-79-QYK" firstAttribute="leading" secondItem="qJj-IM-lud" secondAttribute="leading" constant="10" id="aZJ-hs-FDd"/>
                                             <constraint firstItem="A5m-Nq-PAj" firstAttribute="baseline" secondItem="JEb-KH-Dm3" secondAttribute="baseline" id="gCJ-Ap-6aw"/>
                                             <constraint firstItem="evP-hF-mKI" firstAttribute="trailing" secondItem="2G3-HM-cle" secondAttribute="trailing" id="hCr-sW-zGW"/>
@@ -555,10 +555,10 @@
                                                         <segue destination="aa6-dY-vf5" kind="show" identifier="userprofile_5" id="2Cj-6A-Sf8"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="liked your product" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="INC-Xp-zau">
-                                                    <rect key="frame" x="65" y="10" width="117" height="15"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" text="You are now a BeautyPop Seller!" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="INC-Xp-zau">
+                                                    <rect key="frame" x="65" y="10" width="252" height="15"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="15" id="Ylv-mS-K2h"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="Ylv-mS-K2h"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -592,10 +592,10 @@
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="This is good" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WUm-WL-2i6" userLabel="Desc">
-                                                    <rect key="frame" x="65" y="28" width="255" height="19"/>
+                                                    <rect key="frame" x="65" y="32" width="255" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="VeH-Jk-jlW"/>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="tQS-cM-PCY"/>
+                                                        <constraint firstAttribute="height" constant="15" id="tQS-cM-PCY"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -626,7 +626,7 @@
                                             <constraint firstItem="QMV-s5-xUQ" firstAttribute="top" secondItem="Bq7-OR-7iO" secondAttribute="top" constant="10" id="g5B-o9-Gl6"/>
                                             <constraint firstItem="Znn-UF-HBl" firstAttribute="top" secondItem="yc8-nd-7Un" secondAttribute="top" id="lV5-qB-dZ9"/>
                                             <constraint firstItem="QMV-s5-xUQ" firstAttribute="leading" secondItem="Bq7-OR-7iO" secondAttribute="leading" constant="10" id="o1t-nV-u3h"/>
-                                            <constraint firstItem="yc8-nd-7Un" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="INC-Xp-zau" secondAttribute="trailing" constant="5" id="pRl-O6-by7"/>
+                                            <constraint firstItem="yc8-nd-7Un" firstAttribute="leading" secondItem="INC-Xp-zau" secondAttribute="trailing" constant="5" id="pRl-O6-by7"/>
                                             <constraint firstItem="INC-Xp-zau" firstAttribute="leading" secondItem="QMV-s5-xUQ" secondAttribute="trailing" constant="10" id="uV7-SN-1xE"/>
                                             <constraint firstItem="WUm-WL-2i6" firstAttribute="top" secondItem="INC-Xp-zau" secondAttribute="bottom" constant="3" id="wfv-7B-Oqe"/>
                                             <constraint firstItem="Znn-UF-HBl" firstAttribute="bottom" secondItem="yc8-nd-7Un" secondAttribute="bottom" id="yCq-9H-UNF"/>
@@ -8355,11 +8355,11 @@
     <inferredMetricsTieBreakers>
         <segue reference="NRf-cI-JqS"/>
         <segue reference="h7o-0V-p0S"/>
-        <segue reference="BGy-Vf-KdP"/>
+        <segue reference="ncj-ht-WX7"/>
         <segue reference="pK4-qg-eaZ"/>
         <segue reference="f1D-EY-plH"/>
         <segue reference="SC0-fE-foi"/>
-        <segue reference="Aso-Du-fLI"/>
+        <segue reference="BGy-Vf-KdP"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

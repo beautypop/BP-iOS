@@ -94,7 +94,7 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
             ViewUtil.makeToast("Error when editing product", view: self.view)
         }
         
-        SwiftEventBus.onMainThread(self, name: "deletePostSuccess") { result in
+        SwiftEventBus.onMainThread(self, name: "onSuccessDeletePost") { result in
             NSLog("Product deleted successfully")
             ViewUtil.showNormalView(self, activityLoading: self.activityLoading)
             UserInfoCache.decrementNumProducts()
@@ -109,7 +109,7 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
             }
         }
         
-        SwiftEventBus.onMainThread(self, name: "deletePostFailure") { result in
+        SwiftEventBus.onMainThread(self, name: "onFailureDeletePost") { result in
             ViewUtil.showNormalView(self, activityLoading: self.activityLoading)
             ViewUtil.makeToast("Error when deleting product", view: self.view)
         }
