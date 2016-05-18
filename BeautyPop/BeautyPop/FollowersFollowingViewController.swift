@@ -45,8 +45,8 @@ class FollowersFollowingViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.setCollectionViewSizesInsets()
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "actionbar_bg_pink"), forBarMetrics: UIBarMetrics.Default)
         
         self.loadFollowingFollowers()
         self.loading = true

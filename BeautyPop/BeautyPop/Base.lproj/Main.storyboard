@@ -1738,19 +1738,19 @@
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cancelled" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ah8-Ke-xqH" userLabel="Cancelled">
                                                     <rect key="frame" x="75" y="86" width="60" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                    <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Offered:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Go-pl-dHe" userLabel="Offered">
                                                     <rect key="frame" x="150" y="86" width="50" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                    <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="$10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jae-eL-JTi" userLabel="oPrice">
                                                     <rect key="frame" x="205" y="86" width="25" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                    <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -3692,7 +3692,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZZ-c7-cqZ" userLabel="version">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZZ-c7-cqZ" userLabel="version">
                                         <rect key="frame" x="239" y="10" width="150" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="KFO-iv-HEb"/>
@@ -3901,6 +3901,7 @@
                     <connections>
                         <outlet property="languageDropDown" destination="pG6-pj-0Bc" id="VIo-mg-o4m"/>
                         <outlet property="logOutBtn" destination="GA2-n7-0TT" id="aP7-rA-Fwz"/>
+                        <outlet property="versionText" destination="vZZ-c7-cqZ" id="uQn-5e-2rw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="geT-I0-B5I" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -7653,7 +7654,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="pGK-V9-vzm" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" backIndicatorImage="actionbar_bg_pink" id="GLo-07-1yp">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GLo-07-1yp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.98431372549999996" green="0.0" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -7674,9 +7675,11 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lYw-Mq-FKZ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Activity" id="Sib-yE-bHM"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" backIndicatorImage="actionbar_bg_pink" id="dEc-U6-RPg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="dEc-U6-RPg">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.98431372549999996" green="0.0" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.98431372549999996" green="0.0" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -7731,9 +7734,11 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="MZN-3D-Nbg" customClass="ScrollingNavigationController" customModule="AMScrollingNavbar" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Home" id="SfA-k4-QbK"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" translucent="NO" backIndicatorImage="actionbar_bg_pink" id="Fm4-5L-jDQ">
+                    <navigationBar key="navigationBar" opaque="NO" contentMode="scaleToFill" translucent="NO" id="Fm4-5L-jDQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.98431372549999996" green="0.0" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.98431372549999996" green="0.0" blue="0.20784313730000001" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -8322,7 +8327,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="actionbar_bg_pink" width="10" height="72"/>
         <image name="arrow_next" width="60" height="60"/>
         <image name="dash_line" width="432" height="12"/>
         <image name="dollar" width="64" height="64"/>

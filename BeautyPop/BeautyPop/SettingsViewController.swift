@@ -14,6 +14,8 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet weak var logOutBtn: UIButton!
     @IBOutlet weak var languageDropDown: UIButton!
+    @IBOutlet weak var versionText: UILabel!
+    
     let languageTypeDropDown = DropDown()
     var currentLangValue = ""
     
@@ -26,8 +28,7 @@ class SettingsViewController: UIViewController {
             self.handleLogout(resultDto)
         }
         
-        // Do any additional setup after loading the view.
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "actionbar_bg_pink"), forBarMetrics: UIBarMetrics.Default)
+        versionText.text = AppDelegate.getInstance().appShortVersion
         
         ViewUtil.displayRoundedCornerView(logOutBtn, bgColor: Color.LIGHT_PINK)
         

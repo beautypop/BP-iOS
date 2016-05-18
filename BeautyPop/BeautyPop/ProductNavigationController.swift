@@ -22,8 +22,6 @@ class ProductNavigationController: UIViewController {
     
     func initNavigationComponent() {
         
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "actionbar_bg_pink"), forBarMetrics: UIBarMetrics.Default)
-        
         let whatsupBtn: UIButton = UIButton()
         whatsupBtn.setImage(UIImage(named: "ic_whatsapp"), forState: UIControlState.Normal)
         whatsupBtn.addTarget(self, action: "onClickWhatsupBtn:", forControlEvents: UIControlEvents.TouchUpInside)
