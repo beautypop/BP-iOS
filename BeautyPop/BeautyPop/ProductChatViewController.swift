@@ -34,9 +34,10 @@ class ProductChatViewController: UIViewController {
     var refreshControl = UIRefreshControl()
     var updateOpenedConversation = false
     var currentIndex: NSIndexPath?
-    var lcontentSize = CGFloat(0.0)
-    let DEFAULT_SEPERATOR_SPACING = CGFloat(5.0)
-    let DEFAULT_TABLEVIEW_CELL_HEIGHT = CGFloat(70.0)
+    
+    //var lcontentSize = CGFloat(0.0)
+    //let DEFAULT_SEPERATOR_SPACING = CGFloat(5.0)
+    //let DEFAULT_TABLEVIEW_CELL_HEIGHT = CGFloat(70.0)
     
     override func viewWillAppear(animated: Bool) {
         ViewUtil.hideActivityLoading(self.activityLoading)
@@ -104,8 +105,9 @@ class ProductChatViewController: UIViewController {
         cell.contentMode = .Redraw
         cell.userComment.numberOfLines = 0
         cell.userComment.text = item.lastMessage
-        self.lcontentSize = cell.userComment.frame.size.height
         cell.userComment.sizeToFit()
+        
+        //self.lcontentSize = cell.userComment.frame.size.height
         
         cell.photoLayout.hidden = !item.lastMessageHasImage
         cell.unreadComments.text = String(item.unread)
@@ -167,9 +169,11 @@ class ProductChatViewController: UIViewController {
         return cell
     }
     
+    /*
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return DEFAULT_TABLEVIEW_CELL_HEIGHT + self.lcontentSize + DEFAULT_SEPERATOR_SPACING
     }
+    */
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
