@@ -53,6 +53,7 @@ class SignupViewController: BaseLoginViewController, UITextFieldDelegate {
     @IBAction func onSignUp(sender: UIButton) {
         if isValid() {
             self.isValidForm = true
+            startLoading()
             ApiFacade.signUp(emailText.text!, fname: firstNameText.text!, lname: lastNameText.text!,
                 password: passwordText.text!, repeatPassword: confirmPasswordText.text!,
                 successCallback: onSuccessSignUp, failureCallback: onFailure)
@@ -60,6 +61,7 @@ class SignupViewController: BaseLoginViewController, UITextFieldDelegate {
     }
     
     func onSuccessSignUp(response: String) {
+        stopLoading()
         self.emailLogin(self.emailText.text!, password: self.passwordText.text!)
     }
     
@@ -126,6 +128,20 @@ class SignupViewController: BaseLoginViewController, UITextFieldDelegate {
             self.termsBtn.setImage(UIImage(named: "ic_check"), forState: UIControlState.Normal)
         }
         isTermsDisplay = !isTermsDisplay
+    }
+    
+    override func startLoading() {
+        super.startLoading()
+        
+        self.signUpBtn.enabled = false
+        self.signUpBtn.alpha = 0.75
+    }
+    
+    override func stopLoading() {
+        super.stopLoading()
+        
+        self.signUpBtn.enabled = true
+        self.signUpBtn.alpha = 1.0
     }
     
     //MARK Segue handling methods.

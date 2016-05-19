@@ -57,6 +57,7 @@ class FollowingFeedViewController: UIViewController, UIScrollViewDelegate {
         feedLoader!.reloadFeedItems()
         
         feedViewAdapter = FeedViewAdapter(collectionView: uiCollectionView)
+        feedViewAdapter?.feedViewItemsLayout = FeedViewAdapter.FeedViewItemsLayout.TWO_COLUMNS
         
         setCollectionViewSizesInsets()
         

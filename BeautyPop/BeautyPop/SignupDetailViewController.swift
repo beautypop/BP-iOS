@@ -41,12 +41,13 @@ class SignupDetailViewController: BaseLoginViewController, UITextFieldDelegate, 
     }
 
     func onSuccessSaveSignUpInfo(response: String) {
-        self.postLogin()
+        stopLoading()
+        postLogin()
     }
     
     override func onFailure(message: String?) {
+        stopLoading()
         ViewUtil.showDialog(NSLocalizedString("login_error", comment: ""), message: message!, view: self)
-        self.stopLoading()
     }
     
     override func viewDidLayoutSubviews() {
@@ -63,12 +64,12 @@ class SignupDetailViewController: BaseLoginViewController, UITextFieldDelegate, 
     
     @IBAction func onClickSubmitBtn(sender: UIButton) {
         if isValid() {
+            startLoading()
             ApiFacade.saveSignUpInfo(self.displayName.text!, locationId: -1, successCallback: onSuccessSaveSignUpInfo, failureCallback: onFailure)
         }
     }
     
     func isValid() -> Bool {
-    
         let validDisplayName = ValidationUtil.isValidDisplayName(StringUtil.trim(self.displayName.text))
         if !validDisplayName.0 {
             ViewUtil.makeToast(validDisplayName.1!, view: self.view)
@@ -76,6 +77,20 @@ class SignupDetailViewController: BaseLoginViewController, UITextFieldDelegate, 
         }
         
         return true
+    }
+    
+    override func startLoading() {
+        super.startLoading()
+        
+        self.submitBtn.enabled = false
+        self.submitBtn.alpha = 0.75
+    }
+    
+    override func stopLoading() {
+        super.stopLoading()
+        
+        self.submitBtn.enabled = true
+        self.submitBtn.alpha = 1.0
     }
     
     func initLanguages() {

@@ -98,13 +98,13 @@ class BaseLoginViewController: UIViewController {
     }
     
     func emailLogin(email: String, password: String) {
-        self.view.alpha = 0.75
+        startLoading()
         AppDelegate.getInstance().logOut()
         ApiFacade.loginByEmail(email, password: password, successCallback: onSuccessLogin, failureCallback: onFailure)
     }
     
     func fbLogin(access_token: String, userId: String) {
-        self.view.alpha = 0.75
+        startLoading()
         AppDelegate.getInstance().logOut()
         ApiFacade.loginByFacebook(access_token, successCallback: onSuccessLogin, failureCallback: onFailure)
     }
