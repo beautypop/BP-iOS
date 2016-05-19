@@ -65,7 +65,8 @@ class ChatBubble: UIView {
         if let _ = data.text {
             // frame calculation
             let startY: CGFloat = 10.0
-            labelChatText = UILabel(frame: CGRectMake(startX, startY, CGRectGetWidth(self.frame) - 2 * startX , 5))
+            labelChatText = SRCopyableLabel(frame: CGRectMake(startX, startY, CGRectGetWidth(self.frame) - 2 * startX , 5))
+            //labelChatText = UILabel(frame: CGRectMake(startX, startY, CGRectGetWidth(self.frame) - 2 * startX , 5))
             labelChatText?.textAlignment = data.type == .Me ? .Right : .Left
             labelChatText?.numberOfLines = 0 // Making it multiline
             labelChatText?.text = data.text
