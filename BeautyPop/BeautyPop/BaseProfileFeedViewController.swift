@@ -96,7 +96,7 @@ class BaseProfileFeedViewController: CustomNavigationController {
         cell.profileDescription.numberOfLines = 0
         cell.profileDescription.text = self.userInfo?.aboutMe
         cell.profileDescription.sizeToFit()
-        cell.sellerUrl.text = UrlUtil.createSellerUrl(self.userInfo!)
+        cell.sellerUrl.text = UrlUtil.createShortSellerUrl(self.userInfo!)
         if cell.userImg.image == nil {
             ImageUtil.displayThumbnailProfileImage(self.userInfo!.id, imageView: cell.userImg)
         }

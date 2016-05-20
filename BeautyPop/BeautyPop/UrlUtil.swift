@@ -62,7 +62,7 @@ class UrlUtil {
     
     static func createShortSellerUrl(user: UserVMLite) -> String {
         let url = createSellerUrl(user)
-        return "Shop" + ": " + stripHttpPrefix(url)
+        return stripHttpPrefix(url)
     }
     
     static func stripHttpPrefix(url: String) -> String {
