@@ -117,6 +117,21 @@ class UserActivityViewController: CustomNavigationController {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("UserActivity", forIndexPath: indexPath) as! UserActivityViewCell
             cell.contentMode = UIViewContentMode.Redraw
             cell.activityTime.text = NSDate(timeIntervalSince1970:Double(self.userActivitesItems[indexPath.row].createdDate) / 1000.0).timeAgo
+            
+            ImageUtil.displayThumbnailProfileImage(Int(self.userActivitesItems[indexPath.row].actorImage), imageView: cell.profileImg)
+            
+            if activityType == "FOLLOWED" {
+                cell.postImage.hidden = true
+            } else {
+                cell.postImage.hidden = false
+                ImageUtil.displayPostImage(Int(self.userActivitesItems[indexPath.row].targetImage), imageView: cell.postImage)
+            }
+            
+            cell.userName.hidden = false
+            cell.userName.setTitle(self.userActivitesItems[indexPath.row].actorName, forState: UIControlState.Normal)
+            cell.userName.setTitleColor(Color.PINK, forState: UIControlState.Normal)
+            cell.userName.sizeToFit()
+            
             cell.textMessage.text = getMessageText(self.userActivitesItems[indexPath.row])
             cell.textMessage.numberOfLines = 0
             cell.textMessage.sizeToFit()
@@ -129,29 +144,6 @@ class UserActivityViewController: CustomNavigationController {
             cell.desc.numberOfLines = 0
             cell.desc.sizeToFit()
             
-            ImageUtil.displayThumbnailProfileImage(Int(self.userActivitesItems[indexPath.row].actorImage), imageView: cell.profileImg)
-
-            cell.userName.hidden = false
-            cell.userName.setTitle(self.userActivitesItems[indexPath.row].actorName, forState: UIControlState.Normal)
-            cell.userName.setTitleColor(Color.PINK, forState: UIControlState.Normal)
-            
-            /*if activityType == "FIRST_POST" {
-                cell.userName.hidden = true
-                cell.userName.frame.size = CGSizeMake(0, cell.userName.frame.height)
-                cell.userName.setTitle(nil, forState: UIControlState.Normal)
-            } else {
-                cell.userName.hidden = false
-                cell.userName.setTitle(self.userActivitesItems[indexPath.row].actorName, forState: UIControlState.Normal)
-                cell.userName.setTitleColor(Color.PINK, forState: UIControlState.Normal)
-            }*/
-            //cell.userName.sizeToFit()
-            
-            if activityType == "FOLLOWED" {
-                cell.postImage.hidden = true
-            } else {
-                cell.postImage.hidden = false
-                ImageUtil.displayPostImage(Int(self.userActivitesItems[indexPath.row].targetImage), imageView: cell.postImage)
-            }
             cell.layer.backgroundColor = Color.WHITE.CGColor
             if !viewStatus {
                 cell.layer.backgroundColor = Color.LIGHT_PINK_4.CGColor
