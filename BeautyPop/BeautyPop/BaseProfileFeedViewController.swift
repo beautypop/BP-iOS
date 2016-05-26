@@ -112,5 +112,9 @@ class BaseProfileFeedViewController: CustomNavigationController {
         } else {
             cell.followingBtn.setTitle(NSLocalizedString("following_txt", comment: "") + "0", forState: UIControlState.Normal)
         }
+        
+        cell.reviewView.rating = Double((self.userInfo?.averageReviewScore)!)
+        cell.reviewView.text = "(" + String(Int((self.userInfo?.numReviews)!)) + ")"
+        
     }
 }

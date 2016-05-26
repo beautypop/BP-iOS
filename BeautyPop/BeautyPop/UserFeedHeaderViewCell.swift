@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import Cosmos
 
 class UserFeedHeaderViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var reviewView: CosmosView!
     @IBOutlet weak var sellerUrl: UILabel!
     @IBOutlet weak var btnWidthConsttraint: NSLayoutConstraint!
     @IBOutlet weak var profileDescription: UILabel!
