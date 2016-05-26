@@ -746,4 +746,61 @@ class ApiFacade {
         ApiController.instance.declineConversationOrder(conversationId)
     }
     
+    static func getSellerReviewsFor(userId: Int, successCallback: (([ReviewVM]) -> Void)?, failureCallback: ((String) -> Void)?) {
+        
+        SwiftEventBus.unregister(self)
+        
+        SwiftEventBus.onMainThread(self, name: "onSuccessSellerReviews") { result in
+            if ViewUtil.isEmptyResult(result) {
+                failureCallback!("Comments returned is empty")
+                return
+            }
+            
+            if successCallback != nil {
+                successCallback!(result.object as! [ReviewVM])
+            }
+        }
+        
+        SwiftEventBus.onMainThread(self, name: "onFailureSellerReviews") { result in
+            if failureCallback != nil {
+                var error = "Failed to get comments..."
+                if result.object is NSString {
+                    error += "\n"+(result.object as! String)
+                }
+                failureCallback!(error)
+            }
+        }
+        
+        ApiController.instance.getSellerReviewsFor(userId)
+    }
+    
+    static func getBuyerReviewsFor(userId: Int, successCallback: (([ReviewVM]) -> Void)?, failureCallback: ((String) -> Void)?) {
+        
+        SwiftEventBus.unregister(self)
+        
+        SwiftEventBus.onMainThread(self, name: "onSuccessBuyerReviews") { result in
+            if ViewUtil.isEmptyResult(result) {
+                failureCallback!("Comments returned is empty")
+                return
+            }
+            
+            if successCallback != nil {
+                successCallback!(result.object as! [ReviewVM])
+            }
+        }
+        
+        SwiftEventBus.onMainThread(self, name: "onFailureBuyerReviews") { result in
+            if failureCallback != nil {
+                var error = "Failed to get comments..."
+                if result.object is NSString {
+                    error += "\n"+(result.object as! String)
+                }
+                failureCallback!(error)
+            }
+        }
+        
+        ApiController.instance.getBuyerReviewsFor(userId)
+    }
+    
+    
 }

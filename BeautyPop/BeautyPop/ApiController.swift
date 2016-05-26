@@ -765,6 +765,30 @@ class ApiController {
         self.makeApiCall(callEvent)
     }
     
+    ///api/get-featured-items/{itemType}
+    func getSellerReviewsFor(userId: Int) {
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/api/get-seller-reviews-for/\(userId)"
+        callEvent.resultClass = "[ReviewVM]"
+        callEvent.successEventbusName = "onSuccessSellerReviews"
+        callEvent.failedEventbusName = "onFailureSellerReviews"
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        
+        self.makeApiCall(callEvent)
+    }
+    
+    ///api/get-featured-items/{itemType}
+    func getBuyerReviewsFor(userId: Int) {
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/api/get-buyer-reviews-for/\(userId)"
+        callEvent.resultClass = "[ReviewVM]"
+        callEvent.successEventbusName = "onSuccessBuyerReviews"
+        callEvent.failedEventbusName = "onFailureBuyerReviews"
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        
+        self.makeApiCall(callEvent)
+    }
+    
     func makeApiCall(arg: ApiCallEvent) {
         NSLog("makeApiCall")
         
@@ -886,6 +910,7 @@ class ApiController {
         case "[FeaturedItemVM]": result = Mapper<FeaturedItemVM>().mapArray(inputStr)!
         case "ConversationOrderVM": result = Mapper<ConversationOrderVM>().map(inputStr)!
         case "ResponseVM": result = Mapper<ResponseVM>().map(inputStr)!
+        case "[ReviewVM]": result = Mapper<ReviewVM>().mapArray(inputStr)!
         case "String": result = inputStr
         default: NSLog("calling default object resolver")
         }
