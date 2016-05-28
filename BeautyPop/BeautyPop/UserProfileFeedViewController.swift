@@ -251,9 +251,11 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
         if (identifier == "followingCalls" || identifier == "followersCall") {
             return true
-        } else if (identifier == "editProfile"){
+        } else if identifier == "editProfile" {
             return true
-        } else if (identifier == "upProductScreen") {
+        } else if identifier == "upProductScreen" {
+            return true
+        } else if identifier == "userProfileUserReview" {
             return true
         }
         return false
@@ -278,6 +280,10 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
             productViewController = segue.destinationViewController as? ProductViewController
             productViewController!.feedItem = feedItem
             productViewController!.hidesBottomBarWhenPushed = true
+        } else if segue.identifier == "userProfileUserReview" {
+            let vController = segue.destinationViewController as! UserReviewViewController
+            vController.hidesBottomBarWhenPushed = true
+            vController.userId = self.userInfo!.id
         }
     }
     

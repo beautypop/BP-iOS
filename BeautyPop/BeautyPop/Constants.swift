@@ -71,6 +71,9 @@ struct Constants {
     static let CONVERSATION_ORDER_STATUS_TAG_WIDTH = CGFloat(60)
     static let CONVERSATION_ORDER_STATUS_TAG_MARGIN = CGFloat(15)
     
+    static let USER_REVIEW_DEFAULT_HEIGHT = CGFloat(85.0)
+    //static let USER_REVIEW_SIDE_MARGIN = CGFloat(30.0)
+    
     // strings
     static let ACTIVITY_FIRST_POST = NSLocalizedString("activity_now_seller", comment: "") //"You are now a BeautyPop seller! Your first product has been listed:\n"
     static let ACTIVITY_NEW_POST = NSLocalizedString("activity_new_product", comment: "") // "New product listed:\n"

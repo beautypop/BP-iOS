@@ -250,6 +250,8 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
             return true
         } else if identifier == "settings" {
             return true
+        } else if identifier == "myProfileUserReview" {
+            return true
         }
         return false
     }
@@ -276,6 +278,10 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
             //self.uiCollectionView.delegate = nil
             let vController = segue.destinationViewController as! SettingsViewController
             vController.hidesBottomBarWhenPushed = true
+        } else if segue.identifier == "myProfileUserReview" {
+            let vController = segue.destinationViewController as! UserReviewViewController
+            vController.hidesBottomBarWhenPushed = true
+            vController.userId = self.userInfo!.id
         }
     }
     

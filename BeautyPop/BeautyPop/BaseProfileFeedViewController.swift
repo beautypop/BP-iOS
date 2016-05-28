@@ -113,7 +113,29 @@ class BaseProfileFeedViewController: CustomNavigationController {
             cell.followingBtn.setTitle(NSLocalizedString("following_txt", comment: "") + "0", forState: UIControlState.Normal)
         }
         cell.reviewView.settings.updateOnTouch = false
-        cell.reviewView.rating = Double((self.userInfo?.averageReviewScore)!)
+        cell.reviewView.rating = 0
+        var averageRating = self.userInfo?.averageReviewScore
+        if(averageRating > 1.0 && averageRating <= 1.25){
+            cell.reviewView.rating = 1
+        }else if(averageRating > 1.25 && averageRating <= 1.75){
+            cell.reviewView.rating = 1.5
+        }else if(averageRating > 1.75 && averageRating <= 2.25){
+            cell.reviewView.rating = 2
+        }else if(averageRating > 2.25 && averageRating <= 2.75){
+            cell.reviewView.rating = 2.5
+        }else if(averageRating > 2.75 && averageRating <= 3.25){
+            cell.reviewView.rating = 3
+        }else if(averageRating > 3.25 && averageRating <= 3.75){
+            cell.reviewView.rating = 3.5
+        }else if(averageRating > 3.75 && averageRating <= 4.25){
+            cell.reviewView.rating = 4
+        }else if(averageRating > 4.25 && averageRating <= 4.75){
+            cell.reviewView.rating = 4.5
+        }else if(averageRating > 4.75 && averageRating <= 5.0){
+            cell.reviewView.rating = 5
+        }
+        
+        
         cell.reviewView.text = "(" + String(Int((self.userInfo?.numReviews)!)) + ")"
         
     }
