@@ -54,6 +54,7 @@ class UserReviewViewController: UIViewController {
         cell.title.text = reviewItem.userName
         cell.desc.text = reviewItem.review
         cell.reviewScore.rating = reviewItem.score
+        cell.reviewScore.settings.updateOnTouch = false
         cell.activityTime.text = NSDate(timeIntervalSince1970:Double(self.userReviews[indexPath.row].reviewDate) / 1000.0).timeAgo
         ImageUtil.displayThumbnailProfileImage(Int(self.userReviews[indexPath.row].userId), imageView: cell.userProfileImg)
         ImageUtil.displayPostImage(Int(self.userReviews[indexPath.row].postImageId), imageView: cell.productItem)
