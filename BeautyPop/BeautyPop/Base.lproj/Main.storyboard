@@ -412,8 +412,8 @@
                                                         <segue destination="aa6-dY-vf5" kind="show" identifier="userprofile_4" id="ncj-ht-WX7"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JEb-KH-Dm3">
-                                                    <rect key="frame" x="65" y="10" width="25" height="15"/>
+                                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JEb-KH-Dm3">
+                                                    <rect key="frame" x="65" y="10" width="30" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="AJJ-zD-CfE"/>
                                                     </constraints>
@@ -425,8 +425,8 @@
                                                         <segue destination="aa6-dY-vf5" kind="show" identifier="userprofile_3" id="4HJ-mh-g5u"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" text="liked your product" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5m-Nq-PAj">
-                                                    <rect key="frame" x="95" y="10" width="225" height="15"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="liked your product" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5m-Nq-PAj">
+                                                    <rect key="frame" x="98" y="10" width="117" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="tow-Ig-YOH"/>
                                                     </constraints>
@@ -484,7 +484,6 @@
                                             <constraint firstItem="A5m-Nq-PAj" firstAttribute="top" secondItem="4h1-dB-5QE" secondAttribute="top" id="58b-44-3b8"/>
                                             <constraint firstAttribute="bottom" secondItem="8ws-W6-CuJ" secondAttribute="bottom" constant="5" id="8W7-Ba-1Eb"/>
                                             <constraint firstItem="Ycg-79-QYK" firstAttribute="top" secondItem="qJj-IM-lud" secondAttribute="top" constant="10" id="A84-yq-1EZ"/>
-                                            <constraint firstItem="A5m-Nq-PAj" firstAttribute="centerY" secondItem="JEb-KH-Dm3" secondAttribute="centerY" id="AMp-5L-OAJ"/>
                                             <constraint firstItem="8ws-W6-CuJ" firstAttribute="top" secondItem="xQy-n2-qPy" secondAttribute="bottom" constant="3" id="L4q-23-FeK"/>
                                             <constraint firstItem="4h1-dB-5QE" firstAttribute="top" secondItem="qJj-IM-lud" secondAttribute="top" constant="10" id="L7p-eI-Ybn"/>
                                             <constraint firstItem="2G3-HM-cle" firstAttribute="leading" secondItem="8ws-W6-CuJ" secondAttribute="trailing" constant="5" id="No6-XX-WAS"/>
@@ -493,16 +492,15 @@
                                             <constraint firstItem="A5m-Nq-PAj" firstAttribute="top" secondItem="JEb-KH-Dm3" secondAttribute="top" id="QLC-Nc-IDI"/>
                                             <constraint firstItem="evP-hF-mKI" firstAttribute="leading" secondItem="2G3-HM-cle" secondAttribute="leading" id="QZ1-xY-Cu0"/>
                                             <constraint firstItem="evP-hF-mKI" firstAttribute="bottom" secondItem="2G3-HM-cle" secondAttribute="bottom" id="RyC-cu-dKj"/>
-                                            <constraint firstItem="2G3-HM-cle" firstAttribute="leading" secondItem="A5m-Nq-PAj" secondAttribute="trailing" constant="5" id="YLD-Mb-s8D"/>
                                             <constraint firstItem="Ycg-79-QYK" firstAttribute="leading" secondItem="qJj-IM-lud" secondAttribute="leading" constant="10" id="aZJ-hs-FDd"/>
                                             <constraint firstItem="A5m-Nq-PAj" firstAttribute="baseline" secondItem="JEb-KH-Dm3" secondAttribute="baseline" id="gCJ-Ap-6aw"/>
                                             <constraint firstItem="evP-hF-mKI" firstAttribute="trailing" secondItem="2G3-HM-cle" secondAttribute="trailing" id="hCr-sW-zGW"/>
                                             <constraint firstAttribute="trailing" secondItem="2G3-HM-cle" secondAttribute="trailing" constant="10" id="hEg-Hb-Y7j"/>
-                                            <constraint firstItem="A5m-Nq-PAj" firstAttribute="leading" secondItem="JEb-KH-Dm3" secondAttribute="trailing" constant="3" id="jx3-Pl-MwB"/>
                                             <constraint firstItem="JEb-KH-Dm3" firstAttribute="leading" secondItem="4h1-dB-5QE" secondAttribute="trailing" constant="10" id="lkZ-IS-5Xa"/>
                                             <constraint firstItem="xQy-n2-qPy" firstAttribute="top" secondItem="JEb-KH-Dm3" secondAttribute="bottom" constant="3" id="mgT-aZ-HET"/>
                                             <constraint firstItem="xQy-n2-qPy" firstAttribute="leading" secondItem="Ycg-79-QYK" secondAttribute="trailing" constant="10" id="nQD-h5-6yG"/>
                                             <constraint firstItem="2G3-HM-cle" firstAttribute="leading" secondItem="xQy-n2-qPy" secondAttribute="trailing" constant="5" id="sFt-ZF-8xT"/>
+                                            <constraint firstItem="A5m-Nq-PAj" firstAttribute="leading" secondItem="JEb-KH-Dm3" secondAttribute="trailing" constant="3" id="uFZ-R6-Kbv"/>
                                             <constraint firstItem="2G3-HM-cle" firstAttribute="top" secondItem="qJj-IM-lud" secondAttribute="top" constant="10" id="vK5-Jj-LPj"/>
                                             <constraint firstItem="JEb-KH-Dm3" firstAttribute="top" secondItem="4h1-dB-5QE" secondAttribute="top" id="xbd-SF-orn"/>
                                             <constraint firstItem="4h1-dB-5QE" firstAttribute="leading" secondItem="qJj-IM-lud" secondAttribute="leading" constant="10" id="ygq-eu-h5P"/>
@@ -2736,10 +2734,10 @@
                         <viewControllerLayoutGuide type="bottom" id="f1g-RB-HqY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Imc-Fj-l3e">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VBu-fx-o8h" userLabel="PostLayoutView">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VBu-fx-o8h" userLabel="PostLayoutView">
                                 <rect key="frame" x="0.0" y="20" width="414" height="80"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OX8-a0-XDk" userLabel="PostImage">
@@ -2835,16 +2833,16 @@
                                 </variation>
                             </view>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="T6Y-rR-4fQ">
-                                <rect key="frame" x="189" y="350" width="37" height="37"/>
+                                <rect key="frame" x="189" y="318" width="37" height="37"/>
                                 <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="~ No Chats ~" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jkb-J8-90L" userLabel="TipText">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="~ No Chats ~" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jkb-J8-90L" userLabel="TipText">
                                 <rect key="frame" x="10" y="20" width="394" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="103" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UgG-qg-qxq" userLabel="ConversationTableView">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="103" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UgG-qg-qxq" userLabel="ConversationTableView">
                                 <rect key="frame" x="0.0" y="100" width="414" height="636"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -4414,7 +4412,7 @@
             <objects>
                 <collectionViewController title="Followers View Controller" id="71D-99-izD" userLabel="Following View Controller" customClass="FollowersFollowingViewController" customModule="BeautyPop" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="hiX-6h-gs8">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.92549019607843142" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="1hj-4H-bI1">
@@ -4425,7 +4423,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="followingCollectionViewCell" id="Cz6-lU-wkd" customClass="FollowingCollectionViewCell" customModule="BeautyPop" customModuleProvider="target">
-                                <rect key="frame" x="140" y="0.0" width="320" height="64"/>
+                                <rect key="frame" x="47" y="0.0" width="320" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
@@ -4510,7 +4508,7 @@
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NoItemsToolTip" id="VzE-sZ-OCq" customClass="TooltipViewCell" customModule="BeautyPop" customModuleProvider="target">
-                                <rect key="frame" x="140" y="65" width="320" height="64"/>
+                                <rect key="frame" x="47" y="65" width="320" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
@@ -4558,11 +4556,11 @@
                         <viewControllerLayoutGuide type="bottom" id="awR-cA-oQ0"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="NnA-yH-70c">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="80Z-ha-zQ3">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="ZIa-wx-WkQ">
                                     <size key="itemSize" width="129" height="169"/>
@@ -5035,7 +5033,7 @@
                                 </connections>
                             </collectionView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="gYo-Xm-QDB">
-                                <rect key="frame" x="189" y="350" width="37" height="37"/>
+                                <rect key="frame" x="189" y="318" width="37" height="37"/>
                                 <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
                         </subviews>
@@ -5069,10 +5067,10 @@
                         <viewControllerLayoutGuide type="bottom" id="mKu-Bu-bBb"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="qvX-VW-SYw">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C8z-aJ-lu5" customClass="BetterSegmentedControl" customModule="BetterSegmentedControl">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C8z-aJ-lu5" customClass="BetterSegmentedControl" customModule="BetterSegmentedControl">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -5087,7 +5085,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="51f-Gl-bo1">
+                            <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="51f-Gl-bo1">
                                 <rect key="frame" x="0.0" y="40" width="414" height="583"/>
                                 <color key="backgroundColor" red="0.92549019610000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -5281,7 +5279,7 @@
                                     <outlet property="delegate" destination="cn7-dH-0VA" id="sFN-Mf-oaA"/>
                                 </connections>
                             </collectionView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="QAZ-tm-Pn8">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="QAZ-tm-Pn8">
                                 <rect key="frame" x="197" y="358" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
@@ -5317,7 +5315,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Fsn-8h-2Hq"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="vrW-h3-tGO">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="64" width="414" height="623"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="aUT-qn-yHg">
@@ -8551,10 +8549,10 @@
                         <viewControllerLayoutGuide type="bottom" id="fXw-cu-OeR"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Q4b-8d-bqO">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="65" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dAN-en-S3Z" userLabel="CommentTableView">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="65" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dAN-en-S3Z" userLabel="CommentTableView">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="583"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -8677,16 +8675,16 @@
                                 </connections>
                             </tableView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="zbL-U6-B0u">
-                                <rect key="frame" x="189" y="349" width="37" height="37"/>
+                                <rect key="frame" x="189" y="317" width="37" height="37"/>
                                 <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="~ No Comments ~" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHk-BC-whB" userLabel="tipText">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="~ No Comments ~" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHk-BC-whB" userLabel="tipText">
                                 <rect key="frame" x="0.0" y="10" width="414" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fzr-3V-Umz">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fzr-3V-Umz">
                                 <rect key="frame" x="0.0" y="583" width="414" height="40"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3zJ-XM-2nJ" userLabel="hr">
@@ -8792,12 +8790,12 @@
     <inferredMetricsTieBreakers>
         <segue reference="NRf-cI-JqS"/>
         <segue reference="h7o-0V-p0S"/>
-        <segue reference="oRf-1U-UOz"/>
-        <segue reference="fnX-3S-LaT"/>
-        <segue reference="M0G-4C-Ovh"/>
-        <segue reference="sXk-cu-9b6"/>
+        <segue reference="ncj-ht-WX7"/>
         <segue reference="fRU-pM-mSi"/>
+        <segue reference="7VM-RZ-NKx"/>
+        <segue reference="M0G-4C-Ovh"/>
         <segue reference="SC0-fE-foi"/>
+        <segue reference="oRf-1U-UOz"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>
