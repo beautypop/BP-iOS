@@ -240,9 +240,9 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
     
     //MARK Segue handling methods.
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        if identifier == "followingCalls" {
+        if identifier == "showFollowings" {
             return true
-        } else if identifier == "followersCall" {
+        } else if identifier == "showFollowers" {
             return true
         } else if identifier == "editProfile" {
             return true
@@ -257,7 +257,7 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "followingCalls" || segue.identifier == "followersCall" {
+        if segue.identifier == "showFollowings" || segue.identifier == "showFollowers" {
             let vController = segue.destinationViewController as! FollowersFollowingViewController
             vController.userId = self.userInfo!.id
             vController.optionType = segue.identifier!

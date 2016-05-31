@@ -12,18 +12,20 @@ import BetterSegmentedControl
 class UserReviewViewController: UIViewController {
     
     @IBOutlet weak var segControl: BetterSegmentedControl!
+    @IBOutlet weak var activityLoading: UIActivityIndicatorView!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     var userId: Int = 0
     var userReviews: [ReviewVM] = []
     
-    @IBOutlet weak var activityLoading: UIActivityIndicatorView!
-    @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
         //ApiFacade.getSellerReviewsFor(userId, successCallback: onSuccessReviews, failureCallback: onFailureReviews)
         ApiFacade.getBuyerReviewsFor(userId, successCallback: onSuccessReviews, failureCallback: onFailureReviews)
+        
         segControl.addTarget(self, action: "onValueChanged:", forControlEvents: .ValueChanged)
-        // Do any additional setup after loading the view.
+        segControl.titles = [ "Sold", "Purchased" ]
     }
 
     override func didReceiveMemoryWarning() {

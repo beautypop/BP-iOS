@@ -249,7 +249,7 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
     
     //MARK Segue handling methods.
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        if (identifier == "followingCalls" || identifier == "followersCall") {
+        if (identifier == "showFollowings" || identifier == "showFollowers") {
             return true
         } else if identifier == "editProfile" {
             return true
@@ -263,7 +263,7 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         //self.tabBarController!.tabBar.hidden = true
-        if (segue.identifier == "followingCalls" || segue.identifier == "followersCall") {
+        if (segue.identifier == "showFollowings" || segue.identifier == "showFollowers") {
             let vController = segue.destinationViewController as! FollowersFollowingViewController
             vController.userId = self.userInfo!.id
             vController.optionType = segue.identifier!

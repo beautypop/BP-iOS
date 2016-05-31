@@ -102,12 +102,17 @@ class FollowersFollowingViewController: UICollectionViewController {
         ImageUtil.displayThumbnailProfileImage(userInfo.id, imageView: cell.userImage)
         cell.followersCount.text = String(userInfo.numFollowers)
         
-        if (userInfo.isFollowing) {
-            ViewUtil.displayRoundedCornerView(cell.followingsBtn, bgColor: Color.LIGHT_GRAY)
-            cell.followingsBtn.setTitle("Following", forState: UIControlState.Normal)
+        if userInfo.id == UserInfoCache.getUser()?.id {
+            cell.followingsBtn.hidden = true
         } else {
-            ViewUtil.displayRoundedCornerView(cell.followingsBtn, bgColor: Color.LIGHT_PINK)
-            cell.followingsBtn.setTitle("Follow", forState: UIControlState.Normal)
+            cell.followingsBtn.hidden = false
+            if userInfo.isFollowing {
+                ViewUtil.displayRoundedCornerView(cell.followingsBtn, bgColor: Color.LIGHT_GRAY)
+                cell.followingsBtn.setTitle("Following", forState: UIControlState.Normal)
+            } else {
+                ViewUtil.displayRoundedCornerView(cell.followingsBtn, bgColor: Color.LIGHT_PINK)
+                cell.followingsBtn.setTitle("Follow", forState: UIControlState.Normal)
+            }
         }
         
         return cell
@@ -166,10 +171,10 @@ class FollowersFollowingViewController: UICollectionViewController {
     }
     
     func loadFollowingFollowers() {
-        if ("followingCalls" == optionType) {
-            self.navigationItem.title = "Followings"
-        } else if ("followersCall" == optionType) {
-            self.navigationItem.title = "Followers"
+        if ("showFollowings" == optionType) {
+            self.navigationItem.title = NSLocalizedString("followings_txt", comment: "")
+        } else if ("showFollowers" == optionType) {
+            self.navigationItem.title = NSLocalizedString("followers_txt", comment: "")
         }
         
         ApiFacade.getUserFollowingFollowers(self.userId, offset: offset, optionType: optionType, successCallback: onSuccessGetFollowingFollowers, failureCallback: onFailureGetFollowingFollowers)

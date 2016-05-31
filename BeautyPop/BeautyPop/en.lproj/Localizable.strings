@@ -89,8 +89,9 @@
 "products_txt" = "Products ";
 "likes" = "Likes ";
 "followers_txt" = "Followers ";
-"following_txt" = "Following ";
+"followings_txt" = "Followings ";
 "follow_txt" = "Follow";
+"following_txt" = "Following";
 "verified_email_msg" = "Email is not verified. Please check your email from BeautyPop and click verify link.";
 "login_error" = "Login Error";
 "fill_first_name" = "Please fill first name";

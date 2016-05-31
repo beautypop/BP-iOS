@@ -603,9 +603,9 @@ class ApiFacade {
         }
         
         switch optionType {
-            case "followingCalls":
+            case "showFollowings":
                 ApiController.instance.getUserFollowings(userId, offset: offset)
-            case "followersCall":
+            case "showFollowers":
                 ApiController.instance.getUserFollowers(userId, offset: offset)
             default: break
         }
