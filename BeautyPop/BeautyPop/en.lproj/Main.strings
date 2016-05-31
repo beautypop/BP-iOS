@@ -1,6 +1,6 @@
 
-/* Class = "UIButton"; normalTitle = "Buy Now"; ObjectID = "13f-kK-thK"; */
-"13f-kK-thK.normalTitle" = "Buy Now";
+/* Class = "UIButton"; normalTitle = "Make Offer"; ObjectID = "13f-kK-thK"; */
+"13f-kK-thK.normalTitle" = "Make Offer";
 
 /* Class = "UIButton"; normalTitle = "Seller has accepted your order"; ObjectID = "1IR-L1-WIi"; */
 "1IR-L1-WIi.normalTitle" = "Seller has accepted your order";
@@ -293,8 +293,8 @@
 /* Class = "UILabel"; text = "Products will be pushed to you based on your location"; ObjectID = "XCx-fZ-UbV"; */
 "XCx-fZ-UbV.text" = "Products will be pushed to you based on your location";
 
-/* Class = "UIButton"; normalTitle = "Buy Now"; ObjectID = "XSw-fb-wAp"; */
-"XSw-fb-wAp.normalTitle" = "Buy Now";
+/* Class = "UIButton"; normalTitle = "Make Offer"; ObjectID = "XSw-fb-wAp"; */
+"XSw-fb-wAp.normalTitle" = "Make Offer";
 
 /* Class = "UILabel"; text = "5days ago"; ObjectID = "XTz-40-p6i"; */
 "XTz-40-p6i.text" = "5days ago";
@@ -566,8 +566,8 @@
 /* Class = "UITextField"; placeholder = "Email"; ObjectID = "xxB-KE-xtu"; */
 "xxB-KE-xtu.placeholder" = "Email";
 
-/* Class = "UIButton"; normalTitle = "Buy Again"; ObjectID = "yFN-Sa-mtK"; */
-"yFN-Sa-mtK.normalTitle" = "Buy Again";
+/* Class = "UIButton"; normalTitle = "Make Offer"; ObjectID = "yFN-Sa-mtK"; */
+"yFN-Sa-mtK.normalTitle" = "Make Offer";
 
 /* Class = "UILabel"; text = "-"; ObjectID = "yYJ-va-BJl"; */
 "yYJ-va-BJl.text" = "-";

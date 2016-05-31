@@ -27,8 +27,8 @@
 "pm_accepted_message" = "Offer is accepted";
 "pm_declined_message" = "Offer is declined";
 "pm_order_buy_text" = "Interested?";
-"pm_order_buy" = "Buy Now";
-"pm_order_buy_again" = "Buy Again";
+"pm_order_buy" = "Make Offer";
+"pm_order_buy_again" = "Make Offer";
 "pm_order_cancel_text" = "Ordered";
 "pm_order_cancel" = "Cancel Order";
 "pm_order_cancelled" = "Order cancelled";
