@@ -4802,7 +4802,7 @@
                                                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                         </state>
                                                                         <connections>
-                                                                            <segue destination="71D-99-izD" kind="show" identifier="followingCalls" id="fRU-pM-mSi"/>
+                                                                            <segue destination="71D-99-izD" kind="show" identifier="showFollowers" id="fRU-pM-mSi"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PlE-t5-tHu" userLabel="Following">
@@ -4821,7 +4821,7 @@
                                                                             </mask>
                                                                         </variation>
                                                                         <connections>
-                                                                            <segue destination="71D-99-izD" kind="show" identifier="followersCall" id="QmE-57-6W9"/>
+                                                                            <segue destination="71D-99-izD" kind="show" identifier="showFollowings" id="QmE-57-6W9"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Hu-P6-Ol2" userLabel="PEdit Profile">
@@ -5301,8 +5301,8 @@
                                     <outlet property="delegate" destination="cn7-dH-0VA" id="sFN-Mf-oaA"/>
                                 </connections>
                             </collectionView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="QAZ-tm-Pn8">
-                                <rect key="frame" x="197" y="358" width="20" height="20"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="QAZ-tm-Pn8">
+                                <rect key="frame" x="197" y="326" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -7789,6 +7789,7 @@
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="100" id="BWb-GB-XfD"/>
+                                                                            <constraint firstAttribute="width" constant="100" id="H73-q2-Wgf"/>
                                                                             <constraint firstAttribute="width" constant="100" id="sv9-bb-tL6"/>
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -7798,10 +7799,11 @@
                                                                         <variation key="default">
                                                                             <mask key="constraints">
                                                                                 <exclude reference="BWb-GB-XfD"/>
+                                                                                <exclude reference="sv9-bb-tL6"/>
                                                                             </mask>
                                                                         </variation>
                                                                         <connections>
-                                                                            <segue destination="71D-99-izD" kind="show" identifier="followersCall" id="SUR-X2-GSB"/>
+                                                                            <segue destination="71D-99-izD" kind="show" identifier="showFollowers" id="SUR-X2-GSB"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Z9-MB-j6j" userLabel="Following">
@@ -7820,7 +7822,7 @@
                                                                             </mask>
                                                                         </variation>
                                                                         <connections>
-                                                                            <segue destination="71D-99-izD" kind="show" identifier="followingCalls" id="f1D-EY-plH"/>
+                                                                            <segue destination="71D-99-izD" kind="show" identifier="showFollowings" id="f1D-EY-plH"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OhW-IF-XUD" userLabel="PEdit Profile">

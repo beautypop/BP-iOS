@@ -139,13 +139,7 @@ class FollowersFollowingViewController: UICollectionViewController {
                 }
                 
                 loading = true
-                /*switch optionType {
-                case "followingCalls":
-                    ApiController.instance.getUserFollowings(self.userId, offset:Int64(self.followersFollowings[self.followersFollowings.count - 1].offset))
-                case "followersCall":
-                    ApiController.instance.getUserFollowers(self.userId, offset: Int64(self.followersFollowings[self.followersFollowings.count - 1].offset))
-                default: break
-                }*/
+                
                 ApiFacade.getUserFollowingFollowers(self.userId, offset: Int64(self.followersFollowings[self.followersFollowings.count - 1].offset), optionType: optionType, successCallback: onSuccessGetFollowingFollowers, failureCallback: onFailureGetFollowingFollowers)
             }
         }
