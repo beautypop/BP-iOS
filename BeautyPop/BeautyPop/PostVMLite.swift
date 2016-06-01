@@ -13,6 +13,8 @@ import ObjectMapper
 
 class PostVMLite: BaseArgVM {
     var id: Int = 0
+    var createdDate: Double = 0
+    var updatedDate: Double = 0
     var ownerId: Int = 0
     var ownerName: String = ""
     var title: String = ""
@@ -36,6 +38,8 @@ class PostVMLite: BaseArgVM {
     
     override func mapping(map: ObjectMapper.Map) {
         id<-map["id"]
+        createdDate<-map["createdDate"]
+        updatedDate<-map["updatedDate"]
         ownerId<-map["ownerId"]
         ownerName<-map["ownerName"]
         title<-map["title"]

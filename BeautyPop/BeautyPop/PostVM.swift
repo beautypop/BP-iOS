@@ -12,8 +12,6 @@ import ObjectMapper
 
 class PostVM: PostVMLite {
     
-    var createdDate: Double = 0
-    var updatedDate: Double = 0
     var ownerNumProducts: Int = 0
     var ownerNumFollowers: Int = 0
     var body: String = ""
@@ -34,9 +32,6 @@ class PostVM: PostVMLite {
     
     override func mapping(map: ObjectMapper.Map) {
         super.mapping(map)
-        ownerId<-map["ownerId"]
-        createdDate<-map["createdDate"]
-        updatedDate<-map["updatedDate"]
         ownerNumProducts<-map["ownerNumProducts"]
         ownerNumFollowers<-map["ownerNumFollowers"]
         body<-map["body"]
@@ -53,6 +48,5 @@ class PostVM: PostVMLite {
         subCategoryName<-map["subCategoryName"]
         subCategoryIcon<-map["subCategoryIcon"]
         subCategoryType<-map["subCategoryType"]
-        
     }
 }
