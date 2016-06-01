@@ -34,11 +34,11 @@ class LeaveReviewViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func saveProduct(sender: AnyObject) {
+    func saveReview(sender: AnyObject) {
         
         
         
-        let _confirmDialog = UIAlertController(title: NSLocalizedString("Confirm", comment: ""), message: NSLocalizedString("", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+        let _confirmDialog = UIAlertController(title: NSLocalizedString("", comment: ""), message: NSLocalizedString("reviewConfirmMsg", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
         let okAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.Default, handler: nil)
         
         let confirmAction = UIAlertAction(title: NSLocalizedString("submit", comment: ""), style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction!) in

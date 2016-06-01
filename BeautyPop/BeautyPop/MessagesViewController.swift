@@ -464,7 +464,7 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
         
         ViewUtil.displayRoundedCornerBtnView(self.sellerAcceptButton)
         ViewUtil.displayRoundedCornerBtnView(self.sellerDeclineButton)
-        ViewUtil.displayRoundedCornerBtnView(self.leaveReviewBtn)
+        ViewUtil.displayRoundedCornerView(self.leaveReviewBtn, bgColor: nil, borderColor: Color.RED)
         /*
         let buyerMessageLayoutConstraint = ViewUtil.applyWidthConstraints(self.buyerMessageButton, toView: self.view, multiplierValue: 0.70)
         self.view.addConstraint(buyerMessageLayoutConstraint)

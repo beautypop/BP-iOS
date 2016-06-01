@@ -125,3 +125,4 @@
 "discard_changes" = "Discard changes?";
 "yes" = "Yes";
 "no_review" = "~ No review ~";
+"reviewConfirmMsg" = "Are you about to leave review for the other party. All set?";
