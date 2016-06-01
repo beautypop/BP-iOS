@@ -6822,17 +6822,32 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="45"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c85-Xt-rsm" userLabel="sellerMessageLbl">
-                                                <rect key="frame" x="5" y="5" width="404" height="35"/>
+                                                <rect key="frame" x="5" y="5" width="214" height="35"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eEz-fA-tO2">
+                                                <rect key="frame" x="229" y="5" width="180" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="180" id="OQy-7D-J99"/>
+                                                </constraints>
+                                                <state key="normal" title="Leave Review">
+                                                    <color key="titleColor" red="1" green="0.015992735040000001" blue="0.26659867079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="onLeaveReview:" destination="89W-J0-Agh" eventType="touchUpInside" id="Wdn-bW-8Iv"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="c85-Xt-rsm" secondAttribute="bottom" constant="5" id="7eE-5E-Zwn"/>
                                             <constraint firstItem="c85-Xt-rsm" firstAttribute="leading" secondItem="azs-Nl-fq1" secondAttribute="leading" constant="5" id="99y-iX-Tt4"/>
+                                            <constraint firstAttribute="bottom" secondItem="eEz-fA-tO2" secondAttribute="bottom" constant="5" id="ETa-cS-m2H"/>
+                                            <constraint firstAttribute="trailing" secondItem="eEz-fA-tO2" secondAttribute="trailing" constant="5" id="Ifv-jq-Sbb"/>
+                                            <constraint firstItem="eEz-fA-tO2" firstAttribute="top" secondItem="azs-Nl-fq1" secondAttribute="top" constant="5" id="JIh-ft-4Dn"/>
+                                            <constraint firstItem="eEz-fA-tO2" firstAttribute="leading" secondItem="c85-Xt-rsm" secondAttribute="trailing" constant="10" id="LxP-X8-Ncu"/>
                                             <constraint firstItem="c85-Xt-rsm" firstAttribute="top" secondItem="azs-Nl-fq1" secondAttribute="top" constant="5" id="Yar-g7-IwV"/>
-                                            <constraint firstAttribute="trailing" secondItem="c85-Xt-rsm" secondAttribute="trailing" constant="5" id="xPo-Sa-K08"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -6955,6 +6970,7 @@
                         <outlet property="commentTextView" destination="fcR-U6-Mae" id="hWM-y7-VTH"/>
                         <outlet property="footerbtnsHeight" destination="ERD-99-C9T" id="xd5-ZR-3qx"/>
                         <outlet property="interested" destination="aMl-If-pRF" id="atc-0N-g41"/>
+                        <outlet property="leaveReviewBtn" destination="eEz-fA-tO2" id="zIs-ey-BZO"/>
                         <outlet property="messageCointainerScroll" destination="NJW-6b-MfY" id="A2n-c5-A1F"/>
                         <outlet property="messageComposingView" destination="9LA-QQ-qMg" id="JY6-uc-oac"/>
                         <outlet property="orderText" destination="1Ou-NF-dq8" id="w4L-FU-Mcx"/>
@@ -6981,7 +6997,7 @@
         <!--Leave Review Controller-->
         <scene sceneID="tTN-G0-F7I">
             <objects>
-                <viewController id="gEh-BM-aqz" userLabel="Leave Review Controller" customClass="LeaveReviewViewController" customModule="BeautyPop" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LeaveReviewViewController" id="gEh-BM-aqz" userLabel="Leave Review Controller" customClass="LeaveReviewViewController" customModule="BeautyPop" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aF2-ag-f7d"/>
                         <viewControllerLayoutGuide type="bottom" id="Fdc-C7-cq1"/>
@@ -7762,7 +7778,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NoItemsToolTip" id="8DS-n6-IBp" customClass="TooltipViewCell" customModule="BeautyPop" customModuleProvider="target">
-                                        <rect key="frame" x="130" y="205.5" width="129" height="169"/>
+                                        <rect key="frame" x="130" y="206" width="129" height="169"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="129" height="169"/>

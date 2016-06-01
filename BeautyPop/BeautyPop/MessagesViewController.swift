@@ -28,6 +28,7 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
     @IBOutlet weak var footerbtnsHeight: NSLayoutConstraint!
     @IBOutlet weak var sellerMessageLbl: UILabel!
     
+    @IBOutlet weak var leaveReviewBtn: UIButton!
     var conversation: ConversationVM? = nil
     var offered = false
     var offeredPrice: Double? = -1.0
@@ -463,7 +464,7 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
         
         ViewUtil.displayRoundedCornerBtnView(self.sellerAcceptButton)
         ViewUtil.displayRoundedCornerBtnView(self.sellerDeclineButton)
-        
+        ViewUtil.displayRoundedCornerBtnView(self.leaveReviewBtn)
         /*
         let buyerMessageLayoutConstraint = ViewUtil.applyWidthConstraints(self.buyerMessageButton, toView: self.view, multiplierValue: 0.70)
         self.view.addConstraint(buyerMessageLayoutConstraint)
@@ -552,8 +553,10 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
         // closed orders
         else {
             sellerMessageLayout.hidden = false
+            self.leaveReviewBtn.hidden = true
             if order!.accepted {
                 sellerMessageLbl.text = Constants.PM_ORDER_ACCEPTED_FOR_SELLER
+                self.leaveReviewBtn.hidden = false
             } else if order!.declined {
                 sellerMessageLbl.text = Constants.PM_ORDER_DECLINED_FOR_SELLER
             } else if order!.cancelled {
@@ -801,5 +804,12 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
     
     func onFailureDeclineConversationOrder(response: String) {
         ViewUtil.showNormalView(self, activityLoading: self.activityLoading)
+    }
+    
+    @IBAction func onLeaveReview(sender: AnyObject) {
+        let vController =  self.storyboard!.instantiateViewControllerWithIdentifier("LeaveReviewViewController") as? LeaveReviewViewController
+        vController?.conversationId = (self.conversation?.id)!
+        ViewUtil.resetBackButton(self.navigationItem)
+        self.navigationController?.pushViewController(vController!, animated: true)
     }
 }

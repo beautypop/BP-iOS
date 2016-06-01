@@ -23,7 +23,7 @@ class LeaveReviewViewController: UIViewController {
         saveReviewImg.frame = CGRectMake(0, 0, 60, 35)
         let saveReviewBarBtn = UIBarButtonItem(customView: saveReviewImg)
         self.navigationItem.rightBarButtonItems = [saveReviewBarBtn]
-        
+        self.reviewRating.rating = 0
         ApiFacade.getReview(conversationId, successCallback: onSuccessGetReview, failureCallback: onFailureGetReview)
         
         // Do any additional setup after loading the view.
