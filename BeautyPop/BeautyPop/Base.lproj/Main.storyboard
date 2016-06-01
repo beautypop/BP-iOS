@@ -6978,6 +6978,83 @@
             </objects>
             <point key="canvasLocation" x="9277" y="3798"/>
         </scene>
+        <!--Leave Review Controller-->
+        <scene sceneID="tTN-G0-F7I">
+            <objects>
+                <viewController id="gEh-BM-aqz" userLabel="Leave Review Controller" customClass="LeaveReviewViewController" customModule="BeautyPop" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aF2-ag-f7d"/>
+                        <viewControllerLayoutGuide type="bottom" id="Fdc-C7-cq1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Cet-dM-Mem">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Give a rating to buyer" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SeE-9w-jI8">
+                                <rect key="frame" x="15" y="10" width="148" height="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Idl-E1-Tsb" customClass="CosmosView" customModule="Cosmos">
+                                <rect key="frame" x="240" y="42" width="120" height="30"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="ilG-4O-lcx"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
+                                        <color key="value" red="1" green="0.95865028779999995" blue="0.095571738229999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="emptyColor">
+                                        <color key="value" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="emptyBorderColor">
+                                        <color key="value" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="filledBorderColor">
+                                        <color key="value" red="1" green="0.95865028779999995" blue="0.095571738229999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bTB-Eb-0mA">
+                                <rect key="frame" x="15" y="119" width="575" height="100"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="OLO-yA-sIn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ooE-vB-M7Q">
+                                <rect key="frame" x="15" y="92" width="38" height="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Idl-E1-Tsb" firstAttribute="centerX" secondItem="Cet-dM-Mem" secondAttribute="centerX" id="8ig-0e-55e"/>
+                            <constraint firstItem="ooE-vB-M7Q" firstAttribute="leading" secondItem="SeE-9w-jI8" secondAttribute="leading" id="Apb-xF-TnV"/>
+                            <constraint firstItem="ooE-vB-M7Q" firstAttribute="top" secondItem="Idl-E1-Tsb" secondAttribute="bottom" constant="20" id="O5R-U7-gJj"/>
+                            <constraint firstAttribute="trailing" secondItem="bTB-Eb-0mA" secondAttribute="trailing" constant="10" id="VMI-63-gMJ"/>
+                            <constraint firstItem="bTB-Eb-0mA" firstAttribute="top" secondItem="ooE-vB-M7Q" secondAttribute="bottom" constant="10" id="ieL-Gr-r7U"/>
+                            <constraint firstItem="SeE-9w-jI8" firstAttribute="leading" secondItem="Cet-dM-Mem" secondAttribute="leading" constant="15" id="ifW-xf-Yj8"/>
+                            <constraint firstItem="Idl-E1-Tsb" firstAttribute="top" secondItem="SeE-9w-jI8" secondAttribute="bottom" constant="15" id="mte-5m-0tI"/>
+                            <constraint firstItem="bTB-Eb-0mA" firstAttribute="leading" secondItem="SeE-9w-jI8" secondAttribute="leading" id="yZH-7x-d1h"/>
+                            <constraint firstItem="SeE-9w-jI8" firstAttribute="top" secondItem="Cet-dM-Mem" secondAttribute="top" constant="10" id="zkX-14-1Sx"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="reviewRating" destination="Idl-E1-Tsb" id="m6j-lH-KNI"/>
+                        <outlet property="reviewTxt" destination="bTB-Eb-0mA" id="dWf-Te-MCz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Myz-9M-tAu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9874" y="3730"/>
+        </scene>
         <!--Signup View Controller-->
         <scene sceneID="glw-l1-ZA1">
             <objects>
@@ -8839,9 +8916,9 @@
         <segue reference="h8d-K1-dMp"/>
         <segue reference="SUR-X2-GSB"/>
         <segue reference="fnX-3S-LaT"/>
-        <segue reference="nft-yA-tox"/>
-        <segue reference="oRf-1U-UOz"/>
+        <segue reference="sXk-cu-9b6"/>
         <segue reference="SC0-fE-foi"/>
+        <segue reference="oRf-1U-UOz"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

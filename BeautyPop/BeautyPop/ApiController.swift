@@ -789,6 +789,34 @@ class ApiController {
         self.makeApiCall(callEvent)
     }
     
+    func getReview(conversationId: Int) {
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/api/review/\(conversationId)"
+        callEvent.resultClass = "ReviewVM"
+        callEvent.successEventbusName = "onSuccessGetReview"
+        callEvent.failedEventbusName = "onFailureGetReview"
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        
+        self.makeApiCall(callEvent)
+    }
+    
+    func addReview(newReviewVM: NewReviewVM){
+        var strData = [String]()
+        strData.append("conversationOrderId=\(newReviewVM.conversationOrderId)")
+        strData.append("review=\(newReviewVM.review)")
+        strData.append("score=\(newReviewVM.score)")
+        let parameter = self.makeBodyString(strData)
+        
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/api/review/add"
+        callEvent.resultClass = "ResponseVM"
+        callEvent.body = parameter
+        callEvent.successEventbusName = "onSuccessAddReview"
+        callEvent.failedEventbusName = "onFailureAddReview"
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        self.makePostApiCall(callEvent)
+    }
+    
     func makeApiCall(arg: ApiCallEvent) {
         NSLog("makeApiCall")
         
@@ -911,6 +939,7 @@ class ApiController {
         case "ConversationOrderVM": result = Mapper<ConversationOrderVM>().map(inputStr)!
         case "ResponseVM": result = Mapper<ResponseVM>().map(inputStr)!
         case "[ReviewVM]": result = Mapper<ReviewVM>().mapArray(inputStr)!
+        case "ReviewVM": result = Mapper<ReviewVM>().map(inputStr)!
         case "String": result = inputStr
         default: NSLog("calling default object resolver")
         }

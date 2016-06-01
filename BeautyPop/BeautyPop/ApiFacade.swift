@@ -802,5 +802,61 @@ class ApiFacade {
         ApiController.instance.getBuyerReviewsFor(userId)
     }
     
+    static func getReview(conversationId: Int, successCallback: ((ReviewVM) -> Void)?, failureCallback: ((String) -> Void)?) {
+        
+        SwiftEventBus.unregister(self)
+        
+        SwiftEventBus.onMainThread(self, name: "onSuccessGetReview") { result in
+            if ViewUtil.isEmptyResult(result) {
+                failureCallback!("Comments returned is empty")
+                return
+            }
+            
+            if successCallback != nil {
+                successCallback!(result.object as! ReviewVM)
+            }
+        }
+        
+        SwiftEventBus.onMainThread(self, name: "onFailureGetReview") { result in
+            if failureCallback != nil {
+                var error = "Failed to get comments..."
+                if result.object is NSString {
+                    error += "\n"+(result.object as! String)
+                }
+                failureCallback!(error)
+            }
+        }
+        
+        ApiController.instance.getReview(conversationId)
+    }
+    
+    static func addReview(newReviewVM: NewReviewVM, successCallback: ((ResponseVM) -> Void)?, failureCallback: ((String) -> Void)?) {
+        
+        SwiftEventBus.unregister(self)
+        
+        SwiftEventBus.onMainThread(self, name: "onSuccessAddReview") { result in
+            if ViewUtil.isEmptyResult(result) {
+                failureCallback!("Comments returned is empty")
+                return
+            }
+            
+            if successCallback != nil {
+                successCallback!(result.object as! ResponseVM)
+            }
+        }
+        
+        SwiftEventBus.onMainThread(self, name: "onFailureAddReview") { result in
+            if failureCallback != nil {
+                var error = "Failed to get comments..."
+                if result.object is NSString {
+                    error += "\n"+(result.object as! String)
+                }
+                failureCallback!(error)
+            }
+        }
+        
+        ApiController.instance.addReview(newReviewVM)
+    }
+
     
 }
