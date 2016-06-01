@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftEventBus
+import Cosmos
 
 class BaseProfileFeedViewController: CustomNavigationController {
     
@@ -112,7 +113,7 @@ class BaseProfileFeedViewController: CustomNavigationController {
         } else {
             cell.followingBtn.setTitle(NSLocalizedString("followings_txt", comment: "") + "0", forState: UIControlState.Normal)
         }
-        
+        cell.reviewView.settings.fillMode = StarFillMode.Half
         cell.reviewView.settings.updateOnTouch = false
         cell.reviewView.rating = 0
         let averageRating = self.userInfo?.averageReviewScore
