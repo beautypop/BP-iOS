@@ -34,11 +34,10 @@ class SRCopyableLabel: UILabel {
         }*/
     }
     
-    
     override func copy(sender: AnyObject?) {
         let board = UIPasteboard.generalPasteboard()
         board.string = text
-        ViewUtil.makeToast("Text Copied!", view: self.superview!)
+        ViewUtil.makeToast("Text Copied", view: self.superview!)
         //let menu = UIMenuController.sharedMenuController()
         //menu.setMenuVisible(false, animated: true)
     }

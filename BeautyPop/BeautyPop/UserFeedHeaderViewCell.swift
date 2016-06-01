@@ -26,5 +26,4 @@ class UserFeedHeaderViewCell: UICollectionViewCell {
     @IBOutlet weak var followingBtn: UIButton!
     @IBOutlet weak var displayName: UILabel!
     @IBOutlet weak var userImg: UIImageView!
-    //@IBOutlet weak var sellerUrl: UILabel!
 }
