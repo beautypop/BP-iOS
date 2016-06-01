@@ -808,7 +808,7 @@ class ApiFacade {
         
         SwiftEventBus.onMainThread(self, name: "onSuccessGetReview") { result in
             if ViewUtil.isEmptyResult(result) {
-                failureCallback!("Comments returned is empty")
+                //failureCallback!("Review returned is empty")
                 return
             }
             
@@ -836,7 +836,7 @@ class ApiFacade {
         
         SwiftEventBus.onMainThread(self, name: "onSuccessAddReview") { result in
             if ViewUtil.isEmptyResult(result) {
-                failureCallback!("Comments returned is empty")
+                failureCallback!("Review returned is empty")
                 return
             }
             
@@ -847,7 +847,7 @@ class ApiFacade {
         
         SwiftEventBus.onMainThread(self, name: "onFailureAddReview") { result in
             if failureCallback != nil {
-                var error = "Failed to get comments..."
+                var error = "Failed to add review..."
                 if result.object is NSString {
                     error += "\n"+(result.object as! String)
                 }

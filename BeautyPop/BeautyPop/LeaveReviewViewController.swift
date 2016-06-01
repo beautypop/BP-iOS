@@ -58,9 +58,9 @@ class LeaveReviewViewController: UIViewController {
        
     }
 
-    func onSuccessGetReview(resultDto: ReviewVM) {
-        self.reviewTxt.text = resultDto.review
-        self.reviewRating.rating = resultDto.score
+    func onSuccessGetReview(review: ReviewVM) {
+        self.reviewTxt.text = review.review
+        self.reviewRating.rating = review.score
         //ViewUtil.hideActivityLoading(self.activityLoading)
     }
     
