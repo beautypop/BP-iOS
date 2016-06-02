@@ -462,6 +462,7 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
         ViewUtil.displayRoundedCornerBtnView(self.buyerCancelButton)
         ViewUtil.displayRoundedCornerBtnView(self.buyerOrderAgainButton)
         ViewUtil.displayRoundedCornerBtnView(self.buyerOrderButton)
+        ViewUtil.displayRoundedCornerView(self.buyerReviewBtn, bgColor: nil, borderColor: Color.RED)
         
         ViewUtil.displayRoundedCornerBtnView(self.sellerAcceptButton)
         ViewUtil.displayRoundedCornerBtnView(self.sellerDeclineButton)
@@ -530,6 +531,7 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
             } else if order!.accepted {
                 buyerMessageLbl.text = Constants.PM_ORDER_ACCEPTED_FOR_BUYER
                 self.buyerReviewBtn.hidden = false
+                self.buyerOrderAgainButton.hidden = true
             } else if order!.declined {
                 buyerMessageLbl.text = Constants.PM_ORDER_DECLINED_FOR_BUYER
             }
