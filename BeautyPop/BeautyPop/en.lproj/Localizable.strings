@@ -126,3 +126,6 @@
 "yes" = "Yes";
 "no_review" = "~ No review ~";
 "reviewConfirmMsg" = "Are you about to leave review for the other party. All set?";
+"leave_review_text" = "Leave Review";
+"buyer_review_text" = "Give a rating to seller";
+"seller_review_text" = "Give a rating to buyer";

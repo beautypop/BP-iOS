@@ -10,20 +10,28 @@ import UIKit
 import Cosmos
 class LeaveReviewViewController: UIViewController {
 
+    @IBOutlet weak var titleText: UILabel!
     @IBOutlet weak var reviewTxt: UITextView!
     @IBOutlet weak var reviewRating: CosmosView!
     var conversationId = 0
+    var isBuyer: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let saveReviewImg: UIButton = UIButton()
-        saveReviewImg.setImage(UIImage(named: "ic_check"), forState: UIControlState.Normal)
+        saveReviewImg.setImage(UIImage(named: "ic_action_accept"), forState: UIControlState.Normal)
         saveReviewImg.addTarget(self, action: "saveReview:", forControlEvents: UIControlEvents.TouchUpInside)
         saveReviewImg.frame = CGRectMake(0, 0, 60, 35)
         let saveReviewBarBtn = UIBarButtonItem(customView: saveReviewImg)
         self.navigationItem.rightBarButtonItems = [saveReviewBarBtn]
         self.reviewRating.rating = 0
+        self.navigationItem.title = NSLocalizedString("leave_review_text", comment: "")
+        if  isBuyer {
+            self.titleText.text = NSLocalizedString("buyer_review_text", comment: "")
+        } else {
+            self.titleText.text = NSLocalizedString("seller_review_text", comment: "")
+        }
         ApiFacade.getReview(conversationId, successCallback: onSuccessGetReview, failureCallback: onFailureGetReview)
         
         // Do any additional setup after loading the view.

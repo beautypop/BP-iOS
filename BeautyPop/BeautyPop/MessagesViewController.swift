@@ -13,6 +13,7 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
         
     @IBOutlet weak var commentTextView: UITextView!
     @IBOutlet weak var bottomSpaceForText: NSLayoutConstraint!
+    @IBOutlet weak var buyerReviewBtn: UIButton!
     @IBOutlet weak var activityLoading: UIActivityIndicatorView!
     @IBOutlet weak var prodImg: UIImageView!
     @IBOutlet weak var prodPrice: UILabel!
@@ -519,6 +520,7 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
         else {
             buyerMessageLayout.hidden = false
             buyerOrderAgainButton.hidden = false
+            self.buyerReviewBtn.hidden = true
             if _conversation.postSold {
                 buyerOrderAgainButton.hidden = true
             }
@@ -527,6 +529,7 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
                 buyerMessageLbl.text = Constants.PM_ORDER_CANCELLED
             } else if order!.accepted {
                 buyerMessageLbl.text = Constants.PM_ORDER_ACCEPTED_FOR_BUYER
+                self.buyerReviewBtn.hidden = false
             } else if order!.declined {
                 buyerMessageLbl.text = Constants.PM_ORDER_DECLINED_FOR_BUYER
             }
@@ -808,7 +811,8 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
     
     @IBAction func onLeaveReview(sender: AnyObject) {
         let vController =  self.storyboard!.instantiateViewControllerWithIdentifier("LeaveReviewViewController") as? LeaveReviewViewController
-        vController?.conversationId = (self.conversation?.id)!
+        vController?.conversationId = (self.conversation?.order?.id)!
+        vController!.isBuyer = !self.conversation!.postOwner
         ViewUtil.resetBackButton(self.navigationItem)
         self.navigationController?.pushViewController(vController!, animated: true)
     }
