@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftEventBus
+import BetterSegmentedControl
 
 class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigationControllerDelegate {
     
@@ -38,9 +39,8 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
         self.setUserInfo(user)
         self.navigationItem.title = self.userInfo?.displayName
         
-        if let segmentControl = self.activeHeaderViewCell?.segmentControl {
-            segmentControl.setTitle(NSLocalizedString("products_txt", comment: "") + String(self.userInfo!.numProducts), forSegmentAtIndex: 0)
-            segmentControl.setTitle(NSLocalizedString("likes", comment: "") + String(self.userInfo!.numLikes), forSegmentAtIndex: 1)
+        if let segControl = self.activeHeaderViewCell?.segControl {
+            segControl.titles = [ NSLocalizedString("products_txt", comment: "") + String(self.userInfo!.numProducts), NSLocalizedString("likes", comment: "") + String(self.userInfo!.numLikes)]
         }
         self.reloadFeedItems()
     }
@@ -55,12 +55,6 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
     }
     
     override func viewDidAppear(animated: Bool) {
-        //self.tabBarController!.tabBar.hidden = true
-        //self.navigationItem.setHidesBackButton(false, animated: true)
-        
-        if let segmentControl = self.activeHeaderViewCell?.segmentControl {
-            ViewUtil.selectSegmentControl(segmentControl, view: self.uiCollectionView)
-        }
         
         if currentIndex != nil && productViewController?.feedItem != nil {
             let item = productViewController?.feedItem
@@ -169,18 +163,6 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        /*
-        if (collectionView.tag == 2) {
-            
-        } else {
-            productViewController = self.storyboard!.instantiateViewControllerWithIdentifier("ProductViewController") as! ProductViewController
-            let feedItem = self.getFeedItems()[indexPath.row]
-            productViewController!.feedItem = feedItem
-            self.currentIndex = indexPath
-            //self.tabBarController!.tabBar.hidden = true
-            self.navigationController?.pushViewController(productViewController!, animated: true)
-        }
-        */
     }
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
@@ -239,7 +221,6 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
             dummyLbl.text = self.userInfo?.aboutMe
             dummyLbl.sizeToFit()
             return CGSizeMake(self.view.bounds.width, Constants.PROFILE_HEADER_HEIGHT + dummyLbl.bounds.height)
-            //return CGSizeMake(self.view.frame.width, Constants.PROFILE_HEADER_HEIGHT)
         }
     }
     
@@ -262,7 +243,6 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        //self.tabBarController!.tabBar.hidden = true
         if (segue.identifier == "showFollowings" || segue.identifier == "showFollowers") {
             let vController = segue.destinationViewController as! FollowersFollowingViewController
             vController.userId = self.userInfo!.id
@@ -298,7 +278,6 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
     }
     
     func setCollectionViewSizesInsetsForTopView() {
-        //collectionViewTopCellSize = CGSizeMake(self.view.bounds.width, Constants.PROFILE_HEADER_HEIGHT)
         let dummyLbl = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 0))
         dummyLbl.numberOfLines = 0
         dummyLbl.adjustsFontSizeToFitWidth = true
@@ -324,31 +303,11 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
         feedViewAdapter!.onLikeBtnClick(cell, feedItem: feedItem)
     }
     
-    @IBAction func segAction(sender: AnyObject) {
-        let segControl = sender as? UISegmentedControl
-        if (segControl!.selectedSegmentIndex == 0) {
-            feedLoader?.setFeedType(FeedFilter.FeedType.USER_POSTED)
-        } else if (segControl!.selectedSegmentIndex == 1) {
-            feedLoader?.setFeedType(FeedFilter.FeedType.USER_LIKED)
-        }
-        
-        reloadFeedItems()
-        
-        ViewUtil.selectSegmentControl(segControl!, view: self.uiCollectionView)
-    }
-    
     func setSizesForFilterButtons(cell: UserFeedHeaderViewCell) {
         let availableWidthForButtons:CGFloat = self.view.bounds.width
         let buttonWidth :CGFloat = availableWidthForButtons / 3
         
-        cell.segmentControl.backgroundColor = Color.WHITE
         cell.btnWidthConsttraint.constant = buttonWidth
-        /*
-        cell.followersBtn.layer.borderColor = Color.LIGHT_GRAY.CGColor
-        cell.followersBtn.layer.borderWidth = 1.0
-        cell.followingBtn.layer.borderColor = Color.LIGHT_GRAY.CGColor
-        cell.followingBtn.layer.borderWidth = 1.0
-        */
         
         ViewUtil.displayRoundedCornerView(cell.editProfile, bgColor: Color.LIGHT_GRAY)
         
@@ -378,4 +337,24 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
             ViewUtil.displayRoundedCornerView(cell.editProfile, bgColor: Color.LIGHT_GRAY)
         }
     }
+    
+    @IBAction func onChangeSegControl(sender: AnyObject) {
+        let segmentControl = sender as? BetterSegmentedControl
+        if segmentControl!.index == 1 {
+            feedLoader?.setFeedType(FeedFilter.FeedType.USER_LIKED)
+        }
+        else {
+            feedLoader?.setFeedType(FeedFilter.FeedType.USER_POSTED)
+        }
+        
+        reloadFeedItems()
+        setSegmentedControlTitles()
+    }
+    
+    func setSegmentedControlTitles() {
+        if let segControl = self.activeHeaderViewCell?.segControl {
+            segControl.titles = [ NSLocalizedString("products_txt", comment: "") + String(self.userInfo!.numProducts), NSLocalizedString("likes", comment: "") + String(self.userInfo!.numLikes)]
+        }
+    }
+    
 }

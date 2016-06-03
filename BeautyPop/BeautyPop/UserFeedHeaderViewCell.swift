@@ -8,9 +8,11 @@
 
 import UIKit
 import Cosmos
+import BetterSegmentedControl
 
 class UserFeedHeaderViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var segControl: BetterSegmentedControl!
     @IBOutlet weak var reviewView: CosmosView!
     @IBOutlet weak var sellerUrl: UILabel!
     @IBOutlet weak var btnWidthConsttraint: NSLayoutConstraint!

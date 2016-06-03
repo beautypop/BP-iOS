@@ -17,15 +17,30 @@ class UserReviewViewController: UIViewController {
     
     var userId: Int = 0
     var userReviews: [ReviewVM] = []
-    
+    var sellerReviews: [ReviewVM] = []
+    var buyerReviews: [ReviewVM] = []
+    var selectedIndex = 0
     override func viewDidLoad() {
         super.viewDidLoad()
 
         //ApiFacade.getSellerReviewsFor(userId, successCallback: onSuccessReviews, failureCallback: onFailureReviews)
-        ApiFacade.getBuyerReviewsFor(userId, successCallback: onSuccessReviews, failureCallback: onFailureReviews)
-        
+        ApiFacade.getBuyerReviewsFor(userId, successCallback: onSuccessBuyerReviews, failureCallback: onFailureReviews)
+        ApiFacade.getSellerReviewsFor(userId, successCallback: onSuccessSellerReviews, failureCallback: onFailureReviews)
         segControl.addTarget(self, action: "onValueChanged:", forControlEvents: .ValueChanged)
         segControl.titles = [ "Sold", "Purchased" ]
+        
+        self.collectionView.addPullToRefresh({ [weak self] in
+            self!.userReviews.removeAll()
+            self!.collectionView.reloadData()
+            if self!.selectedIndex == 1 {
+                self!.userReviews = self!.sellerReviews
+            }
+            else {
+                self!.userReviews = self!.buyerReviews
+            }
+            self!.collectionView.reloadData()
+        })
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -116,12 +131,14 @@ class UserReviewViewController: UIViewController {
         
     }
     
-    func onSuccessReviews(resultDto: [ReviewVM]) {
+    func onSuccessBuyerReviews(resultDto: [ReviewVM]) {
         
         if (!resultDto.isEmpty) {
             if (self.userReviews.count == 0) {
+                self.buyerReviews = resultDto
                 self.userReviews = resultDto
             } else {
+                self.buyerReviews.appendContentsOf(resultDto)
                 self.userReviews.appendContentsOf(resultDto)
             }
             self.collectionView.reloadData()
@@ -132,7 +149,30 @@ class UserReviewViewController: UIViewController {
                 let reviewVM = ReviewVM()
                 reviewVM.id = -1
                 self.userReviews.append(reviewVM)
+                self.buyerReviews.append(reviewVM)
                 self.collectionView.reloadData()
+            }
+        }
+        
+        ViewUtil.hideActivityLoading(self.activityLoading)
+    }
+    
+    func onSuccessSellerReviews(resultDto: [ReviewVM]) {
+        
+        if (!resultDto.isEmpty) {
+            if (self.userReviews.count == 0) {
+                self.sellerReviews = resultDto
+            } else {
+                self.sellerReviews.appendContentsOf(resultDto)
+            }
+            self.collectionView.reloadData()
+        } else {
+            //Check for no items ....
+            if (self.userReviews.isEmpty) {
+                //there are no result hence ... set the default record with -1 as id
+                let reviewVM = ReviewVM()
+                reviewVM.id = -1
+                self.sellerReviews.append(reviewVM)
             }
         }
         
@@ -148,23 +188,14 @@ class UserReviewViewController: UIViewController {
         self.userReviews.removeAll()
         self.collectionView.reloadData()
         if sender.index == 1 {
-            ApiFacade.getSellerReviewsFor(userId, successCallback: onSuccessReviews, failureCallback: onFailureReviews)
+            self.userReviews = sellerReviews
+            self.selectedIndex = 1
         }
         else {
-            ApiFacade.getBuyerReviewsFor(userId, successCallback: onSuccessReviews, failureCallback: onFailureReviews)
+            self.selectedIndex = 0
+            self.userReviews = buyerReviews
         }
+        self.collectionView.reloadData()
     }
     
-    /*func onSuccessBuyerReviews(resultDto: [ReviewVM]) {
-        
-    
-        
-        ViewUtil.hideActivityLoading(self.activityLoading)
-    }
-    
-    func onFailureBuyerReviews(response: String) {
-        ViewUtil.makeToast("Error getting user review data.", view: self.view)
-    }*/
-    
-
 }
