@@ -722,38 +722,46 @@
                         <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ig3-3q-QOR">
-                                <rect key="frame" x="0.0" y="20" width="414" height="46"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rxw-gQ-haw" userLabel="betterSegControl" customClass="BetterSegmentedControl" customModule="BetterSegmentedControl">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="45"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="98R-7z-IMt"/>
+                                    <constraint firstAttribute="height" constant="45" id="xdf-Ku-BMS"/>
                                 </constraints>
-                                <segments>
-                                    <segment title="Recommended Seller"/>
-                                    <segment title="Followings"/>
-                                </segments>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="indicatorViewBackgroundColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="titleColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="selectedTitleColor">
+                                        <color key="value" red="1" green="0.015992735040000001" blue="0.26659867079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="segAction:" destination="50r-kV-woN" eventType="valueChanged" id="xyr-QQ-qes"/>
+                                    <action selector="segAction:" destination="50r-kV-woN" eventType="valueChanged" id="DHP-wg-uc4"/>
                                 </connections>
-                            </segmentedControl>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Egv-fq-bNJ">
-                                <rect key="frame" x="0.0" y="65" width="414" height="535"/>
+                            </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Egv-fq-bNJ">
+                                <rect key="frame" x="0.0" y="45" width="414" height="578"/>
                             </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Egv-fq-bNJ" secondAttribute="trailing" id="3je-xO-fyi"/>
                             <constraint firstItem="zPp-vl-2wA" firstAttribute="top" secondItem="Egv-fq-bNJ" secondAttribute="bottom" id="6vb-Do-8Ih"/>
-                            <constraint firstItem="Egv-fq-bNJ" firstAttribute="top" secondItem="Ig3-3q-QOR" secondAttribute="bottom" id="Bab-Vm-wMv"/>
-                            <constraint firstItem="Ig3-3q-QOR" firstAttribute="top" secondItem="0sH-cz-fFs" secondAttribute="bottom" id="pmh-xb-09o"/>
+                            <constraint firstItem="rxw-gQ-haw" firstAttribute="leading" secondItem="GY2-WE-BXH" secondAttribute="leading" id="Kbd-SN-mwW"/>
+                            <constraint firstItem="rxw-gQ-haw" firstAttribute="top" secondItem="0sH-cz-fFs" secondAttribute="bottom" id="LJJ-LS-mjx"/>
+                            <constraint firstAttribute="trailing" secondItem="rxw-gQ-haw" secondAttribute="trailing" id="Nqr-GJ-kDH"/>
+                            <constraint firstItem="Egv-fq-bNJ" firstAttribute="top" secondItem="rxw-gQ-haw" secondAttribute="bottom" id="Yhn-ts-a2R"/>
                             <constraint firstItem="Egv-fq-bNJ" firstAttribute="leading" secondItem="GY2-WE-BXH" secondAttribute="leading" id="vZX-tx-9XT"/>
-                            <constraint firstItem="Ig3-3q-QOR" firstAttribute="leading" secondItem="GY2-WE-BXH" secondAttribute="leading" id="w8B-65-pfI"/>
-                            <constraint firstAttribute="trailing" secondItem="Ig3-3q-QOR" secondAttribute="trailing" id="yCP-YH-JsV"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="dkf-xV-GyL"/>
                     <connections>
-                        <outlet property="segController" destination="Ig3-3q-QOR" id="RRd-N8-NA0"/>
+                        <outlet property="segControl" destination="rxw-gQ-haw" id="ZAg-1S-w6K"/>
                         <outlet property="uiContainerView" destination="Egv-fq-bNJ" id="d6Z-Ad-6ti"/>
                     </connections>
                 </viewController>
@@ -1207,7 +1215,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NoItemsToolTip" id="iN3-V1-ca5" customClass="TooltipViewCell" customModule="BeautyPop" customModuleProvider="target">
-                                        <rect key="frame" x="135" y="170.5" width="129" height="169"/>
+                                        <rect key="frame" x="135" y="171" width="129" height="169"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="129" height="169"/>
@@ -1539,7 +1547,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="108"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wLY-pV-Qq9" id="hvt-8Y-TlD">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="107.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="107"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n8E-zY-KWt" userLabel="PostImage">
@@ -2851,7 +2859,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="108"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uvH-lC-gSY" id="Qad-3T-tBU">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="107.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="107"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ziq-Ew-eFt" userLabel="PostImage">
@@ -3352,7 +3360,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NoItemsToolTip" id="PGR-GK-cnB" customClass="TooltipViewCell" customModule="BeautyPop" customModuleProvider="target">
-                                        <rect key="frame" x="130" y="5.5" width="129" height="169"/>
+                                        <rect key="frame" x="130" y="6" width="129" height="169"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="129" height="169"/>
@@ -4143,7 +4151,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NoItemsToolTip" id="YET-Bu-i9n" customClass="TooltipViewCell" customModule="BeautyPop" customModuleProvider="target">
-                                        <rect key="frame" x="130" y="305.5" width="129" height="169"/>
+                                        <rect key="frame" x="130" y="306" width="129" height="169"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="129" height="169"/>
@@ -4689,7 +4697,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NoItemsToolTip" id="eP3-r2-goB" customClass="TooltipViewCell" customModule="BeautyPop" customModuleProvider="target">
-                                        <rect key="frame" x="130" y="205.5" width="129" height="169"/>
+                                        <rect key="frame" x="130" y="206" width="129" height="169"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="129" height="169"/>
@@ -7051,6 +7059,9 @@
                                     <userDefinedRuntimeAttribute type="color" keyPath="filledBorderColor">
                                         <color key="value" red="1" green="0.95865028779999995" blue="0.095571738229999995" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bTB-Eb-0mA">
@@ -8952,13 +8963,13 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="NRf-cI-JqS"/>
-        <segue reference="h7o-0V-p0S"/>
-        <segue reference="M0G-4C-Ovh"/>
+        <segue reference="h8d-K1-dMp"/>
+        <segue reference="f1D-EY-plH"/>
+        <segue reference="fnX-3S-LaT"/>
         <segue reference="sXk-cu-9b6"/>
-        <segue reference="7VM-RZ-NKx"/>
-        <segue reference="fRU-pM-mSi"/>
         <segue reference="SC0-fE-foi"/>
         <segue reference="oRf-1U-UOz"/>
+        <segue reference="h7o-0V-p0S"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

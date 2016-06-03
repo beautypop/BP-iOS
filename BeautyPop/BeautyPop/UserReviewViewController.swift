@@ -23,9 +23,7 @@ class UserReviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //ApiFacade.getSellerReviewsFor(userId, successCallback: onSuccessReviews, failureCallback: onFailureReviews)
         ApiFacade.getBuyerReviewsFor(userId, successCallback: onSuccessBuyerReviews, failureCallback: onFailureReviews)
-        ApiFacade.getSellerReviewsFor(userId, successCallback: onSuccessSellerReviews, failureCallback: onFailureReviews)
         segControl.addTarget(self, action: "onValueChanged:", forControlEvents: .ValueChanged)
         segControl.titles = [ "Sold", "Purchased" ]
         
@@ -33,10 +31,10 @@ class UserReviewViewController: UIViewController {
             self!.userReviews.removeAll()
             self!.collectionView.reloadData()
             if self!.selectedIndex == 1 {
-                self!.userReviews = self!.sellerReviews
+                ApiFacade.getSellerReviewsFor(self!.userId, successCallback: self!.onSuccessSellerReviews, failureCallback: self!.onFailureReviews)
             }
             else {
-                self!.userReviews = self!.buyerReviews
+                ApiFacade.getBuyerReviewsFor(self!.userId, successCallback: self!.onSuccessBuyerReviews, failureCallback: self!.onFailureReviews)
             }
             self!.collectionView.reloadData()
         })
@@ -134,7 +132,7 @@ class UserReviewViewController: UIViewController {
     func onSuccessBuyerReviews(resultDto: [ReviewVM]) {
         
         if (!resultDto.isEmpty) {
-            if (self.userReviews.count == 0) {
+            if (self.buyerReviews.count == 0) {
                 self.buyerReviews = resultDto
                 self.userReviews = resultDto
             } else {
@@ -144,7 +142,7 @@ class UserReviewViewController: UIViewController {
             self.collectionView.reloadData()
         } else {
             //Check for no items ....
-            if (self.userReviews.isEmpty) {
+            if (self.buyerReviews.isEmpty) {
                 //there are no result hence ... set the default record with -1 as id
                 let reviewVM = ReviewVM()
                 reviewVM.id = -1
@@ -153,22 +151,22 @@ class UserReviewViewController: UIViewController {
                 self.collectionView.reloadData()
             }
         }
-        
+        ApiFacade.getSellerReviewsFor(userId, successCallback: onSuccessSellerReviews, failureCallback: onFailureReviews)
         ViewUtil.hideActivityLoading(self.activityLoading)
     }
     
     func onSuccessSellerReviews(resultDto: [ReviewVM]) {
         
         if (!resultDto.isEmpty) {
-            if (self.userReviews.count == 0) {
+            if (self.sellerReviews.count == 0) {
                 self.sellerReviews = resultDto
             } else {
                 self.sellerReviews.appendContentsOf(resultDto)
             }
-            self.collectionView.reloadData()
+            //self.collectionView.reloadData()
         } else {
             //Check for no items ....
-            if (self.userReviews.isEmpty) {
+            if (self.sellerReviews.isEmpty) {
                 //there are no result hence ... set the default record with -1 as id
                 let reviewVM = ReviewVM()
                 reviewVM.id = -1

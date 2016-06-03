@@ -8,11 +8,12 @@
 
 import UIKit
 import SwiftEventBus
+import BetterSegmentedControl
 
 class SellerViewController: CustomNavigationController {
     
+    @IBOutlet weak var segControl: BetterSegmentedControl!
     @IBOutlet weak var uiContainerView: UIView!
-    @IBOutlet weak var segController: UISegmentedControl!
     
     var bottomLayer: CALayer? = nil
     var sellerRecommendationController : UIViewController? = nil
@@ -21,7 +22,7 @@ class SellerViewController: CustomNavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        segControl.titles = [ "Recommended", "Following" ]
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -29,13 +30,13 @@ class SellerViewController: CustomNavigationController {
     }
 
     override func viewDidAppear(animated: Bool) {
-        self.segController.selectedSegmentIndex = 0
-        self.segController.selectedSegmentIndex = self.activeSegment
-        self.segAction(self.segController)
+        //self.segControl.setIndex(UInt(self.activeSegment))
+        self.segAction(self.segControl)
     }
     
     @IBAction func segAction(sender: AnyObject) {
-        if (self.segController.selectedSegmentIndex == 0) {
+        let segControl = sender as? BetterSegmentedControl
+        if (segControl!.index == 0) {
             if self.sellerRecommendationController == nil {
                 self.sellerRecommendationController = self.storyboard!.instantiateViewControllerWithIdentifier("RecommendedSeller") as! RecommendedSellerViewController
             }
@@ -49,7 +50,7 @@ class SellerViewController: CustomNavigationController {
             self.uiContainerView.addSubview((self.sellerRecommendationController?.view)!)
             self.sellerRecommendationController?.didMoveToParentViewController(self)
             self.activeSegment = 0
-        } else if(self.segController.selectedSegmentIndex == 1) {
+        } else if(segControl!.index == 1) {
             if self.followingController == nil {
                 self.followingController = self.storyboard!.instantiateViewControllerWithIdentifier("FollowingFeedViewController") as! FollowingFeedViewController
             }
@@ -64,8 +65,6 @@ class SellerViewController: CustomNavigationController {
             self.followingController?.didMoveToParentViewController(self)
             self.activeSegment = 1
         }
-        
-        ViewUtil.selectSegmentControl(self.segController, view: self.view)
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
