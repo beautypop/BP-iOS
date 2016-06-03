@@ -830,18 +830,17 @@ class ApiFacade {
         ApiController.instance.getReview(conversationId)
     }
     
-    static func addReview(newReviewVM: NewReviewVM, successCallback: ((ResponseVM) -> Void)?, failureCallback: ((String) -> Void)?) {
+    static func addReview(newReviewVM: NewReviewVM, successCallback: ((String) -> Void)?, failureCallback: ((String) -> Void)?) {
         
         SwiftEventBus.unregister(self)
         
         SwiftEventBus.onMainThread(self, name: "onSuccessAddReview") { result in
-            if ViewUtil.isEmptyResult(result) {
-                failureCallback!("Review returned is empty")
-                return
-            }
-            
             if successCallback != nil {
-                successCallback!(result.object as! ResponseVM)
+                if result.object is NSString {
+                    successCallback!(result.object as! String)
+                } else {
+                    successCallback!("")
+                }
             }
         }
         
@@ -857,6 +856,4 @@ class ApiFacade {
         
         ApiController.instance.addReview(newReviewVM)
     }
-
-    
 }

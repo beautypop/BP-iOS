@@ -76,7 +76,7 @@ class LeaveReviewViewController: UIViewController {
         ViewUtil.makeToast("Error getting user review data.", view: self.view)
     }
     
-    func onSuccessAddReview(response: ResponseVM) {
+    func onSuccessAddReview(response: String) {
         
         //ViewUtil.hideActivityLoading(self.activityLoading)
     }

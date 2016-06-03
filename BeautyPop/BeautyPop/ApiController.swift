@@ -809,7 +809,7 @@ class ApiController {
         
         let callEvent = ApiCallEvent()
         callEvent.method = "/api/review/add"
-        callEvent.resultClass = "ResponseVM"
+        callEvent.resultClass = "String"
         callEvent.body = parameter
         callEvent.successEventbusName = "onSuccessAddReview"
         callEvent.failedEventbusName = "onFailureAddReview"
