@@ -2,8 +2,8 @@
 /* Class = "UIButton"; normalTitle = "Make Offer"; ObjectID = "13f-kK-thK"; */
 "13f-kK-thK.normalTitle" = "Make Offer";
 
-/* Class = "UIButton"; normalTitle = "Seller has accepted your order"; ObjectID = "1IR-L1-WIi"; */
-"1IR-L1-WIi.normalTitle" = "Seller has accepted your order";
+/* Class = "UIButton"; normalTitle = "Order is accepted"; ObjectID = "1IR-L1-WIi"; */
+"1IR-L1-WIi.normalTitle" = "Order is accepted";
 
 /* Class = "UILabel"; text = "You have new order"; ObjectID = "1Ou-NF-dq8"; */
 "1Ou-NF-dq8.text" = "You have new order";
@@ -554,8 +554,8 @@
 /* Class = "UIButton"; normalTitle = "Popular"; ObjectID = "wXI-uP-HmK"; */
 "wXI-uP-HmK.normalTitle" = "Popular";
 
-/* Class = "UIButton"; normalTitle = "Order has been accepted"; ObjectID = "wa7-AP-cnw"; */
-"wa7-AP-cnw.normalTitle" = "Order has been accepted";
+/* Class = "UIButton"; normalTitle = "Order is accepted"; ObjectID = "wa7-AP-cnw"; */
+"wa7-AP-cnw.normalTitle" = "Order is accepted";
 
 /* Class = "UILabel"; text = "$0"; ObjectID = "wv9-GC-hJl"; */
 "wv9-GC-hJl.text" = "$0";
