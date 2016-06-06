@@ -108,12 +108,12 @@ struct Constants {
     
     static let DELETE_COMMENT_TEXT = NSLocalizedString("delete_comment", comment: "") //"Delete comment?"
     
-    static let PM_ORDER_CANCELLED = NSLocalizedString("pm_order_cancelled", comment: "") //"Order cancelled"
-    static let PM_ORDER_ACCEPTED_FOR_BUYER = NSLocalizedString("pm_order_accepted_for_buyer", comment: "") //"Seller has accepted your order"
-    static let PM_ORDER_DECLINED_FOR_BUYER = NSLocalizedString("pm_order_declined_for_buyer", comment: "") //"Seller declined your order"
+    static let PM_ORDER_CANCELLED = NSLocalizedString("pm_order_cancelled", comment: "") //"Order is cancelled"
+    static let PM_ORDER_ACCEPTED_FOR_BUYER = NSLocalizedString("pm_order_accepted_for_buyer", comment: "") //"Order is accepted"
+    static let PM_ORDER_DECLINED_FOR_BUYER = NSLocalizedString("pm_order_declined_for_buyer", comment: "") //"Order is declined"
     
-    static let PM_ORDER_ACCEPTED_FOR_SELLER = NSLocalizedString("pm_order_accepted_for_seller", comment: "") //"Order has been accepted"
-    static let PM_ORDER_DECLINED_FOR_SELLER = NSLocalizedString("pm_order_declined_for_seller", comment: "") //"Order has been declined"
+    static let PM_ORDER_ACCEPTED_FOR_SELLER = NSLocalizedString("pm_order_accepted_for_seller", comment: "") //"Order is accepted"
+    static let PM_ORDER_DECLINED_FOR_SELLER = NSLocalizedString("pm_order_declined_for_seller", comment: "") //"Order is declined"
     
     static let NO_PRODUCT_TEXT = NSLocalizedString("no_product_text", comment: "") //"~ No Products ~"
     static let NO_FOLLOWING_TEXT = NSLocalizedString("no_following_text", comment: "") //"~ No Followings ~"

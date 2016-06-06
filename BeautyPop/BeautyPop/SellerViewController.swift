@@ -8,11 +8,11 @@
 
 import UIKit
 import SwiftEventBus
-import BetterSegmentedControl
+import XMSegmentedControl
 
-class SellerViewController: CustomNavigationController {
+class SellerViewController: CustomNavigationController, XMSegmentedControlDelegate {
     
-    @IBOutlet weak var segControl: BetterSegmentedControl!
+    @IBOutlet weak var segControl: XMSegmentedControl!
     @IBOutlet weak var uiContainerView: UIView!
     
     var bottomLayer: CALayer? = nil
@@ -22,7 +22,12 @@ class SellerViewController: CustomNavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        segControl.titles = [ "Recommended", "Following" ]
+        
+        segControl.delegate = self
+        
+        ViewUtil.setSegmentedControlStyle(segControl, title: [ "Recommended", "Following" ])
+        
+        xmSegmentedControl(segControl!, selectedSegment: 0)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -30,13 +35,11 @@ class SellerViewController: CustomNavigationController {
     }
 
     override func viewDidAppear(animated: Bool) {
-        //self.segControl.setIndex(UInt(self.activeSegment))
-        self.segAction(self.segControl)
+        
     }
     
-    @IBAction func segAction(sender: AnyObject) {
-        let segControl = sender as? BetterSegmentedControl
-        if (segControl!.index == 0) {
+    func xmSegmentedControl(segmentedControl: XMSegmentedControl, selectedSegment: Int) {
+        if segmentedControl.selectedSegment == 0 {
             if self.sellerRecommendationController == nil {
                 self.sellerRecommendationController = self.storyboard!.instantiateViewControllerWithIdentifier("RecommendedSeller") as! RecommendedSellerViewController
             }
@@ -50,7 +53,7 @@ class SellerViewController: CustomNavigationController {
             self.uiContainerView.addSubview((self.sellerRecommendationController?.view)!)
             self.sellerRecommendationController?.didMoveToParentViewController(self)
             self.activeSegment = 0
-        } else if(segControl!.index == 1) {
+        } else if(segmentedControl.selectedSegment == 1) {
             if self.followingController == nil {
                 self.followingController = self.storyboard!.instantiateViewControllerWithIdentifier("FollowingFeedViewController") as! FollowingFeedViewController
             }

@@ -8,6 +8,7 @@
 
 import UIKit
 import PhotoSlider
+import XMSegmentedControl
 
 class ViewUtil {
     
@@ -95,6 +96,26 @@ class ViewUtil {
     
     static func scrollToTop(vController: UICollectionView) {
         vController.contentOffset = CGPointMake(0, 0 - vController.contentInset.top);
+    }
+    
+    static func setSegmentedControlStyle(segControl: XMSegmentedControl, title: [String]) {
+        segControl.segmentTitle = title
+        segControl.backgroundColor = Color.WHITE
+        segControl.tint = Color.LIGHT_GRAY
+        segControl.highlightTint = Color.PINK
+        segControl.highlightColor = Color.PINK
+        segControl.selectedItemHighlightStyle = XMSelectedItemHighlightStyle.BottomEdge
+        segControl.edgeHighlightHeight = 2.0
+    }
+    
+    static func setSegmentedControlInverseStyle(segControl: XMSegmentedControl, title: [String]) {
+        segControl.segmentTitle = title
+        segControl.backgroundColor = Color.PINK
+        segControl.tint = Color.LIGHT_GRAY
+        segControl.highlightTint = Color.WHITE
+        segControl.highlightColor = Color.WHITE
+        segControl.selectedItemHighlightStyle = XMSelectedItemHighlightStyle.BottomEdge
+        segControl.edgeHighlightHeight = 2.0
     }
     
     static func selectSegmentControl(segmentController: UISegmentedControl, view: UIView) {

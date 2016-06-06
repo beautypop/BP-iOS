@@ -7,11 +7,11 @@
 //
 
 import UIKit
-import BetterSegmentedControl
+import XMSegmentedControl
 
-class UserReviewViewController: UIViewController {
+class UserReviewViewController: UIViewController, XMSegmentedControlDelegate {
     
-    @IBOutlet weak var segControl: BetterSegmentedControl!
+    @IBOutlet weak var segControl: XMSegmentedControl!
     @IBOutlet weak var activityLoading: UIActivityIndicatorView!
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -20,13 +20,18 @@ class UserReviewViewController: UIViewController {
     var sellerReviews: [ReviewVM] = []
     var buyerReviews: [ReviewVM] = []
     var selectedIndex = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         ApiFacade.getBuyerReviewsFor(userId, successCallback: onSuccessBuyerReviews, failureCallback: onFailureReviews)
-        segControl.addTarget(self, action: "onValueChanged:", forControlEvents: .ValueChanged)
-        segControl.titles = [ "Sold", "Purchased" ]
         
+        segControl.delegate = self
+        
+        ViewUtil.setSegmentedControlStyle(segControl, title: [ "Sold", "Purchased" ])
+        
+        xmSegmentedControl(segControl!, selectedSegment: 0)
+
         self.collectionView.addPullToRefresh({ [weak self] in
             self!.userReviews.removeAll()
             self!.collectionView.reloadData()
@@ -38,7 +43,6 @@ class UserReviewViewController: UIViewController {
             }
             self!.collectionView.reloadData()
         })
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -181,19 +185,16 @@ class UserReviewViewController: UIViewController {
         ViewUtil.makeToast("Error getting user review data.", view: self.view)
     }
     
-    // MARK: - Action handlers
-    func onValueChanged(sender: BetterSegmentedControl) {
+    func xmSegmentedControl(segmentedControl: XMSegmentedControl, selectedSegment: Int) {
         self.userReviews.removeAll()
         self.collectionView.reloadData()
-        if sender.index == 1 {
-            self.userReviews = sellerReviews
-            self.selectedIndex = 1
-        }
-        else {
+        if segmentedControl.selectedSegment == 0 {
             self.selectedIndex = 0
             self.userReviews = buyerReviews
+        } else if segmentedControl.selectedSegment == 1 {
+            self.selectedIndex = 1
+            self.userReviews = sellerReviews
         }
         self.collectionView.reloadData()
     }
-    
 }
