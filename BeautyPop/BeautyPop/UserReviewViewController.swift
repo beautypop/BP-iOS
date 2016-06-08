@@ -71,7 +71,9 @@ class UserReviewViewController: UIViewController, XMSegmentedControlDelegate {
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("UserReview", forIndexPath: indexPath) as! UserReviewViewCell
         cell.title.text = reviewItem.userName
+        cell.desc.numberOfLines = 0
         cell.desc.text = reviewItem.review
+        cell.desc.sizeToFit()
         cell.reviewScore.rating = reviewItem.score
         cell.reviewScore.settings.updateOnTouch = false
         cell.activityTime.text = NSDate(timeIntervalSince1970:Double(self.userReviews[indexPath.row].reviewDate) / 1000.0).timeAgo
