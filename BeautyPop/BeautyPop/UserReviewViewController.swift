@@ -27,7 +27,7 @@ class UserReviewViewController: UIViewController, XMSegmentedControlDelegate {
         ApiFacade.getBuyerReviewsFor(userId, successCallback: onSuccessBuyerReviews, failureCallback: onFailureReviews)
         
         segControl.delegate = self
-        
+        self.navigationItem.title = "Reviews"
         ViewUtil.setSegmentedControlStyle(segControl, title: [ "Sold", "Purchased" ])
         
         xmSegmentedControl(segControl!, selectedSegment: 0)
