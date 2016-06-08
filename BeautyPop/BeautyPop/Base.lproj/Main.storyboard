@@ -4409,7 +4409,7 @@
             <objects>
                 <collectionViewController title="Followers View Controller" id="71D-99-izD" userLabel="Following View Controller" customClass="FollowersFollowingViewController" customModule="BeautyPop" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="hiX-6h-gs8">
-                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.92549019607843142" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="1hj-4H-bI1">
@@ -4420,7 +4420,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="followingCollectionViewCell" id="Cz6-lU-wkd" customClass="FollowingCollectionViewCell" customModule="BeautyPop" customModuleProvider="target">
-                                <rect key="frame" x="47" y="0.0" width="320" height="64"/>
+                                <rect key="frame" x="140" y="0.0" width="320" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
@@ -4505,7 +4505,7 @@
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NoItemsToolTip" id="VzE-sZ-OCq" customClass="TooltipViewCell" customModule="BeautyPop" customModuleProvider="target">
-                                <rect key="frame" x="47" y="65" width="320" height="64"/>
+                                <rect key="frame" x="140" y="65" width="320" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
@@ -4808,18 +4808,10 @@
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PlE-t5-tHu" userLabel="Following">
                                                                         <rect key="frame" x="101" y="0.0" width="100" height="35"/>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="width" constant="100" id="Kgb-hO-GT8"/>
-                                                                        </constraints>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                         <state key="normal" title="Followings">
                                                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                         </state>
-                                                                        <variation key="default">
-                                                                            <mask key="constraints">
-                                                                                <exclude reference="Kgb-hO-GT8"/>
-                                                                            </mask>
-                                                                        </variation>
                                                                         <connections>
                                                                             <segue destination="71D-99-izD" kind="show" identifier="showFollowings" id="QmE-57-6W9"/>
                                                                         </connections>
@@ -5015,7 +5007,7 @@
                                                         </mask>
                                                     </variation>
                                                     <connections>
-                                                        <outlet property="btnWidthConsttraint" destination="Kgb-hO-GT8" id="xYe-gr-iSz"/>
+                                                        <outlet property="btnWidthConstraint" destination="7Gw-fn-Jdn" id="8Aa-Fd-kC4"/>
                                                         <outlet property="buttonsView" destination="Fqt-7h-XLz" id="x0J-CG-wUu"/>
                                                         <outlet property="displayName" destination="ULa-kB-l9a" id="mZp-VH-dUv"/>
                                                         <outlet property="editProfile" destination="9Ts-yd-gLI" id="5gM-Rm-GTa"/>
@@ -7924,20 +7916,12 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="35"/>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="width" constant="100" id="BWb-GB-XfD"/>
                                                                             <constraint firstAttribute="width" constant="100" id="H73-q2-Wgf"/>
-                                                                            <constraint firstAttribute="width" constant="100" id="sv9-bb-tL6"/>
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                         <state key="normal" title="Followers">
                                                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                         </state>
-                                                                        <variation key="default">
-                                                                            <mask key="constraints">
-                                                                                <exclude reference="BWb-GB-XfD"/>
-                                                                                <exclude reference="sv9-bb-tL6"/>
-                                                                            </mask>
-                                                                        </variation>
                                                                         <connections>
                                                                             <segue destination="71D-99-izD" kind="show" identifier="showFollowers" id="SUR-X2-GSB"/>
                                                                         </connections>
@@ -7945,9 +7929,6 @@
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Z9-MB-j6j" userLabel="Following">
                                                                         <rect key="frame" x="101" y="0.0" width="100" height="35"/>
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="width" constant="100" id="jkJ-Me-4Lk"/>
-                                                                        </constraints>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                         <state key="normal" title="Followings">
                                                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -8202,7 +8183,7 @@
                                                     </variation>
                                                     <connections>
                                                         <outlet property="browseBtn" destination="M7q-ld-1Av" id="Wuj-GL-QK1"/>
-                                                        <outlet property="btnWidthConsttraint" destination="jkJ-Me-4Lk" id="Jyd-hg-pjH"/>
+                                                        <outlet property="btnWidthConstraint" destination="H73-q2-Wgf" id="zg4-SY-EX2"/>
                                                         <outlet property="buttonsView" destination="xgR-gJ-ab2" id="zlC-NK-Sln"/>
                                                         <outlet property="displayName" destination="YPu-YZ-wzK" id="YqE-D6-2J7"/>
                                                         <outlet property="editProfile" destination="uzx-Dp-fRW" id="a9L-IZ-pwK"/>
@@ -8970,14 +8951,14 @@
         <image name="user_thumbnail" width="48" height="48"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NRf-cI-JqS"/>
-        <segue reference="h7o-0V-p0S"/>
-        <segue reference="pK4-qg-eaZ"/>
-        <segue reference="f1D-EY-plH"/>
-        <segue reference="h8d-K1-dMp"/>
+        <segue reference="sXk-cu-9b6"/>
+        <segue reference="M0G-4C-Ovh"/>
+        <segue reference="7VM-RZ-NKx"/>
+        <segue reference="fRU-pM-mSi"/>
         <segue reference="oRf-1U-UOz"/>
         <segue reference="SC0-fE-foi"/>
-        <segue reference="sXk-cu-9b6"/>
+        <segue reference="NRf-cI-JqS"/>
+        <segue reference="h7o-0V-p0S"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

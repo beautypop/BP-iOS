@@ -307,7 +307,7 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
         let availableWidthForButtons:CGFloat = self.view.bounds.width
         let buttonWidth :CGFloat = availableWidthForButtons / 3
         
-        cell.btnWidthConsttraint.constant = buttonWidth
+        cell.btnWidthConstraint.constant = buttonWidth
         
         ViewUtil.displayRoundedCornerView(cell.editProfile, bgColor: Color.LIGHT_GRAY)
         

@@ -353,7 +353,7 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
         let availableWidthForButtons:CGFloat = self.view.bounds.width
         let buttonWidth :CGFloat = availableWidthForButtons / 3
         
-        cell.btnWidthConsttraint.constant = buttonWidth
+        cell.btnWidthConstraint.constant = buttonWidth
         cell.editProfile.layer.borderColor = Color.LIGHT_GRAY.CGColor
         cell.editProfile.layer.borderWidth = 1.0
         
