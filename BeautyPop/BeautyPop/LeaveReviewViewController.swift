@@ -77,7 +77,8 @@ class LeaveReviewViewController: UIViewController {
     }
     
     func onSuccessAddReview(response: String) {
-        
+        self.navigationController?.popViewControllerAnimated(false)
+        ViewUtil.makeToast(NSLocalizedString("add_review_comment", comment: ""), view: self.view)
         //ViewUtil.hideActivityLoading(self.activityLoading)
     }
     
