@@ -116,8 +116,9 @@ class BaseProfileFeedViewController: CustomNavigationController {
         cell.reviewView.settings.fillMode = StarFillMode.Half
         cell.reviewView.settings.updateOnTouch = false
         cell.reviewView.rating = 0
+        
         let averageRating = self.userInfo?.averageReviewScore
-        if averageRating > 1.0 && averageRating <= 1.25 {
+        if averageRating >= 1.0 && averageRating <= 1.25 {
             cell.reviewView.rating = 1
         } else if averageRating > 1.25 && averageRating <= 1.75 {
             cell.reviewView.rating = 1.5
