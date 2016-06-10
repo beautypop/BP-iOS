@@ -139,6 +139,5 @@ class BaseProfileFeedViewController: CustomNavigationController {
         }
         
         cell.reviewView.text = "(" + String(Int((self.userInfo?.numReviews)!)) + ")"
-        
     }
 }

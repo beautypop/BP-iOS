@@ -419,8 +419,8 @@
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "kKX-zT-pU1"; */
 "kKX-zT-pU1.normalTitle" = "Button";
 
-/* Class = "UITabBarItem"; title = "Seller"; ObjectID = "kVJ-5f-Oqs"; */
-"kVJ-5f-Oqs.title" = "Seller";
+/* Class = "UITabBarItem"; title = "Feed"; ObjectID = "kVJ-5f-Oqs"; */
+"kVJ-5f-Oqs.title" = "Feed";
 
 /* Class = "UIButton"; normalTitle = "Signup"; ObjectID = "klc-Px-jSj"; */
 "klc-Px-jSj.normalTitle" = "Signup";

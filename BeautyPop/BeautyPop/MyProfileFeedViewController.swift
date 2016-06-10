@@ -119,13 +119,6 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
         })
     }
     
-    func setSegmentedControlTitles() {
-        if let segControl = self.activeHeaderViewCell?.segControl {
-            segControl.titles = [ NSLocalizedString("products_txt", comment: "") + String(self.userInfo!.numProducts), NSLocalizedString("likes", comment: "") + String(self.userInfo!.numLikes)]
-        }
-        
-    }
-    
     //MARK: UICollectionViewDataSource
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
@@ -335,8 +328,9 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
         } else if segControl!.index == 1 {
             feedLoader?.setFeedType(FeedFilter.FeedType.USER_LIKED)
         }
-        reloadFeedItems()
+        
         setSegmentedControlTitles()
+        reloadFeedItems()
     }
     
     // MARK: UIImagePickerControllerDelegate Methods
@@ -378,5 +372,12 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func setSegmentedControlTitles() {
+        if let segControl = self.activeHeaderViewCell?.segControl {
+            segControl.titleFont = UIFont.systemFontOfSize(15)
+            segControl.titles = [ NSLocalizedString("products_txt", comment: "") + String(self.userInfo!.numProducts), NSLocalizedString("likes", comment: "") + String(self.userInfo!.numLikes)]
+        }
     }
 }

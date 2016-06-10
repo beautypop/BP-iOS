@@ -39,10 +39,8 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
         self.setUserInfo(user)
         self.navigationItem.title = self.userInfo?.displayName
         
-        if let segControl = self.activeHeaderViewCell?.segControl {
-            segControl.titles = [ NSLocalizedString("products_txt", comment: "") + String(self.userInfo!.numProducts), NSLocalizedString("likes", comment: "") + String(self.userInfo!.numLikes)]
-        }
-        self.reloadFeedItems()
+        setSegmentedControlTitles()
+        reloadFeedItems()
     }
     
     func onFailureGetUser(error: String) {
@@ -353,8 +351,8 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
     
     func setSegmentedControlTitles() {
         if let segControl = self.activeHeaderViewCell?.segControl {
+            segControl.titleFont = UIFont.systemFontOfSize(15)
             segControl.titles = [ NSLocalizedString("products_txt", comment: "") + String(self.userInfo!.numProducts), NSLocalizedString("likes", comment: "") + String(self.userInfo!.numLikes)]
         }
     }
-    
 }
