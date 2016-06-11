@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var enterBackgroundTime: CFTimeInterval? = nil
     var enteredBackgroundSeconds: Double? = nil
     
-    private var _apnsDeviceToken: String? = nil
+    private var _apsDeviceToken: String? = nil
     private var _appVersionCode: String? = nil
     private var _appShortVersion: String? = nil
     
@@ -112,15 +112,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             tokenString += String(format: "%02.2hhx", arguments: [tokenChars[i]])
         }
         
-        
         NSLog("Device Token:", tokenString)
-        apnsDeviceToken = tokenString
+        apsDeviceToken = tokenString
         
         //http://stackoverflow.com/questions/24501288/getting-version-and-build-info-with-swift
         appVersionCode = NSBundle.mainBundle().infoDictionary?["CFBundleVersion"] as? String
         appShortVersion = NSBundle.mainBundle().infoDictionary?["CFBundleShortVersionString"] as? String
         
-        SwiftEventBus.post("onSuccessRegisterAppNotification")
+        ApiFacade.saveApnToken()
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
@@ -149,18 +148,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         vc.pushViewController(viewController, animated: true)
         return true
     }*/
+    
     // custom
     
-    var apnsDeviceToken: String? {
+    var apsDeviceToken: String? {
         set {
-            _apnsDeviceToken = newValue
-            SharedPreferencesUtil.getInstance().setDeviceToken(_apnsDeviceToken!)
+            _apsDeviceToken = newValue
+            SharedPreferencesUtil.getInstance().setDeviceToken(_apsDeviceToken!)
         }
         get {
-            if _apnsDeviceToken == nil || _apnsDeviceToken == "" {
-                _apnsDeviceToken = SharedPreferencesUtil.getInstance().getDeviceToken()
+            if _apsDeviceToken == nil || _apsDeviceToken == "" {
+                _apsDeviceToken = SharedPreferencesUtil.getInstance().getDeviceToken()
             }
-            return _apnsDeviceToken
+            return _apsDeviceToken
         }
     }
     
@@ -249,10 +249,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func registerForPushNotifications() {
-        let notificationSettings = UIUserNotificationSettings(
-            forTypes: [.Badge, .Sound, .Alert], categories: nil)
+        let notificationSettings = UIUserNotificationSettings(forTypes: [.Badge, .Sound, .Alert], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
-        print("here..")
     }
 }
 
