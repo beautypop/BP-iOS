@@ -131,3 +131,5 @@
 "seller_review_text" = "Give a rating to buyer";
 "add_review_comment" = "Review submitted Successfully";
 "Start_following_text" = "Follow your favorite sellers. Check out their newest products in your feed.";
+"start_rating_warn" = "Please input a rating";
+"review_exp_warn" = "Please input your experience";

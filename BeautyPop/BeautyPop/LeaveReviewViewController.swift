@@ -44,24 +44,25 @@ class LeaveReviewViewController: UIViewController {
     
     func saveReview(sender: AnyObject) {
         
-        
-        
-        let _confirmDialog = UIAlertController(title: NSLocalizedString("", comment: ""), message: NSLocalizedString("reviewConfirmMsg", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
-        let okAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.Default, handler: nil)
-        
-        let confirmAction = UIAlertAction(title: NSLocalizedString("submit", comment: ""), style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction!) in
+        //validate inputs... 
+        if validateInputs() {
+            let _confirmDialog = UIAlertController(title: NSLocalizedString("", comment: ""), message: NSLocalizedString("reviewConfirmMsg", comment: ""), preferredStyle: UIAlertControllerStyle.Alert)
+            let okAction = UIAlertAction(title: NSLocalizedString("cancel", comment: ""), style: UIAlertActionStyle.Default, handler: nil)
             
-            let newReviewVM = NewReviewVM()
-            newReviewVM.review = self.reviewTxt.text
-            newReviewVM.score = self.reviewRating.rating
-            newReviewVM.conversationOrderId = self.conversationId
+            let confirmAction = UIAlertAction(title: NSLocalizedString("submit", comment: ""), style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction!) in
+                
+                let newReviewVM = NewReviewVM()
+                newReviewVM.review = self.reviewTxt.text
+                newReviewVM.score = self.reviewRating.rating
+                newReviewVM.conversationOrderId = self.conversationId
+                
+                ApiFacade.addReview(newReviewVM, successCallback: self.onSuccessAddReview, failureCallback: self.onFailureAddReview)
+            })
             
-            ApiFacade.addReview(newReviewVM, successCallback: self.onSuccessAddReview, failureCallback: self.onFailureAddReview)
-        })
-        
-        _confirmDialog.addAction(okAction)
-        _confirmDialog.addAction(confirmAction)
-        self.presentViewController(_confirmDialog, animated: true, completion: nil)
+            _confirmDialog.addAction(okAction)
+            _confirmDialog.addAction(confirmAction)
+            self.presentViewController(_confirmDialog, animated: true, completion: nil)
+        }
         
        
     }
@@ -84,6 +85,19 @@ class LeaveReviewViewController: UIViewController {
     
     func onFailureAddReview(response: String) {
         ViewUtil.makeToast("Error saving user review data.", view: self.view)
+    }
+    
+    func validateInputs() -> Bool {
+        //validate if start reating has entered
+        var valid = true
+        if self.reviewRating.rating <= 0 {
+            ViewUtil.makeToast(NSLocalizedString("start_rating_warn", comment: ""), view: self.view)
+            valid = false
+        } else if StringUtil.trim(self.reviewTxt.text).isEmpty {
+            ViewUtil.makeToast(NSLocalizedString("review_exp_warn", comment: ""), view: self.view)
+            valid = false
+        }
+        return valid
     }
     
 }
