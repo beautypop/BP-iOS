@@ -91,7 +91,10 @@ class FollowingFeedViewController: UIViewController, UIScrollViewDelegate {
         if feedItem.id == -1 {
             //this mean there are no results.... hence show no result text
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("NoItemsToolTip", forIndexPath: indexPath) as! TooltipViewCell
-            return feedViewAdapter!.bindNoItemToolTip(cell, feedType: (self.feedLoader?.feedType)!)
+            //return feedViewAdapter!.bindNoItemToolTip(cell, feedType: (self.feedLoader?.feedType)!)
+            cell.toolTipText.text = NSLocalizedString("Start_following_text", comment: "")
+            ViewUtil.displayRoundedCornerView(cell.followingBtn, bgColor: Color.WHITE, borderColor: Color.RED)
+            return cell;
         }
         
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! FeedProductCollectionViewCell
@@ -108,7 +111,8 @@ class FollowingFeedViewController: UIViewController, UIScrollViewDelegate {
         
         if self.feedLoader?.feedItems.count == 1 {
             if self.feedLoader?.feedItems[0].id == -1 {
-                return FeedViewAdapter.getNoFeedItemCellSize(self.view.bounds.width)
+                //return FeedViewAdapter.getNoFeedItemCellSize(self.view.bounds.width)
+                return CGSizeMake(self.view.bounds.width, 300)
             }
         }
         
@@ -138,6 +142,8 @@ class FollowingFeedViewController: UIViewController, UIScrollViewDelegate {
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
         if identifier == "fProductSegue" {
             return true
+        } else if identifier == "startFollowing" {
+            return true
         }
         return false
     }
@@ -151,6 +157,9 @@ class FollowingFeedViewController: UIViewController, UIScrollViewDelegate {
             productViewController = segue.destinationViewController as? ProductViewController
             productViewController!.feedItem = feedItem
             productViewController!.hidesBottomBarWhenPushed = true
+        } else if segue.identifier == "startFollowing" {
+            let vController = segue.destinationViewController as? SellerViewController
+            vController?.activeSegment = 1
         }
     }
     

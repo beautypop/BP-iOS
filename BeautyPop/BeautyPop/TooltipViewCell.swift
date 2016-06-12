@@ -11,4 +11,5 @@ import UIKit
 class TooltipViewCell: UICollectionViewCell {
     @IBOutlet weak var toolTipText: UILabel!
     
+    @IBOutlet weak var followingBtn: UIButton!
 }

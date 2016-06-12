@@ -298,9 +298,11 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     
     //MARK Segue handling methods.
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        if (identifier == "categoryscreen") {
+        if identifier == "categoryscreen" {
             return true
-        } else if (identifier == "productScreen") {
+        } else if identifier == "productScreen" {
+            return true
+        } else if identifier == "showSellers" {
             return true
         }
         return false
@@ -319,6 +321,9 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
             productViewController = segue.destinationViewController as? ProductViewController
             productViewController!.feedItem = feedItem
             productViewController!.hidesBottomBarWhenPushed = true
+        } else if segue.identifier == "showSellers" {
+            let vController = segue.destinationViewController as! SellerViewController
+            vController.activeSegment = 1
         }
     }
     
@@ -414,6 +419,8 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
         }
     }
     
+    @IBAction func onClickShopNow(sender: AnyObject) {
+    }
     /*
     func stopRefreshTimer() {
         if self.feedRefreshTimer != nil {

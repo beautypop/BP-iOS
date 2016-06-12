@@ -25,9 +25,9 @@ class SellerViewController: CustomNavigationController, XMSegmentedControlDelega
         
         segControl.delegate = self
         
-        ViewUtil.setSegmentedControlStyle(segControl, title: [ "Recommended", "Following" ])
+        ViewUtil.setSegmentedControlStyle(segControl, title: [ "Following", "Recommended" ])
         
-        xmSegmentedControl(segControl!, selectedSegment: 0)
+        xmSegmentedControl(segControl!, selectedSegment: activeSegment)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -39,7 +39,7 @@ class SellerViewController: CustomNavigationController, XMSegmentedControlDelega
     }
     
     func xmSegmentedControl(segmentedControl: XMSegmentedControl, selectedSegment: Int) {
-        if segmentedControl.selectedSegment == 0 {
+        if selectedSegment == 1 {
             if self.sellerRecommendationController == nil {
                 self.sellerRecommendationController = self.storyboard!.instantiateViewControllerWithIdentifier("RecommendedSeller") as! RecommendedSellerViewController
             }
@@ -52,8 +52,8 @@ class SellerViewController: CustomNavigationController, XMSegmentedControlDelega
             self.sellerRecommendationController!.view.frame = self.uiContainerView.bounds
             self.uiContainerView.addSubview((self.sellerRecommendationController?.view)!)
             self.sellerRecommendationController?.didMoveToParentViewController(self)
-            self.activeSegment = 0
-        } else if(segmentedControl.selectedSegment == 1) {
+            self.activeSegment = 1
+        } else if(selectedSegment == 0) {
             if self.followingController == nil {
                 self.followingController = self.storyboard!.instantiateViewControllerWithIdentifier("FollowingFeedViewController") as! FollowingFeedViewController
             }
@@ -66,7 +66,7 @@ class SellerViewController: CustomNavigationController, XMSegmentedControlDelega
             self.followingController!.view.frame = self.uiContainerView.bounds
             self.uiContainerView.addSubview((self.followingController?.view)!)
             self.followingController?.didMoveToParentViewController(self)
-            self.activeSegment = 1
+            self.activeSegment = 0
         }
     }
     

@@ -206,6 +206,8 @@ class FollowersFollowingViewController: UICollectionViewController {
         self.loading = false
     }
     
+    @IBAction func onClickStartFollowing(sender: AnyObject) {
+    }
     func onFailureGetFollowingFollowers(response: String) {
         NSLog("Error getting following followers")
     }
