@@ -420,6 +420,10 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     }
     
     @IBAction func onClickShopNow(sender: AnyObject) {
+        //CustomTabBarController.selectSellerTab()
+        if let sellerController = CustomTabBarController.selectSellerTab() {
+            sellerController.activeSegment = 1
+        }
     }
     /*
     func stopRefreshTimer() {

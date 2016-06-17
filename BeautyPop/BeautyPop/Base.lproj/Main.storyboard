@@ -4376,8 +4376,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNC-yw-S0G" userLabel="gotorecomm">
                                                     <rect key="frame" x="0.0" y="0.0" width="394" height="40"/>
                                                     <connections>
-                                                        <action selector="onClickShopNow:" destination="Yee-Hw-mHP" eventType="touchUpInside" id="a4K-kM-Z5d"/>
-                                                        <segue destination="50r-kV-woN" kind="show" identifier="showSellers" id="Rri-Gf-6fj"/>
+                                                        <action selector="onClickShopNow:" destination="Yee-Hw-mHP" eventType="touchUpInside" id="dCy-No-Xoq"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -9053,12 +9052,12 @@
     <inferredMetricsTieBreakers>
         <segue reference="NRf-cI-JqS"/>
         <segue reference="h7o-0V-p0S"/>
-        <segue reference="f1D-EY-plH"/>
         <segue reference="h8d-K1-dMp"/>
+        <segue reference="f1D-EY-plH"/>
         <segue reference="Aso-Du-fLI"/>
-        <segue reference="jhO-y7-EXF"/>
+        <segue reference="b8s-d6-N0D"/>
         <segue reference="BGy-Vf-KdP"/>
-        <segue reference="Rri-Gf-6fj"/>
+        <segue reference="jhO-y7-EXF"/>
         <segue reference="SC0-fE-foi"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
