@@ -323,7 +323,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
             productViewController!.hidesBottomBarWhenPushed = true
         } else if segue.identifier == "showSellers" {
             let vController = segue.destinationViewController as! SellerViewController
-            vController.activeSegment = 1
+            vController.selectRecommendedSegment()
         }
     }
     
@@ -397,7 +397,9 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
             if self.bannerTimer != nil {
                 self.bannerTimer?.invalidate()
             }
-            self.bannerTimer = NSTimer.scheduledTimerWithTimeInterval(Constants.BANNER_REFRESH_TIME_INTERVAL, target: self, selector: "scrollHomeBanner", userInfo: nil, repeats: true)
+            
+            self.bannerTimer = NSTimer.scheduledTimerWithTimeInterval(
+                Constants.BANNER_REFRESH_TIME_INTERVAL, target: self, selector: "scrollHomeBanner", userInfo: nil, repeats: true)
             
             self.headerView?.homeBannerHeight.constant = self.view.bounds.width / Constants.HOME_BANNER_WIDTH_HEIGHT_RATIO
         }
@@ -420,11 +422,11 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     }
     
     @IBAction func onClickShopNow(sender: AnyObject) {
-        //CustomTabBarController.selectSellerTab()
         if let sellerController = CustomTabBarController.selectSellerTab() {
-            sellerController.activeSegment = 1
+            sellerController.selectRecommendedSegment()
         }
     }
+    
     /*
     func stopRefreshTimer() {
         if self.feedRefreshTimer != nil {

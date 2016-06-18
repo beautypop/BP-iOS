@@ -159,7 +159,7 @@ class FollowingFeedViewController: UIViewController, UIScrollViewDelegate {
             productViewController!.hidesBottomBarWhenPushed = true
         } else if segue.identifier == "startFollowing" {
             let vController = segue.destinationViewController as? SellerViewController
-            vController?.activeSegment = 1
+            vController?.selectRecommendedSegment()
         }
     }
     

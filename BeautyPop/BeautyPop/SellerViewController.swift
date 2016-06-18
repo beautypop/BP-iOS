@@ -12,13 +12,39 @@ import XMSegmentedControl
 
 class SellerViewController: CustomNavigationController, XMSegmentedControlDelegate {
     
+    enum SegmentItem: Int {
+        case Following = 0
+        case Recommended
+        
+        init() {
+            self = .Following
+        }
+    }
+    
     @IBOutlet weak var segControl: XMSegmentedControl!
     @IBOutlet weak var uiContainerView: UIView!
     
     var bottomLayer: CALayer? = nil
     var sellerRecommendationController : UIViewController? = nil
     var followingController : UIViewController? = nil
-    var activeSegment: Int = 0
+    var activeSegment: SegmentItem = SegmentItem.Following
+    
+    func selectFollowingSegment() {
+        selectSegment(SegmentItem.Following)
+    }
+    
+    func selectRecommendedSegment() {
+        selectSegment(SegmentItem.Recommended)
+    }
+    
+    func selectSegment(segmentItem: SegmentItem) {
+        if segControl == nil {
+            activeSegment = segmentItem
+        } else {
+            xmSegmentedControl(segControl!, selectedSegment: segmentItem.rawValue)
+            segControl.update()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +53,7 @@ class SellerViewController: CustomNavigationController, XMSegmentedControlDelega
         
         ViewUtil.setSegmentedControlStyle(segControl, title: [ "Following", "Recommended" ])
         
-        xmSegmentedControl(segControl!, selectedSegment: activeSegment)
+        xmSegmentedControl(segControl!, selectedSegment: activeSegment.rawValue)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -39,21 +65,7 @@ class SellerViewController: CustomNavigationController, XMSegmentedControlDelega
     }
     
     func xmSegmentedControl(segmentedControl: XMSegmentedControl, selectedSegment: Int) {
-        if selectedSegment == 1 {
-            if self.sellerRecommendationController == nil {
-                self.sellerRecommendationController = self.storyboard!.instantiateViewControllerWithIdentifier("RecommendedSeller") as! RecommendedSellerViewController
-            }
-            
-            self.followingController?.willMoveToParentViewController(nil)
-            self.followingController?.view.removeFromSuperview()
-            self.followingController?.removeFromParentViewController()
-            
-            addChildViewController(self.sellerRecommendationController!)
-            self.sellerRecommendationController!.view.frame = self.uiContainerView.bounds
-            self.uiContainerView.addSubview((self.sellerRecommendationController?.view)!)
-            self.sellerRecommendationController?.didMoveToParentViewController(self)
-            self.activeSegment = 1
-        } else if(selectedSegment == 0) {
+        if selectedSegment == SegmentItem.Following.rawValue {
             if self.followingController == nil {
                 self.followingController = self.storyboard!.instantiateViewControllerWithIdentifier("FollowingFeedViewController") as! FollowingFeedViewController
             }
@@ -66,8 +78,21 @@ class SellerViewController: CustomNavigationController, XMSegmentedControlDelega
             self.followingController!.view.frame = self.uiContainerView.bounds
             self.uiContainerView.addSubview((self.followingController?.view)!)
             self.followingController?.didMoveToParentViewController(self)
-            self.activeSegment = 0
+        } else if selectedSegment == SegmentItem.Recommended.rawValue {
+            if self.sellerRecommendationController == nil {
+                self.sellerRecommendationController = self.storyboard!.instantiateViewControllerWithIdentifier("RecommendedSeller") as! RecommendedSellerViewController
+            }
+            
+            self.followingController?.willMoveToParentViewController(nil)
+            self.followingController?.view.removeFromSuperview()
+            self.followingController?.removeFromParentViewController()
+            
+            addChildViewController(self.sellerRecommendationController!)
+            self.sellerRecommendationController!.view.frame = self.uiContainerView.bounds
+            self.uiContainerView.addSubview((self.sellerRecommendationController?.view)!)
+            self.sellerRecommendationController?.didMoveToParentViewController(self)
         }
+        segmentedControl.selectedSegment = selectedSegment
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
