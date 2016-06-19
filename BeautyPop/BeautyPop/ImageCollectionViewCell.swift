@@ -10,6 +10,8 @@ import UIKit
 
 class ImageCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var finish: UIButton!
+    @IBOutlet weak var next: UIButton!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var imageView: UIImageView!
     

@@ -69,7 +69,14 @@ class SplashViewController: UIViewController {
     func showMainPage() {
         AppDelegate.getInstance().initUserCaches()
         SwiftEventBus.unregister(self)
-        self.performSegueWithIdentifier("homefeed", sender: nil)
+        
+        if (!SharedPreferencesUtil.getInstance().isScreenViewed(SharedPreferencesUtil.Screen.TOUR)) {
+            SharedPreferencesUtil.getInstance().setScreenViewed(SharedPreferencesUtil.Screen.TOUR)
+            self.performSegueWithIdentifier("tourActivity", sender: nil)
+        } else {
+            self.performSegueWithIdentifier("homefeed", sender: nil)
+        }
+        
         AppDelegate.getInstance().registerForPushNotifications()
     }
     

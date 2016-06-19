@@ -142,8 +142,6 @@ class FollowingFeedViewController: UIViewController, UIScrollViewDelegate {
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
         if identifier == "fProductSegue" {
             return true
-        } else if identifier == "startFollowing" {
-            return true
         }
         return false
     }
@@ -157,9 +155,6 @@ class FollowingFeedViewController: UIViewController, UIScrollViewDelegate {
             productViewController = segue.destinationViewController as? ProductViewController
             productViewController!.feedItem = feedItem
             productViewController!.hidesBottomBarWhenPushed = true
-        } else if segue.identifier == "startFollowing" {
-            let vController = segue.destinationViewController as? SellerViewController
-            vController?.selectRecommendedSegment()
         }
     }
     
