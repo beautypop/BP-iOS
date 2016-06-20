@@ -183,4 +183,10 @@ class FollowingFeedViewController: UIViewController, UIScrollViewDelegate {
         
         feedViewAdapter!.onLikeBtnClick(cell, feedItem: feedItem)
     }
+    
+    @IBAction func onClickFollowingBtn(sender: AnyObject) {
+        if let sellerController = CustomTabBarController.selectSellerTab() {
+           sellerController.selectRecommendedSegment()
+        }
+    }
 }
