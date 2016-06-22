@@ -19,6 +19,7 @@ class SharedPreferencesUtil {
         case HOME_FOLLOWING_TIPS = "HOME_FOLLOWING_TIPS"
         case CATEGORY_TIPS = "CATEGORY_TIPS"
         case MY_PROFILE_TIPS = "MY_PROFILE_TIPS"
+        case TOUR = "TOUR"
     }
     
     enum User: String {
@@ -120,5 +121,6 @@ class SharedPreferencesUtil {
     func clearAll() {
         self.prefs.setValue(nil, forKey: User.SESSION_ID.rawValue)
         self.prefs.setObject(nil, forKey: User.USER_INFO.rawValue)
+        self.prefs.setObject(nil, forKey: Screen.TOUR.rawValue)
     }
 }
