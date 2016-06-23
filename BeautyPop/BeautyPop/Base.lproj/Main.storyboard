@@ -724,22 +724,34 @@
                                                     <color key="pageIndicatorTintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="currentPageIndicatorTintColor" red="0.98823529409999999" green="0.30588235289999999" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                                                 </pageControl>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OGl-Ze-zex" userLabel="next">
-                                                    <rect key="frame" x="93" y="245" width="115" height="30"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wh0-7w-qGP" userLabel="finish">
+                                                    <rect key="frame" x="95" y="233" width="110" height="32"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="Df2-zX-TV7"/>
+                                                        <constraint firstAttribute="height" constant="32" id="6jq-Ff-EKl"/>
+                                                        <constraint firstAttribute="width" constant="110" id="trY-Ad-qw0"/>
                                                     </constraints>
-                                                    <state key="normal" image="ic_next"/>
-                                                    <connections>
-                                                        <action selector="onClickNext:" destination="mk1-sc-Kh0" eventType="touchUpInside" id="VMQ-eG-JyP"/>
-                                                    </connections>
-                                                </button>
-                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wh0-7w-qGP" userLabel="finish">
-                                                    <rect key="frame" x="112" y="242" width="77" height="33"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
                                                     <state key="normal" title="Start Now"/>
                                                     <connections>
                                                         <segue destination="YTL-Dp-vJM" kind="show" identifier="homefeed" id="7WP-FM-oSc"/>
+                                                    </connections>
+                                                </button>
+                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OGl-Ze-zex" userLabel="next">
+                                                    <rect key="frame" x="121" y="233" width="58" height="32"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="32" id="Df2-zX-TV7"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="MIK-pM-Rf6"/>
+                                                        <constraint firstAttribute="width" constant="58" id="r9Y-fg-O14"/>
+                                                    </constraints>
+                                                    <state key="normal" image="ic_next"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="MIK-pM-Rf6"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <connections>
+                                                        <action selector="onClickNext:" destination="mk1-sc-Kh0" eventType="touchUpInside" id="VMQ-eG-JyP"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -747,11 +759,11 @@
                                         </view>
                                         <constraints>
                                             <constraint firstItem="txz-G8-Fkh" firstAttribute="top" secondItem="Fic-7b-HUS" secondAttribute="top" id="9CC-84-RxO"/>
-                                            <constraint firstAttribute="bottom" secondItem="Wh0-7w-qGP" secondAttribute="bottom" constant="25" id="Axq-ZW-b84"/>
+                                            <constraint firstAttribute="bottom" secondItem="Wh0-7w-qGP" secondAttribute="bottom" constant="35" id="Axq-ZW-b84"/>
                                             <constraint firstAttribute="trailing" secondItem="txz-G8-Fkh" secondAttribute="trailing" id="BHH-b6-cDY"/>
                                             <constraint firstItem="OGl-Ze-zex" firstAttribute="centerX" secondItem="Fic-7b-HUS" secondAttribute="centerX" id="MOZ-Ig-aFr"/>
                                             <constraint firstItem="edk-N4-M0R" firstAttribute="centerX" secondItem="Fic-7b-HUS" secondAttribute="centerX" id="PgT-Ph-WDe"/>
-                                            <constraint firstAttribute="bottom" secondItem="OGl-Ze-zex" secondAttribute="bottom" constant="25" id="QG6-ZM-vIn"/>
+                                            <constraint firstAttribute="bottom" secondItem="OGl-Ze-zex" secondAttribute="bottom" constant="35" id="QG6-ZM-vIn"/>
                                             <constraint firstItem="Wh0-7w-qGP" firstAttribute="centerX" secondItem="Fic-7b-HUS" secondAttribute="centerX" id="dT0-He-d7u"/>
                                             <constraint firstAttribute="bottom" secondItem="txz-G8-Fkh" secondAttribute="bottom" id="mlC-6V-KHw"/>
                                             <constraint firstAttribute="bottom" secondItem="edk-N4-M0R" secondAttribute="bottom" constant="15" id="xav-uU-89W"/>
