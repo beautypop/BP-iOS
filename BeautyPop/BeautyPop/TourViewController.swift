@@ -15,6 +15,7 @@ class TourViewController: UIViewController {
     var currentPage: Int?
     
     @IBOutlet weak var uiCollectionView: UICollectionView!
+    
     var images = [
         UIImage(named: "tour_1_en")!,
         UIImage(named: "tour_2_en")!,
