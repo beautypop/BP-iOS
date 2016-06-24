@@ -133,3 +133,5 @@
 "Start_following_text" = "Follow your favorite sellers. Check out their newest products in your feed.";
 "start_rating_warn" = "Please input a rating";
 "review_exp_warn" = "Please input your experience";
+"activity_seller_review" = "has left you a review";
+"activity_buyer_review" = "has left you a review";

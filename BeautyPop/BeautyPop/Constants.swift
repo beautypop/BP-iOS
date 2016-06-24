@@ -83,6 +83,8 @@ struct Constants {
     static let ACTIVITY_SOLD = NSLocalizedString("activity_sold", comment: "") //"already sold."
     static let ACTIVITY_GAME_BADGE = NSLocalizedString("activity_new_badge_msg", comment: "") // "Congratulations! You got a new badge:\n"
     static let ACTIVITY_TIPS_NEW_USER = NSLocalizedString("activity_tips_new_user", comment: "") // "Congratulations! You got a new badge:\n"
+    static let ACTIVITY_SELLER_REVIEW = NSLocalizedString("activity_seller_review", comment: "") // "Congratulations! You got a new badge:\n"
+    static let ACTIVITY_BUYER_REVIEW = NSLocalizedString("activity_buyer_review", comment: "") // "Congratulations! You got a new badge:\n"
     
     static let SETTING_EMAIL_NOTIF_NEW_PRODUCT = NSLocalizedString("product_listed", comment: "") //"Product listed"
     static let SETTING_EMAIL_NOTIF_NEW_CHAT = NSLocalizedString("new_chat", comment: "") //"New chat"

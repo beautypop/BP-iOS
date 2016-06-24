@@ -151,6 +151,76 @@ class UserActivityViewController: CustomNavigationController {
             
             cell.sizeToFit()
             return cell
+        case "BUYER_REVIEW":
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("UserActivityBuyerReview", forIndexPath: indexPath) as! UserActivityViewCell
+            cell.contentMode = UIViewContentMode.Redraw
+            cell.activityTime.text = NSDate(timeIntervalSince1970:Double(self.userActivitesItems[indexPath.row].createdDate) / 1000.0).timeAgo
+            
+            ImageUtil.displayThumbnailProfileImage(Int(self.userActivitesItems[indexPath.row].actorImage), imageView: cell.profileImg)
+            
+            cell.postImage.hidden = false
+            ImageUtil.displayPostImage(Int(self.userActivitesItems[indexPath.row].targetImage), imageView: cell.postImage)
+            
+            cell.userName.hidden = false
+            cell.userName.setTitle(self.userActivitesItems[indexPath.row].actorName, forState: UIControlState.Normal)
+            cell.userName.setTitleColor(Color.PINK, forState: UIControlState.Normal)
+            cell.userName.sizeToFit()
+            
+            cell.textMessage.text = getMessageText(self.userActivitesItems[indexPath.row])
+            cell.textMessage.numberOfLines = 0
+            cell.textMessage.sizeToFit()
+            
+            if let desc = getDescText(self.userActivitesItems[indexPath.row]) {
+                cell.desc.text = desc
+            } else {
+                cell.desc.text = ""
+            }
+            cell.desc.numberOfLines = 0
+            cell.desc.sizeToFit()
+            
+            cell.layer.backgroundColor = Color.WHITE.CGColor
+            if !viewStatus {
+                cell.layer.backgroundColor = Color.LIGHT_PINK_4.CGColor
+            }
+            
+            cell.sizeToFit()
+            return cell
+        case "SELLER_REVIEW":
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("UserActivitySellerReview", forIndexPath: indexPath) as! UserActivityViewCell
+            cell.contentMode = UIViewContentMode.Redraw
+            cell.activityTime.text = NSDate(timeIntervalSince1970:Double(self.userActivitesItems[indexPath.row].createdDate) / 1000.0).timeAgo
+            
+            ImageUtil.displayThumbnailProfileImage(Int(self.userActivitesItems[indexPath.row].actorImage), imageView: cell.profileImg)
+            
+            cell.postImage.hidden = false
+            ImageUtil.displayPostImage(Int(self.userActivitesItems[indexPath.row].targetImage), imageView: cell.postImage)
+            
+            cell.userName.hidden = false
+            cell.userName.setTitle(self.userActivitesItems[indexPath.row].actorName, forState: UIControlState.Normal)
+            cell.userName.setTitleColor(Color.PINK, forState: UIControlState.Normal)
+            cell.userName.sizeToFit()
+            
+            cell.textMessage.text = getMessageText(self.userActivitesItems[indexPath.row])
+            cell.textMessage.numberOfLines = 0
+            cell.textMessage.sizeToFit()
+            
+            if let desc = getDescText(self.userActivitesItems[indexPath.row]) {
+                cell.desc.text = desc
+            } else {
+                cell.desc.text = ""
+            }
+            cell.desc.numberOfLines = 0
+            cell.desc.sizeToFit()
+            
+            cell.layer.backgroundColor = Color.WHITE.CGColor
+            if !viewStatus {
+                cell.layer.backgroundColor = Color.LIGHT_PINK_4.CGColor
+            }
+            
+            cell.sizeToFit()
+            return cell
+            
+            
         case "NEW_GAME_BADGE": fallthrough
         default:
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("UserActivityDefault", forIndexPath: indexPath) as! UserActivityDefaultViewCell
@@ -174,7 +244,7 @@ class UserActivityViewController: CustomNavigationController {
         self.currentIndex = indexPath.row
         let item = self.userActivitesItems[indexPath.row]
         switch item.activityType {
-        case "FIRST_POST", "NEW_POST", "NEW_COMMENT", "LIKED", "SOLD":
+        case "FIRST_POST", "NEW_POST", "NEW_COMMENT", "LIKED", "SOLD", "BUYER_REVIEW", "SELLER_REVIEW":
             ApiFacade.getPost(self.userActivitesItems[indexPath.row].target, successCallback: onSuccessGetPost, failureCallback: onFailure)
         case "TIPS_NEW_USER":
             let vController = self.storyboard?.instantiateViewControllerWithIdentifier("NewProductViewController")
@@ -244,6 +314,10 @@ class UserActivityViewController: CustomNavigationController {
             return Constants.ACTIVITY_GAME_BADGE
         case "TIPS_NEW_USER":
             return Constants.ACTIVITY_TIPS_NEW_USER
+        case "SELLER_REVIEW":
+            return Constants.ACTIVITY_SELLER_REVIEW
+        case "BUYER_REVIEW":
+            return Constants.ACTIVITY_BUYER_REVIEW
         default:
             return nil
         }
@@ -264,6 +338,10 @@ class UserActivityViewController: CustomNavigationController {
         case "SOLD":
             return ""
         case "NEW_GAME_BADGE":
+            return item.targetName
+        case "BUYER_REVIEW":
+            return item.targetName
+        case "SELLER_REVIEW":
             return item.targetName
         default:
             return nil
@@ -288,7 +366,7 @@ class UserActivityViewController: CustomNavigationController {
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
         if (identifier == "userprofile_1" || identifier == "userprofile_2"
-            || identifier == "userprofile_3" || identifier == "userprofile_4" || identifier == "userprofile_5"){
+            || identifier == "userprofile_3" || identifier == "userprofile_4" || identifier == "userprofile_5" || identifier == "userprofile_6" || identifier == "userprofile_7"){
             return true
         }
         return false
@@ -306,7 +384,7 @@ class UserActivityViewController: CustomNavigationController {
             let cell = cSender.superview?.superview as! UserActivityDefaultViewCell
             let indexPath = self.uiCollectionView.indexPathForCell(cell)
             vController.userId = self.userActivitesItems[(indexPath?.row)!].actor
-        } else if (segue.identifier == "userprofile_3" || segue.identifier == "userprofile_4" || segue.identifier == "userprofile_5") {
+        } else if (segue.identifier == "userprofile_3" || segue.identifier == "userprofile_4" || segue.identifier == "userprofile_5" || segue.identifier == "userprofile_6" || segue.identifier == "userprofile_7") {
             let cell = cSender.superview?.superview as! UserActivityViewCell
             let indexPath = self.uiCollectionView.indexPathForCell(cell)
             vController.userId = self.userActivitesItems[(indexPath?.row)!].actor
