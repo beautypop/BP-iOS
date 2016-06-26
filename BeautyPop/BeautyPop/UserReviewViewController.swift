@@ -31,18 +31,6 @@ class UserReviewViewController: UIViewController, XMSegmentedControlDelegate {
         ViewUtil.setSegmentedControlStyle(segControl, title: [ "Sold", "Purchased" ])
         
         xmSegmentedControl(segControl!, selectedSegment: 0)
-
-        self.collectionView.addPullToRefresh({ [weak self] in
-            self!.userReviews.removeAll()
-            self!.collectionView.reloadData()
-            if self!.selectedIndex == 1 {
-                ApiFacade.getSellerReviewsFor(self!.userId, successCallback: self!.onSuccessSellerReviews, failureCallback: self!.onFailureReviews)
-            }
-            else {
-                ApiFacade.getBuyerReviewsFor(self!.userId, successCallback: self!.onSuccessBuyerReviews, failureCallback: self!.onFailureReviews)
-            }
-            self!.collectionView.reloadData()
-        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -132,39 +120,40 @@ class UserReviewViewController: UIViewController, XMSegmentedControlDelegate {
             feedItem.id = self.userReviews[indexPath!.row].postId
             vController.feedItem = feedItem
         }
-        
     }
     
     func onSuccessBuyerReviews(resultDto: [ReviewVM]) {
         
-        if (!resultDto.isEmpty) {
-            if (self.buyerReviews.count == 0) {
+        if !resultDto.isEmpty {
+            if self.buyerReviews.count == 0 {
                 self.buyerReviews = resultDto
-                self.userReviews = resultDto
             } else {
                 self.buyerReviews.appendContentsOf(resultDto)
-                self.userReviews.appendContentsOf(resultDto)
             }
             self.collectionView.reloadData()
         } else {
             //Check for no items ....
-            if (self.buyerReviews.isEmpty) {
+            if self.buyerReviews.isEmpty {
                 //there are no result hence ... set the default record with -1 as id
                 let reviewVM = ReviewVM()
                 reviewVM.id = -1
-                self.userReviews.append(reviewVM)
                 self.buyerReviews.append(reviewVM)
                 self.collectionView.reloadData()
             }
         }
-        ApiFacade.getSellerReviewsFor(userId, successCallback: onSuccessSellerReviews, failureCallback: onFailureReviews)
         ViewUtil.hideActivityLoading(self.activityLoading)
+        
+        // set user reviews
+        self.userReviews = buyerReviews
+        
+        // get seller reviews
+        ApiFacade.getSellerReviewsFor(userId, successCallback: onSuccessSellerReviews, failureCallback: onFailureReviews)
     }
     
     func onSuccessSellerReviews(resultDto: [ReviewVM]) {
         
-        if (!resultDto.isEmpty) {
-            if (self.sellerReviews.count == 0) {
+        if !resultDto.isEmpty {
+            if self.sellerReviews.count == 0  {
                 self.sellerReviews = resultDto
             } else {
                 self.sellerReviews.appendContentsOf(resultDto)
@@ -172,14 +161,13 @@ class UserReviewViewController: UIViewController, XMSegmentedControlDelegate {
             //self.collectionView.reloadData()
         } else {
             //Check for no items ....
-            if (self.sellerReviews.isEmpty) {
+            if self.sellerReviews.isEmpty {
                 //there are no result hence ... set the default record with -1 as id
                 let reviewVM = ReviewVM()
                 reviewVM.id = -1
                 self.sellerReviews.append(reviewVM)
             }
         }
-        
         ViewUtil.hideActivityLoading(self.activityLoading)
     }
     

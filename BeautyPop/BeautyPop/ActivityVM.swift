@@ -41,6 +41,5 @@ class ActivityVM: BaseArgVM {
         targetName<-map["targetName"]
         targetType<-map["targetType"]
         viewed<-map["viewed"]
-
     }
 }

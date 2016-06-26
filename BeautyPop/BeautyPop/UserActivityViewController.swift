@@ -219,8 +219,6 @@ class UserActivityViewController: CustomNavigationController {
             
             cell.sizeToFit()
             return cell
-            
-            
         case "NEW_GAME_BADGE": fallthrough
         default:
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("UserActivityDefault", forIndexPath: indexPath) as! UserActivityDefaultViewCell
@@ -244,12 +242,17 @@ class UserActivityViewController: CustomNavigationController {
         self.currentIndex = indexPath.row
         let item = self.userActivitesItems[indexPath.row]
         switch item.activityType {
-        case "FIRST_POST", "NEW_POST", "NEW_COMMENT", "LIKED", "SOLD", "BUYER_REVIEW", "SELLER_REVIEW":
+        case "FIRST_POST", "NEW_POST", "NEW_COMMENT", "LIKED", "SOLD":
             ApiFacade.getPost(self.userActivitesItems[indexPath.row].target, successCallback: onSuccessGetPost, failureCallback: onFailure)
         case "TIPS_NEW_USER":
-            let vController = self.storyboard?.instantiateViewControllerWithIdentifier("NewProductViewController")
-            vController?.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(vController!, animated: true)
+            let vController = self.storyboard?.instantiateViewControllerWithIdentifier("NewProductViewController") as! NewProductViewController
+            vController.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vController, animated: true)
+        case "BUYER_REVIEW", "SELLER_REVIEW":
+            let vController = self.storyboard?.instantiateViewControllerWithIdentifier("UserReviewViewController") as! UserReviewViewController
+            vController.userId = UserInfoCache.getUser()!.id
+            vController.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vController, animated: true)
         case "FOLLOWED": fallthrough
         default: break
         }
@@ -287,7 +290,7 @@ class UserActivityViewController: CustomNavigationController {
     func handleUserActivitiesData(resultDto: [ActivityVM]) {
         
     }
-
+    
     @IBAction func onClickPostImg(sender: AnyObject) {
         let button = sender as! UIButton
         let view = button.superview!
@@ -365,8 +368,10 @@ class UserActivityViewController: CustomNavigationController {
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        if (identifier == "userprofile_1" || identifier == "userprofile_2"
-            || identifier == "userprofile_3" || identifier == "userprofile_4" || identifier == "userprofile_5" || identifier == "userprofile_6" || identifier == "userprofile_7"){
+        if identifier == "userprofile_1" || identifier == "userprofile_2" ||
+            identifier == "userprofile_3" || identifier == "userprofile_4" ||
+            identifier == "userprofile_5" || identifier == "userprofile_6" ||
+            identifier == "userprofile_7" || identifier == "userprofile_8" || identifier == "userprofile_9" {
             return true
         }
         return false
@@ -374,19 +379,26 @@ class UserActivityViewController: CustomNavigationController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let cSender = sender as! UIButton
-        let vController = segue.destinationViewController as! UserProfileFeedViewController
-        vController.hidesBottomBarWhenPushed = true
-        if (segue.identifier == "userprofile_1"){
+        if segue.identifier == "userprofile_1" {
             let cell = cSender.superview?.superview as! UserActivityViewCell
             let indexPath = self.uiCollectionView.indexPathForCell(cell)
+            let vController = segue.destinationViewController as! UserProfileFeedViewController
+            vController.hidesBottomBarWhenPushed = true
             vController.userId = self.userActivitesItems[(indexPath?.row)!].actor
-        } else if (segue.identifier == "userprofile_2"){
+        } else if segue.identifier == "userprofile_2" {
             let cell = cSender.superview?.superview as! UserActivityDefaultViewCell
             let indexPath = self.uiCollectionView.indexPathForCell(cell)
+            let vController = segue.destinationViewController as! UserProfileFeedViewController
+            vController.hidesBottomBarWhenPushed = true
             vController.userId = self.userActivitesItems[(indexPath?.row)!].actor
-        } else if (segue.identifier == "userprofile_3" || segue.identifier == "userprofile_4" || segue.identifier == "userprofile_5" || segue.identifier == "userprofile_6" || segue.identifier == "userprofile_7") {
+        } else if segue.identifier == "userprofile_3" || segue.identifier == "userprofile_4" ||
+            segue.identifier == "userprofile_5" || segue.identifier == "userprofile_6" ||
+            segue.identifier == "userprofile_7" || segue.identifier == "userprofile_8" ||
+            segue.identifier == "userprofile_9" {
             let cell = cSender.superview?.superview as! UserActivityViewCell
             let indexPath = self.uiCollectionView.indexPathForCell(cell)
+            let vController = segue.destinationViewController as! UserProfileFeedViewController
+            vController.hidesBottomBarWhenPushed = true
             vController.userId = self.userActivitesItems[(indexPath?.row)!].actor
         }
     }
@@ -415,7 +427,7 @@ class UserActivityViewController: CustomNavigationController {
     }
     
     func onSuccessGetPost(post: PostVMLite) {
-        let vController =  self.storyboard!.instantiateViewControllerWithIdentifier("ProductViewController") as! ProductViewController
+        let vController = self.storyboard!.instantiateViewControllerWithIdentifier("ProductViewController") as! ProductViewController
         vController.feedItem = post
         vController.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vController, animated: true)
