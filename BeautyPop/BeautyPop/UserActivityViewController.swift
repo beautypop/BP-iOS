@@ -130,7 +130,7 @@ class UserActivityViewController: CustomNavigationController {
             cell.userName.hidden = false
             cell.userName.setTitle(self.userActivitesItems[indexPath.row].actorName, forState: UIControlState.Normal)
             cell.userName.setTitleColor(Color.PINK, forState: UIControlState.Normal)
-            cell.userName.sizeToFit()
+            //cell.userName.sizeToFit()
             
             cell.textMessage.text = getMessageText(self.userActivitesItems[indexPath.row])
             cell.textMessage.numberOfLines = 0
@@ -164,7 +164,7 @@ class UserActivityViewController: CustomNavigationController {
             cell.userName.hidden = false
             cell.userName.setTitle(self.userActivitesItems[indexPath.row].actorName, forState: UIControlState.Normal)
             cell.userName.setTitleColor(Color.PINK, forState: UIControlState.Normal)
-            cell.userName.sizeToFit()
+            //cell.userName.sizeToFit()
             
             cell.textMessage.text = getMessageText(self.userActivitesItems[indexPath.row])
             cell.textMessage.numberOfLines = 0
@@ -198,7 +198,7 @@ class UserActivityViewController: CustomNavigationController {
             cell.userName.hidden = false
             cell.userName.setTitle(self.userActivitesItems[indexPath.row].actorName, forState: UIControlState.Normal)
             cell.userName.setTitleColor(Color.PINK, forState: UIControlState.Normal)
-            cell.userName.sizeToFit()
+            //cell.userName.sizeToFit()
             
             cell.textMessage.text = getMessageText(self.userActivitesItems[indexPath.row])
             cell.textMessage.numberOfLines = 0
@@ -251,6 +251,11 @@ class UserActivityViewController: CustomNavigationController {
         case "BUYER_REVIEW", "SELLER_REVIEW":
             let vController = self.storyboard?.instantiateViewControllerWithIdentifier("UserReviewViewController") as! UserReviewViewController
             vController.userId = UserInfoCache.getUser()!.id
+            if item.activityType == "SELLER_REVIEW" {
+                vController.selectSellerReviewsSegment()
+            } else {
+                vController.selectBuyerReviewsSegment()
+            }
             vController.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vController, animated: true)
         case "FOLLOWED": fallthrough

@@ -304,7 +304,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pqF-AT-Ylm">
-                                <rect key="frame" x="0.0" y="10" width="414" height="590"/>
+                                <rect key="frame" x="0.0" y="10" width="414" height="612"/>
                                 <color key="backgroundColor" red="0.92549019607843142" green="0.92549019607843142" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="0xe-iZ-kSm">
                                     <size key="itemSize" width="380" height="70"/>
@@ -412,7 +412,7 @@
                                                         <segue destination="aa6-dY-vf5" kind="show" identifier="userprofile_4" id="ncj-ht-WX7"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JEb-KH-Dm3">
+                                                <button opaque="NO" contentMode="left" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JEb-KH-Dm3">
                                                     <rect key="frame" x="65" y="10" width="30" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="AJJ-zD-CfE"/>
@@ -493,6 +493,7 @@
                                             <constraint firstItem="evP-hF-mKI" firstAttribute="leading" secondItem="2G3-HM-cle" secondAttribute="leading" id="QZ1-xY-Cu0"/>
                                             <constraint firstItem="evP-hF-mKI" firstAttribute="bottom" secondItem="2G3-HM-cle" secondAttribute="bottom" id="RyC-cu-dKj"/>
                                             <constraint firstItem="Ycg-79-QYK" firstAttribute="leading" secondItem="qJj-IM-lud" secondAttribute="leading" constant="10" id="aZJ-hs-FDd"/>
+                                            <constraint firstItem="JEb-KH-Dm3" firstAttribute="centerY" secondItem="A5m-Nq-PAj" secondAttribute="centerY" id="fKM-AF-yVW"/>
                                             <constraint firstItem="A5m-Nq-PAj" firstAttribute="baseline" secondItem="JEb-KH-Dm3" secondAttribute="baseline" id="gCJ-Ap-6aw"/>
                                             <constraint firstItem="evP-hF-mKI" firstAttribute="trailing" secondItem="2G3-HM-cle" secondAttribute="trailing" id="hCr-sW-zGW"/>
                                             <constraint firstAttribute="trailing" secondItem="2G3-HM-cle" secondAttribute="trailing" constant="10" id="hEg-Hb-Y7j"/>
@@ -675,7 +676,7 @@
                                                         <segue destination="aa6-dY-vf5" kind="show" identifier="userprofile_6" id="xih-CO-CU3"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FxY-GT-GzI">
+                                                <button opaque="NO" contentMode="left" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FxY-GT-GzI">
                                                     <rect key="frame" x="65" y="10" width="30" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="Oje-rZ-9zi"/>
@@ -754,6 +755,7 @@
                                             <constraint firstItem="8kp-bW-oSe" firstAttribute="bottom" secondItem="t4z-wh-tA7" secondAttribute="bottom" id="Lfm-Eo-Vme"/>
                                             <constraint firstItem="FxY-GT-GzI" firstAttribute="leading" secondItem="JPV-cK-pzG" secondAttribute="trailing" constant="10" id="OSl-7C-Nnc"/>
                                             <constraint firstItem="y5o-ja-LPU" firstAttribute="top" secondItem="FxY-GT-GzI" secondAttribute="top" id="QB8-Vt-ipE"/>
+                                            <constraint firstItem="FxY-GT-GzI" firstAttribute="centerY" secondItem="y5o-ja-LPU" secondAttribute="centerY" id="Qyw-6J-uVd"/>
                                             <constraint firstItem="8kp-bW-oSe" firstAttribute="trailing" secondItem="t4z-wh-tA7" secondAttribute="trailing" id="SJq-aX-tM8"/>
                                             <constraint firstItem="t4z-wh-tA7" firstAttribute="leading" secondItem="b2O-16-Rvw" secondAttribute="trailing" constant="5" id="WXQ-iH-ICs"/>
                                             <constraint firstItem="y5o-ja-LPU" firstAttribute="top" secondItem="JPV-cK-pzG" secondAttribute="top" id="X4J-I7-34u"/>
@@ -816,7 +818,7 @@
                                                         <segue destination="aa6-dY-vf5" kind="show" identifier="userprofile_7" id="h44-Rt-ZWh"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BKD-9f-5Ua">
+                                                <button opaque="NO" contentMode="left" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="tailTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BKD-9f-5Ua">
                                                     <rect key="frame" x="65" y="10" width="30" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="LCb-kR-dOn"/>
@@ -826,7 +828,7 @@
                                                         <color key="titleColor" red="0.98823529409999999" green="0.30588235289999999" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <segue destination="aa6-dY-vf5" kind="show" id="JcC-Hs-J37"/>
+                                                        <segue destination="aa6-dY-vf5" kind="show" identifier="userprofile_9" id="JcC-Hs-J37"/>
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" misplaced="YES" text="left you a review" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dUu-3k-8SC">
@@ -901,6 +903,7 @@
                                             <constraint firstItem="dUu-3k-8SC" firstAttribute="baseline" secondItem="BKD-9f-5Ua" secondAttribute="baseline" id="aSu-Fl-eQs"/>
                                             <constraint firstItem="dUu-3k-8SC" firstAttribute="leading" secondItem="BKD-9f-5Ua" secondAttribute="trailing" constant="3" id="biy-jl-Pfd"/>
                                             <constraint firstItem="BKD-9f-5Ua" firstAttribute="leading" secondItem="cdi-Wd-8al" secondAttribute="trailing" constant="10" id="eGI-PJ-zpv"/>
+                                            <constraint firstItem="BKD-9f-5Ua" firstAttribute="centerY" secondItem="dUu-3k-8SC" secondAttribute="centerY" id="ej2-h3-0ux"/>
                                             <constraint firstItem="FcY-dP-lhJ" firstAttribute="bottom" secondItem="G1c-jo-Tjy" secondAttribute="bottom" id="g4M-g6-30h"/>
                                             <constraint firstItem="NV5-DA-UBZ" firstAttribute="leading" secondItem="9Ol-oO-1ao" secondAttribute="trailing" constant="10" id="gqv-kn-jMO"/>
                                             <constraint firstItem="G1c-jo-Tjy" firstAttribute="leading" secondItem="NV5-DA-UBZ" secondAttribute="trailing" constant="5" id="h05-IX-hJe"/>
@@ -9458,10 +9461,10 @@
         <segue reference="7WP-FM-oSc"/>
         <segue reference="UfZ-y4-j3J"/>
         <segue reference="qeX-vh-ZpW"/>
+        <segue reference="JcC-Hs-J37"/>
         <segue reference="f1D-EY-plH"/>
         <segue reference="h8d-K1-dMp"/>
         <segue reference="fnX-3S-LaT"/>
-        <segue reference="sXk-cu-9b6"/>
         <segue reference="SC0-fE-foi"/>
         <segue reference="oRf-1U-UOz"/>
     </inferredMetricsTieBreakers>
