@@ -69,10 +69,10 @@ class TourViewController: UIViewController {
         
         if self.pageControl == nil {
             self.pageControl = cell.pageControl
-            self.currentPage = indexPath.row
         }
         
-        if self.currentPage == self.images.count {
+        self.currentPage = indexPath.row
+        if self.currentPage == self.images.count - 1 {
             cell.finish.hidden = false
             cell.next.hidden = true
             ViewUtil.displayRoundedCornerView(cell.finish, bgColor: nil, borderColor: Color.WHITE)
@@ -94,7 +94,7 @@ class TourViewController: UIViewController {
         
     }
     
-    // MARK: - PhotoSliderDelegate
+    // MARK: - PhotoSliderDelegate///
     
     func photoSliderControllerWillDismiss(viewController: PhotoSlider.ViewController) {
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.Fade)
