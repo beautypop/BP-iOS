@@ -104,13 +104,10 @@ class TourViewController: UIViewController {
 
     @IBAction func onClickNext(sender: AnyObject) {
         if self.pageControl != nil {
-            let indexPath = NSIndexPath(forRow: self.currentPage!, inSection: 0)
-            self.pageControl?.currentPage = self.currentPage!
-            self.uiCollectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: .None, animated: true)
             self.currentPage! = self.currentPage! + 1
-            if self.currentPage == self.images.count {
-                //self.currentPage = 0
-            }
+            self.pageControl?.currentPage = self.currentPage!
+            let indexPath = NSIndexPath(forRow: self.currentPage!, inSection: 0)
+            self.uiCollectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: .None, animated: true)
         }
     }
 }
