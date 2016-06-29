@@ -107,7 +107,7 @@ class TourViewController: UIViewController {
             self.currentPage! = self.currentPage! + 1
             self.pageControl?.currentPage = self.currentPage!
             let indexPath = NSIndexPath(forRow: self.currentPage!, inSection: 0)
-            self.uiCollectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: .None, animated: true)
+            self.uiCollectionView?.scrollToItemAtIndexPath(indexPath, atScrollPosition: .None, animated: false)
         }
     }
 }

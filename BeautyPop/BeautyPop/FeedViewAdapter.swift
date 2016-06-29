@@ -29,7 +29,7 @@ class FeedViewAdapter {
     
     func bindViewCell(cell: FeedProductCollectionViewCell, feedItem: PostVMLite, index: Int, showOwner: Bool) -> FeedProductCollectionViewCell {
         
-        cell.title.font = UIFont.systemFontOfSize(12)
+        cell.title.font = UIFont.systemFontOfSize(13)
         cell.title.textColor = Color.DARK_GRAY
         cell.title.text = feedItem.title
         
@@ -45,7 +45,7 @@ class FeedViewAdapter {
         cell.likeCount.minimumScaleFactor = 0.01
         cell.likeCount.adjustsFontSizeToFitWidth = true
         cell.likeCount.lineBreakMode = NSLineBreakMode.ByClipping
-        cell.likeCount.font = UIFont.systemFontOfSize(12, weight: UIFontWeightLight)
+        //cell.likeCount.font = UIFont.systemFontOfSize(12, weight: UIFontWeightLight)
         cell.likeCount.text = String(feedItem.numLikes)
         cell.likeCount.sizeToFit()
 
@@ -59,7 +59,7 @@ class FeedViewAdapter {
         }
 
         // price
-        cell.productPrice.font = UIFont.systemFontOfSize(12)
+        //cell.productPrice.font = UIFont.systemFontOfSize(12)
         cell.productPrice.text = ViewUtil.formatPrice(feedItem.price)
         if feedItem.originalPrice != 0 && feedItem.originalPrice != -1 && feedItem.originalPrice != feedItem.price {
             let attrString = NSAttributedString(string: ViewUtil.formatPrice(feedItem.originalPrice), attributes: [NSStrikethroughStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue])
