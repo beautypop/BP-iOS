@@ -25,9 +25,9 @@ class NotificationCounter {
     
     static func refresh(successCallback: ((NotificationCounterVM) -> Void)?, failureCallback: ((String) -> Void)?) {
         
-        SwiftEventBus.onMainThread(self, name: "loadNotificationSuccess") { result in
-            SwiftEventBus.unregister(self)
-            
+        SwiftEventBus.unregister(self)
+        
+        SwiftEventBus.onMainThread(self, name: "onSuccessGetNotificationCounter") { result in
             if ViewUtil.isEmptyResult(result) {
                 failureCallback!("failed to get notifications!")
                 return
@@ -39,9 +39,7 @@ class NotificationCounter {
             }
         }
         
-        SwiftEventBus.onMainThread(self, name: "loadNotificationFailure") { result in
-            SwiftEventBus.unregister(self)
-            
+        SwiftEventBus.onMainThread(self, name: "onFailureGetNotificationCounter") { result in
             if failureCallback != nil {
                 var error = "failed to get notifications"
                 if result.object is NSString {

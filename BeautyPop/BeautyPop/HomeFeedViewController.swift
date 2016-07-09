@@ -129,15 +129,15 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
         self.uiCollectionView!.backgroundColor = Color.FEED_BG
         
         self.uiCollectionView.addPullToRefresh({ [weak self] in
-            ApiFacade.getHomeSliderFeaturedItems(self!.onSuccessGetHomeFeaturedItems, failureCallback: self!.onFailureGetHomeFeaturedItems)
+            ApiFacade.getHomeSliderFeaturedItems(self!.onSuccessGetHomeSliderFeaturedItems, failureCallback: self!.onFailureGetHomeSliderFeaturedItems)
             CategoryCache.refresh(self!.onSuccessGetCategories, failureCallback: nil)
             self!.feedLoader?.reloadFeedItems()
         })
         
-        ApiFacade.getHomeSliderFeaturedItems(onSuccessGetHomeFeaturedItems, failureCallback: onFailureGetHomeFeaturedItems)
+        ApiFacade.getHomeSliderFeaturedItems(onSuccessGetHomeSliderFeaturedItems, failureCallback: onFailureGetHomeSliderFeaturedItems)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"appWillEnterForeground", name:
-            UIApplicationWillEnterForegroundNotification, object: nil)
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector:"appWillEnterForeground", name:
+        //    UIApplicationWillEnterForegroundNotification, object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -233,8 +233,10 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
     
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         if kind == UICollectionElementKindSectionHeader && self.uiCollectionView == collectionView {
-            let headerView : HomeReusableView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "HeaderView", forIndexPath: indexPath) as! HomeReusableView
+            let headerView: HomeReusableView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "HeaderView", forIndexPath: indexPath) as! HomeReusableView
+            
             headerView.headerViewCollection.reloadData()
+            headerView.homeBannerHeight.constant = 0
             
             self.bannerCollectionView = headerView.homeBannerView.subviews[0] as? UICollectionView
             self.bannerCollectionView?.dataSource = self
@@ -378,7 +380,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
         //do nothing.
     }
     
-    func onSuccessGetHomeFeaturedItems(featuredItems: [FeaturedItemVM]) {
+    func onSuccessGetHomeSliderFeaturedItems(featuredItems: [FeaturedItemVM]) {
         if self.headerView != nil {
             self.headerView?.homeBannerHeight.constant = 0
         }
@@ -405,7 +407,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
         }
     }
     
-    func onFailureGetHomeFeaturedItems(message: String) {
+    func onFailureGetHomeSliderFeaturedItems(message: String) {
         NSLog("Error getting home slider featured items")
     }
     

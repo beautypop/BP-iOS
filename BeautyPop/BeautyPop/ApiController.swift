@@ -446,8 +446,8 @@ class ApiController {
         let callEvent = ApiCallEvent()
         callEvent.method = "/api/notification-counter"
         callEvent.resultClass = "NotificationCounterVM"
-        callEvent.successEventbusName = "loadNotificationSuccess"
-        callEvent.failedEventbusName = "loadNotificationFailed"
+        callEvent.successEventbusName = "onSuccessGetNotificationCounter"
+        callEvent.failedEventbusName = "onFailureNotificationCounter"
         callEvent.apiUrl = Constants.BASE_URL + callEvent.method
         self.makeApiCall(callEvent)
     }
