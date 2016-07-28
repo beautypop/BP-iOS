@@ -630,6 +630,36 @@ class ApiFacade {
         
         ApiController.instance.getUserActivities(offset)
     }
+// getCustomSearchResults Function in APIFacade Class
+  /*  static func getCustomSearchResults(offset: Int64, successCallback: (([ActivityVM]) -> Void)?, failureCallback: ((String) -> Void)?) {
+        SwiftEventBus.unregister(self)
+        
+        SwiftEventBus.onMainThread(self, name: "onSuccessGetActivities") { result in
+            if ViewUtil.isEmptyResult(result) {
+                failureCallback!("No activities items")
+                return
+            }
+            
+            if successCallback != nil {
+                successCallback!(result.object as! [ActivityVM])
+            }
+        }
+        
+        SwiftEventBus.onMainThread(self, name: "onFailureGetActivities") { result in
+            if failureCallback != nil {
+                var error = "Failed to get  items..."
+                if result.object is NSString {
+                    error += "\n"+(result.object as! String)
+                }
+                failureCallback!(error)
+            }
+        }
+        
+        ApiController.instance.getUserActivities(offset)
+    }*/
+    
+    
+    
     
     static func newConversationOrder(conversationId: Int, offeredPrice: Double, successCallback: ((ConversationOrderVM) -> Void)?, failureCallback: ((String) -> Void)?) {
         SwiftEventBus.unregister(self)
@@ -848,5 +878,56 @@ class ApiFacade {
         }
         
         ApiController.instance.addReview(newReviewVM)
+    }
+    static func searchProducts(searchText: String, categoryId: Int, offset: Int, successCallback: (([PostVMLite]) -> Void)?, failureCallback: ((String) -> Void)?) {
+        
+        SwiftEventBus.unregister(self)
+        
+        SwiftEventBus.onMainThread(self, name: "onSuccessGetProducts") { result in
+            if successCallback != nil {
+                //if result.object is NSString {
+                    successCallback!(result.object as! [PostVMLite])
+                //} else {
+                //    successCallback!([])
+                //}
+            }
+        }
+        
+        SwiftEventBus.onMainThread(self, name: "onFailureGetProducts") { result in
+            if failureCallback != nil {
+                var error = "Failed to get Products..."
+                if result.object is NSString {
+                    error += "\n"+(result.object as! String)
+                }
+                failureCallback!(error)
+            }
+        }
+        ApiController.instance.searchProducts(searchText, categoryId: categoryId, offset: offset)
+    }
+    
+    static func searchUser(searchText: String, offset: Int, successCallback: (([SellerVM]) -> Void)?, failureCallback: ((String) -> Void)?) {
+        NSLog(searchText)
+        SwiftEventBus.unregister(self)
+        
+        SwiftEventBus.onMainThread(self, name: "onSuccessGetUser") { result in
+            if successCallback != nil {
+                //if result.object is NSString {
+                    successCallback!(result.object as! [SellerVM])
+                //} else {
+                //    successCallback!([])
+                //}
+            }
+        }
+        
+        SwiftEventBus.onMainThread(self, name: "onFailureGetUser") { result in
+            if failureCallback != nil {
+                var error = "Failed to get Products..."
+                if result.object is NSString {
+                    error += "\n"+(result.object as! String)
+                }
+                failureCallback!(error)
+            }
+        }
+        ApiController.instance.searchUser(searchText, offset: offset)
     }
 }

@@ -37,6 +37,13 @@ class CustomNavigationController: ScrollingNavigationViewController, ScrollingNa
         self.navigationController?.pushViewController(vController!, animated: true)
     }
     
+    func onClickSearhBtn(sender: AnyObject?) {
+        //self.tabBarController!.tabBar.hidden = true
+        let vController = self.storyboard?.instantiateViewControllerWithIdentifier("SearchViewController")
+        vController?.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vController!, animated: true)
+    }
+    
     func onClickChatBtn(sender: AnyObject?) {
         //self.tabBarController!.tabBar.hidden = true
         let vController = self.storyboard?.instantiateViewControllerWithIdentifier("ConversationsController")
@@ -78,6 +85,11 @@ class CustomNavigationController: ScrollingNavigationViewController, ScrollingNa
         sellBtn.addTarget(self, action: "onClickSellBtn:", forControlEvents: UIControlEvents.TouchUpInside)
         sellBtn.frame = CGRectMake(0, 0, 35, 35)
         
+        let searchBtn: UIButton = UIButton()
+        searchBtn.setImage(UIImage(named: "newSearch1"), forState: UIControlState.Normal)
+        searchBtn.addTarget(self, action: "onClickSearhBtn:", forControlEvents: UIControlEvents.TouchUpInside)
+        searchBtn.frame = CGRectMake(0, 0, 35, 35)  
+        
         let chatBtn: UIButton = UIButton()
         chatBtn.setImage(UIImage(named: "ic_chat"), forState: UIControlState.Normal)
         chatBtn.addTarget(self, action: "onClickChatBtn:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -92,11 +104,12 @@ class CustomNavigationController: ScrollingNavigationViewController, ScrollingNa
         logo.frame = CGRectMake(0, 0, 35, 35)
 
         let sellBarBtn = UIBarButtonItem(customView: sellBtn)
+        let searchBarBtn = UIBarButtonItem(customView: searchBtn)
         let chatBarBtn = ENMBadgedBarButtonItem(customView: chatBtn, value: "")
         //let badgeBarBtn = UIBarButtonItem(customView: gameBadgeBtn)
         let logoBarBtn = UIBarButtonItem(customView: logo)
         
-        self.navigationItem.rightBarButtonItems = [sellBarBtn, chatBarBtn ]
+        self.navigationItem.rightBarButtonItems = [sellBarBtn, chatBarBtn, searchBarBtn]
         self.navigationItem.leftItemsSupplementBackButton = true
         self.navigationItem.leftBarButtonItems = [logoBarBtn]
     }

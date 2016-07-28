@@ -135,3 +135,5 @@
 "review_exp_warn" = "Please input your experience";
 "activity_seller_review" = "left you a review";
 "activity_buyer_review" = "left you a review";
+"products" = "Products";
+"user" = "Users";
