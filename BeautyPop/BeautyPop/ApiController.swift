@@ -23,6 +23,26 @@ class ApiController {
     
     init() {
     }
+    ///search-posts/{searchKey}/{catId}/{offset}
+    func searchProducts(searchText: String, categoryId: Int, offset: Int) {
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/search-posts/\(searchText)/\(categoryId)/\(offset)"
+        callEvent.resultClass = "[PostVMLite]"
+        callEvent.successEventbusName = "onSuccessGetProducts"
+        callEvent.failedEventbusName = "onFailureGetProducts"
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        self.makeApiCall(callEvent)
+    }
+    
+    func searchUser(searchText: String, offset: Int) {
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/search-users/\(searchText)/\(offset)"
+        callEvent.resultClass = "[SellerVM]"
+        callEvent.successEventbusName = "onSuccessGetUser"
+        callEvent.failedEventbusName = "onFailureGetUser"
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        self.makeApiCall(callEvent)
+    }
     
     func loginByFacebook(authToken: String) {
         let url = Constants.BASE_URL + "/authenticate/mobile/facebook?access_token=\(authToken)"
