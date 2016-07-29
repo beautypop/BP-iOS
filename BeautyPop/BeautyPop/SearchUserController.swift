@@ -13,7 +13,7 @@ import SwiftEventBus
 class SearchUserController: UIViewController {
 
     @IBOutlet weak var uiCollectionView: UICollectionView!
-    @IBOutlet weak var activityLoadin: UIActivityIndicatorView!
+    @IBOutlet weak var activityLoading: UIActivityIndicatorView!
     
     var loading: Bool = false
     var loadedAll: Bool = false
@@ -36,7 +36,7 @@ class SearchUserController: UIViewController {
         self.uiCollectionView.collectionViewLayout = flowLayout
         self.uiCollectionView!.alwaysBounceVertical = true
         self.uiCollectionView!.backgroundColor = Color.WHITE
-        ViewUtil.showActivityLoading(self.activityLoadin)
+        ViewUtil.showActivityLoading(self.activityLoading)
         
         /*let sellers = result.object as! [SellerVM]
         self.handleRecommendedSeller(sellers)*/
@@ -68,7 +68,7 @@ class SearchUserController: UIViewController {
             }
         }
         loading = false
-        ViewUtil.hideActivityLoading(self.activityLoadin)
+        ViewUtil.hideActivityLoading(self.activityLoading)
     }
     
     func onFailure(message: String) {
@@ -175,7 +175,7 @@ class SearchUserController: UIViewController {
     func scrollViewDidScroll(scrollView: UIScrollView) {
         if (scrollView.contentOffset.y + scrollView.frame.size.height) >= scrollView.contentSize.height - Constants.FEED_LOAD_SCROLL_THRESHOLD {
             if (!loadedAll && !loading) {
-                ViewUtil.showActivityLoading(self.activityLoadin)
+                ViewUtil.showActivityLoading(self.activityLoading)
                 loading = true
                 var feedOffset: Int64 = 0
                 if (!self.users.isEmpty) {
@@ -310,7 +310,7 @@ class SearchUserController: UIViewController {
             return true
         }
         return false
-        ViewUtil.hideActivityLoading(self.activityLoadin)
+        ViewUtil.hideActivityLoading(self.activityLoading)
     }
 
 }

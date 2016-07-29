@@ -9,18 +9,12 @@
 import UIKit
 
 class ProductCollectionViewCell: UICollectionViewCell {
-    //@IBOutlet weak var productPrice: UILabel!
     
-   // @IBOutlet weak var likeIcon: UIImageView!
-   // @IBOutlet weak var productTitle: UILabel!
-    
-    //@IBOutlet weak var productImg: UIImageView!
+    // @IBOutlet weak var likeIcon: UIImageView!
     @IBOutlet weak var productImg: UIImageView!
     @IBOutlet weak var productTitle: UILabel!
     @IBOutlet weak var productPrice: UILabel!
     @IBOutlet weak var soldImage: UIImageView!
-    
-    @IBOutlet weak var productImg: UIImageView!
     
 //    override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes!) {
 //        super.applyLayoutAttributes(layoutAttributes)
