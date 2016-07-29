@@ -42,7 +42,9 @@ class SearchUserController: UIViewController {
         self.handleRecommendedSeller(sellers)*/
 //API Call
         ApiFacade.searchUser(searchText,offset: self.offset,successCallback: onSuccessGetUser, failureCallback: onFailure)
-        
+        self.uiCollectionView.addPullToRefresh({ [weak self] in
+            self?.reloadSellers()
+        })
     }
     
     override func didReceiveMemoryWarning() {
@@ -59,14 +61,14 @@ class SearchUserController: UIViewController {
             }
             uiCollectionView.reloadData()
         } else {
-            //loadedAll = true
+            loadedAll = true
             if (self.users.isEmpty) {
                 
                 self.uiCollectionView.hidden = true
             }
         }
         loading = false
-        //ViewUtil.hideActivityLoading(self.activityLoading)
+        ViewUtil.hideActivityLoading(self.activityLoadin)
     }
     
     func onFailure(message: String) {
@@ -156,10 +158,14 @@ class SearchUserController: UIViewController {
         dummyLbl.numberOfLines = 2
         dummyLbl.text = self.users[indexPath.row].aboutMe
         dummyLbl.sizeToFit()
-        
+        var imageWidth: CGFloat
+        if(self.users[indexPath.row].numProducts != 0)
+        {
         let availableWidthForButtons: CGFloat = self.view.bounds.width - (Constants.DEFAULT_SPACING * 4)
-        let imageWidth: CGFloat = availableWidthForButtons / 4
-        
+            imageWidth = availableWidthForButtons / 4
+        }else{
+            imageWidth = -3
+        }
         return CGSizeMake(
             self.view.bounds.width - (Constants.DEFAULT_SPACING * 2),
             Constants.SELLER_FEED_ITEM_DETAILS_HEIGHT + dummyLbl.bounds.height + imageWidth)
@@ -191,18 +197,119 @@ class SearchUserController: UIViewController {
         cell.prodImgWidth.constant = buttonWidth
         cell.prodImgHt.constant = buttonWidth
     }
-    func handleSearchedUsers(sellers: [SellerVM]) {
-        if (!sellers.isEmpty) {
-            if (self.users.count == 0) {
-                self.users = sellers
-            } else {
-                self.users.appendContentsOf(sellers)
-            }
-            self.uiCollectionView.reloadData()
+    
+    
+    @IBAction func onClickPostImg1(sender: AnyObject) {
+        moveToProductView(sender, index: 0)
+    }
+    @IBAction func onClickPostImg2(sender: AnyObject) {
+        moveToProductView(sender, index: 1)
+    }
+    @IBAction func onClickPostImg3(sender: AnyObject) {
+        moveToProductView(sender, index: 2)
+    }
+    @IBAction func onClickPostImg4(sender: AnyObject) {
+        moveToProductView(sender, index: 3)
+    }
+    func moveToProductView(sender: AnyObject, index: Int) {
+        let button = sender as! UIButton
+        let view = button.superview!
+        let cell = view.superview! as! UsersCollectionViewCell
+        
+        let indexPath = self.uiCollectionView.indexPathForCell(cell)!
+        
+        let vController =  self.storyboard!.instantiateViewControllerWithIdentifier("ProductViewController") as! ProductViewController
+        let feedItem = self.users[indexPath.row]
+        vController.feedItem = feedItem.posts[index]
+        vController.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vController, animated: true)
+    }
+    @IBAction func onClickMoreProducs(sender: AnyObject) {
+        let button = sender as! UIButton
+        let view = button.superview!
+        let cell = view.superview! as! UsersCollectionViewCell
+        
+        let indexPath = self.uiCollectionView.indexPathForCell(cell)!
+        moveToUserProfile(indexPath.row)
+    }
+    @IBAction func onClickFollowUnfollow(sender: AnyObject) {
+        let button = sender as! UIButton
+        let view = button.superview!
+        let cell = view.superview! as! UsersCollectionViewCell
+        
+        let indexPath = self.uiCollectionView.indexPathForCell(cell)!
+        let item = self.users[indexPath.row]
+        if (item.isFollowing) {
+            unfollow(item, cell: cell)
         } else {
-            loadedAll = true
+            follow(item, cell: cell)
         }
-        loading = false
+    }
+    func follow(user: UserVMLite, cell: UsersCollectionViewCell) {
+        
+        ApiController.instance.followUser(user.id)
+        user.isFollowing = true
+        ViewUtil.selectFollowButtonStyleLite(cell.followButton)
+    }
+    
+    func unfollow(user: UserVMLite, cell: UsersCollectionViewCell){
+        ApiController.instance.unfollowUser(user.id)
+        user.isFollowing = false
+        ViewUtil.unselectFollowButtonStyleLite(cell.followButton)
+    }
+
+    @IBAction func onClickSeller(sender: AnyObject) {
+        let button = sender as! UIButton
+        let view = button.superview!
+        let cell = view.superview! as! UsersCollectionViewCell
+        
+        let indexPath = self.uiCollectionView.indexPathForCell(cell)!
+        moveToUserProfile(indexPath.row)
+        
+    }
+    func moveToUserProfile(index: Int) {
+        ViewUtil.resetBackButton(self.navigationItem)
+        let vController = self.storyboard?.instantiateViewControllerWithIdentifier("UserProfileFeedViewController") as! UserProfileFeedViewController
+        vController.userId = self.users[index].id
+        vController.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vController, animated: true)
+    }
+    
+    func clearSellers() {
+        self.loading = false
+        self.loadedAll = false
+        self.users.removeAll()
+        self.users = []
+        self.uiCollectionView.reloadData()
+        self.offset = 0
+    }
+    
+    func reloadSellers() {
+        clearSellers()
+        ApiFacade.searchUser(searchText,offset: self.offset,successCallback: onSuccessGetUser, failureCallback: onFailure)
+        self.loading = true
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if (segue.identifier == "spuserprofile") {
+            let button = sender as! UIButton
+            let view = button.superview!
+            let cell = view.superview! as! UsersCollectionViewCell
+            let indexPath = self.uiCollectionView.indexPathForCell(cell)!
+            let userItem = self.users[indexPath.row]
+            let vc = segue.destinationViewController as! UserProfileFeedViewController
+            vc.hidesBottomBarWhenPushed = true
+            vc.userId = userItem.id
+        }
+    }
+    
+    //MARK Segue handling methods.
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        if (identifier == "spuserprofile") {
+            return true
+        }
+        return false
         ViewUtil.hideActivityLoading(self.activityLoadin)
     }
 
