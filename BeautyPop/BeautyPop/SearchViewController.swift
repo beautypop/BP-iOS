@@ -12,9 +12,6 @@ import XMSegmentedControl
 import SwiftEventBus
 import QQPlaceholderTextView
 
-
-
-
 class SearchViewController:UIViewController, XMSegmentedControlDelegate
 {
     enum SegmentItem: Int {

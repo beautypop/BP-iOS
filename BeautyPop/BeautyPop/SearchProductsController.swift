@@ -75,6 +75,11 @@ class SearchProductsController: UIViewController {
             ImageUtil.displayPostImage(self.products[indexPath.row].images[0], imageView: cell.productImg)
             cell.productTitle.text = self.products[indexPath.row].title
             cell.productPrice.text = String( self.products[indexPath.row].price)
+            if(products[indexPath.row].sold == true){
+                cell.soldImage.hidden=false
+            } else {
+                cell.soldImage.hidden=true
+            }
             return cell
     }
     
