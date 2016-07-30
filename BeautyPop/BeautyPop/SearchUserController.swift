@@ -20,6 +20,7 @@ class SearchUserController: UIViewController {
     var users: [SellerVM] = []
     var searchText=""
     var offset = 0
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         //sself.navigationController?.navigationBarHidden = false
@@ -31,15 +32,12 @@ class SearchUserController: UIViewController {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.itemSize = CGSizeMake(self.view.bounds.width, self.view.bounds.height)
         flowLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
-        flowLayout.minimumInteritemSpacing = 1
-        flowLayout.minimumLineSpacing = 1
+        flowLayout.minimumInteritemSpacing = 3
+        flowLayout.minimumLineSpacing = 3
         self.uiCollectionView.collectionViewLayout = flowLayout
         self.uiCollectionView!.alwaysBounceVertical = true
-        self.uiCollectionView!.backgroundColor = Color.WHITE
+        self.uiCollectionView!.backgroundColor = Color.FEED_BG
         ViewUtil.showActivityLoading(self.activityLoading)
-        
-        /*let sellers = result.object as! [SellerVM]
-        self.handleRecommendedSeller(sellers)*/
 //API Call
         ApiFacade.searchUser(searchText,offset: self.offset,successCallback: onSuccessGetUser, failureCallback: onFailure)
         self.uiCollectionView.addPullToRefresh({ [weak self] in
@@ -63,8 +61,12 @@ class SearchUserController: UIViewController {
         } else {
             loadedAll = true
             if (self.users.isEmpty) {
-                
-                self.uiCollectionView.hidden = true
+                //Check for no items ....
+                //there are no result hence ... set the default record with -1 as id
+                let userVM = SellerVM()
+                userVM.id = -1
+                self.users.append(userVM)
+                uiCollectionView.reloadData()
             }
         }
         loading = false
@@ -83,9 +85,14 @@ class SearchUserController: UIViewController {
         return users.count
     }
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let feedItem = self.users[indexPath.row]
+        if self.users.count == 1 && feedItem.id == -1{
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("NoItemsToolTip", forIndexPath: indexPath) as! TooltipViewCell
+            NSLog("No Users Found")
+            cell.toolTipText.text = Constants.NO_USER_TEXT
+            return cell
+        }
         let cell=collectionView.dequeueReusableCellWithReuseIdentifier("SerachViewCell", forIndexPath: indexPath) as! UsersCollectionViewCell
-        //cell.userName.text = self.users[indexPath.row].firstName
-        
         let item = self.users[indexPath.row]
         cell.contentMode = UIViewContentMode.Redraw
         cell.sizeToFit()
@@ -94,33 +101,26 @@ class SearchUserController: UIViewController {
         cell.aboutMe.numberOfLines = 3
         cell.aboutMe.text = item.aboutMe
         cell.aboutMe.sizeToFit()
-        
         ImageUtil.displayThumbnailProfileImage(self.users[indexPath.row].id, imageView: cell.sellerImage)
-        
         // follow
         if item.id == UserInfoCache.getUser()!.id {
             cell.followButton.hidden = true
         } else {
             cell.followButton.hidden = false
-            
             if item.isFollowing {
                 ViewUtil.selectFollowButtonStyleLite(cell.followButton)
             } else {
                 ViewUtil.unselectFollowButtonStyleLite(cell.followButton)
             }
         }
-        
         self.setSizesFoProdImgs(cell)
-        
         var imageHolders: [UIImageView] = []
         imageHolders.append(cell.prodImage_1)
         imageHolders.append(cell.prodImage_2)
         imageHolders.append(cell.prodImage_3)
         imageHolders.append(cell.prodImage_4)
-        
         let posts = item.posts
         for i in 0 ..< posts.count {
-            NSLog("image iteration")
             ImageUtil.displayOriginalPostImage(posts[i].images[0], imageView: imageHolders[i])
             if (item.numMoreProducts > 0 && i == posts.count - 1) {
                 cell.moreText.setTitle("+" + String(item.numMoreProducts) + NSLocalizedString("product_txt", comment: ""), forState: UIControlState.Normal)
@@ -134,19 +134,14 @@ class SearchUserController: UIViewController {
                 cell.moreText.hidden = true
             }
         }
-        
         cell.layer.cornerRadius = Constants.DEFAULT_CORNER_RADIUS
         cell.layer.masksToBounds = true
         cell.layer.borderColor = Color.LIGHT_GRAY.CGColor
         cell.layer.borderWidth = 0.5
-        
         return cell
-        
     }
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        
-        
-        
+
     }
     
     // MARK: UICollectionViewDelegateFlowLayout
@@ -181,7 +176,6 @@ class SearchUserController: UIViewController {
                 if (!self.users.isEmpty) {
                     feedOffset = Int64(self.users[self.users.count-1].offset)
                 }
-                
                 ApiFacade.searchUser(searchText,offset: self.offset,successCallback: onSuccessGetUser, failureCallback: onFailure)
             }
         }
@@ -215,9 +209,7 @@ class SearchUserController: UIViewController {
         let button = sender as! UIButton
         let view = button.superview!
         let cell = view.superview! as! UsersCollectionViewCell
-        
         let indexPath = self.uiCollectionView.indexPathForCell(cell)!
-        
         let vController =  self.storyboard!.instantiateViewControllerWithIdentifier("ProductViewController") as! ProductViewController
         let feedItem = self.users[indexPath.row]
         vController.feedItem = feedItem.posts[index]
@@ -228,7 +220,6 @@ class SearchUserController: UIViewController {
         let button = sender as! UIButton
         let view = button.superview!
         let cell = view.superview! as! UsersCollectionViewCell
-        
         let indexPath = self.uiCollectionView.indexPathForCell(cell)!
         moveToUserProfile(indexPath.row)
     }
@@ -236,7 +227,6 @@ class SearchUserController: UIViewController {
         let button = sender as! UIButton
         let view = button.superview!
         let cell = view.superview! as! UsersCollectionViewCell
-        
         let indexPath = self.uiCollectionView.indexPathForCell(cell)!
         let item = self.users[indexPath.row]
         if (item.isFollowing) {
@@ -246,7 +236,6 @@ class SearchUserController: UIViewController {
         }
     }
     func follow(user: UserVMLite, cell: UsersCollectionViewCell) {
-        
         ApiController.instance.followUser(user.id)
         user.isFollowing = true
         ViewUtil.selectFollowButtonStyleLite(cell.followButton)
@@ -262,10 +251,8 @@ class SearchUserController: UIViewController {
         let button = sender as! UIButton
         let view = button.superview!
         let cell = view.superview! as! UsersCollectionViewCell
-        
         let indexPath = self.uiCollectionView.indexPathForCell(cell)!
         moveToUserProfile(indexPath.row)
-        
     }
     func moveToUserProfile(index: Int) {
         ViewUtil.resetBackButton(self.navigationItem)

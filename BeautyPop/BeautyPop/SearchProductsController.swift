@@ -11,12 +11,9 @@ import UIKit
 import SwiftEventBus
 
 class SearchProductsController: UIViewController {
-    
-    
     @IBOutlet weak var uiCollectionView: UICollectionView!
-    
-    
     @IBOutlet weak var activityLoading: UIActivityIndicatorView!
+    
     var feedLoader: FeedLoader? = nil
     var feedViewAdapter: FeedViewAdapter? = nil
     var offset = 0
@@ -36,31 +33,21 @@ class SearchProductsController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setCollectionViewSizesInsets()
         self.loading = true
-        /*
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 10, right: 0)
-        layout.itemSize = CGSize(width: screenWidth/3, height: screenWidth/3)
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-        */
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.itemSize = CGSizeMake(self.view.bounds.width, self.view.bounds.height)
         flowLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
-        flowLayout.minimumInteritemSpacing = 7
-        flowLayout.minimumLineSpacing = 7
+        flowLayout.minimumInteritemSpacing = 3
+        flowLayout.minimumLineSpacing = 3
         self.uiCollectionView.collectionViewLayout = flowLayout
         self.uiCollectionView!.alwaysBounceVertical = true
-        //self.uiCollectionView!.backgroundColor = Color.FEED_BG
-        
+        self.uiCollectionView!.backgroundColor = Color.FEED_BG
         self.uiCollectionView.addPullToRefresh({ [weak self] in
             self?.reload()
         })
         //API Call
         ApiFacade.searchProducts(searchText,categoryId: catId,offset: offset,successCallback: onSuccessGetProducts, failureCallback: onFailure)
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -79,19 +66,16 @@ class SearchProductsController: UIViewController {
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let feedItem = self.products[indexPath.row]
         if self.products.count == 1 && feedItem.id == -1 {
-            NSLog("No Products Found")
             //this mean there are no results.... hence show no result text
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("NoItemsToolTip", forIndexPath: indexPath) as! TooltipViewCell
             cell.toolTipText.text = Constants.NO_PRODUCT_TEXT
             return cell
-        }else{
+        }
         let cell=collectionView.dequeueReusableCellWithReuseIdentifier("searchProductViewCell", forIndexPath: indexPath) as! ProductCollectionViewCell
-            NSLog("Products Found")
             ImageUtil.displayPostImage(self.products[indexPath.row].images[0], imageView: cell.productImg)
             cell.productTitle.text = self.products[indexPath.row].title
             cell.productPrice.text = String( self.products[indexPath.row].price)
             return cell
-        }
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -102,17 +86,14 @@ class SearchProductsController: UIViewController {
     // MARK: UICollectionViewDelegateFlowLayout
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        
         if self.products.count == 1 {
             if self.products[0].id == -1 {
                 return CGSizeMake(self.view.bounds.width, Constants.NO_ITEM_TIP_TEXT_CELL_HEIGHT)
             }
         }
-            
         if let _ = collectionViewCellSize {
             return collectionViewCellSize!
         }
-        
         return CGSizeZero
     }
     
@@ -139,8 +120,8 @@ class SearchProductsController: UIViewController {
     func setCollectionViewSizesInsets() {
         let sideSpacing = Constants.FEED_ITEM_2COL_SIDE_SPACING
         let detailsHeight = Constants.FEED_ITEM_2COL_DETAILS_HEIGHT
-        let availableWidthForCells: CGFloat = self.view.bounds.width - Constants.HOME_HEADER_ITEMS_MARGIN_TOTAL
-        //let availableWidthForCells: CGFloat = self.view.bounds.width - (sideSpacing * CGFloat(2 + 1))  // left middle right spacing
+        //let availableWidthForCells: CGFloat = self.view.bounds.width - Constants.HOME_HEADER_ITEMS_MARGIN_TOTAL
+        let availableWidthForCells: CGFloat = self.view.bounds.width - (sideSpacing * CGFloat(0.5))  // left middle right spacing
         let cellWidth: CGFloat = availableWidthForCells / 2
         let cellHeight = cellWidth + detailsHeight
         collectionViewCellSize = CGSizeMake(cellWidth, cellHeight)
@@ -158,7 +139,7 @@ class SearchProductsController: UIViewController {
         } else {
             loadedAll = true
             if (self.products.isEmpty) {
-                self.uiCollectionView.hidden = true
+                //self.uiCollectionView.hidden = true
                 
                 //Check for no items ....
                     //there are no result hence ... set the default record with -1 as id
@@ -204,7 +185,6 @@ class SearchProductsController: UIViewController {
             let indexPath = self.uiCollectionView!.indexPathForCell(cell)
             let feedItem: PostVMLite = PostVMLite()
             feedItem.id = self.products[indexPath!.row].id
-
             self.currentIndex = indexPath
             productViewController = segue.destinationViewController as? ProductViewController
             productViewController!.feedItem = feedItem

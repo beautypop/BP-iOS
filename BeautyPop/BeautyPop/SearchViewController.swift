@@ -247,11 +247,16 @@ class SearchViewController:UIViewController, XMSegmentedControlDelegate
             let vController = segue.destinationViewController as! SearchProductsController
             vController.searchText = self.searchText.text!
             let categoryVM = CategoryCache.getCategoryByName(categoryDropDown.titleLabel!.text!);
-            if((categoryVM) != nil){
-                vController.catId = (categoryVM?.id)!}
+            if((categoryVM) == nil){
+                vController.catId = 0
+            }
             else
             {
-                vController.catId = 0
+                let subCategory = CategoryCache.getSubCategoryByName(subcategoryDropDown.titleLabel!.text!, subCategories: categoryVM!.subCategories!)
+                if((subCategory) == nil){
+                    vController.catId = (categoryVM?.id)!}
+                else{
+                    vController.catId = (subCategory?.id)!}
             }
             vController.hidesBottomBarWhenPushed = true
         }else if segue.identifier == "SearchUserController"{
