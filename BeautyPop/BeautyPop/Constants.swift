@@ -119,6 +119,7 @@ struct Constants {
     
     static let NO_PRODUCT_TEXT = NSLocalizedString("no_product_text", comment: "") //"~ No Products ~"
     static let NO_FOLLOWING_TEXT = NSLocalizedString("no_following_text", comment: "") //"~ No Followings ~"
+    static let NO_USER_TEXT = NSLocalizedString("no_user_text", comment: "") //"~ No Users ~"
     
     static let SHARING_SELLER_MSG_PREFIX = NSLocalizedString("notif_checkout_msg", comment: "") //"Check out BeautyPop Seller"
 }
