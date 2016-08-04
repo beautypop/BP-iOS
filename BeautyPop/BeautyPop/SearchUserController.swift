@@ -20,6 +20,7 @@ class SearchUserController: UIViewController {
     var users: [SellerVM] = []
     var searchText=""
     var offset = 0
+
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
