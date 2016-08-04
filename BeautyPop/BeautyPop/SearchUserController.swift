@@ -34,6 +34,7 @@ class SearchUserController: UIViewController {
         flowLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
         flowLayout.minimumInteritemSpacing = 3
         flowLayout.minimumLineSpacing = 3
+        flowLayout.sectionInset = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
         self.uiCollectionView.collectionViewLayout = flowLayout
         self.uiCollectionView!.alwaysBounceVertical = true
         self.uiCollectionView!.backgroundColor = Color.FEED_BG
@@ -172,9 +173,8 @@ class SearchUserController: UIViewController {
             if (!loadedAll && !loading) {
                 ViewUtil.showActivityLoading(self.activityLoading)
                 loading = true
-                var feedOffset: Int64 = 0
                 if (!self.users.isEmpty) {
-                    feedOffset = Int64(self.users[self.users.count-1].offset)
+                    offset = offset + 1
                 }
                 ApiFacade.searchUser(searchText,offset: self.offset,successCallback: onSuccessGetUser, failureCallback: onFailure)
             }

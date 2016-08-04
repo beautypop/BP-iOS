@@ -62,6 +62,7 @@ class SearchViewController:UIViewController, XMSegmentedControlDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchText.becomeFirstResponder()
         self.loading = true
         xmViewController.delegate=self
         ViewUtil.setSegmentedControlStyle(xmViewController, title: [ NSLocalizedString("products", comment:""), NSLocalizedString("user", comment:"") ])
@@ -72,19 +73,21 @@ class SearchViewController:UIViewController, XMSegmentedControlDelegate
         self.categoryOptions.bottomOffset = CGPoint(x: 0, y: categoryDropDown.bounds.height)
         self.categoryOptions.direction = .Top
         self.categoryDropDown.titleLabel?.addObserver(self, forKeyPath: "text", options: NSKeyValueObservingOptions.New, context: nil)
-        
         self.view.backgroundColor = Color.FEED_BG
         self.subCategoryOptions.anchorView = subcategoryDropDown
         self.subCategoryOptions.bottomOffset = CGPoint(x: 0, y: subcategoryDropDown.bounds.height)
         self.subCategoryOptions.direction = .Top
         userView.backgroundColor=Color.FEED_BG
         productView.backgroundColor=Color.FEED_BG
+        ViewUtil.displayRoundedCornerView(self.prodSearch, bgColor: Color.LIGHT_PINK)
+        ViewUtil.displayRoundedCornerView(self.userSearch, bgColor: Color.LIGHT_PINK)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         self.view.addGestureRecognizer(tap)
         searchText.autocapitalizationType = UITextAutocapitalizationType.None
         
         //self.categoryDropDown.setTitle(NSLocalizedString("choose_category", comment: ""), forState: UIControlState.Normal)
         //self.subcategoryDropDown.setTitle(NSLocalizedString("choose_sub_category", comment: ""), forState: UIControlState.Normal)
+        
        
     }
     override func didReceiveMemoryWarning() {
@@ -187,6 +190,7 @@ class SearchViewController:UIViewController, XMSegmentedControlDelegate
     }
     
     //Product Search Button ..
+    
     @IBAction func productSearchButtonAction(sender: AnyObject) {
         if((searchText.text?.isEmpty) == true){
             ViewUtil.makeToast(NSLocalizedString("enter_text_msg", comment: ""), view: self.view)
@@ -198,6 +202,7 @@ class SearchViewController:UIViewController, XMSegmentedControlDelegate
     }
     
     //User Search Button..
+    
     @IBAction func userSearchButtonAction(sender: AnyObject) {
         if((searchText.text?.isEmpty) == true){
             ViewUtil.makeToast(NSLocalizedString("enter_text_msg", comment: ""), view: self.view)
@@ -207,6 +212,7 @@ class SearchViewController:UIViewController, XMSegmentedControlDelegate
             performSegueWithIdentifier("SearchUserController", sender: self)
         }
     }
+    
 
     // MARK:- Notification
     func keyboardWillShow(notification: NSNotification) {
@@ -263,4 +269,5 @@ class SearchViewController:UIViewController, XMSegmentedControlDelegate
         }
         
     }
+    
 }

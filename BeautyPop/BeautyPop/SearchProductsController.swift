@@ -14,6 +14,7 @@ class SearchProductsController: UIViewController {
     @IBOutlet weak var uiCollectionView: UICollectionView!
     @IBOutlet weak var activityLoading: UIActivityIndicatorView!
     
+    
     var feedLoader: FeedLoader? = nil
     var feedViewAdapter: FeedViewAdapter? = nil
     var offset = 0
@@ -40,6 +41,7 @@ class SearchProductsController: UIViewController {
         flowLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
         flowLayout.minimumInteritemSpacing = 3
         flowLayout.minimumLineSpacing = 3
+        flowLayout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         self.uiCollectionView.collectionViewLayout = flowLayout
         self.uiCollectionView!.alwaysBounceVertical = true
         self.uiCollectionView!.backgroundColor = Color.FEED_BG
@@ -74,12 +76,16 @@ class SearchProductsController: UIViewController {
         let cell=collectionView.dequeueReusableCellWithReuseIdentifier("searchProductViewCell", forIndexPath: indexPath) as! ProductCollectionViewCell
             ImageUtil.displayPostImage(self.products[indexPath.row].images[0], imageView: cell.productImg)
             cell.productTitle.text = self.products[indexPath.row].title
-            cell.productPrice.text = String( self.products[indexPath.row].price)
+            cell.productPrice.text = ViewUtil.formatPrice(self.products[indexPath.row].price)
             if(products[indexPath.row].sold == true){
                 cell.soldImage.hidden=false
             } else {
                 cell.soldImage.hidden=true
             }
+            cell.layer.borderColor = Color.FEED_ITEM_BORDER.CGColor
+            cell.layer.borderWidth = 0.5
+            cell.layer.cornerRadius = Constants.FEED_ITEM_2COL_CORNER_RADIUS
+            //ViewUtil.displayRoundedCornerView(cell.productImg, bgColor: nil, borderColor: Color.LIGHT_GRAY)
             return cell
     }
     
@@ -125,8 +131,7 @@ class SearchProductsController: UIViewController {
     func setCollectionViewSizesInsets() {
         let sideSpacing = Constants.FEED_ITEM_2COL_SIDE_SPACING
         let detailsHeight = Constants.FEED_ITEM_2COL_DETAILS_HEIGHT
-        //let availableWidthForCells: CGFloat = self.view.bounds.width - Constants.HOME_HEADER_ITEMS_MARGIN_TOTAL
-        let availableWidthForCells: CGFloat = self.view.bounds.width - (sideSpacing * CGFloat(0.5))  // left middle right spacing
+        let availableWidthForCells: CGFloat = self.view.bounds.width - (sideSpacing * CGFloat(2.2))  // left middle right spacing
         let cellWidth: CGFloat = availableWidthForCells / 2
         let cellHeight = cellWidth + detailsHeight
         collectionViewCellSize = CGSizeMake(cellWidth, cellHeight)
