@@ -5034,7 +5034,10 @@
                             <searchBar contentMode="scaleToFill" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="Rns-HL-rth">
                                 <rect key="frame" x="5" y="25" width="590" height="44"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <textInputTraits key="textInputTraits" keyboardAppearance="alert" enablesReturnKeyAutomatically="YES"/>
+                                <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="done"/>
+                                <connections>
+                                    <outlet property="delegate" destination="qDa-2x-0wm" id="azt-c9-T1g"/>
+                                </connections>
                             </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
