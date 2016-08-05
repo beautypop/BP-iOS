@@ -20,7 +20,6 @@ class SearchUserController: UIViewController {
     var users: [SellerVM] = []
     var searchText=""
     var offset = 0
-
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -156,7 +155,7 @@ class SearchUserController: UIViewController {
         dummyLbl.text = self.users[indexPath.row].aboutMe
         dummyLbl.adjustsFontSizeToFitWidth = true
         dummyLbl.lineBreakMode = NSLineBreakMode.ByClipping
-        dummyLbl.font = UIFont.systemFontOfSize(14, weight: UIFontWeightLight)
+        dummyLbl.font = UIFont.systemFontOfSize(13, weight: UIFontWeightLight)
         dummyLbl.sizeToFit()
         var imageWidth: CGFloat
         if(self.users[indexPath.row].numProducts != 0) {
@@ -263,7 +262,7 @@ class SearchUserController: UIViewController {
         moveToUserProfile(indexPath.row)
     }
     
-        func moveToUserProfile(index: Int) {
+    func moveToUserProfile(index: Int) {
         ViewUtil.resetBackButton(self.navigationItem)
         let vController = self.storyboard?.instantiateViewControllerWithIdentifier("UserProfileFeedViewController") as! UserProfileFeedViewController
         vController.userId = self.users[index].id
