@@ -5115,6 +5115,9 @@
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="onClickSeller:" destination="U4g-8D-Nd1" eventType="touchUpInside" id="tjN-vE-2Nm"/>
+                                                    </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8gg-QZ-ulD">
                                                     <rect key="frame" x="72" y="10" width="7" height="16"/>
@@ -5144,7 +5147,7 @@
                                                         <color key="titleColor" red="0.98823529409999999" green="0.30588235289999999" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="onClickFollowUnfollow:" destination="vWT-TA-JRt" eventType="touchUpInside" id="tQu-7b-x0E"/>
+                                                        <action selector="onClickFollowUnfollow:" destination="U4g-8D-Nd1" eventType="touchUpInside" id="LxB-pK-TFr"/>
                                                     </connections>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Che-Nr-Cr1" userLabel="AboutUs">
@@ -5168,7 +5171,7 @@
                                                         <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="onClickPostImg1:" destination="vWT-TA-JRt" eventType="touchUpInside" id="DZv-0D-Cbc"/>
+                                                        <action selector="onClickPostImg1:" destination="U4g-8D-Nd1" eventType="touchUpInside" id="yuB-HN-LNs"/>
                                                     </connections>
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oNZ-5D-ShR" userLabel="ProdImg2">
@@ -5182,7 +5185,7 @@
                                                         <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="onClickPostImg2:" destination="vWT-TA-JRt" eventType="touchUpInside" id="oog-qS-R8c"/>
+                                                        <action selector="onClickPostImg2:" destination="U4g-8D-Nd1" eventType="touchUpInside" id="U59-GU-Qfy"/>
                                                     </connections>
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TBl-rk-Lim" userLabel="ProdImg3">
@@ -5196,7 +5199,7 @@
                                                         <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="onClickPostImg3:" destination="vWT-TA-JRt" eventType="touchUpInside" id="kvz-KV-cGq"/>
+                                                        <action selector="onClickPostImg3:" destination="U4g-8D-Nd1" eventType="touchUpInside" id="xrh-bt-f6a"/>
                                                     </connections>
                                                 </button>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kMW-fl-4CL" userLabel="ProdImg4">
@@ -5210,7 +5213,7 @@
                                                         <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="onClickPostImg4:" destination="vWT-TA-JRt" eventType="touchUpInside" id="awY-wg-ha9"/>
+                                                        <action selector="onClickPostImg4:" destination="U4g-8D-Nd1" eventType="touchUpInside" id="q6S-zu-oL1"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eeu-k1-YVJ" userLabel="MoreText">
@@ -5221,7 +5224,7 @@
                                                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="onClickMoreProducs:" destination="vWT-TA-JRt" eventType="touchUpInside" id="OI3-pj-lST"/>
+                                                        <action selector="onClickMoreProducs:" destination="U4g-8D-Nd1" eventType="touchUpInside" id="uWz-xv-uTA"/>
                                                     </connections>
                                                 </button>
                                             </subviews>

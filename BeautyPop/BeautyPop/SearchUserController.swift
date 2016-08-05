@@ -200,9 +200,11 @@ class SearchUserController: UIViewController {
     @IBAction func onClickPostImg1(sender: AnyObject) {
         moveToProductView(sender, index: 0)
     }
+        
     @IBAction func onClickPostImg2(sender: AnyObject) {
         moveToProductView(sender, index: 1)
     }
+    
     @IBAction func onClickPostImg3(sender: AnyObject) {
         moveToProductView(sender, index: 2)
     }
@@ -227,6 +229,7 @@ class SearchUserController: UIViewController {
         let indexPath = self.uiCollectionView.indexPathForCell(cell)!
         moveToUserProfile(indexPath.row)
     }
+
     @IBAction func onClickFollowUnfollow(sender: AnyObject) {
         let button = sender as! UIButton
         let view = button.superview!
@@ -238,6 +241,7 @@ class SearchUserController: UIViewController {
         } else {
             follow(item, cell: cell)
         }
+
     }
     func follow(user: UserVMLite, cell: UsersCollectionViewCell) {
         ApiController.instance.followUser(user.id)
@@ -258,7 +262,8 @@ class SearchUserController: UIViewController {
         let indexPath = self.uiCollectionView.indexPathForCell(cell)!
         moveToUserProfile(indexPath.row)
     }
-    func moveToUserProfile(index: Int) {
+    
+        func moveToUserProfile(index: Int) {
         ViewUtil.resetBackButton(self.navigationItem)
         let vController = self.storyboard?.instantiateViewControllerWithIdentifier("UserProfileFeedViewController") as! UserProfileFeedViewController
         vController.userId = self.users[index].id
