@@ -12,7 +12,7 @@ import XMSegmentedControl
 import SwiftEventBus
 import QQPlaceholderTextView
 
-class SearchViewController:UIViewController, XMSegmentedControlDelegate
+class SearchViewController:UIViewController, XMSegmentedControlDelegate, UISearchBarDelegate
 {
     enum SegmentItem: Int {
         case User = 0
@@ -62,6 +62,7 @@ class SearchViewController:UIViewController, XMSegmentedControlDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.searchText.delegate = self
         searchText.becomeFirstResponder()
         self.loading = true
         xmViewController.delegate=self
@@ -87,8 +88,6 @@ class SearchViewController:UIViewController, XMSegmentedControlDelegate
         
         //self.categoryDropDown.setTitle(NSLocalizedString("choose_category", comment: ""), forState: UIControlState.Normal)
         //self.subcategoryDropDown.setTitle(NSLocalizedString("choose_sub_category", comment: ""), forState: UIControlState.Normal)
-        
-       
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -100,7 +100,7 @@ class SearchUserController: UIViewController {
         cell.sizeToFit()
         cell.userName.text = String(item.displayName)
         cell.followersLabel.text = String(item.numFollowers)
-        cell.aboutMe.numberOfLines = 3
+        cell.aboutMe.numberOfLines = 0
         cell.aboutMe.text = item.aboutMe
         cell.aboutMe.sizeToFit()
         ImageUtil.displayThumbnailProfileImage(self.users[indexPath.row].id, imageView: cell.sellerImage)
@@ -152,20 +152,23 @@ class SearchUserController: UIViewController {
         
         // this code is used to dynamically specify the height to CellView without this code contents get overlapped
         let dummyLbl = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 0))
-        dummyLbl.numberOfLines = 2
+        dummyLbl.numberOfLines = 0
         dummyLbl.text = self.users[indexPath.row].aboutMe
+        dummyLbl.adjustsFontSizeToFitWidth = true
+        dummyLbl.lineBreakMode = NSLineBreakMode.ByClipping
+        dummyLbl.font = UIFont.systemFontOfSize(14, weight: UIFontWeightLight)
         dummyLbl.sizeToFit()
         var imageWidth: CGFloat
-        if(self.users[indexPath.row].numProducts != 0)
-        {
-        let availableWidthForButtons: CGFloat = self.view.bounds.width - (Constants.DEFAULT_SPACING * 4)
+        if(self.users[indexPath.row].numProducts != 0) {
+            let availableWidthForButtons: CGFloat = self.view.bounds.width - (Constants.DEFAULT_SPACING * 4)
             imageWidth = availableWidthForButtons / 4
-        }else{
+        } else {
             imageWidth = -3
         }
         return CGSizeMake(
             self.view.bounds.width - (Constants.DEFAULT_SPACING * 2),
             Constants.SELLER_FEED_ITEM_DETAILS_HEIGHT + dummyLbl.bounds.height + imageWidth)
+        
     }
     
     // MARK: UIScrollview Delegate
