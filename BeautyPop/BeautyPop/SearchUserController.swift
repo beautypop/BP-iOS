@@ -164,9 +164,14 @@ class SearchUserController: UIViewController {
         } else {
             imageWidth = -3
         }
+        var tempHeight: CGFloat = 0.0
+        if(dummyLbl.bounds.height != 0)
+        {
+            tempHeight = dummyLbl.bounds.height - 10.0
+        }
         return CGSizeMake(
             self.view.bounds.width - (Constants.DEFAULT_SPACING * 2),
-            Constants.SELLER_FEED_ITEM_DETAILS_HEIGHT + dummyLbl.bounds.height + imageWidth)
+            Constants.SELLER_FEED_ITEM_DETAILS_HEIGHT + tempHeight + imageWidth)
         
     }
     
