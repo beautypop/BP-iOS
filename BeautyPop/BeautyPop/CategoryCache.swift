@@ -12,6 +12,9 @@ import SwiftEventBus
 class CategoryCache {
     
     static var categories: [CategoryVM] = []
+    static var themeCategories: [CategoryVM] = []
+    static var trendCategories: [CategoryVM] = []
+    static var customCategories: [CategoryVM] = []
     
     init() {
     }
@@ -28,8 +31,28 @@ class CategoryCache {
                 failureCallback!("Categories returned is empty")
                 return
             }
+            self.categories.removeAll()
+            self.themeCategories.removeAll()
+            self.trendCategories.removeAll()
+            self.customCategories.removeAll()
+            self.categories = []
+            self.themeCategories = []
+            self.trendCategories = []
+            self.customCategories = []
             
-            self.categories = result.object as! [CategoryVM]
+            let allCategories = result.object as! [CategoryVM]
+            
+            for categoryVM in allCategories {
+                if ("PUBLIC" == categoryVM.categoryType) {
+                    self.categories.append(categoryVM)
+                } else if ("THEME" == categoryVM.categoryType) {
+                    self.themeCategories.append(categoryVM)
+                } else if ("TREND" == categoryVM.categoryType) {
+                    self.trendCategories.append(categoryVM)
+                } else if ("CUSTOM" == categoryVM.categoryType) {
+                    self.customCategories.append(categoryVM)
+                } 
+            }
             if successCallback != nil {
                 successCallback!(categories)
             }
@@ -59,10 +82,46 @@ class CategoryCache {
         return nil
     }
     
+    static func getTrendById(catId: Int) -> CategoryVM? {
+        for index in 0 ..< CategoryCache.trendCategories.count {
+            if Int(CategoryCache.trendCategories[index].id) == catId {
+                return CategoryCache.trendCategories[index]
+            }
+        }
+        return nil
+    }
+    
+    static func getThemeById(catId: Int) -> CategoryVM? {
+        for index in 0 ..< CategoryCache.themeCategories.count {
+            if Int(CategoryCache.themeCategories[index].id) == catId {
+                return CategoryCache.themeCategories[index]
+            }
+        }
+        return nil
+    }
+    
     static func getCategoryByName(name: String) -> CategoryVM? {
         for index in 0 ..< CategoryCache.categories.count {
             if CategoryCache.categories[index].name == name {
                 return CategoryCache.categories[index]
+            }
+        }
+        return nil
+    }
+    
+    static func getTrendsByName(name: String) -> CategoryVM? {
+        for index in 0 ..< CategoryCache.trendCategories.count {
+            if CategoryCache.trendCategories[index].name == name {
+                return CategoryCache.trendCategories[index]
+            }
+        }
+        return nil
+    }
+    
+    static func getThemesByName(name: String) -> CategoryVM? {
+        for index in 0 ..< CategoryCache.themeCategories.count {
+            if CategoryCache.themeCategories[index].name == name {
+                return CategoryCache.themeCategories[index]
             }
         }
         return nil

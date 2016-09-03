@@ -20,17 +20,24 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
     @IBOutlet weak var subCategoryDropDown: UIButton!
     @IBOutlet weak var conditionDropDown: UIButton!
     @IBOutlet weak var deletePostBtn: UIButton!
+    @IBOutlet weak var themesDropDown: UIButton!
+    @IBOutlet weak var trendsDropDown: UIButton!
     
     var postId: Int = 0
     var postItem: PostVM? = nil
     let categoryOptions = DropDown()
     let subCategoryOptions = DropDown()
     let conditionTypeDropDown = DropDown()
+    let themesOptions = DropDown()
+    let trendsOptions = DropDown()
     
     var save: String = ""
     var selectedIndex :Int?
     var selCategoryId: Int = -1
     var selSubCategoryId: Int = -1
+    var selTrendsId: Int = -1
+    var selThemeId: Int = -1
+    
     
     /*
      var keyboardType: UIKeyboardType {
@@ -127,6 +134,14 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
         self.subCategoryOptions.bottomOffset = CGPoint(x: 0, y:subCategoryDropDown.bounds.height)
         self.subCategoryOptions.direction = .Top
         
+        self.themesOptions.anchorView = themesDropDown
+        self.themesOptions.bottomOffset = CGPoint(x: 0, y: themesDropDown.bounds.height)
+        self.themesOptions.direction = .Top
+        
+        self.trendsOptions.anchorView = trendsDropDown
+        self.trendsOptions.bottomOffset = CGPoint(x: 0, y: trendsDropDown.bounds.height)
+        self.trendsOptions.direction = .Top
+        
         let saveProductImg: UIButton = UIButton()
         saveProductImg.setTitle("Save", forState: UIControlState.Normal)
         saveProductImg.addTarget(self, action: "saveProduct:", forControlEvents: UIControlEvents.TouchUpInside)
@@ -146,9 +161,14 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
         self.pricetxt.text = String(Int((self.postItem?.price)!))
         self.selCategoryId = (self.postItem?.categoryId)!
         self.selSubCategoryId = (self.postItem?.subCategoryId)!
+        self.selTrendsId = (self.postItem?.trendId)!
+        self.selThemeId = (self.postItem?.themeId)!
         
         initCategoryOptions()
         initSubCategoryOptions()
+        initConditionTypes()
+        initThemesOptions()
+        initTrendsOptions()
         initConditionTypes()
         
         ViewUtil.hideActivityLoading(self.activityLoading)
@@ -180,6 +200,62 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
                 self.selCategoryId = category.id
             }
             self.categoryDropDown.setTitle(item, forState: .Normal)
+        }
+    }
+    
+    func initTrendsOptions() {
+        let trends = CategoryCache.trendCategories
+        
+        var selectedValue = NSLocalizedString("choose_trends", comment: "")
+        var dataSource: [String] = []
+        for i in 0 ..< trends.count {
+            dataSource.append(trends[i].name)
+            if Int(trends[i].id) == self.selTrendsId {
+                selectedValue = trends[i].name
+            }
+        }
+        
+        self.trendsOptions.dataSource = dataSource
+        dispatch_async(dispatch_get_main_queue(), {
+            self.trendsOptions.reloadAllComponents()
+        })
+        
+        self.trendsDropDown.setTitle(selectedValue, forState: UIControlState.Normal)
+        
+        self.trendsOptions.selectionAction = { [unowned self] (index, item) in
+            self.selTrendsId = -1
+            if let category = CategoryCache.getTrendsByName(item) {
+                self.selTrendsId = category.id
+            }
+            self.trendsDropDown.setTitle(item, forState: .Normal)
+        }
+    }
+    
+    func initThemesOptions() {
+        let themes = CategoryCache.themeCategories
+        
+        var selectedValue = NSLocalizedString("choose_theme", comment: "")
+        var dataSource: [String] = []
+        for i in 0 ..< themes.count {
+            dataSource.append(themes[i].name)
+            if Int(themes[i].id) == self.selThemeId {
+                selectedValue = themes[i].name
+            }
+        }
+        
+        self.themesOptions.dataSource = dataSource
+        dispatch_async(dispatch_get_main_queue(), {
+            self.themesOptions.reloadAllComponents()
+        })
+        
+        self.themesDropDown.setTitle(selectedValue, forState: UIControlState.Normal)
+        
+        self.themesOptions.selectionAction = { [unowned self] (index, item) in
+            self.selThemeId = -1
+            if let category = CategoryCache.getThemesByName(item) {
+                self.selThemeId = category.id
+            }
+            self.themesDropDown.setTitle(item, forState: .Normal)
         }
     }
     
@@ -234,6 +310,22 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
         }
     }
     
+    @IBAction func ShoworDismissTrends(sender: AnyObject) {
+        if self.trendsOptions.hidden {
+            self.trendsOptions.show()
+        } else {
+            self.trendsOptions.hide()
+        }
+    }
+    
+    @IBAction func ShoworDismissThemes(sender: AnyObject) {
+        if self.themesOptions.hidden {
+            self.themesOptions.show()
+        } else {
+            self.themesOptions.hide()
+        }
+    }
+    
     @IBAction func subCategorySellDropDown(sender: AnyObject) {
         if self.subCategoryOptions.hidden {
             self.subCategoryOptions.show()
@@ -264,7 +356,7 @@ class EditProductViewController: UIViewController, UITextFieldDelegate, UITextVi
         if isValid() {
             ViewUtil.showGrayOutView(self, activityLoading: self.activityLoading)
             let conditionType = ViewUtil.parsePostConditionTypeFromValue(conditionDropDown.titleLabel!.text!)
-            ApiController.instance.editPost(self.postId, title: StringUtil.trim(postTitle.text), body: StringUtil.trim(prodDescription.text), catId: self.selSubCategoryId, conditionType: String(conditionType), pricetxt: StringUtil.trim(pricetxt.text))
+            ApiController.instance.editPost(self.postId, title: StringUtil.trim(postTitle.text), body: StringUtil.trim(prodDescription.text), catId: self.selSubCategoryId, conditionType: String(conditionType), pricetxt: StringUtil.trim(pricetxt.text), trendId: self.selTrendsId, themeId: self.selThemeId)
         }
     }
     

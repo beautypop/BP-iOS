@@ -12,9 +12,11 @@ class CustomTabBarController: UITabBarController {
     
     enum TabItem: Int {
         case Home = 0
+        case Theme
         case Seller
         case Activity
         case Profile
+        
         
         init() {
             self = .Home
@@ -41,8 +43,6 @@ class CustomTabBarController: UITabBarController {
             tabBarController.hidesBottomBarWhenPushed = false
             
             if let navController = tabBarController.viewControllers![tabItem.rawValue] as? UINavigationController {
-                //navController.navigationBarHidden = false
-                //navController.toolbarHidden = false
                 return navController.viewControllers[0]
             }
         }
@@ -60,7 +60,11 @@ class CustomTabBarController: UITabBarController {
     static func selectHomeTab() -> HomeFeedViewController? {
         return selectTab(TabItem.Home) as? HomeFeedViewController
     }
-
+    
+    static func selectTrendsTab() -> NewTrendsViewController? {
+        return selectTab(TabItem.Theme) as? NewTrendsViewController
+    }
+    
     static func selectSellerTab() -> SellerViewController? {
         return selectTab(TabItem.Seller) as? SellerViewController
     }
@@ -86,6 +90,11 @@ class CustomTabBarController: UITabBarController {
         let selImage = UIImage(named: "mn_home_sel")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
         self.tabBar.items![TabItem.Home.rawValue].image = image
         self.tabBar.items![TabItem.Home.rawValue].selectedImage = selImage
+        
+        let trendsImg = UIImage(named: "ic_view_grid")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        let selTrendsImg = UIImage(named: "ic_view_grid_sel")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        self.tabBar.items![TabItem.Theme.rawValue].image = trendsImg
+        self.tabBar.items![TabItem.Theme.rawValue].selectedImage = selTrendsImg
         
         let sellerImg = UIImage(named: "mn_seller")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
         let selSellerImg = UIImage(named: "mn_seller_sel")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)

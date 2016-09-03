@@ -35,6 +35,8 @@ class PostVMLite: BaseArgVM {
     var baseScore: Double = 0
     var timeScore: Double = 0
     var prodLiked: Bool = false
+    var themeId = -1
+    var trendId = -1
     
     override func mapping(map: ObjectMapper.Map) {
         id<-map["id"]
@@ -59,5 +61,7 @@ class PostVMLite: BaseArgVM {
         offset<-map["offset"]
         baseScore<-map["baseScore"]
         timeScore<-map["timeScore"]
+        themeId<-map["themeId"]
+        trendId<-map["trendId"]
     }
 }

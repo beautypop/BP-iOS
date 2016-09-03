@@ -23,9 +23,14 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
     @IBOutlet weak var activityLoading: UIActivityIndicatorView!
     @IBOutlet weak var subCategoryDropDown: UIButton!
     
+    @IBOutlet weak var themesDropDown: UIButton!
+    @IBOutlet weak var trendsDropDown: UIButton!
+    
     let categoryOptions = DropDown()
     let conditionTypeDropDown = DropDown()
     let subCategoryOptions = DropDown()
+    let themesOptions = DropDown()
+    let trendsOptions = DropDown()
     
     var save: String = ""
     var collectionViewCellSize : CGSize?
@@ -35,7 +40,8 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
     var selectedIndex :Int? = 0
     var selCategoryId: Int = -1
     var selSubCategoryId: Int = -1
-    
+    var selTrendsId: Int = -1
+    var selThemeId: Int = -1
     let croppingEnabled: Bool = true
     let libraryEnabled: Bool = true
     
@@ -116,7 +122,8 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
         
         initCategoryOptions()
         initSubCategoryOptions()
-        
+        initTrendsOptions()
+        initThemesOptions()
         initConditionTypes()
         
         self.conditionTypeDropDown.anchorView = conditionDropDown
@@ -132,13 +139,21 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
         self.subCategoryOptions.bottomOffset = CGPoint(x: 0, y: subCategoryDropDown.bounds.height)
         self.subCategoryOptions.direction = .Top
         
+        self.themesOptions.anchorView = themesDropDown
+        self.themesOptions.bottomOffset = CGPoint(x: 0, y: themesDropDown.bounds.height)
+        self.themesOptions.direction = .Top
+        
+        self.trendsOptions.anchorView = trendsDropDown
+        self.trendsOptions.bottomOffset = CGPoint(x: 0, y: trendsDropDown.bounds.height)
+        self.trendsOptions.direction = .Top
+        
         self.setCollectionViewSizesInsets()
         
         self.collectionView.reloadData()
         
         let saveProductImg: UIButton = UIButton()
         saveProductImg.setTitle(NSLocalizedString("save", comment: ""), forState: UIControlState.Normal)
-        saveProductImg.addTarget(self, action: "saveProduct:", forControlEvents: UIControlEvents.TouchUpInside)
+        saveProductImg.addTarget(self, action: #selector(NewProductViewController.saveProduct(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         saveProductImg.frame = CGRectMake(0, 0, 60, 35)
         let saveProductBarBtn = UIBarButtonItem(customView: saveProductImg)
         self.navigationItem.rightBarButtonItems = [saveProductBarBtn]
@@ -170,6 +185,62 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
                 self.selCategoryId = category.id
             }
             self.categoryDropDown.setTitle(item, forState: .Normal)
+        }
+    }
+    
+    func initTrendsOptions() {
+        let trends = CategoryCache.trendCategories
+        
+        var selectedValue = NSLocalizedString("choose_trends", comment: "")
+        var dataSource: [String] = []
+        for i in 0 ..< trends.count {
+            dataSource.append(trends[i].name)
+            if Int(trends[i].id) == self.selTrendsId {
+                selectedValue = trends[i].name
+            }
+        }
+        
+        self.trendsOptions.dataSource = dataSource
+        dispatch_async(dispatch_get_main_queue(), {
+            self.trendsOptions.reloadAllComponents()
+        })
+        
+        self.trendsDropDown.setTitle(selectedValue, forState: UIControlState.Normal)
+        
+        self.trendsOptions.selectionAction = { [unowned self] (index, item) in
+            self.selTrendsId = -1
+            if let category = CategoryCache.getTrendsByName(item) {
+                self.selTrendsId = category.id
+            }
+            self.trendsDropDown.setTitle(item, forState: .Normal)
+        }
+    }
+    
+    func initThemesOptions() {
+        let themes = CategoryCache.themeCategories
+        
+        var selectedValue = NSLocalizedString("choose_theme", comment: "")
+        var dataSource: [String] = []
+        for i in 0 ..< themes.count {
+            dataSource.append(themes[i].name)
+            if Int(themes[i].id) == self.selThemeId {
+                selectedValue = themes[i].name
+            }
+        }
+        
+        self.themesOptions.dataSource = dataSource
+        dispatch_async(dispatch_get_main_queue(), {
+            self.themesOptions.reloadAllComponents()
+        })
+        
+        self.themesDropDown.setTitle(selectedValue, forState: UIControlState.Normal)
+        
+        self.themesOptions.selectionAction = { [unowned self] (index, item) in
+            self.selThemeId = -1
+            if let category = CategoryCache.getThemesByName(item) {
+                self.selThemeId = category.id
+            }
+            self.themesDropDown.setTitle(item, forState: .Normal)
         }
     }
     
@@ -212,6 +283,22 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
             self.conditionTypeDropDown.show()
         } else {
             self.conditionTypeDropDown.hide()
+        }
+    }
+    
+    @IBAction func ShoworDismissTrends(sender: AnyObject) {
+        if self.trendsOptions.hidden {
+            self.trendsOptions.show()
+        } else {
+            self.trendsOptions.hide()
+        }
+    }
+    
+    @IBAction func ShoworDismissThemes(sender: AnyObject) {
+        if self.themesOptions.hidden {
+            self.themesOptions.show()
+        } else {
+            self.themesOptions.hide()
         }
     }
 
@@ -350,7 +437,7 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
         if isValid() {
             ViewUtil.showGrayOutView(self, activityLoading: self.activityLoading)
             let conditionType = ViewUtil.parsePostConditionTypeFromValue(conditionDropDown.titleLabel!.text!)
-            ApiController.instance.newPost(StringUtil.trim(sellingtext.text), body: StringUtil.trim(prodDescription.text), catId: self.selSubCategoryId, conditionType: String(conditionType), pricetxt: StringUtil.trim(pricetxt.text), imageCollection: self.imageCollection)
+            ApiController.instance.newPost(StringUtil.trim(sellingtext.text), body: StringUtil.trim(prodDescription.text), catId: self.selSubCategoryId, conditionType: String(conditionType), pricetxt: StringUtil.trim(pricetxt.text), trendId: self.selTrendsId, themeId: self.selThemeId, imageCollection: self.imageCollection)
         }
     }
     

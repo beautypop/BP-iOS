@@ -930,4 +930,53 @@ class ApiFacade {
         }
         ApiController.instance.searchUser(searchText, offset: offset)
     }
+    static func searchCategory(successCallback: (([CategoryVM]) -> Void)?, failureCallback: ((String) -> Void)?) {
+        SwiftEventBus.unregister(self)
+        SwiftEventBus.onMainThread(self, name: "categoriesSuccess") { result in
+            if successCallback != nil {
+                //if result.object is NSString {
+                successCallback!(result.object as! [CategoryVM])
+                //} else {
+                //    successCallback!([])
+                //}
+            }
+        }
+        
+        SwiftEventBus.onMainThread(self, name: "categoriesFailed") { result in
+            if failureCallback != nil {
+                var error = "Failed to get CATEGORY..."
+                if result.object is NSString {
+                    error += "\n"+(result.object as! String)
+                }
+                failureCallback!(error)
+            }
+        }
+        ApiController.instance.searchCategories()
+    }
+    
+    static func getCategoryPopularProducts(id: Int, offset: Int64, collectionView: UICollectionView, successCallback: (([PostVMLite], UICollectionView) -> Void)?, failureCallback: ((String) -> Void)?) {
+        SwiftEventBus.unregister(self)
+        
+        SwiftEventBus.onMainThread(self, name: "categoryPopularFeedLoadSuccess") { result in
+            if ViewUtil.isEmptyResult(result) {
+                failureCallback!("No suggested products")
+                return
+            }
+            
+            if successCallback != nil {
+                successCallback!(result.object as! [PostVMLite], collectionView)
+            }
+        }
+        
+        SwiftEventBus.onMainThread(self, name: "categoryPopularFeedLoadFailed") { result in
+            if failureCallback != nil {
+                var error = "Failed to get suggested products..."
+                if result.object is NSString {
+                    error += "\n"+(result.object as! String)
+                }
+                failureCallback!(error)
+            }
+        }
+        ApiController.instance.getCategoryPopularFeed(id, offset: offset)
+    }
 }

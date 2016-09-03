@@ -135,10 +135,20 @@ class ApiController {
 
     func getCategories() {
         let callEvent = ApiCallEvent()
-        callEvent.method = "/api/get-categories"
+        callEvent.method = "/api/get-all-categories"
         callEvent.resultClass = "[CategoryVM]"
         callEvent.successEventbusName = "categoriesReceivedSuccess"
         callEvent.failedEventbusName = "categoriesReceivedFailed"
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        self.makeApiCall(callEvent)
+    }
+    
+    func searchCategories() {
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/api/get-categories"
+        callEvent.resultClass = "[CategoryVM]"
+        callEvent.successEventbusName = "categoriesSuccess"
+        callEvent.failedEventbusName = "categoriesFailed"
         callEvent.apiUrl = Constants.BASE_URL + callEvent.method
         self.makeApiCall(callEvent)
     }
@@ -492,7 +502,7 @@ class ApiController {
         self.makeApiCall(callEvent)
     }
     
-    func editPost(postId: Int, title: String, body: String, catId: Int, conditionType:String, pricetxt : String) {
+    func editPost(postId: Int, title: String, body: String, catId: Int, conditionType:String, pricetxt : String, trendId: Int, themeId: Int) {
         let callEvent = ApiCallEvent()
         callEvent.method = "/api/post/edit"
         callEvent.resultClass="String"
@@ -511,6 +521,8 @@ class ApiController {
                 multipartFormData.appendBodyPart(data: StringUtil.toEncodedData(pricetxt), name :"price")
                 multipartFormData.appendBodyPart(data: StringUtil.toEncodedData(conditionType), name :"conditionType")
                 multipartFormData.appendBodyPart(data: StringUtil.toEncodedData(Constants.DEVICE_TYPE), name :"deviceType")
+                multipartFormData.appendBodyPart(data: StringUtil.toEncodedData(String(trendId)), name :"trendId")
+                multipartFormData.appendBodyPart(data: StringUtil.toEncodedData(String(themeId)), name :"themeId")
             },
             encodingCompletion: { encodingResult in
                 switch encodingResult {
@@ -523,7 +535,7 @@ class ApiController {
         )
     }
     
-    func newPost(title: String, body: String, catId: Int, conditionType:String, pricetxt : String, imageCollection: [AnyObject]) {
+    func newPost(title: String, body: String, catId: Int, conditionType:String, pricetxt : String, trendId: Int, themeId: Int, imageCollection: [AnyObject]) {
         let callEvent = ApiCallEvent()
         callEvent.method = "/api/post/new"
         callEvent.resultClass="NewPostVM"
@@ -557,6 +569,8 @@ class ApiController {
                 multipartFormData.appendBodyPart(data: StringUtil.toEncodedData(pricetxt), name :"price")
                 multipartFormData.appendBodyPart(data: StringUtil.toEncodedData(conditionType), name :"conditionType")
                 multipartFormData.appendBodyPart(data: StringUtil.toEncodedData("ios"), name :"deviceType")
+                multipartFormData.appendBodyPart(data: StringUtil.toEncodedData(String(trendId)), name :"trendId")
+                multipartFormData.appendBodyPart(data: StringUtil.toEncodedData(String(themeId)), name :"themeId")
             },
             encodingCompletion: { encodingResult in
                 switch encodingResult {
