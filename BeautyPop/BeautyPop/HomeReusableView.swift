@@ -25,6 +25,9 @@ class HomeReusableView: UICollectionReusableView {
     @IBOutlet weak var newestBtn: UIButton!
     @IBOutlet weak var lowToHighBtn: UIButton!
     
+    @IBOutlet weak var headerImage: UIImageView!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var headerLabel: UILabel!
     override func updateConstraints() {
         super.updateConstraints()
     }
