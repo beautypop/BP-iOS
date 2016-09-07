@@ -56,12 +56,12 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
     //Table View Methods
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return trendCategories.count
-        /*var rows = 0
+        var rows = 0
         switch section {
         case 0:
             rows = 1
@@ -69,13 +69,13 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
             rows = trendCategories.count
         }
         return rows
-        */
-        return trendCategories.count + 1
+ 
+        //return trendCategories.count + 1
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        if indexPath.row == 0 {
+        if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier("category1Cell", forIndexPath: indexPath) as! TrendsViewCell
             //cell.viewWithTag(0)
             
@@ -87,8 +87,10 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         } else{
             let cell = tableView.dequeueReusableCellWithIdentifier("categoryCell", forIndexPath: indexPath) as! TrendsViewCell
             
-            let trendCategory = self.trendCategories[indexPath.row - 1]
+            let trendCategory = self.trendCategories[indexPath.row]
             ImageUtil.displayFeaturedItemImage(trendCategory.icon, imageView: cell.trendImageView)
+            cell.trendTitle.text = trendCategory.name
+            cell.productIndicator.image = UIImage(named: "ic_triangle")
             trendProductsCollectionView = cell.viewWithTag(1) as! UICollectionView
             trendProductsCollectionView.delegate = self
             trendProductsCollectionView.dataSource = self
@@ -100,12 +102,18 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row == 0 {
+        if indexPath.section == 0 {
             
         } else {
             self.currentIndex = indexPath
             self.performSegueWithIdentifier("trendPage", sender: nil)
         }
+    }
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.section == 0{
+            return 100
+        }
+        return (self.view.bounds.width/2)
     }
     
     //Collection View Methods
@@ -134,6 +142,8 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
             dispatch_async(dispatch_get_main_queue(), {
                 cell.productImg.kf_setImageWithURL(imageUrl!)
             })
+            cell.themeLabel.text = themeCategory.name
+            //cell.layer.borderWidth = 1
             return cell
         } else {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ProductViewCell", forIndexPath: indexPath) as! ProductCollectionViewCell
@@ -148,12 +158,12 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         self.performSegueWithIdentifier("themePage", sender: nil)
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    /*func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         //if self.themeUICollectionView != nil && themeUICollectionView == collectionView {
         //    return CGSize(width: self.view.frame.size.width, height: self.view.frame.size.width)
         //}
         return CGSizeMake(Constants.MORE_PRODUCTS_DIMENSION, Constants.MORE_PRODUCTS_DIMENSION)
-    }
+    }*/
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
         if identifier == "themePage" {
@@ -168,9 +178,11 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         if segue.identifier == "themePage" {
             let vController = segue.destinationViewController as! ThemeViewController
             vController.themeCategory = self.themeCategories[self.currentIndex!.row]
+            vController.page = "Theme"
         } else if segue.identifier == "trendPage" {
             let vController = segue.destinationViewController as! ThemeViewController
-            vController.themeCategory = self.trendCategories[self.currentIndex!.row - 1]
+            vController.themeCategory = self.trendCategories[self.currentIndex!.row]
+            vController.page = "Trends"
         }
     }
 

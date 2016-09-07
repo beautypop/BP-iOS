@@ -15,6 +15,7 @@ class ThemeViewController: UIViewController{
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var themeCategory: CategoryVM? = nil
+    var page: String = ""
     var headerView: HomeReusableView?
     var productList: [PostVMLite]! = []
     var feedViewAdapter: FeedViewAdapter? = nil
@@ -109,9 +110,10 @@ class ThemeViewController: UIViewController{
             let headerView : HomeReusableView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "HeaderView", forIndexPath: indexPath) as! HomeReusableView
             ImageUtil.displayFeaturedItemImage((themeCategory?.icon)!, imageView: headerView.headerImage)
             headerView.headerLabel.text = themeCategory?.categoryType
-            headerView.descriptionLabel.text = themeCategory?.description
             headerView.descriptionLabel.numberOfLines = 0
+            headerView.descriptionLabel.text = themeCategory?.description
             headerView.descriptionLabel.sizeToFit()
+            headerView.descriptionLabel.preferredMaxLayoutWidth = CGRectGetWidth(headerView.descriptionLabel.frame)
             self.headerView = headerView
             self.uiImageView = headerView.headerImage
         }
@@ -154,8 +156,12 @@ class ThemeViewController: UIViewController{
             dummyLbl.font = UIFont.systemFontOfSize(14, weight: UIFontWeightLight)
             dummyLbl.text = self.themeCategory?.description
             dummyLbl.sizeToFit()
-            
-            return CGSizeMake(self.view.bounds.width, Constants.PROFILE_HEADER_HEIGHT + dummyLbl.bounds.height)
+            if self.page == "Theme"{
+                return CGSizeMake(self.view.bounds.width, self.view.bounds.width + dummyLbl.bounds.height)
+            }else{
+                //return CGSizeMake(self.view.bounds.width, Constants.PROFILE_HEADER_HEIGHT + dummyLbl.bounds.height)
+                return CGSizeMake(self.view.bounds.width, (self.view.bounds.width/2) + dummyLbl.bounds.height + 17)
+            }
             //return CGSizeMake(self.view.frame.width, Constants.PROFILE_HEADER_HEIGHT)
         }
     }
@@ -233,7 +239,12 @@ class ThemeViewController: UIViewController{
         dummyLbl.font = UIFont.systemFontOfSize(14, weight: UIFontWeightLight)
         dummyLbl.text = self.themeCategory?.description
         dummyLbl.sizeToFit()
-        collectionViewTopCellSize = CGSizeMake(self.view.bounds.width, Constants.PROFILE_HEADER_HEIGHT + dummyLbl.bounds.height)
+        if self.page == "Theme"{
+            collectionViewTopCellSize = CGSizeMake(self.view.bounds.width, self.view.bounds.width + dummyLbl.bounds.height)
+        }else{
+            collectionViewTopCellSize = CGSizeMake(self.view.bounds.width, Constants.PROFILE_HEADER_HEIGHT + dummyLbl.bounds.height)
+        }
+        
     }
     
     func setCollectionViewSizesInsets() {

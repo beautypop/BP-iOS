@@ -1151,7 +1151,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lfD-Zy-A6Y" userLabel="ProductCollection">
-                                                            <rect key="frame" x="0.0" y="25" width="414" height="69"/>
+                                                            <rect key="frame" x="0.0" y="20" width="414" height="79"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="3" minimumInteritemSpacing="3" id="2jM-4I-RPt">
                                                                 <size key="itemSize" width="65" height="65"/>
@@ -1161,7 +1161,7 @@
                                                             </collectionViewFlowLayout>
                                                             <cells>
                                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ThemeViewCell" id="afG-vG-lD5" userLabel="moreprods" customClass="ProductCollectionViewCell" customModule="BeautyPop" customModuleProvider="target">
-                                                                    <rect key="frame" x="3" y="2" width="65" height="65"/>
+                                                                    <rect key="frame" x="3" y="7" width="65" height="65"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                         <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
@@ -1192,6 +1192,7 @@
                                                                     </constraints>
                                                                     <connections>
                                                                         <outlet property="productImg" destination="oLJ-HH-Fbx" id="8Uo-aM-Yb0"/>
+                                                                        <outlet property="themeLabel" destination="OCE-nC-dPR" id="1Tr-FW-jcC"/>
                                                                     </connections>
                                                                 </collectionViewCell>
                                                             </cells>
@@ -1202,7 +1203,7 @@
                                                         <constraint firstItem="hZb-rp-WfE" firstAttribute="top" secondItem="boF-RR-paa" secondAttribute="top" id="1fg-7d-od9"/>
                                                         <constraint firstItem="hZb-rp-WfE" firstAttribute="leading" secondItem="boF-RR-paa" secondAttribute="leading" constant="5" id="70a-f9-4Ze"/>
                                                         <constraint firstAttribute="trailing" secondItem="hZb-rp-WfE" secondAttribute="trailing" constant="5" id="AOu-Lz-D8V"/>
-                                                        <constraint firstItem="lfD-Zy-A6Y" firstAttribute="top" secondItem="hZb-rp-WfE" secondAttribute="bottom" constant="5" id="LAI-ZA-0Aj"/>
+                                                        <constraint firstItem="lfD-Zy-A6Y" firstAttribute="top" secondItem="hZb-rp-WfE" secondAttribute="bottom" id="LAI-ZA-0Aj"/>
                                                         <constraint firstAttribute="trailing" secondItem="lfD-Zy-A6Y" secondAttribute="trailing" id="bxc-dF-Cdy"/>
                                                         <constraint firstItem="lfD-Zy-A6Y" firstAttribute="leading" secondItem="boF-RR-paa" secondAttribute="leading" id="wyJ-26-ibt"/>
                                                     </constraints>
@@ -1212,42 +1213,35 @@
                                                 <constraint firstAttribute="trailing" secondItem="boF-RR-paa" secondAttribute="trailing" id="Ewd-WV-zWT"/>
                                                 <constraint firstItem="boF-RR-paa" firstAttribute="top" secondItem="x0g-FL-FWb" secondAttribute="topMargin" id="WP1-Yo-ZQj"/>
                                                 <constraint firstItem="boF-RR-paa" firstAttribute="leading" secondItem="x0g-FL-FWb" secondAttribute="leading" id="ZLy-o5-cb6"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="lfD-Zy-A6Y" secondAttribute="bottom" constant="5" id="bIW-c8-rYw"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="lfD-Zy-A6Y" secondAttribute="bottom" id="bIW-c8-rYw"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="boF-RR-paa" secondAttribute="bottom" constant="5" id="p5o-Qz-XL9"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="categoryCell" rowHeight="216" id="lG5-uO-Faf" userLabel="themeCategories" customClass="TrendsViewCell" customModule="BeautyPop" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="143" width="414" height="216"/>
+                                    <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="categoryCell" rowHeight="308" id="lG5-uO-Faf" userLabel="themeCategories" customClass="TrendsViewCell" customModule="BeautyPop" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="143" width="414" height="308"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lG5-uO-Faf" id="aGo-dE-mmi">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="216"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="308"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uXC-Gl-pM5" userLabel="BaseView">
-                                                    <rect key="frame" x="0.0" y="1" width="414" height="215"/>
+                                                    <rect key="frame" x="0.0" y="1" width="414" height="307"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="D2h-gx-vau" userLabel="categoryImage">
-                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="207"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="100" id="xNO-fG-7Pu"/>
+                                                                <constraint firstAttribute="width" secondItem="D2h-gx-vau" secondAttribute="height" multiplier="2:1" id="vvk-Tr-oaP"/>
+                                                                <constraint firstAttribute="height" constant="200" id="xNO-fG-7Pu"/>
                                                             </constraints>
-                                                        </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trend Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvY-nJ-rFy">
-                                                            <rect key="frame" x="166" y="40" width="82" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="peU-Ew-nm2" userLabel="productIndicator">
-                                                            <rect key="frame" x="20" y="80" width="20" height="20"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="20" id="HZe-t4-hfr"/>
-                                                                <constraint firstAttribute="width" constant="20" id="vGc-Wf-Jnt"/>
-                                                            </constraints>
+                                                            <variation key="default">
+                                                                <mask key="constraints">
+                                                                    <exclude reference="xNO-fG-7Pu"/>
+                                                                </mask>
+                                                            </variation>
                                                         </imageView>
                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NfL-z1-O0H" userLabel="ProductCollection">
-                                                            <rect key="frame" x="0.0" y="100" width="414" height="115"/>
+                                                            <rect key="frame" x="0.0" y="207" width="414" height="100"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="NSW-am-CRp">
                                                                 <size key="itemSize" width="65" height="65"/>
@@ -1257,7 +1251,7 @@
                                                             </collectionViewFlowLayout>
                                                             <cells>
                                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProductViewCell" id="weF-nh-Huv" userLabel="moreprods" customClass="ProductCollectionViewCell" customModule="BeautyPop" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="25" width="65" height="65"/>
+                                                                    <rect key="frame" x="0.0" y="18" width="65" height="65"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                                                         <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
@@ -1284,6 +1278,19 @@
                                                                 </collectionViewCell>
                                                             </cells>
                                                         </collectionView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvY-nJ-rFy">
+                                                            <rect key="frame" x="207" y="104" width="0.0" height="0.0"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="peU-Ew-nm2" userLabel="productIndicator">
+                                                            <rect key="frame" x="20" y="192" width="15" height="15"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="15" id="HZe-t4-hfr"/>
+                                                                <constraint firstAttribute="width" constant="15" id="vGc-Wf-Jnt"/>
+                                                            </constraints>
+                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -1312,6 +1319,7 @@
                                         <connections>
                                             <outlet property="productIndicator" destination="peU-Ew-nm2" id="cqF-dv-V59"/>
                                             <outlet property="trendImageView" destination="D2h-gx-vau" id="AfM-8B-yFZ"/>
+                                            <outlet property="trendTitle" destination="cvY-nJ-rFy" id="Oal-Iv-GRw"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1320,8 +1328,8 @@
                                     <outlet property="delegate" destination="Ttn-RZ-sJ0" id="LXh-uq-UmC"/>
                                 </connections>
                             </tableView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="TcE-uX-5kd" userLabel="ActivityIndicator">
-                                <rect key="frame" x="197" y="358" width="20" height="20"/>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="TcE-uX-5kd" userLabel="ActivityIndicator">
+                                <rect key="frame" x="197" y="366" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1329,7 +1337,9 @@
                             <constraint firstItem="5DU-m0-Szd" firstAttribute="leading" secondItem="jnT-I8-7q3" secondAttribute="leading" id="aPa-A2-sd6"/>
                             <constraint firstAttribute="trailing" secondItem="5DU-m0-Szd" secondAttribute="trailing" id="mml-NL-4lc"/>
                             <constraint firstItem="5DU-m0-Szd" firstAttribute="top" secondItem="IEr-s6-BNn" secondAttribute="bottom" id="n89-Tm-VE2"/>
+                            <constraint firstItem="TcE-uX-5kd" firstAttribute="centerY" secondItem="5DU-m0-Szd" secondAttribute="centerY" id="oAD-ye-nRE"/>
                             <constraint firstItem="8JN-Tq-TEP" firstAttribute="top" secondItem="5DU-m0-Szd" secondAttribute="bottom" id="sTn-ZF-VfC"/>
+                            <constraint firstItem="TcE-uX-5kd" firstAttribute="centerX" secondItem="5DU-m0-Szd" secondAttribute="centerX" id="x4h-3n-kXP"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="bmf-os-Lfp"/>
@@ -3448,7 +3458,7 @@
                         <viewControllerLayoutGuide type="bottom" id="f1g-RB-HqY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Imc-Fj-l3e">
-                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VBu-fx-o8h" userLabel="PostLayoutView">
@@ -3547,10 +3557,10 @@
                                 </variation>
                             </view>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="T6Y-rR-4fQ">
-                                <rect key="frame" x="189" y="318" width="37" height="37"/>
+                                <rect key="frame" x="189" y="350" width="37" height="37"/>
                                 <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="~ No Chats ~" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jkb-J8-90L" userLabel="TipText">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="~ No Chats ~" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jkb-J8-90L" userLabel="TipText">
                                 <rect key="frame" x="10" y="20" width="394" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -6004,11 +6014,11 @@
                         <viewControllerLayoutGuide type="bottom" id="awR-cA-oQ0"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="NnA-yH-70c">
-                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="80Z-ha-zQ3">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="ZIa-wx-WkQ">
                                     <size key="itemSize" width="129" height="169"/>
@@ -6018,7 +6028,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CellType" id="b4q-Mn-BhA" customClass="FeedProductCollectionViewCell" customModule="BeautyPop" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="200" width="130" height="180"/>
+                                        <rect key="frame" x="0.0" y="264" width="130" height="180"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="130" height="180"/>
@@ -6137,7 +6147,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NoItemsToolTip" id="eP3-r2-goB" customClass="TooltipViewCell" customModule="BeautyPop" customModuleProvider="target">
-                                        <rect key="frame" x="130" y="206" width="129" height="169"/>
+                                        <rect key="frame" x="130" y="270" width="129" height="169"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="129" height="169"/>
@@ -6166,7 +6176,7 @@
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="center" reuseIdentifier="HeaderView" id="Ghd-uF-cUT" customClass="ProfileFeedReusableView" customModule="BeautyPop" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="200"/>
+                                    <rect key="frame" x="0.0" y="64" width="414" height="200"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="PKz-uP-gqh" userLabel="HeaderViewCollection">
@@ -6498,7 +6508,7 @@
                                 </connections>
                             </collectionView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="gYo-Xm-QDB">
-                                <rect key="frame" x="189" y="318" width="37" height="37"/>
+                                <rect key="frame" x="189" y="350" width="37" height="37"/>
                                 <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
                         </subviews>
@@ -6794,7 +6804,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Fsn-8h-2Hq"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="vrW-h3-tGO">
-                        <rect key="frame" x="0.0" y="64" width="414" height="623"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="687"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="aUT-qn-yHg">
@@ -6802,7 +6812,7 @@
                                 <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="20" sectionFooterHeight="45" translatesAutoresizingMaskIntoConstraints="NO" id="eIF-np-185">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="513"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="577"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
@@ -7689,7 +7699,7 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rBo-hQ-nNA" userLabel="FooterBar">
-                                <rect key="frame" x="0.0" y="578" width="414" height="45"/>
+                                <rect key="frame" x="0.0" y="642" width="414" height="45"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K21-D8-oCd" userLabel="hrBar2">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
@@ -10259,16 +10269,16 @@
                         <viewControllerLayoutGuide type="bottom" id="fXw-cu-OeR"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Q4b-8d-bqO">
-                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="65" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dAN-en-S3Z" userLabel="CommentTableView">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="583"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="commentTableCell" rowHeight="65" id="UEY-rS-MpJ" customClass="CommentTableViewCell" customModule="BeautyPop" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="65"/>
+                                        <rect key="frame" x="0.0" y="92" width="414" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UEY-rS-MpJ" id="5VX-bg-EHf">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
@@ -10385,17 +10395,17 @@
                                 </connections>
                             </tableView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="zbL-U6-B0u">
-                                <rect key="frame" x="189" y="317" width="37" height="37"/>
+                                <rect key="frame" x="189" y="349" width="37" height="37"/>
                                 <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="~ No Comments ~" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHk-BC-whB" userLabel="tipText">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="~ No Comments ~" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dHk-BC-whB" userLabel="tipText">
                                 <rect key="frame" x="0.0" y="10" width="414" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fzr-3V-Umz">
-                                <rect key="frame" x="0.0" y="583" width="414" height="40"/>
+                                <rect key="frame" x="0.0" y="647" width="414" height="40"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3zJ-XM-2nJ" userLabel="hr">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
@@ -10505,13 +10515,13 @@
                                 <rect key="frame" x="0.0" y="64" width="414" height="623"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="V9p-ep-9Ba">
                                     <size key="itemSize" width="136" height="173"/>
-                                    <size key="headerReferenceSize" width="50" height="135"/>
+                                    <size key="headerReferenceSize" width="50" height="133"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="productsCell" id="dvF-i0-11j" customClass="FeedProductCollectionViewCell" customModule="BeautyPop" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="199" width="136" height="182"/>
+                                        <rect key="frame" x="0.0" y="197" width="136" height="182"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="136" height="182"/>
@@ -10556,7 +10566,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NoItemsToolTip" id="ti0-YD-0Wk" customClass="TooltipViewCell" customModule="BeautyPop" customModuleProvider="target">
-                                        <rect key="frame" x="136" y="204" width="136" height="173"/>
+                                        <rect key="frame" x="136" y="202" width="136" height="173"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="136" height="173"/>
@@ -10585,28 +10595,20 @@
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HeaderView" id="Ru6-OZ-eYK" customClass="HomeReusableView" customModule="BeautyPop">
-                                    <rect key="frame" x="0.0" y="64" width="414" height="135"/>
+                                    <rect key="frame" x="0.0" y="64" width="414" height="133"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vhC-tw-4Ok">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="95"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="87" id="h44-X0-85w"/>
-                                            </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="h44-X0-85w"/>
-                                                </mask>
-                                            </variation>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="94"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sfq-7v-Rr0">
-                                            <rect key="frame" x="5" y="97" width="92" height="18"/>
+                                            <rect key="frame" x="5" y="96" width="92" height="18"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zLd-77-1wv">
-                                            <rect key="frame" x="5" y="117" width="404" height="16"/>
+                                            <rect key="frame" x="5" y="116" width="404" height="16"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -10618,7 +10620,7 @@
                                         <constraint firstItem="vhC-tw-4Ok" firstAttribute="top" secondItem="Ru6-OZ-eYK" secondAttribute="top" id="4S8-Kw-wru"/>
                                         <constraint firstItem="zLd-77-1wv" firstAttribute="leading" secondItem="Ru6-OZ-eYK" secondAttribute="leading" constant="5" id="7tB-ge-it0"/>
                                         <constraint firstItem="zLd-77-1wv" firstAttribute="top" secondItem="Sfq-7v-Rr0" secondAttribute="bottom" constant="2" id="9Xk-jg-a6B"/>
-                                        <constraint firstAttribute="bottom" secondItem="zLd-77-1wv" secondAttribute="bottom" constant="2" id="dbj-nk-Fdk"/>
+                                        <constraint firstAttribute="bottom" secondItem="zLd-77-1wv" secondAttribute="bottom" constant="1" id="PCF-JZ-6Cj"/>
                                         <constraint firstAttribute="trailing" secondItem="zLd-77-1wv" secondAttribute="trailing" constant="5" id="e5G-Pu-BSW"/>
                                         <constraint firstAttribute="trailing" secondItem="vhC-tw-4Ok" secondAttribute="trailing" id="pDp-dy-17d"/>
                                         <constraint firstItem="vhC-tw-4Ok" firstAttribute="leading" secondItem="Ru6-OZ-eYK" secondAttribute="leading" id="wCa-ti-g3z"/>
@@ -10655,7 +10657,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1h3-ak-dR2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-446" y="2609"/>
+            <point key="canvasLocation" x="-452" y="2625"/>
         </scene>
     </scenes>
     <resources>
@@ -10689,11 +10691,11 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="nft-yA-tox"/>
-        <segue reference="jhO-y7-EXF"/>
+        <segue reference="EZe-AO-r74"/>
+        <segue reference="DKS-v1-2ww"/>
         <segue reference="7WP-FM-oSc"/>
         <segue reference="UfZ-y4-j3J"/>
         <segue reference="h7o-0V-p0S"/>
-        <segue reference="DKS-v1-2ww"/>
         <segue reference="h8d-K1-dMp"/>
         <segue reference="f1D-EY-plH"/>
         <segue reference="BGy-Vf-KdP"/>
