@@ -24,8 +24,9 @@ class ThemeViewController: UIViewController{
     var loadedAll = false
     var collectionViewCellSize : CGSize?
     var collectionViewTopCellSize : CGSize?
-    var screenTitle: String = ""
+    //var screenTitle: String = ""
     var uiImageView: UIImageView?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +34,7 @@ class ThemeViewController: UIViewController{
         feedViewAdapter = FeedViewAdapter(collectionView: uiCollectionView)
         feedViewAdapter?.feedViewItemsLayout = FeedViewAdapter.FeedViewItemsLayout.TWO_COLUMNS
         uiCollectionView.collectionViewLayout = feedViewAdapter!.getFeedViewFlowLayout(self)
-        
+        self.uiCollectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         self.uiCollectionView!.alwaysBounceVertical = true
         self.uiCollectionView!.backgroundColor = Color.FEED_BG
         
@@ -50,7 +51,7 @@ class ThemeViewController: UIViewController{
         self.uiCollectionView.addPullToRefresh({ [weak self] in
             self!.reloadTheme()
         })
-        self.navigationItem.title = screenTitle
+        self.navigationItem.title = self.page
     }
     
     func reloadTheme() {
@@ -58,7 +59,7 @@ class ThemeViewController: UIViewController{
         self.uiCollectionView.reloadData()
         self.offset = 0
         loading = true
-        ApiFacade.getCategoryPopularProducts(themeCategory!.id, offset: self.offset, collectionView: uiCollectionView, successCallback: onSuccessPopularProducts, failureCallback: onFailurePopularProducts)
+        ApiFacade.getCategoryPopularProducts(themeCategory!.id, offset: self.offset, index: 0, collectionView: uiCollectionView, successCallback: onSuccessPopularProducts, failureCallback: onFailurePopularProducts)
         //uiCollectionView.reloadData()
     }
     
@@ -153,20 +154,20 @@ class ThemeViewController: UIViewController{
             dummyLbl.numberOfLines = 0
             dummyLbl.adjustsFontSizeToFitWidth = true
             dummyLbl.lineBreakMode = NSLineBreakMode.ByClipping
-            dummyLbl.font = UIFont.systemFontOfSize(14, weight: UIFontWeightLight)
+            dummyLbl.font = UIFont.systemFontOfSize(13, weight: UIFontWeightLight)
             dummyLbl.text = self.themeCategory?.description
             dummyLbl.sizeToFit()
             if self.page == "Theme"{
-                return CGSizeMake(self.view.bounds.width, self.view.bounds.width + dummyLbl.bounds.height)
+                return CGSizeMake(self.view.bounds.width, (self.view.bounds.width/2) + dummyLbl.bounds.height + 20)
             }else{
                 //return CGSizeMake(self.view.bounds.width, Constants.PROFILE_HEADER_HEIGHT + dummyLbl.bounds.height)
-                return CGSizeMake(self.view.bounds.width, (self.view.bounds.width/2) + dummyLbl.bounds.height + 17)
+                return CGSizeMake(self.view.bounds.width, (self.view.bounds.width/2) + dummyLbl.bounds.height + 20)
             }
             //return CGSizeMake(self.view.frame.width, Constants.PROFILE_HEADER_HEIGHT)
         }
     }
     
-    func onSuccessPopularProducts(products: [PostVMLite], uiCollectionView: UICollectionView) {
+    func onSuccessPopularProducts(products: [PostVMLite], uiCollectionView: UICollectionView, index: Int) {
         
         if (!products.isEmpty) {
             if (self.productList.count == 0) {
@@ -205,7 +206,7 @@ class ThemeViewController: UIViewController{
                 if (!self.productList.isEmpty) {
                     offset = Int64(self.productList[self.productList.count-1].offset)
                 }
-                ApiFacade.getCategoryPopularProducts(themeCategory!.id, offset: self.offset, collectionView: uiCollectionView, successCallback: onSuccessPopularProducts, failureCallback: onFailurePopularProducts)
+                ApiFacade.getCategoryPopularProducts(themeCategory!.id, offset: self.offset, index: 0, collectionView: uiCollectionView, successCallback: onSuccessPopularProducts, failureCallback: onFailurePopularProducts)
             }
         }
     }
@@ -236,7 +237,7 @@ class ThemeViewController: UIViewController{
         dummyLbl.numberOfLines = 0
         dummyLbl.adjustsFontSizeToFitWidth = true
         dummyLbl.lineBreakMode = NSLineBreakMode.ByClipping
-        dummyLbl.font = UIFont.systemFontOfSize(14, weight: UIFontWeightLight)
+        dummyLbl.font = UIFont.systemFontOfSize(13, weight: UIFontWeightLight)
         dummyLbl.text = self.themeCategory?.description
         dummyLbl.sizeToFit()
         if self.page == "Theme"{

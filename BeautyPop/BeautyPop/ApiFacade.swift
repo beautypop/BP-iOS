@@ -954,7 +954,7 @@ class ApiFacade {
         ApiController.instance.searchCategories()
     }
     
-    static func getCategoryPopularProducts(id: Int, offset: Int64, collectionView: UICollectionView, successCallback: (([PostVMLite], UICollectionView) -> Void)?, failureCallback: ((String) -> Void)?) {
+    static func getCategoryPopularProducts(id: Int, offset: Int64, index: Int, collectionView: UICollectionView, successCallback: (([PostVMLite], UICollectionView, Int) -> Void)?, failureCallback: ((String) -> Void)?) {
         SwiftEventBus.unregister(self)
         
         SwiftEventBus.onMainThread(self, name: "categoryPopularFeedLoadSuccess") { result in
@@ -964,7 +964,7 @@ class ApiFacade {
             }
             
             if successCallback != nil {
-                successCallback!(result.object as! [PostVMLite], collectionView)
+                successCallback!(result.object as! [PostVMLite], collectionView, index)
             }
         }
         

@@ -14,6 +14,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var soldImage: UIImageView!
     @IBOutlet weak var productImg: UIImageView!
     
+    @IBOutlet weak var themeImage: UIImageView!
     @IBOutlet weak var themeLabel: UILabel!
 //    override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes!) {
 //        super.applyLayoutAttributes(layoutAttributes)
