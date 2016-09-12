@@ -215,17 +215,18 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
             vController.themeCategory = self.themeCategories[indexPath.row]
             vController.page = "Themes"
             self.navigationController?.pushViewController(vController, animated: true)
+        } else {
+            let trendCell = collectionView.superview?.superview?.superview as! TrendsViewCell
+            let _indexPath = self.trendsTableView.indexPathForCell(trendCell)!
+            let productList = trendsProductList![_indexPath.row]
+            
+            let vController =  self.storyboard!.instantiateViewControllerWithIdentifier("ProductViewController") as! ProductViewController
+            vController.feedItem = productList[indexPath.row]
+            vController.hidesBottomBarWhenPushed = true
+            ViewUtil.resetBackButton(self.navigationItem)
+            self.navigationController?.pushViewController(vController, animated: true)
         }
         
-        let trendCell = collectionView.superview?.superview?.superview as! TrendsViewCell
-        let _indexPath = self.trendsTableView.indexPathForCell(trendCell)!
-        let productList = trendsProductList![_indexPath.row]
-        
-        let vController =  self.storyboard!.instantiateViewControllerWithIdentifier("ProductViewController") as! ProductViewController
-        vController.feedItem = productList[indexPath.row]
-        vController.hidesBottomBarWhenPushed = true
-        ViewUtil.resetBackButton(self.navigationItem)
-        self.navigationController?.pushViewController(vController, animated: true)
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
