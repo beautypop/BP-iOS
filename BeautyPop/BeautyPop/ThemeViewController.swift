@@ -158,10 +158,10 @@ class ThemeViewController: UIViewController{
             dummyLbl.text = self.themeCategory?.description
             dummyLbl.sizeToFit()
             if self.page == "Theme"{
-                return CGSizeMake(self.view.bounds.width, (self.view.bounds.width/2) + dummyLbl.bounds.height + 20)
+                return CGSizeMake(self.view.bounds.width, (self.view.bounds.width/2) + dummyLbl.bounds.height + 22)
             }else{
                 //return CGSizeMake(self.view.bounds.width, Constants.PROFILE_HEADER_HEIGHT + dummyLbl.bounds.height)
-                return CGSizeMake(self.view.bounds.width, (self.view.bounds.width/2) + dummyLbl.bounds.height + 20)
+                return CGSizeMake(self.view.bounds.width, (self.view.bounds.width/2) + dummyLbl.bounds.height + 22)
             }
             //return CGSizeMake(self.view.frame.width, Constants.PROFILE_HEADER_HEIGHT)
         }

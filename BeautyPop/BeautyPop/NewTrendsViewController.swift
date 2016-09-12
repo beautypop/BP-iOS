@@ -80,7 +80,7 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = cell.bounds
-        gradientLayer.locations = [0.0, 1.0]
+        gradientLayer.locations = [0.0, 1.0] 
         
         gradientLayer.colors = [
             UIColor(white: 0, alpha: 0.0).CGColor,
@@ -117,7 +117,7 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 130.00
+        return (self.view.bounds.width/3.5) + 50
     }
     
     //Collection View Methods
@@ -179,31 +179,6 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         
         return cell
         
-        /*if (indexPath.row == 0) {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("themeCell", forIndexPath: indexPath) as! ProductCollectionViewCell
-            return cell
-        } else {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ProductViewCell", forIndexPath: indexPath) as! ProductCollectionViewCell
-            //cell.productPrice.text = String(self.productList[indexPath.row].price)
-            ImageUtil.displayOriginalPostImage(self.productList[indexPath.row].images[0], imageView: cell.productImg)
-            return cell
-        }*/
-        
-        /*if self.themeUICollectionView != nil && themeUICollectionView == collectionView {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ThemeViewCell", forIndexPath: indexPath) as! ProductCollectionViewCell
-            let themeCategory = self.themeCategories[indexPath.row]
-            //ImageUtil.displayFeaturedItemImage(themeCategory.icon, imageView: cell.productImg)
-            let imagePath = themeCategory.icon
-            let imageUrl  = NSURL(string: imagePath)
-            dispatch_async(dispatch_get_main_queue(), {
-                cell.productImg.kf_setImageWithURL(imageUrl!)
-            })
-            cell.themeLabel.text = themeCategory.name
-            //cell.layer.borderWidth = 1
-            return cell
-        } else {*/
-        
-        //}
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
@@ -213,7 +188,7 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         if self.themeUICollectionView != nil && themeUICollectionView == collectionView {
             let vController =  self.storyboard!.instantiateViewControllerWithIdentifier("ThemeViewController") as! ThemeViewController
             vController.themeCategory = self.themeCategories[indexPath.row]
-            vController.page = "Themes"
+            vController.page = "Theme"
             self.navigationController?.pushViewController(vController, animated: true)
         } else {
             let trendCell = collectionView.superview?.superview?.superview as! TrendsViewCell
@@ -231,7 +206,7 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         if self.themeUICollectionView != nil && themeUICollectionView == collectionView {
-            return CGSizeMake(Constants.MORE_PRODUCTS_DIMENSION - 10, Constants.MORE_PRODUCTS_DIMENSION - 10)
+            return CGSizeMake((self.view.bounds.width/3.5), (self.view.bounds.width/3.5))
         }
         return CGSizeMake(Constants.MORE_PRODUCTS_DIMENSION, Constants.MORE_PRODUCTS_DIMENSION)
     }
