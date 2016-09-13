@@ -30,7 +30,6 @@ class ThemeViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         feedViewAdapter = FeedViewAdapter(collectionView: uiCollectionView)
         feedViewAdapter?.feedViewItemsLayout = FeedViewAdapter.FeedViewItemsLayout.TWO_COLUMNS
         uiCollectionView.collectionViewLayout = feedViewAdapter!.getFeedViewFlowLayout(self)
@@ -51,7 +50,7 @@ class ThemeViewController: UIViewController{
         self.uiCollectionView.addPullToRefresh({ [weak self] in
             self!.reloadTheme()
         })
-        self.navigationItem.title = self.page
+        self.navigationItem.title = themeCategory?.name
     }
     
     func reloadTheme() {
@@ -117,6 +116,7 @@ class ThemeViewController: UIViewController{
             headerView.descriptionLabel.preferredMaxLayoutWidth = CGRectGetWidth(headerView.descriptionLabel.frame)
             self.headerView = headerView
             self.uiImageView = headerView.headerImage
+            headerView.headerLabel.text = themeCategory?.name
         }
         return self.headerView!
     }

@@ -1216,50 +1216,61 @@
                                             <constraint firstAttribute="trailing" secondItem="uXC-Gl-pM5" secondAttribute="trailing" id="z1C-ti-fTT"/>
                                         </constraints>
                                     </tableViewCell>
-                                    <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="categoryCell" rowHeight="291" id="d7O-g1-LFn" userLabel="themeCategories" customClass="TrendsViewCell" customModule="BeautyPop" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="162" width="414" height="291"/>
+                                    <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="categoryCell" rowHeight="307" id="d7O-g1-LFn" userLabel="themeCategories" customClass="TrendsViewCell" customModule="BeautyPop" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="162" width="414" height="307"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="d7O-g1-LFn" id="vaG-Da-90W">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="291"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="307"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R1v-08-qgt" userLabel="BaseView">
-                                                    <rect key="frame" x="0.0" y="5" width="414" height="283"/>
+                                                    <rect key="frame" x="0.0" y="5" width="414" height="299"/>
                                                     <subviews>
                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="aD0-3L-e9t" userLabel="ProductCollection">
-                                                            <rect key="frame" x="0.0" y="207" width="414" height="76"/>
+                                                            <rect key="frame" x="0.0" y="207" width="414" height="92"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="3" minimumInteritemSpacing="3" id="GbM-wK-Le2">
-                                                                <size key="itemSize" width="65" height="65"/>
+                                                                <size key="itemSize" width="71" height="69"/>
                                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                                <inset key="sectionInset" minX="5" minY="3" maxX="3" maxY="5"/>
+                                                                <inset key="sectionInset" minX="5" minY="3" maxX="3" maxY="0.0"/>
                                                             </collectionViewFlowLayout>
                                                             <cells>
                                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProductViewCell" id="H9D-Gb-31I" userLabel="moreprods" customClass="ProductCollectionViewCell" customModule="BeautyPop">
-                                                                    <rect key="frame" x="5" y="5" width="65" height="65"/>
+                                                                    <rect key="frame" x="5" y="13" width="71" height="69"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="71" height="69"/>
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
-                                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ayB-sY-Bhx">
+                                                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ayB-sY-Bhx">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="65" height="65"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" secondItem="ayB-sY-Bhx" secondAttribute="height" multiplier="1:1" id="Ba6-4Y-09K"/>
                                                                                 </constraints>
                                                                             </imageView>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WCs-DW-vxg">
+                                                                                <rect key="frame" x="33" y="65" width="0.0" height="15"/>
+                                                                                <constraints>
+                                                                                    <constraint firstAttribute="height" constant="15" id="mSG-lb-Efe"/>
+                                                                                </constraints>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                <color key="textColor" red="0.0" green="0.75673762583892612" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
                                                                         </subviews>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                     </view>
                                                                     <constraints>
+                                                                        <constraint firstItem="WCs-DW-vxg" firstAttribute="top" secondItem="ayB-sY-Bhx" secondAttribute="bottom" id="175-4Q-z8f"/>
                                                                         <constraint firstAttribute="trailing" secondItem="ayB-sY-Bhx" secondAttribute="trailing" id="4cw-IM-kJK"/>
                                                                         <constraint firstItem="ayB-sY-Bhx" firstAttribute="top" secondItem="H9D-Gb-31I" secondAttribute="top" id="8bF-Tn-hMY"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="ayB-sY-Bhx" secondAttribute="bottom" id="hz9-qa-lQa"/>
+                                                                        <constraint firstItem="WCs-DW-vxg" firstAttribute="centerX" secondItem="ayB-sY-Bhx" secondAttribute="centerX" id="a9g-eX-CBc"/>
                                                                         <constraint firstItem="ayB-sY-Bhx" firstAttribute="leading" secondItem="H9D-Gb-31I" secondAttribute="leading" id="y9B-yl-vFA"/>
                                                                     </constraints>
                                                                     <connections>
                                                                         <outlet property="productImg" destination="ayB-sY-Bhx" id="Scd-hT-X1v"/>
+                                                                        <outlet property="trendsProductPrize" destination="WCs-DW-vxg" id="XFy-zP-O85"/>
                                                                     </connections>
                                                                 </collectionViewCell>
                                                             </cells>
@@ -1278,8 +1289,8 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" highlighted="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pES-DQ-r3S" userLabel="Trend Header Image">
-                                                            <rect key="frame" x="207" y="104" width="0.0" height="0.0"/>
-                                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                                            <rect key="frame" x="207" y="103" width="0.0" height="0.0"/>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -1330,9 +1341,6 @@
                                     <outlet property="delegate" destination="Ttn-RZ-sJ0" id="LXh-uq-UmC"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TE5-tH-TQt" userLabel="ProdImageButton">
-                                <rect key="frame" x="6" y="443" width="63" height="66"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>

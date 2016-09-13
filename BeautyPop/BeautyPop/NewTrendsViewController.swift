@@ -79,7 +79,7 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         trendProductsCollectionView.dataSource = self
         
         let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = cell.bounds
+        gradientLayer.frame = cell.trendImageView.bounds
         gradientLayer.locations = [0.0, 1.0] 
         
         gradientLayer.colors = [
@@ -94,13 +94,13 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    /*func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.currentIndex = indexPath
-    }
+    }*/
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0{
-            return (self.view.bounds.width/2) + Constants.MORE_PRODUCTS_DIMENSION + 20
+            return (self.view.bounds.width/2) + Constants.MORE_PRODUCTS_DIMENSION + 40
         }
         return (self.view.bounds.width/2) + 120
     }
@@ -176,7 +176,7 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ProductViewCell", forIndexPath: indexPath) as! ProductCollectionViewCell
         //cell.productPrice.text = String(self.productList[indexPath.row].price)
         ImageUtil.displayOriginalPostImage(productList[indexPath.row].images[0], imageView: cell.productImg)
-        
+        cell.trendsProductPrize.text = ViewUtil.formatPrice(productList[indexPath.row].price)
         return cell
         
     }
@@ -208,7 +208,7 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         if self.themeUICollectionView != nil && themeUICollectionView == collectionView {
             return CGSizeMake((self.view.bounds.width/3.5), (self.view.bounds.width/3.5))
         }
-        return CGSizeMake(Constants.MORE_PRODUCTS_DIMENSION, Constants.MORE_PRODUCTS_DIMENSION)
+        return CGSizeMake(Constants.MORE_PRODUCTS_DIMENSION, Constants.MORE_PRODUCTS_DIMENSION + 30)
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
