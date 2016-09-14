@@ -10,5 +10,7 @@ import Foundation
 import UIKit
 
 class CustomHeader: UITableViewCell {
+    @IBOutlet weak var exploreByTheme: UILabel!
 
+    @IBOutlet weak var themeLabelHeight: NSLayoutConstraint!
 }

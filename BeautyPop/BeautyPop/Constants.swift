@@ -30,6 +30,9 @@ struct Constants {
     static let FEED_LOAD_SCROLL_THRESHOLD = CGFloat(500.0)
     static let SHOW_HIDE_BAR_SCROLL_DISTANCE = CGFloat(5.0)
     static let MAIN_BOTTOM_BAR_ALPHA = 0.9
+    static let THEME_BOTTOM_BAR_ALPHA = CGFloat(0.6)
+    static let THEME_TOP_BAR_ALPHA = CGFloat(0.0)
+    
     static let BANNER_REFRESH_TIME_INTERVAL = 4.0
     static let FEED_IDLE_REFRESH_TIME_INTERVAL = 5.0 * 60
     
@@ -70,6 +73,8 @@ struct Constants {
     static let MORE_PRODUCTS_EXTRA_HEIGHT = CGFloat(35)
     static let CONVERSATION_ORDER_STATUS_TAG_WIDTH = CGFloat(60)
     static let CONVERSATION_ORDER_STATUS_TAG_MARGIN = CGFloat(15)
+    static let THEME_DIMENSION = CGFloat(100)
+    static let TREND_PRODUCTS_DIMENSION = CGFloat(100)
     
     static let USER_REVIEW_DEFAULT_HEIGHT = CGFloat(85.0)
     //static let USER_REVIEW_SIDE_MARGIN = CGFloat(30.0)

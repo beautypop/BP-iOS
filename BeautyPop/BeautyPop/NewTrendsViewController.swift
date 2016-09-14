@@ -22,7 +22,7 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
     var productViewController: ProductViewController?
     var vController: ThemeViewController?
     var trendsProductList: [[PostVMLite]]? = [[]]
-    
+    var THEME_HEADER_HEIGHT = CGFloat(0.0)
     override func viewDidAppear(animated: Bool) {
         self.trendsTableView.reloadData()
     }
@@ -33,6 +33,7 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         self.trendsTableView.setNeedsLayout()
         self.trendsTableView.layoutIfNeeded()
         self.trendsTableView.reloadData()
+        THEME_HEADER_HEIGHT = self.view.bounds.width/2
         self.trendsTableView.translatesAutoresizingMaskIntoConstraints = true
         self.trendCategories = CategoryCache.trendCategories
         self.themeCategories = CategoryCache.themeCategories
@@ -83,8 +84,8 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         gradientLayer.locations = [0.0, 1.0] 
         
         gradientLayer.colors = [
-            UIColor(white: 0, alpha: 0.0).CGColor,
-            UIColor(white: 0, alpha: 0.6).CGColor,
+            UIColor(white: 0, alpha: Constants.THEME_TOP_BAR_ALPHA).CGColor,
+            UIColor(white: 0, alpha: Constants.THEME_BOTTOM_BAR_ALPHA).CGColor,
             Color.LIGHT_GRAY.CGColor
         ]
         cell.trendImageView.layer.sublayers = nil
@@ -100,9 +101,9 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0{
-            return (self.view.bounds.width/2) + Constants.MORE_PRODUCTS_DIMENSION + 40
+            return THEME_HEADER_HEIGHT + Constants.TREND_PRODUCTS_DIMENSION + 40
         }
-        return (self.view.bounds.width/2) + 120
+        return THEME_HEADER_HEIGHT + 120
     }
     
     //Header Table View Methods
@@ -113,11 +114,19 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         self.themeUICollectionView.dataSource = self
         self.themeUICollectionView.delegate = self
         self.themeUICollectionView.reloadData()
+        if (themeCategories.count == 0){
+            headerCell.themeLabelHeight.constant = 2
+        }else{
+            headerCell.themeLabelHeight.constant = Constants.THEME_DIMENSION + 30
+        }
         return headerCell
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return (self.view.bounds.width/3.5) + 50
+        if (themeCategories.count == 0){
+                return 22
+        }
+        return Constants.THEME_DIMENSION + 50
     }
     
     //Collection View Methods
@@ -156,8 +165,8 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
             gradientLayer.locations = [0.0, 1.0]
             
             gradientLayer.colors = [
-                UIColor(white: 0, alpha: 0.0).CGColor,
-                UIColor(white: 0, alpha: 0.6).CGColor,
+                UIColor(white: 0, alpha: Constants.THEME_TOP_BAR_ALPHA).CGColor,
+                UIColor(white: 0, alpha: Constants.THEME_BOTTOM_BAR_ALPHA).CGColor,
                 Color.LIGHT_GRAY.CGColor
             ]
             cell.themeImage.layer.sublayers = nil
@@ -206,9 +215,9 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         if self.themeUICollectionView != nil && themeUICollectionView == collectionView {
-            return CGSizeMake((self.view.bounds.width/3.5), (self.view.bounds.width/3.5))
+            return CGSizeMake(Constants.THEME_DIMENSION, Constants.THEME_DIMENSION)
         }
-        return CGSizeMake(Constants.MORE_PRODUCTS_DIMENSION, Constants.MORE_PRODUCTS_DIMENSION + 30)
+        return CGSizeMake(Constants.TREND_PRODUCTS_DIMENSION, Constants.TREND_PRODUCTS_DIMENSION + 30)
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {

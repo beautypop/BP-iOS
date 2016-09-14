@@ -26,7 +26,7 @@ class ThemeViewController: UIViewController{
     var collectionViewTopCellSize : CGSize?
     //var screenTitle: String = ""
     var uiImageView: UIImageView?
-    
+    var THEME_HEADER_HEIGHT = CGFloat(0.0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +36,7 @@ class ThemeViewController: UIViewController{
         self.uiCollectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
         self.uiCollectionView!.alwaysBounceVertical = true
         self.uiCollectionView!.backgroundColor = Color.FEED_BG
-        
+        THEME_HEADER_HEIGHT = self.view.bounds.width / 2
         setCollectionViewSizesInsets()
         //setCollectionViewSizesInsetsForTopView()
         
@@ -158,10 +158,10 @@ class ThemeViewController: UIViewController{
             dummyLbl.text = self.themeCategory?.description
             dummyLbl.sizeToFit()
             if self.page == "Theme"{
-                return CGSizeMake(self.view.bounds.width, (self.view.bounds.width/2) + dummyLbl.bounds.height + 22)
+                return CGSizeMake(self.view.bounds.width, THEME_HEADER_HEIGHT + dummyLbl.bounds.height + 22)
             }else{
                 //return CGSizeMake(self.view.bounds.width, Constants.PROFILE_HEADER_HEIGHT + dummyLbl.bounds.height)
-                return CGSizeMake(self.view.bounds.width, (self.view.bounds.width/2) + dummyLbl.bounds.height + 22)
+                return CGSizeMake(self.view.bounds.width, THEME_HEADER_HEIGHT + dummyLbl.bounds.height + 22)
             }
             //return CGSizeMake(self.view.frame.width, Constants.PROFILE_HEADER_HEIGHT)
         }
