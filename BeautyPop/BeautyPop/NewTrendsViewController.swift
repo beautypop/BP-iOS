@@ -155,7 +155,7 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         if self.themeUICollectionView != nil && themeUICollectionView == collectionView {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("themeCell", forIndexPath: indexPath) as! ProductCollectionViewCell
             let themeCategory = self.themeCategories[indexPath.row]
-            let imagePath = themeCategory.icon
+            let imagePath = themeCategory.thumbnail
             let imageUrl  = NSURL(string: imagePath)
             dispatch_async(dispatch_get_main_queue(), {
                 cell.themeImage.kf_setImageWithURL(imageUrl!)

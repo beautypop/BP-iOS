@@ -12,6 +12,7 @@ import ObjectMapper
 class CategoryVM: BaseArgVM {
     var id: Int = 0
     var icon: String = ""
+    var thumbnail: String = ""
     var name: String = ""
     var description: String = ""
     var categoryType: String = ""
@@ -21,6 +22,7 @@ class CategoryVM: BaseArgVM {
     override func mapping(map: ObjectMapper.Map) {
         id<-map["id"]
         icon<-map["icon"]
+        thumbnail<-map["thumbnail"]
         name<-map["name"]
         description<-map["description"]
         categoryType<-map["categoryType"]

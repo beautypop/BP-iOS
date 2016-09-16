@@ -150,17 +150,17 @@ class ThemeViewController: UIViewController{
         if collectionView.tag == 2 {
             return CGSizeZero
         } else {
-            let dummyLbl = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 0))
+            let dummyLbl = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width + Constants.DEFAULT_SPACING * 4, height: 0))
             dummyLbl.numberOfLines = 0
             dummyLbl.adjustsFontSizeToFitWidth = true
             dummyLbl.lineBreakMode = NSLineBreakMode.ByClipping
-            dummyLbl.font = UIFont.systemFontOfSize(13, weight: UIFontWeightLight)
+            dummyLbl.font = UIFont.systemFontOfSize(15, weight: UIFontWeightLight)
             dummyLbl.text = self.themeCategory?.description
             dummyLbl.sizeToFit()
             if self.page == "Theme"{
-                return CGSizeMake(self.view.bounds.width, THEME_HEADER_HEIGHT + dummyLbl.bounds.height + 22)
+                return CGSizeMake(self.view.bounds.width, THEME_HEADER_HEIGHT + dummyLbl.bounds.height + 50)
             }else{
-                return CGSizeMake(self.view.bounds.width, THEME_HEADER_HEIGHT + dummyLbl.bounds.height + 22)
+                return CGSizeMake(self.view.bounds.width, THEME_HEADER_HEIGHT + dummyLbl.bounds.height + 50)
             }
         }
     }
