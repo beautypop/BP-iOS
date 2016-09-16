@@ -160,10 +160,8 @@ class ThemeViewController: UIViewController{
             if self.page == "Theme"{
                 return CGSizeMake(self.view.bounds.width, THEME_HEADER_HEIGHT + dummyLbl.bounds.height + 22)
             }else{
-                //return CGSizeMake(self.view.bounds.width, Constants.PROFILE_HEADER_HEIGHT + dummyLbl.bounds.height)
                 return CGSizeMake(self.view.bounds.width, THEME_HEADER_HEIGHT + dummyLbl.bounds.height + 22)
             }
-            //return CGSizeMake(self.view.frame.width, Constants.PROFILE_HEADER_HEIGHT)
         }
     }
     
@@ -232,7 +230,6 @@ class ThemeViewController: UIViewController{
     }
     
     func setCollectionViewSizesInsetsForTopView() {
-        //collectionViewTopCellSize = CGSizeMake(self.view.bounds.width, Constants.PROFILE_HEADER_HEIGHT)
         let dummyLbl = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 0))
         dummyLbl.numberOfLines = 0
         dummyLbl.adjustsFontSizeToFitWidth = true

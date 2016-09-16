@@ -211,7 +211,7 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
         if (collectionView.tag == 2){
             return CGSizeZero
         } else {
-            let dummyLbl = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 0))
+            let dummyLbl = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width - Constants.DEFAULT_SPACING * 4, height: 0))
             dummyLbl.numberOfLines = 0
             dummyLbl.adjustsFontSizeToFitWidth = true
             dummyLbl.lineBreakMode = NSLineBreakMode.ByClipping
@@ -276,7 +276,7 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
     }
     
     func setCollectionViewSizesInsetsForTopView() {
-        let dummyLbl = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 0))
+        let dummyLbl = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width - Constants.DEFAULT_SPACING * 4, height: 0))
         dummyLbl.numberOfLines = 0
         dummyLbl.adjustsFontSizeToFitWidth = true
         dummyLbl.lineBreakMode = NSLineBreakMode.ByClipping

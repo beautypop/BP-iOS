@@ -214,7 +214,7 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
         if collectionView.tag == 2 {
             return CGSizeZero
         } else {
-            let dummyLbl = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 0))
+            let dummyLbl = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width - Constants.DEFAULT_SPACING * 4, height: 0))
             dummyLbl.numberOfLines = 0
             dummyLbl.adjustsFontSizeToFitWidth = true
             dummyLbl.lineBreakMode = NSLineBreakMode.ByClipping
@@ -222,7 +222,6 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
             dummyLbl.text = self.userInfo?.aboutMe
             dummyLbl.sizeToFit()
             return CGSizeMake(self.view.bounds.width, Constants.PROFILE_HEADER_HEIGHT + dummyLbl.bounds.height)
-            //return CGSizeMake(self.view.frame.width, Constants.PROFILE_HEADER_HEIGHT)
         }
     }
     
@@ -288,8 +287,7 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
     }
     
     func setCollectionViewSizesInsetsForTopView() {
-        //collectionViewTopCellSize = CGSizeMake(self.view.bounds.width, Constants.PROFILE_HEADER_HEIGHT)
-        let dummyLbl = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 0))
+        let dummyLbl = UILabel(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width - Constants.DEFAULT_SPACING * 4, height: 0))
         dummyLbl.numberOfLines = 0
         dummyLbl.adjustsFontSizeToFitWidth = true
         dummyLbl.lineBreakMode = NSLineBreakMode.ByClipping
