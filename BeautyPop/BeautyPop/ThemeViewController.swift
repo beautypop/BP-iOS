@@ -243,7 +243,7 @@ class ThemeViewController: UIViewController{
         if self.page == "Theme"{
             collectionViewTopCellSize = CGSizeMake(self.view.bounds.width, self.view.bounds.width + dummyLbl.bounds.height)
         }else{
-            collectionViewTopCellSize = CGSizeMake(self.view.bounds.width, Constants.PROFILE_HEADER_HEIGHT + dummyLbl.bounds.height)
+            collectionViewTopCellSize = CGSizeMake(self.view.bounds.width, self.view.bounds.width + dummyLbl.bounds.height)
         }
         
     }
