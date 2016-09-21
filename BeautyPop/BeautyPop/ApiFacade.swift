@@ -955,7 +955,7 @@ class ApiFacade {
     }
     
     static func getCategoryPopularProducts(id: Int, offset: Int64, index: Int, collectionView: UICollectionView, successCallback: (([PostVMLite], UICollectionView, Int) -> Void)?, failureCallback: ((String) -> Void)?) {
-        SwiftEventBus.unregister(self)
+        //SwiftEventBus.unregister(self)
         
         SwiftEventBus.onMainThread(self, name: "categoryPopularFeedLoadSuccess") { result in
             if ViewUtil.isEmptyResult(result) {
