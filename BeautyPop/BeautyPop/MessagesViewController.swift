@@ -92,7 +92,7 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(
             target: self,
-            action: "dismissKeyboard")
+            action: #selector(MessagesViewController.dismissKeyboard))
         self.messageCointainerScroll.addGestureRecognizer(tap)
         
         ViewUtil.showActivityLoading(self.activityLoading)
@@ -111,7 +111,7 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
         
         let userProfileBtn: UIButton = UIButton()
         userProfileBtn.setImage(UIImage(named: "w_profile"), forState: UIControlState.Normal)
-        userProfileBtn.addTarget(self, action: "onClickProfileBtn:", forControlEvents: UIControlEvents.TouchUpInside)
+        userProfileBtn.addTarget(self, action: #selector(MessagesViewController.onClickProfileBtn(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         userProfileBtn.frame = CGRectMake(0, 0, 30, 30)
         let userProfileBarBtn = UIBarButtonItem(customView: userProfileBtn)
         self.navigationItem.rightBarButtonItems = [userProfileBarBtn]
@@ -126,9 +126,9 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
     }
         
     func addKeyboardNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name:UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MessagesViewController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil)
         //NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardDidShow:", name: UIKeyboardDidShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name:UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MessagesViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil)
     }
         
     // MARK:- Notification
@@ -390,7 +390,7 @@ class MessagesViewController: UIViewController, PhotoSliderDelegate, UIScrollVie
     func addMoreMessageLoaderLayout() {
         let loaderLayout: UIButton = UIButton(frame: CGRectMake(0, 0, self.view.frame.width, 50))
         loaderLayout.setTitle("LOAD EARLIER MESSAGES", forState: .Normal)
-        loaderLayout.addTarget(self, action: "loadMoreMessages:", forControlEvents: UIControlEvents.TouchUpInside)
+        loaderLayout.addTarget(self, action: #selector(MessagesViewController.loadMoreMessages(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         loaderLayout.layer.backgroundColor = Color.LIGHT_GRAY.CGColor
         let titleFont : UIFont = UIFont.systemFontOfSize(15.0)
         loaderLayout.titleLabel?.font = titleFont

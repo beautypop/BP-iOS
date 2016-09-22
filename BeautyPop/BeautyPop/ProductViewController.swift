@@ -569,7 +569,7 @@ class ProductViewController: ProductNavigationController, UICollectionViewDelega
             editProductImg.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left
             editProductImg.titleLabel!.lineBreakMode = NSLineBreakMode.ByWordWrapping
             editProductImg.frame = CGRectMake(0, 0, 35, 35)
-            editProductImg.addTarget(self, action: "onClickEditBtn:", forControlEvents: UIControlEvents.TouchUpInside)
+            editProductImg.addTarget(self, action: #selector(ProductViewController.onClickEditBtn(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             let editProductBarBtn = UIBarButtonItem(customView: editProductImg)
             self.navigationItem.rightBarButtonItems?.insert(editProductBarBtn, atIndex: 0)
         }

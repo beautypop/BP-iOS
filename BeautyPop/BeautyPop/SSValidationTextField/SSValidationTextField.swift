@@ -54,7 +54,7 @@ class SSValidationTextField: UITextField {
     }
 
     private func setup() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "textFieldEdited:", name: UITextFieldTextDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SSValidationTextField.textFieldEdited(_:)), name: UITextFieldTextDidChangeNotification, object: nil)
     }
 
     deinit {
@@ -77,7 +77,7 @@ class SSValidationTextField: UITextField {
             delayTimer?.invalidate()
             delayTimer = nil
         }
-        delayTimer = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(delaytime), target: self, selector: "checkValidity", userInfo: nil, repeats: false)
+        delayTimer = NSTimer.scheduledTimerWithTimeInterval(NSTimeInterval(delaytime), target: self, selector: #selector(SSValidationTextField.checkValidity), userInfo: nil, repeats: false)
     }
 /**
     When called manually, performs the validity check, sets the appropriate label and returns bool whether validation was successful or not.

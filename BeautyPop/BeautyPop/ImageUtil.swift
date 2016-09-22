@@ -212,7 +212,7 @@ class ImageUtil {
         UIGraphicsBeginImageContext(rect.size);
         image.drawInRect(rect)
         let img = UIGraphicsGetImageFromCurrentImageContext();
-        let imageData = UIImageJPEGRepresentation(img, compressionQuality);
+        let imageData = UIImageJPEGRepresentation(img!, compressionQuality);
         UIGraphicsEndImageContext();
         return imageData!;
     }

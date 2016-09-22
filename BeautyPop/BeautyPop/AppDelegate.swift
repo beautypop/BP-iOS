@@ -43,11 +43,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //Even though the Facebook SDK can make this determinitaion on its own,
         //let's make sure that the facebook SDK only sees urls intended for it,
         //facebook has enough info already!
-        let isFacebookURL = url.scheme.hasPrefix("fb\(FBSDKSettings.appID())") && url.host == "authorize"
+        let isFacebookURL = url.scheme!.hasPrefix("fb\(FBSDKSettings.appID())") && url.host == "authorize"
         if isFacebookURL {
             return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
         } else {
-            let isDeepLinkUrl = url.scheme.hasPrefix(Constants.DEEP_LINK_URL_SCHEME)
+            let isDeepLinkUrl = url.scheme!.hasPrefix(Constants.DEEP_LINK_URL_SCHEME)
             if isDeepLinkUrl {
                 let pathVariables = url.pathComponents
                 if pathVariables?.count == 2 { //assuming the url is of Seller

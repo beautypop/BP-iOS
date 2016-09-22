@@ -115,8 +115,8 @@ public class ALCameraViewController: UIViewController {
         cameraView.frame = view.bounds
         
         rotate()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "rotate", name: UIDeviceOrientationDidChangeNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "volumeChanged", name: "AVSystemController_SystemVolumeDidChangeNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ALCameraViewController.rotate), name: UIDeviceOrientationDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ALCameraViewController.volumeChanged), name: "AVSystemController_SystemVolumeDidChangeNotification", object: nil)
     }
     
     public override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
@@ -181,7 +181,7 @@ public class ALCameraViewController: UIViewController {
         view.addSubview(permissionsView)
         view.addSubview(closeButton)
         
-        closeButton.addTarget(self, action: "close", forControlEvents: UIControlEvents.TouchUpInside)
+        closeButton.addTarget(self, action: #selector(ALCameraViewController.close), forControlEvents: UIControlEvents.TouchUpInside)
         closeButton.setImage(UIImage(named: "retakeButton", inBundle: CameraGlobals.shared.bundle, compatibleWithTraitCollection: nil), forState: UIControlState.Normal)
         closeButton.sizeToFit()
         
@@ -202,11 +202,11 @@ public class ALCameraViewController: UIViewController {
         view.addSubview(swapButton)
         view.addSubview(flashButton)
         
-        cameraButton.addTarget(self, action: "capturePhoto", forControlEvents: .TouchUpInside)
-        swapButton.addTarget(self, action: "swapCamera", forControlEvents: .TouchUpInside)
-        libraryButton.addTarget(self, action: "showLibrary", forControlEvents: .TouchUpInside)
-        closeButton.addTarget(self, action: "close", forControlEvents: .TouchUpInside)
-        flashButton.addTarget(self, action: "toggleFlash", forControlEvents: .TouchUpInside)
+        cameraButton.addTarget(self, action: #selector(ALCameraViewController.capturePhoto), forControlEvents: .TouchUpInside)
+        swapButton.addTarget(self, action: #selector(ALCameraViewController.swapCamera), forControlEvents: .TouchUpInside)
+        libraryButton.addTarget(self, action: #selector(ALCameraViewController.showLibrary), forControlEvents: .TouchUpInside)
+        closeButton.addTarget(self, action: #selector(ALCameraViewController.close), forControlEvents: .TouchUpInside)
+        flashButton.addTarget(self, action: #selector(ALCameraViewController.toggleFlash), forControlEvents: .TouchUpInside)
         layoutCamera()
     }
     

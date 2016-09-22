@@ -88,7 +88,7 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
         self.prodDescription.isApplyTextFieldStyle = true
         self.prodDescription.layer.borderWidth = 0
         self.imagePicker.delegate = self
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(NewProductViewController.dismissKeyboard))
         self.view.addGestureRecognizer(tap)
         
         self.sellingtext.delegate = self
@@ -96,7 +96,7 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
         
         self.view.backgroundColor = Color.FEED_BG
         
-        ViewUtil.setCustomBackButton(self, action: "onBackPressed:")
+        ViewUtil.setCustomBackButton(self, action: #selector(NewProductViewController.onBackPressed(_:)))
         
         SwiftEventBus.unregister(self)
         
@@ -353,7 +353,7 @@ class NewProductViewController: UIViewController, UITextFieldDelegate, UITextVie
         cell.imageHolder.tag = indexPath.row
         cell.imageHolder.layer.borderWidth = 1.0
         cell.imageHolder.layer.borderColor = Color.LIGHT_GRAY_2.CGColor
-        cell.imageHolder.addTarget(self, action:"choosePhotoOption:" , forControlEvents: UIControlEvents.TouchUpInside)
+        cell.imageHolder.addTarget(self, action:#selector(NewProductViewController.choosePhotoOption(_:)) , forControlEvents: UIControlEvents.TouchUpInside)
         return cell
     }
     

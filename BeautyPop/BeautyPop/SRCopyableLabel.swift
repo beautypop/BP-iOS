@@ -22,7 +22,7 @@ class SRCopyableLabel: UILabel {
     
     func sharedInit() {
         userInteractionEnabled = true
-        addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: "copy:"))
+        addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(UIResponderStandardEditActions.copy(_:))))
     }
     
     func showMenu(sender: AnyObject?) {
@@ -47,7 +47,7 @@ class SRCopyableLabel: UILabel {
     }
     
     override func canPerformAction(action: Selector, withSender sender: AnyObject?) -> Bool {
-        if action == "copy:" {
+        if action == #selector(UIResponderStandardEditActions.copy(_:)) {
             return true
         }
         return false

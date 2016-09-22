@@ -98,7 +98,7 @@ class ChatBubble: UIView {
                 self.addSubview(imageViewChat!)
             }
             self.imageId = data.imageId
-            let singleTap = UITapGestureRecognizer(target: self, action: "viewFullScreenImageByUrl:")
+            let singleTap = UITapGestureRecognizer(target: self, action: #selector(ChatBubble.viewFullScreenImageByUrl(_:)))
             singleTap.numberOfTapsRequired = 1 // Initialized to 1 by default
             singleTap.numberOfTouchesRequired = 1 // Initialized to 1 by default
             imageViewChat!.addGestureRecognizer(singleTap)
@@ -113,7 +113,7 @@ class ChatBubble: UIView {
             imageViewChat?.layer.masksToBounds = true
             self.addSubview(imageViewChat!)
             self.image = data.image!
-            let singleTap = UITapGestureRecognizer(target: self, action: "viewFullScreenImage:")
+            let singleTap = UITapGestureRecognizer(target: self, action: #selector(ChatBubble.viewFullScreenImage(_:)))
             singleTap.numberOfTapsRequired = 1 // Initialized to 1 by default
             singleTap.numberOfTouchesRequired = 1 // Initialized to 1 by default
             imageViewChat!.addGestureRecognizer(singleTap)

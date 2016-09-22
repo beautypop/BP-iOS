@@ -56,10 +56,10 @@ class EditProfileViewController: UIViewController, UITextFieldDelegate, UITextVi
             ViewUtil.makeToast("Error updating user info", view: self.view)
         }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(EditProfileViewController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(EditProfileViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil)
         
-        var uiGesture = UITapGestureRecognizer(target: self, action: "scrollViewTouched")
+        let uiGesture = UITapGestureRecognizer(target: self, action: #selector(EditProfileViewController.scrollViewTouched))
         self.editScrollView.addGestureRecognizer(uiGesture)
         
         self.editScrollView.backgroundColor = Color.FEED_BG

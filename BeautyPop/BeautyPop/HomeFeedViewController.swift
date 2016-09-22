@@ -400,7 +400,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
             }
             
             self.bannerTimer = NSTimer.scheduledTimerWithTimeInterval(
-                Constants.BANNER_REFRESH_TIME_INTERVAL, target: self, selector: "scrollHomeBanner", userInfo: nil, repeats: true)
+                Constants.BANNER_REFRESH_TIME_INTERVAL, target: self, selector: #selector(HomeFeedViewController.scrollHomeBanner), userInfo: nil, repeats: true)
             
             self.headerView?.homeBannerHeight.constant = self.view.bounds.width / Constants.HOME_BANNER_WIDTH_HEIGHT_RATIO
         }
