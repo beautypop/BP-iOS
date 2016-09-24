@@ -54,7 +54,7 @@ class FollowersFollowingViewController: UICollectionViewController {
         self.collectionView!.alwaysBounceVertical = true
         self.collectionView!.backgroundColor = Color.FEED_BG
         
-        self.collectionView!.addPullToRefresh({ [weak self] in
+        self.collectionView!.addPullRefreshHandler({ [weak self] in
             self?.reloadList()
         })
     }

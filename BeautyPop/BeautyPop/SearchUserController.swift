@@ -41,7 +41,7 @@ class SearchUserController: UIViewController {
         ViewUtil.showActivityLoading(self.activityLoading)
 //API Call
         ApiFacade.searchUser(searchText,offset: self.offset,successCallback: onSuccessGetUser, failureCallback: onFailure)
-        self.uiCollectionView.addPullToRefresh({ [weak self] in
+        self.uiCollectionView.addPullRefreshHandler({ [weak self] in
             self?.reloadSellers()
         })
     }

@@ -45,7 +45,7 @@ class SearchProductsController: UIViewController {
         self.uiCollectionView.collectionViewLayout = flowLayout
         self.uiCollectionView!.alwaysBounceVertical = true
         self.uiCollectionView!.backgroundColor = Color.FEED_BG
-        self.uiCollectionView.addPullToRefresh({ [weak self] in
+        self.uiCollectionView.addPullRefreshHandler({ [weak self] in
             self?.reload()
         })
         //API Call

@@ -128,7 +128,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
         self.uiCollectionView!.alwaysBounceVertical = true
         self.uiCollectionView!.backgroundColor = Color.FEED_BG
         
-        self.uiCollectionView.addPullToRefresh({ [weak self] in
+        self.uiCollectionView.addPullRefreshHandler({ [weak self] in
             ApiFacade.getHomeSliderFeaturedItems(self!.onSuccessGetHomeSliderFeaturedItems, failureCallback: self!.onFailureGetHomeSliderFeaturedItems)
             CategoryCache.refresh(self!.onSuccessGetCategories, failureCallback: nil)
             self!.feedLoader?.reloadFeedItems()

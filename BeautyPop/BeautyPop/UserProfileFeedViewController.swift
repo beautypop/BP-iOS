@@ -91,7 +91,7 @@ class UserProfileFeedViewController: BaseProfileFeedViewController, UINavigation
         self.uiCollectionView!.alwaysBounceVertical = true
         self.uiCollectionView!.backgroundColor = Color.FEED_BG
         
-        self.uiCollectionView.addPullToRefresh({ [weak self] in
+        self.uiCollectionView.addPullRefreshHandler({ [weak self] in
             self!.feedLoader?.reloadFeedItems((self?.userInfo?.id)!)
         })
     }
