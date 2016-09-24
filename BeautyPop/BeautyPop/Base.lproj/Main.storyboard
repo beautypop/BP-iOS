@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="pGK-V9-vzm">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="pGK-V9-vzm">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -1128,7 +1128,7 @@
                                 <color key="separatorColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="themeCell" rowHeight="125" id="lG5-uO-Faf" userLabel="themeHeader" customClass="CustomHeader" customModule="BeautyPop" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="49.5" width="414" height="125"/>
+                                        <rect key="frame" x="0.0" y="50" width="414" height="125"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lG5-uO-Faf" id="aGo-dE-mmi">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="125"/>
@@ -1233,7 +1233,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="categoryCell" rowHeight="328" id="d7O-g1-LFn" userLabel="themeCategories" customClass="TrendsViewCell" customModule="BeautyPop" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="174.5" width="414" height="328"/>
+                                        <rect key="frame" x="0.0" y="175" width="414" height="328"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="d7O-g1-LFn" id="vaG-Da-90W">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="328"/>
@@ -1249,7 +1249,7 @@
                                                                 <size key="itemSize" width="85" height="85"/>
                                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                                <inset key="sectionInset" minX="0.0" minY="5" maxX="0.0" maxY="5"/>
                                                             </collectionViewFlowLayout>
                                                             <cells>
                                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProductViewCell" id="H9D-Gb-31I" userLabel="moreprods" customClass="ProductCollectionViewCell" customModule="BeautyPop">
@@ -1328,9 +1328,10 @@
                                                     <constraints>
                                                         <constraint firstItem="Ora-FK-aKR" firstAttribute="leading" secondItem="R1v-08-qgt" secondAttribute="leading" id="1va-aU-M1u"/>
                                                         <constraint firstItem="aD0-3L-e9t" firstAttribute="top" secondItem="VQ7-NF-4Jg" secondAttribute="bottom" id="1ye-f7-kPD"/>
+                                                        <constraint firstItem="umG-6F-0ql" firstAttribute="bottom" secondItem="VQ7-NF-4Jg" secondAttribute="bottom" id="4dT-tN-ghV"/>
+                                                        <constraint firstItem="Ora-FK-aKR" firstAttribute="bottom" secondItem="VQ7-NF-4Jg" secondAttribute="bottom" id="Cdu-Zf-pNn"/>
                                                         <constraint firstItem="Ora-FK-aKR" firstAttribute="top" secondItem="R1v-08-qgt" secondAttribute="top" id="G0Q-VQ-tfz"/>
                                                         <constraint firstItem="umG-6F-0ql" firstAttribute="leading" secondItem="R1v-08-qgt" secondAttribute="leading" constant="20" id="Hf5-RL-itF"/>
-                                                        <constraint firstItem="aD0-3L-e9t" firstAttribute="top" secondItem="umG-6F-0ql" secondAttribute="bottom" id="NkN-vr-SFc"/>
                                                         <constraint firstAttribute="bottom" secondItem="aD0-3L-e9t" secondAttribute="bottom" id="WJq-JH-ubw"/>
                                                         <constraint firstItem="VQ7-NF-4Jg" firstAttribute="top" secondItem="R1v-08-qgt" secondAttribute="top" id="c5y-5j-SCg"/>
                                                         <constraint firstItem="VQ7-NF-4Jg" firstAttribute="leading" secondItem="R1v-08-qgt" secondAttribute="leading" id="fR5-8y-zKt"/>
@@ -1338,7 +1339,6 @@
                                                         <constraint firstItem="aD0-3L-e9t" firstAttribute="leading" secondItem="R1v-08-qgt" secondAttribute="leading" id="hEY-hf-fXb"/>
                                                         <constraint firstItem="pES-DQ-r3S" firstAttribute="centerX" secondItem="VQ7-NF-4Jg" secondAttribute="centerX" id="jdI-0p-SXL"/>
                                                         <constraint firstAttribute="trailing" secondItem="VQ7-NF-4Jg" secondAttribute="trailing" id="lgr-9b-XmZ"/>
-                                                        <constraint firstItem="Ora-FK-aKR" firstAttribute="height" secondItem="VQ7-NF-4Jg" secondAttribute="height" id="ltn-NA-esq"/>
                                                         <constraint firstAttribute="trailing" secondItem="Ora-FK-aKR" secondAttribute="trailing" id="qpP-3T-QVg"/>
                                                         <constraint firstAttribute="trailing" secondItem="aD0-3L-e9t" secondAttribute="trailing" id="spX-Tk-MZx"/>
                                                     </constraints>
@@ -1744,7 +1744,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CellType1" id="3pE-Xk-YHP" customClass="FeedProductCollectionViewCell" customModule="BeautyPop" customModuleProvider="target">
-                                        <rect key="frame" x="5" y="169.5" width="130" height="160"/>
+                                        <rect key="frame" x="5" y="170" width="130" height="160"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="130" height="160"/>
@@ -2044,7 +2044,7 @@
                                                         <action selector="onClickPopulated:" destination="sRG-sa-2YS" eventType="touchUpInside" id="I7c-MJ-aCl"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P9b-r6-a2f" userLabel="Newest">
+                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P9b-r6-a2f" userLabel="Newest">
                                                     <rect key="frame" x="99" y="0.0" width="99" height="35"/>
                                                     <color key="backgroundColor" red="0.98823529409999999" green="0.30588235289999999" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -2066,7 +2066,7 @@
                                                         <action selector="onClickLowHigh:" destination="sRG-sa-2YS" eventType="touchUpInside" id="ZSQ-Bw-LOD"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xpb-nF-8vR" userLabel="HighToLow">
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xpb-nF-8vR" userLabel="HighToLow">
                                                     <rect key="frame" x="296" y="0.0" width="99" height="35"/>
                                                     <color key="backgroundColor" red="0.98823529409999999" green="0.30588235289999999" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
@@ -2213,7 +2213,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="108"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wLY-pV-Qq9" id="hvt-8Y-TlD">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="107.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="107"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n8E-zY-KWt" userLabel="PostImage">
@@ -2367,7 +2367,7 @@
                                                         </mask>
                                                     </variation>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ixa-aR-b6e" userLabel="Desc">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ixa-aR-b6e" userLabel="Desc">
                                                     <rect key="frame" x="75" y="35" width="276" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Ixa-aR-b6e" secondAttribute="height" multiplier="270:20" id="JsU-Gm-UYF"/>
@@ -2938,13 +2938,13 @@
                                     <action selector="fbLoginClick:" destination="ph2-TD-09V" eventType="touchUpInside" id="n0P-we-1cy"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dash_line" translatesAutoresizingMaskIntoConstraints="NO" id="6DK-oo-i43">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="dash_line" translatesAutoresizingMaskIntoConstraints="NO" id="6DK-oo-i43">
                                 <rect key="frame" x="35" y="252" width="344" height="3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="3" id="T5H-nD-uiP"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BeautyPop will not post to Facebook without your permission" lineBreakMode="wordWrap" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbb-sT-3lB">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="BeautyPop will not post to Facebook without your permission" lineBreakMode="wordWrap" numberOfLines="0" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bbb-sT-3lB">
                                 <rect key="frame" x="83" y="199" width="249" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="i67-Tm-ten"/>
@@ -3607,7 +3607,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="108"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uvH-lC-gSY" id="Qad-3T-tBU">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="107.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="107"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ziq-Ew-eFt" userLabel="PostImage">
@@ -4108,7 +4108,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NoItemsToolTip" id="PGR-GK-cnB" customClass="TooltipViewCell" customModule="BeautyPop" customModuleProvider="target">
-                                        <rect key="frame" x="130" y="5.5" width="129" height="169"/>
+                                        <rect key="frame" x="130" y="6" width="129" height="169"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="129" height="169"/>
@@ -4786,7 +4786,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CellType1" id="VyU-PQ-uMs" customClass="FeedProductCollectionViewCell" customModule="BeautyPop" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="332.5" width="130" height="160"/>
+                                        <rect key="frame" x="0.0" y="333" width="130" height="160"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="130" height="160"/>
@@ -6075,7 +6075,7 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9BP-Lt-9df">
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9BP-Lt-9df">
                                                     <rect key="frame" x="90" y="155" width="20" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="i1R-Qz-pHx"/>
@@ -6089,7 +6089,7 @@
                                                         <action selector="onLikeBtnClick:" destination="aa6-dY-vf5" eventType="touchUpInside" id="z1y-wK-E9q"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CZA-hO-dMW" userLabel="Like Count">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CZA-hO-dMW" userLabel="Like Count">
                                                     <rect key="frame" x="112" y="155" width="10" height="20"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -6179,7 +6179,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NoItemsToolTip" id="eP3-r2-goB" customClass="TooltipViewCell" customModule="BeautyPop" customModuleProvider="target">
-                                        <rect key="frame" x="130" y="205.5" width="129" height="169"/>
+                                        <rect key="frame" x="130" y="206" width="129" height="169"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="129" height="169"/>
@@ -7794,7 +7794,7 @@
                                         <rect key="frame" x="55" y="0.0" width="359" height="45"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="COA-Pb-bQ8">
-                                                <rect key="frame" x="0.0" y="0.0" width="179.5" height="45"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="180" height="45"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <state key="normal" title="View Chats"/>
@@ -7802,8 +7802,8 @@
                                                     <segue destination="K3t-LR-EuE" kind="show" identifier="viewChats" id="Ds4-XX-fSh"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N1m-Yk-Qrt">
-                                                <rect key="frame" x="179" y="0.0" width="179.5" height="45"/>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N1m-Yk-Qrt">
+                                                <rect key="frame" x="179" y="0.0" width="180" height="45"/>
                                                 <color key="backgroundColor" red="0.031372549020000001" green="0.71764705880000002" blue="0.1058823529" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <state key="normal" title="Mark as Sold"/>
@@ -7827,8 +7827,8 @@
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1IZ-SP-2w1" userLabel="buyerButtonsLayout">
                                         <rect key="frame" x="55" y="0.0" width="359" height="45"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XSw-fb-wAp" userLabel="BuyNow Btn">
-                                                <rect key="frame" x="179" y="0.0" width="179.5" height="45"/>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XSw-fb-wAp" userLabel="BuyNow Btn">
+                                                <rect key="frame" x="179" y="0.0" width="180" height="45"/>
                                                 <color key="backgroundColor" red="0.98823529409999999" green="0.30588235289999999" blue="0.3921568627" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <state key="normal" title="Make Offer">
@@ -7839,7 +7839,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uJg-Os-pQA" userLabel="Chat Btn">
-                                                <rect key="frame" x="0.0" y="0.0" width="179.5" height="45"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="180" height="45"/>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <state key="normal" title="Chat">
@@ -9325,7 +9325,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NoItemsToolTip" id="8DS-n6-IBp" customClass="TooltipViewCell" customModule="BeautyPop" customModuleProvider="target">
-                                        <rect key="frame" x="130" y="205.5" width="129" height="169"/>
+                                        <rect key="frame" x="130" y="206" width="129" height="169"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="129" height="169"/>
@@ -10235,10 +10235,10 @@
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotificationCell" id="LsA-aW-OBG" customClass="NotificationViewCell" customModule="BeautyPop" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="49.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="50" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="LsA-aW-OBG" id="LGF-yf-G1q">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xkO-9t-Kik">
@@ -10313,7 +10313,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UEY-rS-MpJ" id="5VX-bg-EHf">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="64.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ctj-SU-CAd" userLabel="PostImgBtn">
@@ -10598,7 +10598,7 @@
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NoItemsToolTip" id="ti0-YD-0Wk" customClass="TooltipViewCell" customModule="BeautyPop" customModuleProvider="target">
-                                        <rect key="frame" x="136" y="268.5" width="136" height="173"/>
+                                        <rect key="frame" x="136" y="269" width="136" height="173"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="136" height="173"/>
