@@ -35,7 +35,7 @@ func NSDateTimeAgoLocalizedStrings(key: String) -> String {
     }
     
     let path = NSURL(fileURLWithPath: resourcePath!).URLByAppendingPathComponent("NSDateTimeAgo.bundle")
-    guard let bundle = NSBundle(URL: path!) else {
+    guard let bundle = NSBundle(URL: path) else {
         return ""
     }
     

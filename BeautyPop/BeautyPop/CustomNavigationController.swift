@@ -82,17 +82,17 @@ class CustomNavigationController: ScrollingNavigationViewController, ScrollingNa
         
         let sellBtn: UIButton = UIButton()
         sellBtn.setImage(UIImage(named: "btn_sell"), forState: UIControlState.Normal)
-        sellBtn.addTarget(self, action: #selector(CustomNavigationController.onClickSellBtn(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        sellBtn.addTarget(self, action: "onClickSellBtn:", forControlEvents: UIControlEvents.TouchUpInside)
         sellBtn.frame = CGRectMake(0, 0, 35, 35)
         
         let searchBtn: UIButton = UIButton()
         searchBtn.setImage(UIImage(named: "newSearch1"), forState: UIControlState.Normal)
-        searchBtn.addTarget(self, action: #selector(CustomNavigationController.onClickSearhBtn(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        searchBtn.addTarget(self, action: "onClickSearhBtn:", forControlEvents: UIControlEvents.TouchUpInside)
         searchBtn.frame = CGRectMake(0, 0, 35, 35)  
         
         let chatBtn: UIButton = UIButton()
         chatBtn.setImage(UIImage(named: "ic_chat"), forState: UIControlState.Normal)
-        chatBtn.addTarget(self, action: #selector(CustomNavigationController.onClickChatBtn(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        chatBtn.addTarget(self, action: "onClickChatBtn:", forControlEvents: UIControlEvents.TouchUpInside)
         chatBtn.frame = CGRectMake(0, 0, 35, 35)
         
         //let gameBadgeBtn: UIButton = UIButton()

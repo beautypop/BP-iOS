@@ -68,7 +68,7 @@ class ProductChatViewController: UIViewController {
         loading = true
         self.tipText.hidden = true
         self.refreshControl.attributedTitle = NSAttributedString(string: "")
-        self.refreshControl.addTarget(self, action: #selector(ProductChatViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.conversationTableView.addSubview(refreshControl)
         
         self.conversationTableView.separatorColor = Color.LIGHT_GRAY

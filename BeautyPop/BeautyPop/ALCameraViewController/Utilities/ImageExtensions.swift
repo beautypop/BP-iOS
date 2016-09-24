@@ -18,11 +18,11 @@ extension UIImage {
         let drawPoint = CGPointZero
         UIGraphicsBeginImageContext(frame.size)
         let context = UIGraphicsGetCurrentContext()
-        CGContextTranslateCTM(context!, -frame.origin.x, -frame.origin.y)
+        CGContextTranslateCTM(context, -frame.origin.x, -frame.origin.y)
         drawAtPoint(drawPoint)
         let croppedImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext();
-        return croppedImage!
+        return croppedImage
     }
     
     func fixFrontCameraOrientation() -> UIImage {

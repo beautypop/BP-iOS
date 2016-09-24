@@ -54,7 +54,7 @@ class MoreCommentsViewController: UIViewController, UIScrollViewDelegate, UIText
         self.loading = true
         
         self.refreshControl.attributedTitle = NSAttributedString(string: "")
-        self.refreshControl.addTarget(self, action: #selector(MoreCommentsViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         
         self.commentsTableView.addSubview(refreshControl)
         self.commentsTableView.separatorColor = Color.LIGHT_GRAY
@@ -67,7 +67,7 @@ class MoreCommentsViewController: UIViewController, UIScrollViewDelegate, UIText
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(
             target: self,
-            action: #selector(MoreCommentsViewController.dismissKeyboard))
+            action: "dismissKeyboard")
         self.commentsTableView.addGestureRecognizer(tap)
         
         self.addKeyboardNotifications()
@@ -308,8 +308,8 @@ class MoreCommentsViewController: UIViewController, UIScrollViewDelegate, UIText
     }
     
     func addKeyboardNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MoreCommentsViewController.keyboardWillShow(_:)), name:UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MoreCommentsViewController.keyboardWillHide(_:)), name:UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow:", name:UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillHide:", name:UIKeyboardWillHideNotification, object: nil)
     }
     
     // MARK:- Notification

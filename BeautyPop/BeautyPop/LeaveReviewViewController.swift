@@ -21,7 +21,7 @@ class LeaveReviewViewController: UIViewController {
         
         let saveReviewImg: UIButton = UIButton()
         saveReviewImg.setImage(UIImage(named: "ic_action_accept"), forState: UIControlState.Normal)
-        saveReviewImg.addTarget(self, action: #selector(LeaveReviewViewController.saveReview(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        saveReviewImg.addTarget(self, action: "saveReview:", forControlEvents: UIControlEvents.TouchUpInside)
         saveReviewImg.frame = CGRectMake(0, 0, 35, 35)
         let saveReviewBarBtn = UIBarButtonItem(customView: saveReviewImg)
         self.navigationItem.rightBarButtonItems = [saveReviewBarBtn]

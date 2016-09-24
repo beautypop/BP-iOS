@@ -82,7 +82,7 @@ class SearchViewController:UIViewController, XMSegmentedControlDelegate, UISearc
         productView.backgroundColor=Color.FEED_BG
         ViewUtil.displayRoundedCornerView(self.prodSearch, bgColor: Color.LIGHT_PINK)
         ViewUtil.displayRoundedCornerView(self.userSearch, bgColor: Color.LIGHT_PINK)
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SearchViewController.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         self.view.addGestureRecognizer(tap)
         searchText.autocapitalizationType = UITextAutocapitalizationType.None
         
