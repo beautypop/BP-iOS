@@ -203,6 +203,16 @@ class ApiController {
         self.makeApiCall(callEvent)
     }
     
+    func getCategoryPopularProductsForFirst(id: Int, offset: Int64) {
+        let callEvent = ApiCallEvent()
+        callEvent.method = "/api/get-category-popular-feed/\(id)/ALL/\(offset)"
+        callEvent.resultClass = "[PostVMLite]"
+        callEvent.successEventbusName = "categoryPopularFeedFirstViewSuccess"
+        callEvent.failedEventbusName = "categoryPopularFeedFirstViewFailed"
+        callEvent.apiUrl = Constants.BASE_URL + callEvent.method
+        self.makeApiCall(callEvent)
+    }
+    
     func getCategoryNewestFeed(id: Int, offset: Int64) {
         let callEvent = ApiCallEvent()
         callEvent.method = "/api/get-category-newest-feed/\(id)/ALL/\(offset)"

@@ -954,8 +954,35 @@ class ApiFacade {
         ApiController.instance.searchCategories()
     }
     
-    static func getCategoryPopularProducts(id: Int, offset: Int64, index: Int, collectionView: UICollectionView, successCallback: (([PostVMLite], UICollectionView, Int) -> Void)?, failureCallback: ((String) -> Void)?) {
+    static func getCategoryPopularProductsForFirst(id: Int, offset: Int64, index: Int, collectionView: UICollectionView, successCallback: (([PostVMLite], UICollectionView, Int) -> Void)?, failureCallback: ((String) -> Void)?) {
         //SwiftEventBus.unregister(self)
+        
+        SwiftEventBus.onMainThread(self, name: "categoryPopularFeedFirstViewSuccess") { result in
+            if ViewUtil.isEmptyResult(result) {
+                failureCallback!("No suggested products")
+                return
+            }
+            
+            if successCallback != nil {
+                successCallback!(result.object as! [PostVMLite], collectionView, index)
+            }
+        }
+        
+        SwiftEventBus.onMainThread(self, name: "categoryPopularFeedFirstViewFailed") { result in
+            if failureCallback != nil {
+                var error = "Failed to get suggested products..."
+                if result.object is NSString {
+                    error += "\n"+(result.object as! String)
+                }
+                failureCallback!(error)
+            }
+        }
+        ApiController.instance.getCategoryPopularProductsForFirst(id, offset: offset)
+    }
+    
+    static func getCategoryPopularProducts(id: Int, offset: Int64, index: Int, collectionView: UICollectionView, successCallback: (([PostVMLite], UICollectionView, Int) -> Void)?, failureCallback: ((String) -> Void)?) {
+        SwiftEventBus.unregister("categoryPopularFeedLoadSuccess")
+        SwiftEventBus.unregister("categoryPopularFeedLoadFailed")
         
         SwiftEventBus.onMainThread(self, name: "categoryPopularFeedLoadSuccess") { result in
             if ViewUtil.isEmptyResult(result) {
