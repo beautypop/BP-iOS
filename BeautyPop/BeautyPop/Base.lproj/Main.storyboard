@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="pGK-V9-vzm">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -1195,13 +1194,13 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Explore by Theme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W49-Wn-LKK">
                                                             <rect key="frame" x="5" y="5" width="136" height="20"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                            <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Trending Collections" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wsg-CP-CYa">
                                                             <rect key="frame" x="5" y="100" width="158" height="20"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                                            <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -1316,6 +1315,12 @@
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofT-UW-dJN" userLabel="trendId">
+                                                            <rect key="frame" x="186" y="93" width="42" height="21"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ora-FK-aKR" userLabel="TrendImageButton">
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="207"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
@@ -1334,9 +1339,11 @@
                                                         <constraint firstItem="umG-6F-0ql" firstAttribute="leading" secondItem="R1v-08-qgt" secondAttribute="leading" constant="20" id="Hf5-RL-itF"/>
                                                         <constraint firstAttribute="bottom" secondItem="aD0-3L-e9t" secondAttribute="bottom" id="WJq-JH-ubw"/>
                                                         <constraint firstItem="VQ7-NF-4Jg" firstAttribute="top" secondItem="R1v-08-qgt" secondAttribute="top" id="c5y-5j-SCg"/>
+                                                        <constraint firstItem="ofT-UW-dJN" firstAttribute="centerY" secondItem="pES-DQ-r3S" secondAttribute="centerY" id="euC-Wz-A81"/>
                                                         <constraint firstItem="VQ7-NF-4Jg" firstAttribute="leading" secondItem="R1v-08-qgt" secondAttribute="leading" id="fR5-8y-zKt"/>
                                                         <constraint firstItem="pES-DQ-r3S" firstAttribute="centerY" secondItem="VQ7-NF-4Jg" secondAttribute="centerY" id="fqe-BX-o9O"/>
                                                         <constraint firstItem="aD0-3L-e9t" firstAttribute="leading" secondItem="R1v-08-qgt" secondAttribute="leading" id="hEY-hf-fXb"/>
+                                                        <constraint firstItem="ofT-UW-dJN" firstAttribute="centerX" secondItem="pES-DQ-r3S" secondAttribute="centerX" id="ifR-rt-Qjh"/>
                                                         <constraint firstItem="pES-DQ-r3S" firstAttribute="centerX" secondItem="VQ7-NF-4Jg" secondAttribute="centerX" id="jdI-0p-SXL"/>
                                                         <constraint firstAttribute="trailing" secondItem="VQ7-NF-4Jg" secondAttribute="trailing" id="lgr-9b-XmZ"/>
                                                         <constraint firstAttribute="trailing" secondItem="Ora-FK-aKR" secondAttribute="trailing" id="qpP-3T-QVg"/>
@@ -1354,6 +1361,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="productIndicator" destination="umG-6F-0ql" id="nFG-kv-q0e"/>
+                                            <outlet property="trendId" destination="ofT-UW-dJN" id="v1L-I8-Z38"/>
                                             <outlet property="trendImageView" destination="VQ7-NF-4Jg" id="abg-Ng-HVA"/>
                                             <outlet property="trendTitle" destination="pES-DQ-r3S" id="bUY-5E-mtb"/>
                                         </connections>
@@ -10645,7 +10653,7 @@
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Description Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zLd-77-1wv">
                                             <rect key="frame" x="10" y="229" width="404" height="16"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                            <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                            <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>

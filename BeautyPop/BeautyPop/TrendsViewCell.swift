@@ -14,6 +14,7 @@ class TrendsViewCell : UITableViewCell {
     @IBOutlet weak var trendImageView: UIImageView!
     @IBOutlet weak var productIndicator: UIImageView!
     
+    @IBOutlet var trendId: UILabel!
     @IBOutlet weak var trendTitle: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
