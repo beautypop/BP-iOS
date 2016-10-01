@@ -114,11 +114,14 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         let seconds = 1.0
         let delay = seconds * Double(NSEC_PER_SEC)  // nanoseconds per seconds
         let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        
+        //ViewUtil.showGrayOutView(self, activityLoading: self.activityLoading)
         dispatch_after(dispatchTime, dispatch_get_main_queue(), {
             // here code perfomed with delay
-            ViewUtil.showActivityLoading(self.activityLoading)
-            ApiFacade.getCategoryPopularProducts(trendCategory.id, offset: 0, index: indexPath.row, collectionView: trendProductsCollectionView, successCallback: self.onSuccessPopularProducts, failureCallback: self.onFailurePopularProducts)
+            if (self.trendsProducts[trendCategory.id]?.count > 0) {
+                trendProductsCollectionView.reloadData()
+            } else {
+                ApiFacade.getCategoryPopularProducts(trendCategory.id, offset: 0, index: indexPath.row, collectionView: trendProductsCollectionView, successCallback: self.onSuccessPopularProducts, failureCallback: self.onFailurePopularProducts)
+            }
             
         })
 
@@ -340,5 +343,18 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         self.navigationController?.pushViewController(vController, animated: true)
     }
 
-  
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        NSLog("Table view scroll detected at offset: %f", scrollView.contentOffset.y)
+        //ViewUtil.showGrayOutView(self, activityLoading: self.activityLoading)
+        ViewUtil.showActivityLoading(self.activityLoading)
+    }
+    
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        ViewUtil.hideActivityLoading(self.activityLoading)
+    }
+ 
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        ViewUtil.hideActivityLoading(self.activityLoading)
+    }
+
 }
