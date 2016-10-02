@@ -90,6 +90,9 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         trendProductsCollectionView.delegate = self
         trendProductsCollectionView.dataSource = self
         
+        trendsProducts[trendCategory.id] = []
+        trendProductsCollectionView.reloadData()
+        
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = cell.trendImageView.bounds
         gradientLayer.locations = [0.0, 1.0] 
@@ -102,15 +105,6 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         cell.trendImageView.layer.sublayers = nil
         cell.trendImageView.layer.insertSublayer(gradientLayer, atIndex: 0)
         
-        /*ApiFacade.getCategoryPopularProducts(trendCategory.id, offset: 0, index: indexPath.row, collectionView: trendProductsCollectionView, successCallback: onSuccessPopularProducts, failureCallback: onFailurePopularProducts)
-        */
-        /*if indexPath.row == 0 {
-            //getCategoryPopularProductsForFirst
-            firstCollectionView = trendProductsCollectionView
-            ApiFacade.getCategoryPopularProductsForFirst(trendCategory.id, offset: 0, index: indexPath.row, collectionView: self.trendProductsCollectionView, successCallback: self.onSuccessPopularProducts, failureCallback: self.onFailurePopularProducts)
-        } else {
-            ApiFacade.getCategoryPopularProducts(trendCategory.id, offset: 0, index: indexPath.row, collectionView: self.trendProductsCollectionView, successCallback: self.onSuccessPopularProducts, failureCallback: self.onFailurePopularProducts)
-        }*/
         let seconds = 1.0
         let delay = seconds * Double(NSEC_PER_SEC)  // nanoseconds per seconds
         let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
@@ -307,8 +301,7 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
                 */let trendCell = uiCollectionView.superview?.superview?.superview as! TrendsViewCell
                 if (self.trendsTableView.indexPathForCell(trendCell) != nil) {
                     let indexPath = self.trendsTableView.indexPathForCell(trendCell)!
-                    //trendsProductList?[indexPath.row].removeAll()
-                    //trendsProductList?.removeAtIndex(indexPath.row)
+                    //trendsProducts[products[0].trendId] = products
                     //uiCollectionView.reloadData()
                     if products.count > 0 {
                         trendsProducts[products[0].trendId] = products
@@ -343,7 +336,7 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         self.navigationController?.pushViewController(vController, animated: true)
     }
 
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    /*func scrollViewDidScroll(scrollView: UIScrollView) {
         NSLog("Table view scroll detected at offset: %f", scrollView.contentOffset.y)
         //ViewUtil.showGrayOutView(self, activityLoading: self.activityLoading)
         ViewUtil.showActivityLoading(self.activityLoading)
@@ -355,6 +348,6 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
  
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         ViewUtil.hideActivityLoading(self.activityLoading)
-    }
+    }*/
 
 }
