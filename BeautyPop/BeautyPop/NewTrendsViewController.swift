@@ -15,17 +15,14 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
     @IBOutlet weak var trendsTableView: UITableView!
     @IBOutlet weak var activityLoading: UIActivityIndicatorView!
     var themeUICollectionView: UICollectionView!
-    //var trendProductsCollectionView: UICollectionView!
     var refreshControl = UIRefreshControl()
     var trendCategories: [CategoryVM] = []
     var themeCategories: [CategoryVM] = []
     var currentIndex: NSIndexPath?
     var productViewController: ProductViewController?
     var vController: ThemeViewController?
-    //var trendsProductList: [[PostVMLite]]? = [[]]
     var THEME_HEADER_HEIGHT = CGFloat(0.0)
     
-    //var firstCollectionView: UICollectionView!
     var trendsProducts: [Int: [PostVMLite]] = [:]
     
     override func viewDidAppear(animated: Bool) {
@@ -39,7 +36,6 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         self.trendsTableView.separatorColor = Color.WHITE
         self.trendsTableView.setNeedsLayout()
         self.trendsTableView.layoutIfNeeded()
-        //self.trendsTableView.reloadData()
         THEME_HEADER_HEIGHT = self.view.bounds.width/2
         self.trendsTableView.translatesAutoresizingMaskIntoConstraints = true
         self.trendCategories = CategoryCache.trendCategories
@@ -50,7 +46,6 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         self.trendsTableView.contentInset = UIEdgeInsetsMake(0, 0, 70, 0);
         for i in 0...trendCategories.count - 1 {
             trendsProducts[trendCategories[i].id] = []
-            //self.trendsProductList?.insert([], atIndex: i)
         }
         
     }
@@ -90,8 +85,10 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         trendProductsCollectionView.delegate = self
         trendProductsCollectionView.dataSource = self
         
+        let oldData = trendsProducts[trendCategory.id]
         trendsProducts[trendCategory.id] = []
         trendProductsCollectionView.reloadData()
+        trendsProducts[trendCategory.id] = oldData
         
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = cell.trendImageView.bounds
@@ -105,26 +102,14 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         cell.trendImageView.layer.sublayers = nil
         cell.trendImageView.layer.insertSublayer(gradientLayer, atIndex: 0)
         
-        let seconds = 1.0
-        let delay = seconds * Double(NSEC_PER_SEC)  // nanoseconds per seconds
-        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        //ViewUtil.showGrayOutView(self, activityLoading: self.activityLoading)
-        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-            // here code perfomed with delay
-            if (self.trendsProducts[trendCategory.id]?.count > 0) {
-                trendProductsCollectionView.reloadData()
-            } else {
-                ApiFacade.getCategoryPopularProducts(trendCategory.id, offset: 0, index: indexPath.row, collectionView: trendProductsCollectionView, successCallback: self.onSuccessPopularProducts, failureCallback: self.onFailurePopularProducts)
-            }
-            
-        })
-
+        if (self.trendsProducts[trendCategory.id]?.count > 0) {
+            trendProductsCollectionView.reloadData()
+        } else {
+            ApiFacade.getCategoryPopularProducts(trendCategory.id, offset: 0, index: indexPath.row, collectionView: trendProductsCollectionView, successCallback: self.onSuccessPopularProducts, failureCallback: self.onFailurePopularProducts)
+        }
+        
         return cell
     }
-    
-    /*func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.currentIndex = indexPath
-    }*/
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 0{
@@ -140,7 +125,6 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         self.themeUICollectionView = headerCell.viewWithTag(1) as! UICollectionView
         self.themeUICollectionView.dataSource = self
         self.themeUICollectionView.delegate = self
-        //self.themeUICollectionView.reloadData()
         if (themeCategories.count == 0){
             headerCell.themeLabelHeight.constant = 2
         }else{
@@ -169,11 +153,6 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         //below code is for showing products under each of the trend category
         let trendCell = collectionView.superview?.superview?.superview as! TrendsViewCell
         if (self.trendsTableView.indexPathForCell(trendCell) != nil) {
-            //let indexPath = self.trendsTableView.indexPathForCell(trendCell)!
-            /*if (trendsProductList != nil) {
-                let products = trendsProductList![indexPath.row]
-                return products.count
-            }*/
             let products = trendsProducts[Int(trendCell.trendId.text!)!]
             return products!.count
             
@@ -185,6 +164,7 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         
         if self.themeUICollectionView != nil && themeUICollectionView == collectionView {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("themeCell", forIndexPath: indexPath) as! ProductCollectionViewCell
+            
             let themeCategory = self.themeCategories[indexPath.row]
             let imagePath = themeCategory.icon
             let imageUrl  = NSURL(string: imagePath)
@@ -205,16 +185,7 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
             
             cell.themeLabel.text = themeCategory.name
             return cell
-        } /*else if self.firstCollectionView != nil && firstCollectionView == collectionView {
-            let productList = trendsProductList![0]
-            let _indexPath: NSIndexPath = NSIndexPath(forRow: 0, inSection: 0)
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ProductViewCell", forIndexPath: _indexPath) as! ProductCollectionViewCell
-            
-            //cell.productPrice.text = String(self.productList[indexPath.row].price)
-            ImageUtil.displayOriginalPostImage(productList[indexPath.row].images[0], imageView: cell.productImg)
-            cell.trendsProductPrize.text = ViewUtil.formatPrice(productList[indexPath.row].price)
-            return cell
-        }*/
+        }
         
         //below code is for rendering the products for trends category
         let trendCell = collectionView.superview?.superview?.superview as! TrendsViewCell
@@ -232,9 +203,6 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        //self.currentIndex = indexPath
-        //self.performSegueWithIdentifier("productScreen", sender: nil)
-        
         if self.themeUICollectionView != nil && themeUICollectionView == collectionView {
             let vController =  self.storyboard!.instantiateViewControllerWithIdentifier("ThemeViewController") as! ThemeViewController
             vController.themeCategory = self.themeCategories[indexPath.row]
@@ -266,9 +234,7 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
             return true
         } else if identifier == "trendPage" {
             return true
-        }/* else if identifier == "productScreen" {
-            return true
-        }*/
+        }
         return false
     }
     
@@ -285,40 +251,15 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
     }
     
     func onSuccessPopularProducts(products: [PostVMLite], uiCollectionView: UICollectionView, index: Int) {
-        print(">>>>")
-        //print(trendsProductList![index].count)
-        print(">>>.")
-        //if (trendsProductList![index].count <= 0) {
-            /*if (index == 0 && self.firstCollectionView != nil) {
-                trendsProductList![index].removeAll()
-                trendsProductList?.removeAtIndex(index)
-                //firstCollectionView.reloadData()
-                trendsProductList?.insert(products, atIndex: index)
-                firstCollectionView.reloadData()
-                ViewUtil.hideActivityLoading(activityLoading)
-                firstCollectionView = nil
-            } else {
-                */let trendCell = uiCollectionView.superview?.superview?.superview as! TrendsViewCell
-                if (self.trendsTableView.indexPathForCell(trendCell) != nil) {
-                    let indexPath = self.trendsTableView.indexPathForCell(trendCell)!
-                    //trendsProducts[products[0].trendId] = products
-                    //uiCollectionView.reloadData()
-                    if products.count > 0 {
-                        trendsProducts[products[0].trendId] = products
-                        //trendsProductList?.insert(products, atIndex: indexPath.row)
-                    } /*else {
-                        trendsProducts[products[0].trendId] = products
-                        trendsProductList?.insert(products, atIndex: indexPath.row)
-                    }*/
-                    uiCollectionView.reloadData()
-                    ViewUtil.hideActivityLoading(activityLoading)
-                }
-            //}
-        //}
-        
-        
-        
-        //firstCollectionView.reloadData()
+        let trendCell = uiCollectionView.superview?.superview?.superview as! TrendsViewCell
+        if (self.trendsTableView.indexPathForCell(trendCell) != nil) {
+            //let indexPath = self.trendsTableView.indexPathForCell(trendCell)!
+            if products.count > 0 {
+                trendsProducts[products[0].trendId] = products
+            }
+            uiCollectionView.reloadData()
+            ViewUtil.hideActivityLoading(activityLoading)
+        }
     }
     
     func onFailurePopularProducts(error: String) {
@@ -335,19 +276,5 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         vController.page = "Trends"
         self.navigationController?.pushViewController(vController, animated: true)
     }
-
-    /*func scrollViewDidScroll(scrollView: UIScrollView) {
-        NSLog("Table view scroll detected at offset: %f", scrollView.contentOffset.y)
-        //ViewUtil.showGrayOutView(self, activityLoading: self.activityLoading)
-        ViewUtil.showActivityLoading(self.activityLoading)
-    }
-    
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-        ViewUtil.hideActivityLoading(self.activityLoading)
-    }
- 
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        ViewUtil.hideActivityLoading(self.activityLoading)
-    }*/
 
 }
