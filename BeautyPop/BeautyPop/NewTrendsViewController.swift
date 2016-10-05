@@ -31,6 +31,13 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
     func timerFunc(timer:NSTimer!) {
     
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        for i in 0...trendCategories.count - 1 {
+            trendsProducts[trendCategories[i].id] = []
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.trendsTableView.separatorColor = Color.WHITE
@@ -47,15 +54,17 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         for i in 0...trendCategories.count - 1 {
             trendsProducts[trendCategories[i].id] = []
         }
-        
     }
     
     func refresh() {
         self.trendCategories = CategoryCache.trendCategories
         self.themeCategories = CategoryCache.themeCategories
+        for i in 0...trendCategories.count - 1 {
+            trendsProducts[trendCategories[i].id] = []
+        }
         self.trendsTableView.reloadData()
         self.refreshControl.endRefreshing()
-        self.themeUICollectionView.reloadData()
+        //self.themeUICollectionView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
