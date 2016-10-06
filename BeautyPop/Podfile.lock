@@ -1,49 +1,60 @@
 PODS:
-  - Alamofire (3.1.3)
-  - AlamofireObjectMapper (2.1.0):
-    - Alamofire (~> 3.1.0)
+  - Alamofire (3.5.1)
+  - AlamofireObjectMapper (2.1.2):
+    - Alamofire (~> 3.2)
     - ObjectMapper (~> 1.0)
   - AMScrollingNavbar (2.0.14)
-  - JSONModel (1.1.2)
-  - Kingfisher (1.8.3)
-  - ObjectMapper (1.0.1)
-  - PhotoSlider (0.13.1):
+  - BetterSegmentedControl (0.4)
+  - Cosmos (1.2.3)
+  - JSONModel (1.6.0)
+  - Kingfisher (1.9.3)
+  - ObjectMapper (1.5.0)
+  - PhotoSlider (0.12.1):
     - Kingfisher
   - PullToRefreshSwift (2.0.0)
   - QQPlaceholderTextView (0.0.6)
   - SwiftEventBus (1.1.0)
+  - XMSegmentedControl (0.1.4)
 
 DEPENDENCIES:
   - Alamofire (~> 3.0)
   - AlamofireObjectMapper (~> 2.0)
   - AMScrollingNavbar (~> 2.0.1)
+  - BetterSegmentedControl (= 0.4)
+  - Cosmos (~> 1.2)
   - JSONModel
-  - Kingfisher (~> 1.8)
+  - Kingfisher (~> 1.9.3)
   - ObjectMapper
-  - PhotoSlider (~> 0.13)
-  - PullToRefreshSwift
+  - PhotoSlider (~> 0.12.1)
+  - PullToRefreshSwift (~> 2.0.0)
   - QQPlaceholderTextView (~> 0.0.2)
-  - SwiftEventBus (from `https://github.com/cesarferreira/SwiftEventBus.git`)
+  - SwiftEventBus (from `https://github.com/cesarferreira/SwiftEventBus.git`, tag
+    `1.1.0`)
+  - XMSegmentedControl (~> 0.1.4)
 
 EXTERNAL SOURCES:
   SwiftEventBus:
     :git: https://github.com/cesarferreira/SwiftEventBus.git
+    :tag: 1.1.0
 
 CHECKOUT OPTIONS:
   SwiftEventBus:
-    :commit: 4b8cbb5a8227b3c29af75e0416689d26178733d8
     :git: https://github.com/cesarferreira/SwiftEventBus.git
+    :tag: 1.1.0
 
 SPEC CHECKSUMS:
-  Alamofire: 9f93b56389e48def9220dd57d1f44b1927229a5a
-  AlamofireObjectMapper: 24097576202064f8b0a583452dd934064f78dc0e
+  Alamofire: 0dfba1184a543e2aa160f4e39cac4e8aba48d223
+  AlamofireObjectMapper: 82391c31f23e37bdb2660da174bcf81b202da39d
   AMScrollingNavbar: be1de69f46cea4667026400db6cb22e783f9533d
-  JSONModel: 216584d0311b053ff714f1d6cb700dbf890847bc
-  Kingfisher: ead91e9dbeb7e5a2e8b7af3bd8a294104cbcc3f9
-  ObjectMapper: 98524bac0dca46c6b3d5ee02cd410fc700ec6ce2
-  PhotoSlider: 8527559d02b27c6301ab9f4a9ec6c9b412c26600
+  BetterSegmentedControl: 982368e9cae749f28b7a2e969a37dcb73c375400
+  Cosmos: efddd01b729956ad6335bc58bc92e5735a1d12a3
+  JSONModel: f0ac82ba4d1812728f50feb58103d155d1226b95
+  Kingfisher: 9e37d2a78a082dc123bfe8a16de65de85518daae
+  ObjectMapper: 386645adca9d9d23b95eda43090b09d66444cf14
+  PhotoSlider: 70ccfe6735785894ea0ca7762f4b165f58563518
   PullToRefreshSwift: 5c509e89c6638eae689813b665eff1a0ea0560d3
   QQPlaceholderTextView: 890ea371345a2105e0dfdcdc1f219dfe4cd45958
   SwiftEventBus: d334f7aecbddbd995c3de5c262cf35c72db550f3
+  XMSegmentedControl: 51cf4f3daf14920692a064d9252aa7b29622dda6
 
 COCOAPODS: 0.39.0

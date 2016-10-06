@@ -43,7 +43,7 @@ class RecommendedSellerViewController: UIViewController {
         self.uiCollectionView!.alwaysBounceVertical = true
         self.uiCollectionView!.backgroundColor = Color.FEED_BG
         
-        self.uiCollectionView.addPullRefreshHandler({ [weak self] in
+        self.uiCollectionView.addPullToRefresh({ [weak self] in
             self?.reloadSellers()
         })
     }

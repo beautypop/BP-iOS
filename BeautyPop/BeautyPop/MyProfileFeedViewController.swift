@@ -113,7 +113,7 @@ class MyProfileFeedViewController: BaseProfileFeedViewController, UIImagePickerC
         self.uiCollectionView!.alwaysBounceVertical = true
         self.uiCollectionView!.backgroundColor = Color.FEED_BG
         
-        self.uiCollectionView.addPullRefreshHandler({ [weak self] in
+        self.uiCollectionView.addPullToRefresh({ [weak self] in
             UserInfoCache.refresh(self!.onSuccessGetUserInfo, failureCallback: nil)
             self?.reloadFeedItems()
         })

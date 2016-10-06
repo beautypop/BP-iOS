@@ -47,7 +47,7 @@ class ThemeViewController: UIViewController{
         self.uiCollectionView.registerClass(HomeReusableView.self, forSupplementaryViewOfKind: "CategoryHeaderView", withReuseIdentifier: "HeaderView")
         
         self.reloadTheme()
-        self.uiCollectionView.addPullRefreshHandler({ [weak self] in
+        self.uiCollectionView.addPullToRefresh({ [weak self] in
             self!.reloadTheme()
         })
         self.navigationItem.title = themeCategory?.name
