@@ -108,14 +108,14 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
             UIColor(white: 0, alpha: Constants.THEME_BOTTOM_BAR_ALPHA).CGColor,
             Color.LIGHT_GRAY.CGColor
         ]
-        cell.trendImageView.layer.sublayers = nil
-        cell.trendImageView.layer.insertSublayer(gradientLayer, atIndex: 0)
         
         if (self.trendsProducts[trendCategory.id]?.count > 0) {
             trendProductsCollectionView.reloadData()
         } else {
             ApiFacade.getCategoryPopularProducts(trendCategory.id, offset: 0, index: indexPath.row, collectionView: trendProductsCollectionView, successCallback: self.onSuccessPopularProducts, failureCallback: self.onFailurePopularProducts)
         }
+        cell.trendImageView.layer.sublayers = nil
+        cell.trendImageView.layer.insertSublayer(gradientLayer, atIndex: 0)
         
         return cell
     }
@@ -146,7 +146,7 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
         if (themeCategories.count == 0){
                 return 22
         }
-        return Constants.THEME_DIMENSION + 50
+        return Constants.THEME_DIMENSION + 60
     }
     
     //Collection View Methods
