@@ -10,10 +10,9 @@ import UIKit
 
 class NewTrendsViewController: CustomNavigationController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    
-    
     @IBOutlet weak var trendsTableView: UITableView!
     @IBOutlet weak var activityLoading: UIActivityIndicatorView!
+    
     var themeUICollectionView: UICollectionView!
     var refreshControl = UIRefreshControl()
     var trendCategories: [CategoryVM] = []
@@ -28,6 +27,7 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
     override func viewDidAppear(animated: Bool) {
         self.trendsTableView.reloadData()
     }
+    
     func timerFunc(timer:NSTimer!) {
     
     }
@@ -130,12 +130,12 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
     //Header Table View Methods
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let  headerCell = tableView.dequeueReusableCellWithIdentifier("themeCell") as! CustomHeader
+        let headerCell = tableView.dequeueReusableCellWithIdentifier("themeCell") as! CustomHeader
         self.themeUICollectionView = headerCell.viewWithTag(1) as! UICollectionView
         self.themeUICollectionView.dataSource = self
         self.themeUICollectionView.delegate = self
         if (themeCategories.count == 0){
-            headerCell.themeLabelHeight.constant = 2
+            headerCell.themeLabelHeight.constant = 10
         }else{
             headerCell.themeLabelHeight.constant = Constants.THEME_DIMENSION + 30
         }
@@ -144,7 +144,7 @@ class NewTrendsViewController: CustomNavigationController, UICollectionViewDeleg
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (themeCategories.count == 0){
-                return 22
+            return 40
         }
         return Constants.THEME_DIMENSION + 60
     }
