@@ -235,6 +235,7 @@ class HomeFeedViewController: CustomNavigationController, UICollectionViewDataSo
         if kind == UICollectionElementKindSectionHeader && self.uiCollectionView == collectionView {
             let headerView: HomeReusableView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "HeaderView", forIndexPath: indexPath) as! HomeReusableView
             
+            headerView.homeBannerHeight.constant = 0
             headerView.headerViewCollection.reloadData()
             
             self.bannerCollectionView = headerView.homeBannerView.subviews[0] as? UICollectionView
