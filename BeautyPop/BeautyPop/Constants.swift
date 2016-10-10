@@ -74,7 +74,7 @@ struct Constants {
     static let CONVERSATION_ORDER_STATUS_TAG_WIDTH = CGFloat(60)
     static let CONVERSATION_ORDER_STATUS_TAG_MARGIN = CGFloat(15)
     static let THEME_DIMENSION = CGFloat(100)
-    static let TREND_PRODUCTS_DIMENSION = CGFloat(100)
+    static let TREND_PRODUCTS_DIMENSION = CGFloat(135)
     
     static let USER_REVIEW_DEFAULT_HEIGHT = CGFloat(85.0)
     //static let USER_REVIEW_SIDE_MARGIN = CGFloat(30.0)
